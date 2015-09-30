@@ -1,0 +1,823 @@
+loading environment...
+============ INIT BENCHMARKING ===============
+rm: cannot remove `/home/pruivo/dp_tpcc/bin': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/conf': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/dataplacement': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/lib': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/logs': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/monitor': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/plugins': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/reports': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/logs/*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys/*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/dataplacement/*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/monitor/*': No such file or directory
+killing java process from vm47
+java: no process found
+killing java process from vm48
+java: no process found
+killing java process from vm49
+java: no process found
+killing java process from vm50
+java: no process found
+killing java process from vm51
+java: no process found
+killing java process from vm52
+java: no process found
+killing java process from vm53
+java: no process found
+killing java process from vm54
+java: no process found
+killing java process from vm55
+java: no process found
+killing java process from vm56
+java: no process found
+killing java process from vm57
+java: no process found
+killing java process from vm58
+java: no process found
+killing java process from vm59
+java: no process found
+killing java process from vm60
+java: no process found
+killing java process from vm61
+java: no process found
+killing java process from vm62
+java: no process found
+killing java process from vm63
+java: no process found
+killing java process from vm64
+java: no process found
+killing java process from vm65
+java: no process found
+killing java process from vm66
+java: no process found
+killing java process from vm67
+java: no process found
+killing java process from vm68
+java: no process found
+killing java process from vm69
+java: no process found
+killing java process from vm70
+java: no process found
+killing java process from vm71
+java: no process found
+killing java process from vm72
+java: no process found
+killing java process from vm73
+java: no process found
+killing java process from vm74
+java: no process found
+killing java process from vm75
+java: no process found
+killing java process from vm76
+java: no process found
+killing java process from vm77
+java: no process found
+killing java process from vm78
+java: no process found
+killing java process from vm79
+java: no process found
+killing java process from vm80
+java: no process found
+killing java process from vm81
+java: no process found
+killing java process from vm82
+java: no process found
+killing java process from vm83
+java: no process found
+killing java process from vm84
+java: no process found
+killing java process from vm85
+java: no process found
+killing java process from vm86
+java: no process found
+cleaning slave vm47
+cleaning slave vm48
+cleaning slave vm49
+cleaning slave vm50
+cleaning slave vm51
+cleaning slave vm52
+cleaning slave vm53
+cleaning slave vm54
+cleaning slave vm55
+cleaning slave vm56
+cleaning slave vm57
+cleaning slave vm58
+cleaning slave vm59
+cleaning slave vm60
+cleaning slave vm61
+cleaning slave vm62
+cleaning slave vm63
+cleaning slave vm64
+cleaning slave vm65
+cleaning slave vm66
+cleaning slave vm67
+cleaning slave vm68
+cleaning slave vm69
+cleaning slave vm70
+cleaning slave vm71
+cleaning slave vm72
+cleaning slave vm73
+cleaning slave vm74
+cleaning slave vm75
+cleaning slave vm76
+cleaning slave vm77
+cleaning slave vm78
+cleaning slave vm79
+cleaning slave vm80
+cleaning slave vm81
+cleaning slave vm82
+cleaning slave vm83
+cleaning slave vm84
+cleaning slave vm85
+cleaning slave vm86
+============ STARTING BENCHMARKING ===============
+Writing configuration to /home/pruivo/dp_tpcc/plugins/infinispan4/conf/jgroups/jgroups.xml
+Finished!
+Writing configuration to /home/pruivo/dp_tpcc/plugins/infinispan4/conf/ispn.xml
+Finished!
+Writing configuration to /home/pruivo/dp_tpcc/conf/benchmark.xml
+Finished!
+=======================================================================
+Radargun test
+run with nodes: 40
+folder suffix: lp_50-p_-c50-data-placement-owner_2
+estimated duration: 120 minutes
+run in nodes: vm47 vm48 vm49 vm50 vm51 vm52 vm53 vm54 vm55 vm56 vm57 vm58 vm59 vm60 vm61 vm62 vm63 vm64 vm65 vm66 vm67 vm68 vm69 vm70 vm71 vm72 vm73 vm74 vm75 vm76 vm77 vm78 vm79 vm80 vm81 vm82 vm83 vm84 vm85 vm86
+=======================================================================
+copy to all nodes
+copy to vm47
+copy to vm48
+copy to vm49
+copy to vm50
+copy to vm51
+copy to vm52
+copy to vm53
+copy to vm54
+copy to vm55
+copy to vm56
+copy to vm57
+copy to vm58
+copy to vm59
+copy to vm60
+copy to vm61
+copy to vm62
+copy to vm63
+copy to vm64
+copy to vm65
+copy to vm66
+copy to vm67
+copy to vm68
+copy to vm69
+copy to vm70
+copy to vm71
+copy to vm72
+copy to vm73
+copy to vm74
+copy to vm75
+copy to vm76
+copy to vm77
+copy to vm78
+copy to vm79
+copy to vm80
+copy to vm81
+copy to vm82
+copy to vm83
+copy to vm84
+copy to vm85
+copy to vm86
+starting tests with this number of nodes: 40
+start test with 40 number of nodes
+=== Radargun: benchmark.sh ===
+This script is used to launch the master process, which coordinates tests run 
+on slaves.
+
+Master's PID is 14673 running on cloudtm
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm47 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm47!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm48 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm48!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm49 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm49!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm50 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm50!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm51 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm51!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm52 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm52!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm53 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm53!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm54 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm54!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm55 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm55!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm56 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm56!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm57 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm57!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm58 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm58!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm59 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm59!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm60 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm60!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm61 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm61!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm62 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm62!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm63 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm63!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm64 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm64!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm65 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm65!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm66 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm66!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm67 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm67!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm68 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm68!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm69 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm69!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm70 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm70!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm71 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm71!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm72 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm72!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm73 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm73!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm74 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm74!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm75 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm75!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm76 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm76!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm77 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm77!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm78 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm78!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm79 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm79!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm80 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm80!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm81 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm81!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm82 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm82!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm83 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm83!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm84 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm84!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm85 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm85!
+
+ssh -q -o "StrictHostKeyChecking false" -l pruivo vm86 'source ~/.bash_profile ; cd /home/pruivo/dp_tpcc ; bin/slave.sh -m 10.100.0.1 -g 10.100.0.1'
+bash: /home/pruivo/.bash_profile: No such file or directory
+=== Radargun: slave.sh ===
+This script is used to launch the local slave process.
+
+... done! Slave process started on host vm86!
+
+Slaves started in vm47 vm48 vm49 vm50 vm51 vm52 vm53 vm54 vm55 vm56 vm57 vm58 vm59 vm60 vm61 vm62 vm63 vm64 vm65 vm66 vm67 vm68 vm69 vm70 vm71 vm72 vm73 vm74 vm75 vm76 vm77 vm78 vm79 vm80 vm81 vm82 vm83 vm84 vm85 vm86
+started at Fri Nov 16 15:00:40 WET 2012
+wait 120 minutes
+Checking if the master finished...
+Master finished! No PID found! returning... @ Fri Nov 16 17:00:40 WET 2012
+kill all java
+Master not running.
+killing java process from vm47
+java: no process found
+killing java process from vm48
+java: no process found
+killing java process from vm49
+java: no process found
+killing java process from vm50
+java: no process found
+killing java process from vm51
+java: no process found
+killing java process from vm52
+java: no process found
+killing java process from vm53
+java: no process found
+killing java process from vm54
+java: no process found
+killing java process from vm55
+java: no process found
+killing java process from vm56
+java: no process found
+killing java process from vm57
+java: no process found
+killing java process from vm58
+java: no process found
+killing java process from vm59
+java: no process found
+killing java process from vm60
+java: no process found
+killing java process from vm61
+java: no process found
+killing java process from vm62
+java: no process found
+killing java process from vm63
+java: no process found
+killing java process from vm64
+java: no process found
+killing java process from vm65
+java: no process found
+killing java process from vm66
+java: no process found
+killing java process from vm67
+java: no process found
+killing java process from vm68
+java: no process found
+killing java process from vm69
+java: no process found
+killing java process from vm70
+java: no process found
+killing java process from vm71
+java: no process found
+killing java process from vm72
+java: no process found
+killing java process from vm73
+java: no process found
+killing java process from vm74
+java: no process found
+killing java process from vm75
+java: no process found
+killing java process from vm76
+java: no process found
+killing java process from vm77
+java: no process found
+killing java process from vm78
+java: no process found
+killing java process from vm79
+java: no process found
+killing java process from vm80
+java: no process found
+killing java process from vm81
+java: no process found
+killing java process from vm82
+java: no process found
+killing java process from vm83
+java: no process found
+killing java process from vm84
+java: no process found
+killing java process from vm85
+java: no process found
+killing java process from vm86
+java: no process found
+save logs from vm47
+save logs from vm48
+save logs from vm49
+save logs from vm50
+save logs from vm51
+save logs from vm52
+save logs from vm53
+save logs from vm54
+save logs from vm55
+save logs from vm56
+save logs from vm57
+save logs from vm58
+save logs from vm59
+save logs from vm60
+save logs from vm61
+save logs from vm62
+save logs from vm63
+save logs from vm64
+save logs from vm65
+save logs from vm66
+save logs from vm67
+save logs from vm68
+save logs from vm69
+save logs from vm70
+save logs from vm71
+save logs from vm72
+save logs from vm73
+save logs from vm74
+save logs from vm75
+save logs from vm76
+save logs from vm77
+save logs from vm78
+save logs from vm79
+save logs from vm80
+save logs from vm81
+save logs from vm82
+save logs from vm83
+save logs from vm84
+save logs from vm85
+save logs from vm86
+save key from vm47
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm48
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm49
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm50
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm51
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm52
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm53
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm54
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm55
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm56
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm57
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm58
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm59
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm60
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm61
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm62
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm63
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm64
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm65
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm66
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm67
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm68
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm69
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm70
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm71
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm72
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm73
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm74
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm75
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm76
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm77
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm78
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm79
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm80
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm81
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm82
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm83
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm84
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm85
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+save key from vm86
+scp: /home/pruivo/dp_tpcc/keys-*: No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys-*': No such file or directory
+save data placement stats from vm47
+save data placement stats from vm48
+save data placement stats from vm49
+save data placement stats from vm50
+save data placement stats from vm51
+save data placement stats from vm52
+save data placement stats from vm53
+save data placement stats from vm54
+save data placement stats from vm55
+save data placement stats from vm56
+save data placement stats from vm57
+save data placement stats from vm58
+save data placement stats from vm59
+save data placement stats from vm60
+save data placement stats from vm61
+save data placement stats from vm62
+save data placement stats from vm63
+save data placement stats from vm64
+save data placement stats from vm65
+save data placement stats from vm66
+save data placement stats from vm67
+save data placement stats from vm68
+save data placement stats from vm69
+save data placement stats from vm70
+save data placement stats from vm71
+save data placement stats from vm72
+save data placement stats from vm73
+save data placement stats from vm74
+save data placement stats from vm75
+save data placement stats from vm76
+save data placement stats from vm77
+save data placement stats from vm78
+save data placement stats from vm79
+save data placement stats from vm80
+save data placement stats from vm81
+save data placement stats from vm82
+save data placement stats from vm83
+save data placement stats from vm84
+save data placement stats from vm85
+save data placement stats from vm86
+copy monitor stats from /home/pruivo/www/files/report.csv to /home/pruivo/dp_tpcc/monitor/40nodes
+all tests finishes... getting data...
+Copying reports to /home/pruivo/results-radargun/11.16.2/test-result-lp_50-p_-c50-data-placement-owner_2
+Copying Logs
+Copying Keys
+Copying Data Placement stats
+Copying Monitor stats
+Copying configuration files
+all complete! cleaning nodes...
+rm: cannot remove `/home/pruivo/dp_tpcc/bin': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/conf': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/dataplacement': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/keys': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/lib': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/logs': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/monitor': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/plugins': Is a directory
+rm: cannot remove `/home/pruivo/dp_tpcc/reports': Is a directory
+cleaning slave vm47
+cleaning slave vm48
+cleaning slave vm49
+cleaning slave vm50
+cleaning slave vm51
+cleaning slave vm52
+cleaning slave vm53
+cleaning slave vm54
+cleaning slave vm55
+cleaning slave vm56
+cleaning slave vm57
+cleaning slave vm58
+cleaning slave vm59
+cleaning slave vm60
+cleaning slave vm61
+cleaning slave vm62
+cleaning slave vm63
+cleaning slave vm64
+cleaning slave vm65
+cleaning slave vm66
+cleaning slave vm67
+cleaning slave vm68
+cleaning slave vm69
+cleaning slave vm70
+cleaning slave vm71
+cleaning slave vm72
+cleaning slave vm73
+cleaning slave vm74
+cleaning slave vm75
+cleaning slave vm76
+cleaning slave vm77
+cleaning slave vm78
+cleaning slave vm79
+cleaning slave vm80
+cleaning slave vm81
+cleaning slave vm82
+cleaning slave vm83
+cleaning slave vm84
+cleaning slave vm85
+cleaning slave vm86
+============ FINISHED BENCHMARKING ===============
