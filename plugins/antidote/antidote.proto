@@ -1,0 +1,59 @@
+// Java package specifiers
+option java_package = "com.basho.riak.protobuf";
+option java_outer_classname = "AntidotePB";
+
+//Interactive transaction interface
+message FpbStartTxnReq {
+    optional uint64 clock = 1;
+}
+
+message FpbPrepTxnReq {
+    required FpbTxId txid = 1;
+    repeated FpbUpdate ops = 2;
+}
+
+message FpbPrepTxnResp {
+    required bool success = 1;
+    optional uint64 commit_time = 2;
+}
+
+message FpbReadReq {
+    required FpbTxId txid = 1;
+    required uint32 key = 2;
+}
+
+message FpbUpdate {
+    required uint32 key = 1;
+    required bytes value = 2;
+}
+
+//General transaction that contains all transaction code 
+message FpbTxnReq {
+	optional bytes clock = 1;
+    repeated FpbTxnOp ops = 2;
+}
+
+message FpbTxnOp {
+    required uint32 type = 1;
+    required uint32 key = 2;
+    optional uint32 operation = 3;
+    optional bytes parameter = 4;
+}
+
+//Operation possible inside atomic update transaction
+message FpbTxnResp {
+	required bool success = 1;
+	optional bytes clock = 2;
+	repeated FpbValue results = 3;
+}
+
+//Response for a transaction
+message FpbValue {
+	required uint32 key = 1;
+    required bytes value = 2;
+}
+
+message FpbTxId {
+    required uint64 snapshot = 1;
+    required bytes pid = 2;
+}

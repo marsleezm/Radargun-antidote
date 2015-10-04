@@ -11,7 +11,7 @@
 
     <modules>
         <module>framework</module>
-        <module>plugins/infinispan4</module>
+        <module>plugins/antidote</module>
         <!--module>plugins/infinispan50</module>
         <module>plugins/infinispan51</module>
         <module>plugins/infinispan52</module>
@@ -112,13 +112,13 @@
                             <tasks>
                                 <echo message="Packaging the framework, and the following plugins: infinispan4, infinispan5, infinispan50, jbosscache2, jbosscache3, ehcache25" />
 
-                                <copy todir="${distribution.artifact}/plugins/infinispan4">
-                                    <fileset dir="plugins/infinispan4/target/distribution/plugin-infinispan4-bin/plugin-infinispan4">
+                                <copy todir="${distribution.artifact}/plugins/antidote">
+                                    <fileset dir="plugins/antidote/target/distribution/plugin-antidote-bin/plugin-antidote">
                                         <include name="**/*" />
                                     </fileset>
                                 </copy>
                                 <chmod perm="ugo+rwx" type="file">
-                                    <fileset dir="${distribution.artifact}/plugins/infinispan4/bin">
+                                    <fileset dir="${distribution.artifact}/plugins/antidote/bin">
                                         <include name="**/*.sh" />
                                         <include name="**/*.py" />
                                     </fileset>
