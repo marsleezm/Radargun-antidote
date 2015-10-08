@@ -185,7 +185,12 @@ public class TransactionManager {
 	}
 
 	public void delayedPut(Object key, Object value) {
-		put(key, value);
+		try {
+			put(key, value);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean isCoordinator() {
