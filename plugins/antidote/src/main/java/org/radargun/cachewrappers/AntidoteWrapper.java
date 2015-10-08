@@ -109,7 +109,6 @@ public class AntidoteWrapper implements CacheWrapper {
    public void startTransaction(boolean isReadOnly) {
       assertTm();
       try {
-    	 log.warn("Start txn!!!!!!!!!!!!!!!!!");
          tm.begin();
       }
       catch (Exception e) {
@@ -171,13 +170,11 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public Object getDelayed(Object key) {
-	   log.warn("Delay get!!!!!!!!!!!!!!!!!");
        return tm.delayedGet(key);
    }
 
    @Override
    public void putDelayed(Object key, Object value) {
-	   log.warn("Delay put!!!!!!!!!!!!!!!!!");
        tm.delayedPut(key, value);
    }
 

@@ -16,6 +16,7 @@ import com.basho.riak.protobuf.AntidotePB.FpbNodePart;
 import com.basho.riak.protobuf.AntidotePB.FpbPartList;
 import com.basho.riak.protobuf.AntidotePB.FpbPartListReq;
 import com.basho.riak.protobuf.AntidotePB.FpbTxId;
+import com.sun.tools.javac.util.Pair;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -27,6 +28,7 @@ public class DCManager {
 	static List<String> allNodes = new ArrayList<String>();
 	static List<AntidoteConnection> connections = new ArrayList<AntidoteConnection>();
 	static List<Integer> nodePartitionNum = new ArrayList<Integer>();
+	static List<Pair<Integer, Integer>> nodePartList = new ArrayList<Pair<Integer, Integer>>();
 	static AntidoteConnection localConnection;
 	static Integer nodeIndex;
 	static String localIp;
@@ -39,7 +41,7 @@ public class DCManager {
 		try {
 			InetAddress addr = InetAddress.getLocalHost();
 			localIp = addr.getHostAddress();
-			log.warn("Local Ip is"+localIp);
+			log.warn("Local Ip is "+localIp);
 			localConnection = new AntidoteConnection(localIp);
 			getHashFun();
 			nodeIndex = allNodes.indexOf(localIp);
@@ -134,15 +136,19 @@ public class DCManager {
 		try {
 			localConnection.send(MSG_PartListReq, FpbPartListReq.newBuilder().setNoop(true).build());
 			FpbPartList partList = FpbPartList.parseFrom(localConnection.receive(MSG_PartList));
+			int currentNodeIndex = 0;
 			for(FpbNodePart nodePart : partList.getNodePartsList())
 			{	
 				String nodeName = nodePart.getIp().toStringUtf8();
 				nodePartitionNum.add(nodePart.getNumPartitions());
+				for(int i=0; i<nodePart.getNumPartitions(); ++i)
+					nodePartList.add(new Pair<Integer, Integer>(currentNodeIndex,i));
 				allNodes.add(nodeName);
 				log.warn("ip:"+nodeName+", partitions:"+nodePart.getNumPartitions());
 				String ip = nodeName.split("@")[1].replace("'", "");
 				if(ip.equals(localIp) == false)
 					connections.add(new AntidoteConnection(ip));
+				++currentNodeIndex;
 			}
 			log.info("Allnodes are"+allNodes);
 		} catch (IOException e) {
@@ -174,6 +180,11 @@ public class DCManager {
 	static public AntidoteConnection getConectionByIndex(int index) {
 		// TODO Auto-generated method stub
 		return connections.get(index);
+	}
+	
+	static public Pair<Integer, Integer> locateForNormalKey(Object key){
+		int index = key.hashCode() % nodePartList.size();
+		return nodePartList.get(index);
 	}
 
 }

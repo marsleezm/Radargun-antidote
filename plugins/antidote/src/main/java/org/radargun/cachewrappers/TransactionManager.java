@@ -20,6 +20,7 @@ import com.basho.riak.protobuf.AntidotePB.FpbTxId;
 import com.basho.riak.protobuf.AntidotePB.FpbUpdate;
 import com.basho.riak.protobuf.AntidotePB.FpbValue;
 import com.google.protobuf.ByteString;
+import com.sun.tools.javac.util.Pair;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,16 +54,32 @@ public class TransactionManager {
 		if (isInTxn)
 			writeBuffer.put(key, (String)value);
 		else{
-			MagicKey mKey = (MagicKey)key;
-			AntidoteConnection connection = DCManager.getConectionByIndex(mKey.node);
-			Integer partitionId = mKey.hashCode() % DCManager.getPartNum(mKey.node);
-			FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(ByteString.copyFromUtf8(mKey.key))
-					.setValue(ByteString.copyFromUtf8(value.toString())).setPartitionId(partitionId).build();
-			
-			connection.send(MSG_SingleUpReq, singleUpReq);
-			FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-			if (!resp.getSuccess())
-				throw new Exception();
+			//Partition id has to be plus one because of the index in Erlang is different.
+			if( key instanceof MagicKey)
+			{
+				MagicKey mKey = (MagicKey)key;
+				AntidoteConnection connection = DCManager.getConectionByIndex(mKey.node);
+				Integer partitionId = mKey.hashCode() % DCManager.getPartNum(mKey.node);
+				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(ByteString.copyFromUtf8(mKey.key))
+						.setValue(ByteString.copyFromUtf8(value.toString())).setPartitionId(partitionId+1).build();
+				
+				connection.send(MSG_SingleUpReq, singleUpReq);
+				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+				if (!resp.getSuccess())
+					throw new Exception();
+			}
+			else
+			{	
+				Pair<Integer, Integer> location = DCManager.locateForNormalKey(key);
+				AntidoteConnection connection = DCManager.getConectionByIndex(location.fst);
+				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(ByteString.copyFromUtf8(key.toString()))
+						.setValue(ByteString.copyFromUtf8(value.toString())).setPartitionId(location.snd+1).build();
+				
+				connection.send(MSG_SingleUpReq, singleUpReq);
+				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+				if (!resp.getSuccess())
+					throw new Exception();
+			}
 		}
 	}
 
@@ -161,7 +178,7 @@ public class TransactionManager {
 	private FpbPerNodeUp.Builder newUpBuilder(String ip, int part_id, String key, String value)
 	{
 		return FpbPerNodeUp.newBuilder().setNode(ByteString.copyFromUtf8(ip))
-				.setPartitionId(part_id).addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(key)).
+				.setPartitionId(part_id + 1).addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(key)).
 						setValue(ByteString.copyFromUtf8(value)));
 	}
 
@@ -207,15 +224,17 @@ public class TransactionManager {
 				log.info("Is Magic key!!");
 				keyNode = ((MagicKey)key).node;
 				connection = DCManager.getConnectionByKey(key);
+				partitionId = key.hashCode() % DCManager.getPartNum(keyNode);
 			}
 			else{	
-				keyNode =  (int)(Math.random() * DCManager.getAddressesSize());
-				log.info("keyNode is "+keyNode);
-				connection = DCManager.getConectionByIndex(keyNode);	
+				Pair<Integer, Integer> location = DCManager.locateForNormalKey(key);
+				keyNode = location.fst;
+				connection = DCManager.getConectionByIndex(location.fst);
+				partitionId = key.hashCode() % DCManager.getPartNum(location.snd);				
 			}
-			partitionId = key.hashCode() % DCManager.getPartNum(keyNode);
 			
-			FpbReadReq readReq = FpbReadReq.newBuilder().setTxid(txId).setPartitionId(partitionId).
+			
+			FpbReadReq readReq = FpbReadReq.newBuilder().setTxid(txId).setPartitionId(partitionId+1).
 					setKey(ByteString.copyFromUtf8(((MagicKey)key).key)).build();
 			try {
 				connection.send(MSG_ReadReq, readReq);
