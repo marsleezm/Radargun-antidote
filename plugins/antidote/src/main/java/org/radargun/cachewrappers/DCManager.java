@@ -16,7 +16,6 @@ import com.basho.riak.protobuf.AntidotePB.FpbNodePart;
 import com.basho.riak.protobuf.AntidotePB.FpbPartList;
 import com.basho.riak.protobuf.AntidotePB.FpbPartListReq;
 import com.basho.riak.protobuf.AntidotePB.FpbTxId;
-import com.sun.tools.javac.util.Pair;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -24,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 public class DCManager {
 	static List<String> allNodes = new ArrayList<String>();
 	static List<AntidoteConnection> connections = new ArrayList<AntidoteConnection>();

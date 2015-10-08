@@ -20,7 +20,6 @@ import com.basho.riak.protobuf.AntidotePB.FpbTxId;
 import com.basho.riak.protobuf.AntidotePB.FpbUpdate;
 import com.basho.riak.protobuf.AntidotePB.FpbValue;
 import com.google.protobuf.ByteString;
-import com.sun.tools.javac.util.Pair;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
