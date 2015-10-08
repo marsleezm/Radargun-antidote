@@ -9,7 +9,18 @@ message FpbStartTxnReq {
 
 message FpbPrepTxnReq {
     required FpbTxId txid = 1;
-    repeated FpbUpdate ops = 2;
+    optional FpbNodeUps local_updates = 2;
+    optional FpbNodeUps remote_updates = 3;
+}
+
+message FpbNodeUps {
+    repeated FpbPerNodeUp per_nodeup = 1;
+}
+
+message FpbPerNodeUp {
+    required bytes node = 1;
+    required uint32 partition_id = 2;
+    repeated FpbUpdate ups = 3; 
 }
 
 message FpbPrepTxnResp {
@@ -19,11 +30,31 @@ message FpbPrepTxnResp {
 
 message FpbReadReq {
     required FpbTxId txid = 1;
-    required uint32 key = 2;
+    required bytes key = 2;
+    required uint32 partition_id = 3;
+}
+
+message FpbPartListReq {
+    optional bool noop = 1;
+}
+
+message FpbSingleUpReq {
+    required bytes key = 1;
+    required bytes value = 2;
+    required uint32 partition_id = 3;
+}
+
+message FpbPartList {
+    repeated FpbNodePart node_parts = 1;
+}
+
+message FpbNodePart {
+    required bytes ip = 1;
+    required uint32 num_partitions = 2 ;
 }
 
 message FpbUpdate {
-    required uint32 key = 1;
+    required bytes key = 1;
     required bytes value = 2;
 }
 
@@ -49,8 +80,7 @@ message FpbTxnResp {
 
 //Response for a transaction
 message FpbValue {
-	required uint32 key = 1;
-    required bytes value = 2;
+    required bytes value = 1;
 }
 
 message FpbTxId {

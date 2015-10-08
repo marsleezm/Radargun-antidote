@@ -15,7 +15,7 @@ public class AntidoteWrapper implements CacheWrapper {
 
    private static Log log = LogFactory.getLog(AntidoteWrapper.class);
    TransactionManager tm;
-   DCManager dcManager;
+
    boolean started = false;
    String config;
    Method isPassiveReplicationMethod = null;
@@ -27,13 +27,9 @@ public class AntidoteWrapper implements CacheWrapper {
 
       log.trace("Using config file: " + configFile + " and cache name: " + cacheName);
 
+      log.warn("Finishing loading config file:"+config);
       if (!started) {
-         dcManager = new DCManager("resources/antidote-config.xml");
-         String cacheNames = dcManager.getDefinedCacheNames();
-         if (!cacheNames.contains(cacheName))
-            throw new IllegalStateException("The requested cache(" + cacheName + ") is not defined. Defined cache " +
-                                                  "names are " + cacheNames);
-
+         DCManager.init(config);
          started = true;
          tm = new TransactionManager();
          log.info("Using transaction manager: " + tm);
@@ -43,13 +39,13 @@ public class AntidoteWrapper implements CacheWrapper {
    
    @Override
     public void clusterFormed(int expected) {
-           while (dcManager.getAddressesSize() != expected) {
+           while (DCManager.getAddressesSize() != expected) {
                try {
                    Thread.sleep(1000);
                } catch (InterruptedException e) {}
               
            }
-           MagicKey.NODE_INDEX = dcManager.getNodeIndex();
+           MagicKey.NODE_INDEX = DCManager.getNodeIndex();
     }
    
    @Override
@@ -63,9 +59,9 @@ public class AntidoteWrapper implements CacheWrapper {
     }
    
    public void tearDown() throws Exception {
-      List<String> addressList = dcManager.getMembers();
+      List<String> addressList = DCManager.getMembers();
       if (started) {
-         dcManager.stop();
+    	 DCManager.stop();
          log.trace("Stopped, previous view is " + addressList);
          started = false;
       }
@@ -86,23 +82,23 @@ public class AntidoteWrapper implements CacheWrapper {
 
    public void empty() throws Exception {
       //use keySet().size() rather than size directly as cache.size might not be reliable
-      log.info("Cache size before clear (cluster size= " + dcManager.getAddressesSize() +")" 
-    		  	+ dcManager.getCacheSize());
+      log.info("Cache size before clear (cluster size= " + DCManager.getAddressesSize() +")" 
+    		  	+ DCManager.getCacheSize());
 
-      dcManager.clear();
-      log.info("Cache size after clear: " + dcManager.getCacheSize());
+      DCManager.clear();
+      log.info("Cache size after clear: " + DCManager.getCacheSize());
    }
 
    public int getNumMembers() {
-      if (dcManager.getMembers() != null) {
-         log.trace("Members are: " + dcManager.getMembers());
+      if (DCManager.getMembers() != null) {
+         log.trace("Members are: " + DCManager.getMembers());
       }
-      return dcManager.getMembers() == null ? 0 : dcManager.getMembers().size();
+      return DCManager.getMembers() == null ? 0 : DCManager.getMembers().size();
    }
 
    public String getInfo() {
       //Important: don't change this string without validating the ./dist.sh as it relies on its format!!
-      return "Running : " + dcManager.getVersion() +  ", config:" + config + ", cacheName:" + dcManager.getName();
+      return "Running : " + DCManager.getVersion() +  ", config:" + config + ", cacheName:" + DCManager.getName();
    }
 
    public Object getReplicatedData(String bucket, String key) throws Exception {
@@ -113,6 +109,7 @@ public class AntidoteWrapper implements CacheWrapper {
    public void startTransaction(boolean isReadOnly) {
       assertTm();
       try {
+    	 log.warn("Start txn!!!!!!!!!!!!!!!!!");
          tm.begin();
       }
       catch (Exception e) {
@@ -148,12 +145,12 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public int getCacheSize() {
-      return dcManager.getCacheSize();
+      return DCManager.getCacheSize();
    }
 
    @Override
    public Map<String, String> getAdditionalStats() {
-      return dcManager.getStat();
+      return DCManager.getStat();
    }
 
    @Override
@@ -174,11 +171,13 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public Object getDelayed(Object key) {
+	   log.warn("Delay get!!!!!!!!!!!!!!!!!");
        return tm.delayedGet(key);
    }
 
    @Override
    public void putDelayed(Object key, Object value) {
+	   log.warn("Delay put!!!!!!!!!!!!!!!!!");
        tm.delayedPut(key, value);
    }
 

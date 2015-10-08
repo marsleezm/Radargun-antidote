@@ -40,9 +40,9 @@
       <CsvReportGeneration/>
    </benchmark>
    <products>
-      <infinispan4>
-         <config name="ispn.xml"/>
-      </infinispan4>
+      <antidote>
+         <config name="antidote-config.xml"/>
+      </antidote>
    </products>
    <reports>
       <report name="Reports" />
