@@ -37,11 +37,11 @@ public class DCManager {
 	
 	static public void init(String configFile){
 		try {
-			log.warn("Connected!");
-			localConnection = new AntidoteConnection("127.0.0.1");
-			getHashFun();
 			InetAddress addr = InetAddress.getLocalHost();
 			localIp = addr.getHostAddress();
+			log.warn("Local Ip is"+localIp);
+			localConnection = new AntidoteConnection(localIp);
+			getHashFun();
 			nodeIndex = allNodes.indexOf(localIp);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -64,10 +64,11 @@ public class DCManager {
 	}
 
 	static public List<String> getMembers() {
-		return new ArrayList<String>(allNodes);
+		return allNodes;
 	}
 
 	static public void stop() {
+		localConnection.close();
 		for(AntidoteConnection connection : connections)
 			connection.close();
 	}
@@ -139,7 +140,9 @@ public class DCManager {
 				nodePartitionNum.add(nodePart.getNumPartitions());
 				allNodes.add(nodeName);
 				log.warn("ip:"+nodeName+", partitions:"+nodePart.getNumPartitions());
-				connections.add(new AntidoteConnection(nodeName.split("@")[1].replace("'", "")));
+				String ip = nodeName.split("@")[1].replace("'", "");
+				if(ip.equals(localIp) == false)
+					connections.add(new AntidoteConnection(ip));
 			}
 			log.info("Allnodes are"+allNodes);
 		} catch (IOException e) {
