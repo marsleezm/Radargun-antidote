@@ -1,26 +1,13 @@
 package org.radargun.cachewrappers;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-
 import com.basho.riak.protobuf.AntidotePB.FpbNodePart;
 import com.basho.riak.protobuf.AntidotePB.FpbPartList;
 import com.basho.riak.protobuf.AntidotePB.FpbPartListReq;
-import com.basho.riak.protobuf.AntidotePB.FpbTxId;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +16,6 @@ public class DCManager {
 	static List<AntidoteConnection> connections = new ArrayList<AntidoteConnection>();
 	static List<Integer> nodePartitionNum = new ArrayList<Integer>();
 	static List<Pair<Integer, Integer>> nodePartList = new ArrayList<Pair<Integer, Integer>>();
-	static AntidoteConnection localConnection;
 	static Integer nodeIndex;
 	static String localIp;
 	private static Log log = LogFactory.getLog(DCManager.class);
@@ -41,8 +27,6 @@ public class DCManager {
 		try {
 			InetAddress addr = InetAddress.getLocalHost();
 			localIp = addr.getHostAddress();
-			log.warn("Local Ip is "+localIp);
-			localConnection = new AntidoteConnection(localIp);
 			getHashFun();
 			nodeIndex = allNodes.indexOf(localIp);
 		} catch (IOException e) {
@@ -70,7 +54,6 @@ public class DCManager {
 	}
 
 	static public void stop() {
-		localConnection.close();
 		for(AntidoteConnection connection : connections)
 			connection.close();
 	}
@@ -110,7 +93,7 @@ public class DCManager {
 	}
 
 	static public AntidoteConnection getLocalConnection() {
-		return localConnection;
+		return connections.get(nodeIndex);
 	}
 	
 	private void parseXML(String config) {
@@ -134,22 +117,23 @@ public class DCManager {
 	
 	static private void getHashFun(){
 		try {
-			localConnection.send(MSG_PartListReq, FpbPartListReq.newBuilder().setNoop(true).build());
-			FpbPartList partList = FpbPartList.parseFrom(localConnection.receive(MSG_PartList));
+			AntidoteConnection tempConnection = new AntidoteConnection(localIp);
+			
+			tempConnection.send(MSG_PartListReq, FpbPartListReq.newBuilder().setNoop(true).build());
+			FpbPartList partList = FpbPartList.parseFrom(tempConnection.receive(MSG_PartList));
 			int currentNodeIndex = 0;
 			for(FpbNodePart nodePart : partList.getNodePartsList())
 			{	
 				String nodeName = nodePart.getIp().toStringUtf8();
 				nodePartitionNum.add(nodePart.getNumPartitions());
 				for(int i=0; i<nodePart.getNumPartitions(); ++i)
-				{
 					nodePartList.add(new Pair<Integer, Integer>(currentNodeIndex,i));
-					log.info("nodePart :"+nodePartList.toString());
-				}
 				allNodes.add(nodeName);
 				log.warn("ip:"+nodeName+", partitions:"+nodePart.getNumPartitions());
 				String ip = nodeName.split("@")[1].replace("'", "");
-				if(ip.equals(localIp) == false)
+				if (ip.equals(localIp))
+					connections.add(tempConnection);
+				else
 					connections.add(new AntidoteConnection(ip));
 				++currentNodeIndex;
 			}
