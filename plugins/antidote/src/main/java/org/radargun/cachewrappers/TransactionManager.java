@@ -75,6 +75,7 @@ public class TransactionManager {
 						.setValue(ByteString.copyFromUtf8(value.toString())).setPartitionId(location.snd+1).build();
 				
 				connection.send(MSG_SingleUpReq, singleUpReq);
+				log.info("Sent message");
 				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
 				if (!resp.getSuccess())
 					throw new Exception();
