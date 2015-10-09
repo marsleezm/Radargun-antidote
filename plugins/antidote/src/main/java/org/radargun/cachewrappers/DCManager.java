@@ -142,7 +142,10 @@ public class DCManager {
 				String nodeName = nodePart.getIp().toStringUtf8();
 				nodePartitionNum.add(nodePart.getNumPartitions());
 				for(int i=0; i<nodePart.getNumPartitions(); ++i)
+				{
 					nodePartList.add(new Pair<Integer, Integer>(currentNodeIndex,i));
+					log.info("nodePart :"+nodePartList.toString());
+				}
 				allNodes.add(nodeName);
 				log.warn("ip:"+nodeName+", partitions:"+nodePart.getNumPartitions());
 				String ip = nodeName.split("@")[1].replace("'", "");
