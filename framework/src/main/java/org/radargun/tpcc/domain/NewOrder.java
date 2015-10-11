@@ -3,6 +3,11 @@ package org.radargun.tpcc.domain;
 import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccItem;
+import com.basho.riak.protobuf.AntidotePB.TpccNewOrder;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 
 /**
@@ -58,7 +63,13 @@ public class NewOrder implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccNewOrder neworder = TpccNewOrder.newBuilder()
+			   .setNoDId(no_o_id).setNoDId(no_d_id).setNoWId(no_w_id)
+			   .build();
+	   
+	   FpbValue value = FpbValue.newBuilder().setNeworder(neworder).setField(7).build();
+	   
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override

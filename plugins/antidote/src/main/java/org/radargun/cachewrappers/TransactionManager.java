@@ -27,6 +27,7 @@ import org.radargun.cachewrappers.AntidoteConnection;
 
 public class TransactionManager {
     private AntidoteConnection connection = null;
+    private static final Integer VALUE_FIELD = 12;
     private static final Integer MSG_StartTxnReq = 90;
     private static final Integer MSG_PrepTxnReq = 91;
     private static final Integer MSG_PrepTxnResp = 92;
@@ -38,8 +39,8 @@ public class TransactionManager {
     private boolean isInTxn = false;
     
     private FpbTxId txId;
-    private Map<Object, Object> writeBuffer = new HashMap<Object, Object>();
-    private Map<Object, Object> readBuffer = new HashMap<Object, Object>();
+    private Map<Object, FpbValue> writeBuffer = new HashMap<Object, FpbValue>();
+    private Map<Object, FpbValue> readBuffer = new HashMap<Object, FpbValue>();
 	
 	public void begin() throws IOException {
 		FpbStartTxnReq startTxnReq = FpbStartTxnReq.newBuilder().setClock(0).build();
@@ -50,8 +51,15 @@ public class TransactionManager {
 	}
 	
 	public void put(Object key, Object value) throws Exception {
+		FpbValue newValue;
+		if (!(value instanceof FpbValue))
+			newValue = FpbValue.newBuilder().setValue(ByteString.copyFromUtf8(value.toString())).build();
+		else
+			newValue = (FpbValue)value;
+		
+		
 		if (isInTxn)
-			writeBuffer.put(key, (String)value);
+			writeBuffer.put(key, newValue);
 		else{
 			//Partition id has to be plus one because of the index in Erlang is different.
 			if( key instanceof MagicKey)
@@ -60,7 +68,7 @@ public class TransactionManager {
 				AntidoteConnection connection = DCManager.getConectionByIndex(mKey.node);
 				Integer partitionId = mKey.hashCode() % DCManager.getPartNum(mKey.node);
 				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(ByteString.copyFromUtf8(mKey.key))
-						.setValue(ByteString.copyFromUtf8(value.toString())).setPartitionId(partitionId+1).build();
+						.setValue(newValue).setPartitionId(partitionId+1).build();
 				
 				connection.send(MSG_SingleUpReq, singleUpReq);
 				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
@@ -72,7 +80,7 @@ public class TransactionManager {
 				Pair<Integer, Integer> location = DCManager.locateForNormalKey(key);
 				AntidoteConnection connection = DCManager.getConectionByIndex(location.fst);
 				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(ByteString.copyFromUtf8(key.toString()))
-						.setValue(ByteString.copyFromUtf8(value.toString())).setPartitionId(location.snd+1).build();
+						.setValue(newValue).setPartitionId(location.snd+1).build();
 				
 				connection.send(MSG_SingleUpReq, singleUpReq);
 				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
@@ -83,9 +91,10 @@ public class TransactionManager {
 	}
 
 	public Object get(Object key) {
+		FpbValue value;
 		if(isInTxn)
 		{
-			Object value = writeBuffer.get(key);
+			value = writeBuffer.get(key);
 			if( value == null )
 			{
 				value = readBuffer.get(key);
@@ -93,16 +102,18 @@ public class TransactionManager {
 				{
 					value = getKeyFromServer(key, isInTxn);
 					readBuffer.put(key, value);
-					return value;
 				}
-				else
-					return value;
 			}
 			else
 				return value;
 		}
 		else
-			return getKeyFromServer(key, isInTxn);
+			value = getKeyFromServer(key, isInTxn);
+		
+		if(value.getField() == VALUE_FIELD)
+			return value.getValue().toString();
+		else
+			return value;
 	}
 
 	public void commit() throws Exception {
@@ -115,7 +126,7 @@ public class TransactionManager {
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
 				remoteUpdates = FpbNodeUps.newBuilder();
 		
-		for(Map.Entry<Object, Object> entry : writeBuffer.entrySet())
+		for(Map.Entry<Object, FpbValue> entry : writeBuffer.entrySet())
 		{	
 			MagicKey mKey = (MagicKey)entry.getKey();
 			int keyNode, hashCode;
@@ -133,7 +144,7 @@ public class TransactionManager {
 				{
 					FpbPerNodeUp.Builder upBuilder= localKeySet.get(index);
 					upBuilder.addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(realKey)).
-							setValue(ByteString.copyFromUtf8(entry.getValue().toString())));
+							setValue((entry.getValue())));
 				}
 			}
 			else
@@ -149,7 +160,7 @@ public class TransactionManager {
 					if (nodesUp.containsKey(index)) {
 						FpbPerNodeUp.Builder upBuilder= nodesUp.get(index);
 						upBuilder.addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(realKey)).
-								setValue(ByteString.copyFromUtf8(entry.getValue().toString())));
+								setValue(entry.getValue()));
 					}
 					else{
 						nodesUp.put(index, newUpBuilder(DCManager.getNodeIp(keyNode), index, realKey, entry.getValue()));
@@ -177,11 +188,11 @@ public class TransactionManager {
 			throw new Exception();
 	}
 	
-	private FpbPerNodeUp.Builder newUpBuilder(String ip, int part_id, String key, Object value)
+	private FpbPerNodeUp.Builder newUpBuilder(String ip, int part_id, String key, FpbValue value)
 	{
 		return FpbPerNodeUp.newBuilder().setNode(ByteString.copyFromUtf8(ip))
 				.setPartitionId(part_id + 1).addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(key)).
-						setValue(ByteString.copyFromUtf8(value.toString())));
+						setValue(value));
 	}
 
 	public void abort() {
@@ -218,7 +229,7 @@ public class TransactionManager {
 	}
 	
 	
-	private Object getKeyFromServer(Object key, boolean isInTxn) {
+	private FpbValue getKeyFromServer(Object key, boolean isInTxn) {
 		int keyNode, partitionId;
 
 		AntidoteConnection connection;
@@ -246,8 +257,7 @@ public class TransactionManager {
 			
 			try {
 				connection.send(MSG_ReadReq, readReq);
-				FpbValue value = FpbValue.parseFrom(connection.receive(MSG_Value));
-				return value.getValue();
+				return FpbValue.parseFrom(connection.receive(MSG_Value));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

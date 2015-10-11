@@ -3,6 +3,11 @@ package org.radargun.tpcc.domain;
 import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
+import com.basho.riak.protobuf.AntidotePB.TpccStock;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 
 /**
@@ -211,7 +216,18 @@ public class Stock implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccStock stock = TpccStock.newBuilder()
+			   .setSData(ByteString.copyFromUtf8(s_data)).setSDist01(ByteString.copyFromUtf8(s_dist_01))
+			   .setSDist02(ByteString.copyFromUtf8(s_dist_02)).setSDist03(ByteString.copyFromUtf8(s_dist_03))
+			   .setSDist04(ByteString.copyFromUtf8(s_dist_04)).setSDist05(ByteString.copyFromUtf8(s_dist_05))
+			   .setSDist06(ByteString.copyFromUtf8(s_dist_06)).setSDist07(ByteString.copyFromUtf8(s_dist_07))
+			   .setSDist08(ByteString.copyFromUtf8(s_dist_08)).setSDist09(ByteString.copyFromUtf8(s_dist_09))
+			   .setSDist10(ByteString.copyFromUtf8(s_dist_10)).setSOrderCnt(s_order_cnt)
+			   .setSQuantity(s_quantity).setSRemoteCnt(s_remote_cnt).setSYtd(s_ytd).build();
+	   
+	   FpbValue value = FpbValue.newBuilder().setStock(stock).setField(10).build();
+	   
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override
@@ -226,26 +242,25 @@ public class Stock implements Serializable, DomainObject {
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
-      Stock loaded = (Stock) wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      if (value == null) return false;
+      TpccStock stock = value.getStock();
 
-      if (loaded == null) return false;
-
-      this.s_data = loaded.s_data;
-      this.s_dist_01 = loaded.s_dist_01;
-      this.s_dist_02 = loaded.s_dist_02;
-      this.s_dist_03 = loaded.s_dist_03;
-      this.s_dist_04 = loaded.s_dist_04;
-      this.s_dist_05 = loaded.s_dist_05;
-      this.s_dist_06 = loaded.s_dist_06;
-      this.s_dist_07 = loaded.s_dist_07;
-      this.s_dist_08 = loaded.s_dist_08;
-      this.s_dist_09 = loaded.s_dist_09;
-      this.s_dist_10 = loaded.s_dist_10;
-      this.s_order_cnt = loaded.s_order_cnt;
-      this.s_quantity = loaded.s_quantity;
-      this.s_remote_cnt = loaded.s_remote_cnt;
-      this.s_ytd = loaded.s_ytd;
-
+      this.s_data = stock.getSData().toString();
+      this.s_dist_01 = stock.getSDist01().toString();
+      this.s_dist_02 = stock.getSDist02().toString();
+      this.s_dist_03 = stock.getSDist03().toString();
+      this.s_dist_04 = stock.getSDist04().toString();
+      this.s_dist_05 = stock.getSDist05().toString();
+      this.s_dist_06 = stock.getSDist06().toString();
+      this.s_dist_07 = stock.getSDist07().toString();
+      this.s_dist_08 = stock.getSDist08().toString();;
+      this.s_dist_09 = stock.getSDist09().toString();
+      this.s_dist_10 = stock.getSDist10().toString();
+      this.s_order_cnt = stock.getSOrderCnt();
+      this.s_quantity = stock.getSQuantity();
+      this.s_remote_cnt = stock.getSRemoteCnt();
+      this.s_ytd = stock.getSYtd();
 
       return true;
    }

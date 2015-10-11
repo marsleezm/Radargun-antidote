@@ -3,6 +3,11 @@ package org.radargun.tpcc.domain;
 import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup;
+import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
+import com.google.protobuf.ByteString;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -87,7 +92,19 @@ public class CustomerLookup implements Externalizable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccCustomerLookup.Builder builder = TpccCustomerLookup.newBuilder()
+			   .setCWId(c_w_id).setCDId(c_d_id)
+			   .setCLast(ByteString.copyFromUtf8(c_last));
+	   
+	   int index = 0;
+	   for(Long id : ids)
+	   {
+		   builder.setIds(index, id);
+	   }
+	   
+	   FpbValue value = FpbValue.newBuilder().setClookup(builder).setField(3).build();
+	   
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override

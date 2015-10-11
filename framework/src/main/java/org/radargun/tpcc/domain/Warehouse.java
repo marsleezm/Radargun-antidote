@@ -5,6 +5,12 @@ import org.radargun.LocatedKey;
 import org.radargun.tpcc.DomainObject;
 import org.radargun.tpcc.TpccTools;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccOrder;
+import com.basho.riak.protobuf.AntidotePB.TpccStock;
+import com.basho.riak.protobuf.AntidotePB.TpccWarehouse;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 
 /**
@@ -136,7 +142,15 @@ public class Warehouse implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccWarehouse warehouse = TpccWarehouse.newBuilder()
+			   .setWCity(ByteString.copyFromUtf8(w_city)).setWName(ByteString.copyFromUtf8(w_name))
+			   .setWStreet1(ByteString.copyFromUtf8(w_street1)).setWStreet2(ByteString.copyFromUtf8(w_street2))
+			   .setWState(ByteString.copyFromUtf8(w_state)).setWTax(w_tax)
+			   .setWZip(ByteString.copyFromUtf8(w_zip)).build();
+	      
+	   FpbValue value = FpbValue.newBuilder().setWarehouse(warehouse).setField(11).build();
+	   
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override
@@ -151,17 +165,17 @@ public class Warehouse implements Serializable, DomainObject {
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
-      Warehouse loaded = (Warehouse) wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  if (value == null) return false;
+	  TpccWarehouse warehouse = value.getWarehouse();
 
-      if (loaded == null) return false;
-
-      this.w_city = loaded.w_city;
-      this.w_name = loaded.w_name;
-      this.w_state = loaded.w_state;
-      this.w_street1 = loaded.w_street1;
-      this.w_street2 = loaded.w_street2;
-      this.w_tax = loaded.w_tax;
-      this.w_zip = loaded.w_zip;
+      this.w_city = warehouse.getWCity().toString();
+      this.w_name = warehouse.getWName().toString();
+      this.w_state = warehouse.getWState().toString();
+      this.w_street1 = warehouse.getWStreet1().toString();
+      this.w_street2 = warehouse.getWStreet2().toString();
+      this.w_tax = warehouse.getWTax();
+      this.w_zip = warehouse.getWZip().toString();
 
       return true;
    }

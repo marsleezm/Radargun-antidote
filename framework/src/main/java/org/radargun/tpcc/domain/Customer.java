@@ -5,6 +5,11 @@ import org.radargun.LocatedKey;
 import org.radargun.tpcc.DomainObject;
 import org.radargun.tpcc.TpccTools;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccCustomer;
+import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -263,14 +268,27 @@ public class Customer implements Serializable, Comparable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex) , this);
+	   TpccCustomer customer = TpccCustomer.newBuilder()
+			   .setCCity(ByteString.copyFromUtf8(c_city)).setCCredit(ByteString.copyFromUtf8(c_credit))
+			   .setCCreditLim(c_credit_lim).setCData(ByteString.copyFromUtf8(c_data)).
+			   setCDeliveryCnt(c_delivery_cnt)
+			   .setCDiscount(c_discount).setCFirst(ByteString.copyFromUtf8(c_first))
+			   .setCLast(ByteString.copyFromUtf8(c_last)).setCMiddle(ByteString.copyFromUtf8(c_middle))
+			   .setCPaymentCnt(c_payment_cnt).setCPhone(ByteString.copyFromUtf8(c_phone))
+			   .setCSince(c_since).setCState(ByteString.copyFromUtf8(c_state))
+			   .setCStreet1(ByteString.copyFromUtf8(c_street1)).setCStreet2(ByteString.copyFromUtf8(c_street2))
+			   .setCYtdPayment(c_ytd_payment).setCZip(ByteString.copyFromUtf8(c_zip)).build();
+	   
+	   FpbValue value = FpbValue.newBuilder().setCustomer(customer).setField(2).build();
+	      
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex) , value);
    }
 
    @Override
    public void storeToPopulate(CacheWrapper wrapper, int nodeIndex, boolean localOnly) throws Throwable {
       String key = getKey();
       if (localOnly) {
-         
+    	  
       } else {
          store(wrapper, nodeIndex);
       }
@@ -279,27 +297,28 @@ public class Customer implements Serializable, Comparable, DomainObject {
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
-      Customer loaded = (Customer) wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      TpccCustomer customer = value.getCustomer();
+      
+      if (value == null) return false;
 
-      if (loaded == null) return false;
-
-      this.c_city = loaded.c_city;
-      this.c_credit = loaded.c_credit;
-      this.c_credit_lim = loaded.c_credit_lim;
-      this.c_data = loaded.c_data;
-      this.c_delivery_cnt = loaded.c_delivery_cnt;
-      this.c_discount = loaded.c_discount;
-      this.c_first = loaded.c_first;
-      this.c_last = loaded.c_last;
-      this.c_middle = loaded.c_middle;
-      this.c_payment_cnt = loaded.c_payment_cnt;
-      this.c_phone = loaded.c_phone;
-      this.c_since = loaded.c_since;
-      this.c_state = loaded.c_state;
-      this.c_street1 = loaded.c_street1;
-      this.c_street2 = loaded.c_street2;
-      this.c_ytd_payment = loaded.c_ytd_payment;
-      this.c_zip = loaded.c_zip;
+      this.c_city = customer.getCCity().toString();
+      this.c_credit = customer.getCCredit().toString();
+      this.c_credit_lim = customer.getCCreditLim();
+      this.c_data = customer.getCData().toString();
+      this.c_delivery_cnt = customer.getCDeliveryCnt();
+      this.c_discount = customer.getCDiscount();
+      this.c_first = customer.getCFirst().toString();
+      this.c_last = customer.getCLast().toString();
+      this.c_middle = customer.getCMiddle().toString();
+      this.c_payment_cnt = customer.getCPaymentCnt();
+      this.c_phone = customer.getCPhone().toString();
+      this.c_since = customer.getCSince();
+      this.c_state = customer.getCState().toString();
+      this.c_street1 = customer.getCStreet1().toString();
+      this.c_street2 = customer.getCStreet2().toString();
+      this.c_ytd_payment = customer.getCYtdPayment();
+      this.c_zip = customer.getCZip().toString();
 
       return true;
    }

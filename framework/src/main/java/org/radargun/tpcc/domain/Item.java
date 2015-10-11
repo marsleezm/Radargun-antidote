@@ -3,6 +3,11 @@ package org.radargun.tpcc.domain;
 import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
+import com.basho.riak.protobuf.AntidotePB.TpccItem;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 
 /**
@@ -79,7 +84,14 @@ public class Item implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccItem item = TpccItem.newBuilder()
+			   .setIData(ByteString.copyFromUtf8(i_data)).setIImId(i_im_id)
+			   .setIName(ByteString.copyFromUtf8(i_name)).setIPrice(i_price)
+			   .build();
+	   
+	   FpbValue value = FpbValue.newBuilder().setItem(item).setField(6).build();
+	      
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override
@@ -94,15 +106,14 @@ public class Item implements Serializable, DomainObject {
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
-      Item loaded = (Item) wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  if (value == null) return false;
+	  TpccItem item = value.getItem();
 
-      if (loaded == null) return false;
-
-      this.i_data = loaded.i_data;
-      this.i_im_id = loaded.i_im_id;
-      this.i_name = loaded.i_name;
-      this.i_price = loaded.i_price;
-
+      this.i_data = item.getIData().toString();
+      this.i_im_id = item.getIImId();
+      this.i_name = item.getIName().toString();
+      this.i_price = item.getIPrice();
 
       return true;
    }

@@ -3,6 +3,11 @@ package org.radargun.tpcc.domain;
 import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
+import com.basho.riak.protobuf.AntidotePB.TpccOrder;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -113,7 +118,14 @@ public class Order implements Serializable, Comparable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccOrder order = TpccOrder.newBuilder()
+			   .setOCId(o_c_id).setOCarrierId(o_carrier_id)
+			   .setOEntryD(o_entry_d).setOOlCnt(o_ol_cnt)
+			   .setOAllLocal(o_all_local).build();
+	   
+	   FpbValue value = FpbValue.newBuilder().setOrder(order).setField(8).build();
+	   
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override
@@ -128,17 +140,15 @@ public class Order implements Serializable, Comparable, DomainObject {
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
-      Order loaded = (Order) wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      if (value == null) return false;
+      TpccOrder order = value.getOrder();
 
-      if (loaded == null) return false;
-
-
-      this.o_c_id = loaded.o_c_id;
-      this.o_carrier_id = loaded.o_carrier_id;
-      this.o_entry_d = loaded.o_entry_d;
-      this.o_ol_cnt = loaded.o_ol_cnt;
-      this.o_all_local = loaded.o_all_local;
-
+      this.o_c_id = order.getOCId();
+      this.o_carrier_id = order.getOCarrierId();
+      this.o_entry_d = order.getOEntryD();
+      this.o_ol_cnt = order.getOOlCnt();
+      this.o_all_local = order.getOAllLocal();
 
       return true;
    }

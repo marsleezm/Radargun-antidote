@@ -25,7 +25,7 @@ public final class AntidotePB {
    * Protobuf type {@code FpbStartTxnReq}
    *
    * <pre>
-   *Interactive transaction interface
+   *Interactive transaction int32erface
    * </pre>
    */
   public static final class FpbStartTxnReq extends
@@ -250,7 +250,7 @@ public final class AntidotePB {
      * Protobuf type {@code FpbStartTxnReq}
      *
      * <pre>
-     *Interactive transaction interface
+     *Interactive transaction int32erface
      * </pre>
      */
     public static final class Builder extends
@@ -4493,15 +4493,19 @@ public final class AntidotePB {
      */
     com.google.protobuf.ByteString getKey();
 
-    // required bytes value = 2;
+    // required .FpbValue value = 2;
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
     boolean hasValue();
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
-    com.google.protobuf.ByteString getValue();
+    com.basho.riak.protobuf.AntidotePB.FpbValue getValue();
+    /**
+     * <code>required .FpbValue value = 2;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder getValueOrBuilder();
 
     // required uint32 partition_id = 3;
     /**
@@ -4570,8 +4574,16 @@ public final class AntidotePB {
               break;
             }
             case 18: {
+              com.basho.riak.protobuf.AntidotePB.FpbValue.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = value_.toBuilder();
+              }
+              value_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.FpbValue.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(value_);
+                value_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000002;
-              value_ = input.readBytes();
               break;
             }
             case 24: {
@@ -4635,19 +4647,25 @@ public final class AntidotePB {
       return key_;
     }
 
-    // required bytes value = 2;
+    // required .FpbValue value = 2;
     public static final int VALUE_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString value_;
+    private com.basho.riak.protobuf.AntidotePB.FpbValue value_;
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
     public boolean hasValue() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
-    public com.google.protobuf.ByteString getValue() {
+    public com.basho.riak.protobuf.AntidotePB.FpbValue getValue() {
+      return value_;
+    }
+    /**
+     * <code>required .FpbValue value = 2;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder getValueOrBuilder() {
       return value_;
     }
 
@@ -4669,7 +4687,7 @@ public final class AntidotePB {
 
     private void initFields() {
       key_ = com.google.protobuf.ByteString.EMPTY;
-      value_ = com.google.protobuf.ByteString.EMPTY;
+      value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
       partitionId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -4689,6 +4707,10 @@ public final class AntidotePB {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!getValue().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -4700,7 +4722,7 @@ public final class AntidotePB {
         output.writeBytes(1, key_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, value_);
+        output.writeMessage(2, value_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeUInt32(3, partitionId_);
@@ -4720,7 +4742,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, value_);
+          .computeMessageSize(2, value_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4834,6 +4856,7 @@ public final class AntidotePB {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getValueFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4844,7 +4867,11 @@ public final class AntidotePB {
         super.clear();
         key_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000001);
-        value_ = com.google.protobuf.ByteString.EMPTY;
+        if (valueBuilder_ == null) {
+          value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
+        } else {
+          valueBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
         partitionId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -4883,7 +4910,11 @@ public final class AntidotePB {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.value_ = value_;
+        if (valueBuilder_ == null) {
+          result.value_ = value_;
+        } else {
+          result.value_ = valueBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -4908,7 +4939,7 @@ public final class AntidotePB {
           setKey(other.getKey());
         }
         if (other.hasValue()) {
-          setValue(other.getValue());
+          mergeValue(other.getValue());
         }
         if (other.hasPartitionId()) {
           setPartitionId(other.getPartitionId());
@@ -4927,6 +4958,10 @@ public final class AntidotePB {
           return false;
         }
         if (!hasPartitionId()) {
+          
+          return false;
+        }
+        if (!getValue().isInitialized()) {
           
           return false;
         }
@@ -4988,40 +5023,121 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes value = 2;
-      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      // required .FpbValue value = 2;
+      private com.basho.riak.protobuf.AntidotePB.FpbValue value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.FpbValue, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder, com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder> valueBuilder_;
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
        */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
        */
-      public com.google.protobuf.ByteString getValue() {
-        return value_;
+      public com.basho.riak.protobuf.AntidotePB.FpbValue getValue() {
+        if (valueBuilder_ == null) {
+          return value_;
+        } else {
+          return valueBuilder_.getMessage();
+        }
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
        */
-      public Builder setValue(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        value_ = value;
-        onChanged();
+      public Builder setValue(com.basho.riak.protobuf.AntidotePB.FpbValue value) {
+        if (valueBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          valueBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public Builder setValue(
+          com.basho.riak.protobuf.AntidotePB.FpbValue.Builder builderForValue) {
+        if (valueBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          valueBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public Builder mergeValue(com.basho.riak.protobuf.AntidotePB.FpbValue value) {
+        if (valueBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              value_ != com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance()) {
+            value_ =
+              com.basho.riak.protobuf.AntidotePB.FpbValue.newBuilder(value_).mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          valueBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
        */
       public Builder clearValue() {
+        if (valueBuilder_ == null) {
+          value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
+          onChanged();
+        } else {
+          valueBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        value_ = getDefaultInstance().getValue();
-        onChanged();
         return this;
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbValue.Builder getValueBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getValueFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder getValueOrBuilder() {
+        if (valueBuilder_ != null) {
+          return valueBuilder_.getMessageOrBuilder();
+        } else {
+          return value_;
+        }
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.FpbValue, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder, com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder> 
+          getValueFieldBuilder() {
+        if (valueBuilder_ == null) {
+          valueBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.FpbValue, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder, com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder>(
+                  value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        return valueBuilder_;
       }
 
       // required uint32 partition_id = 3;
@@ -6263,15 +6379,19 @@ public final class AntidotePB {
      */
     com.google.protobuf.ByteString getKey();
 
-    // required bytes value = 2;
+    // required .FpbValue value = 2;
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
     boolean hasValue();
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
-    com.google.protobuf.ByteString getValue();
+    com.basho.riak.protobuf.AntidotePB.FpbValue getValue();
+    /**
+     * <code>required .FpbValue value = 2;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder getValueOrBuilder();
   }
   /**
    * Protobuf type {@code FpbUpdate}
@@ -6330,8 +6450,16 @@ public final class AntidotePB {
               break;
             }
             case 18: {
+              com.basho.riak.protobuf.AntidotePB.FpbValue.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = value_.toBuilder();
+              }
+              value_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.FpbValue.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(value_);
+                value_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000002;
-              value_ = input.readBytes();
               break;
             }
           }
@@ -6390,25 +6518,31 @@ public final class AntidotePB {
       return key_;
     }
 
-    // required bytes value = 2;
+    // required .FpbValue value = 2;
     public static final int VALUE_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString value_;
+    private com.basho.riak.protobuf.AntidotePB.FpbValue value_;
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
     public boolean hasValue() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes value = 2;</code>
+     * <code>required .FpbValue value = 2;</code>
      */
-    public com.google.protobuf.ByteString getValue() {
+    public com.basho.riak.protobuf.AntidotePB.FpbValue getValue() {
+      return value_;
+    }
+    /**
+     * <code>required .FpbValue value = 2;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder getValueOrBuilder() {
       return value_;
     }
 
     private void initFields() {
       key_ = com.google.protobuf.ByteString.EMPTY;
-      value_ = com.google.protobuf.ByteString.EMPTY;
+      value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6423,6 +6557,10 @@ public final class AntidotePB {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!getValue().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -6434,7 +6572,7 @@ public final class AntidotePB {
         output.writeBytes(1, key_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, value_);
+        output.writeMessage(2, value_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6451,7 +6589,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, value_);
+          .computeMessageSize(2, value_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6561,6 +6699,7 @@ public final class AntidotePB {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getValueFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6571,7 +6710,11 @@ public final class AntidotePB {
         super.clear();
         key_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000001);
-        value_ = com.google.protobuf.ByteString.EMPTY;
+        if (valueBuilder_ == null) {
+          value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
+        } else {
+          valueBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -6608,7 +6751,11 @@ public final class AntidotePB {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.value_ = value_;
+        if (valueBuilder_ == null) {
+          result.value_ = value_;
+        } else {
+          result.value_ = valueBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6629,7 +6776,7 @@ public final class AntidotePB {
           setKey(other.getKey());
         }
         if (other.hasValue()) {
-          setValue(other.getValue());
+          mergeValue(other.getValue());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6641,6 +6788,10 @@ public final class AntidotePB {
           return false;
         }
         if (!hasValue()) {
+          
+          return false;
+        }
+        if (!getValue().isInitialized()) {
           
           return false;
         }
@@ -6702,40 +6853,121 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes value = 2;
-      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      // required .FpbValue value = 2;
+      private com.basho.riak.protobuf.AntidotePB.FpbValue value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.FpbValue, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder, com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder> valueBuilder_;
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
        */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
        */
-      public com.google.protobuf.ByteString getValue() {
-        return value_;
+      public com.basho.riak.protobuf.AntidotePB.FpbValue getValue() {
+        if (valueBuilder_ == null) {
+          return value_;
+        } else {
+          return valueBuilder_.getMessage();
+        }
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
        */
-      public Builder setValue(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        value_ = value;
-        onChanged();
+      public Builder setValue(com.basho.riak.protobuf.AntidotePB.FpbValue value) {
+        if (valueBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          value_ = value;
+          onChanged();
+        } else {
+          valueBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required bytes value = 2;</code>
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public Builder setValue(
+          com.basho.riak.protobuf.AntidotePB.FpbValue.Builder builderForValue) {
+        if (valueBuilder_ == null) {
+          value_ = builderForValue.build();
+          onChanged();
+        } else {
+          valueBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public Builder mergeValue(com.basho.riak.protobuf.AntidotePB.FpbValue value) {
+        if (valueBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              value_ != com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance()) {
+            value_ =
+              com.basho.riak.protobuf.AntidotePB.FpbValue.newBuilder(value_).mergeFrom(value).buildPartial();
+          } else {
+            value_ = value;
+          }
+          onChanged();
+        } else {
+          valueBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
        */
       public Builder clearValue() {
+        if (valueBuilder_ == null) {
+          value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
+          onChanged();
+        } else {
+          valueBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        value_ = getDefaultInstance().getValue();
-        onChanged();
         return this;
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbValue.Builder getValueBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getValueFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder getValueOrBuilder() {
+        if (valueBuilder_ != null) {
+          return valueBuilder_.getMessageOrBuilder();
+        } else {
+          return value_;
+        }
+      }
+      /**
+       * <code>required .FpbValue value = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.FpbValue, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder, com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder> 
+          getValueFieldBuilder() {
+        if (valueBuilder_ == null) {
+          valueBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.FpbValue, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder, com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder>(
+                  value_,
+                  getParentForChildren(),
+                  isClean());
+          value_ = null;
+        }
+        return valueBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:FpbUpdate)
@@ -9058,421 +9290,6 @@ public final class AntidotePB {
     // @@protoc_insertion_point(class_scope:FpbTxnResp)
   }
 
-  public interface FpbValueOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // required bytes value = 1;
-    /**
-     * <code>required bytes value = 1;</code>
-     */
-    boolean hasValue();
-    /**
-     * <code>required bytes value = 1;</code>
-     */
-    com.google.protobuf.ByteString getValue();
-  }
-  /**
-   * Protobuf type {@code FpbValue}
-   *
-   * <pre>
-   *Response for a transaction
-   * </pre>
-   */
-  public static final class FpbValue extends
-      com.google.protobuf.GeneratedMessage
-      implements FpbValueOrBuilder {
-    // Use FpbValue.newBuilder() to construct.
-    private FpbValue(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private FpbValue(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final FpbValue defaultInstance;
-    public static FpbValue getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public FpbValue getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private FpbValue(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              value_ = input.readBytes();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.basho.riak.protobuf.AntidotePB.FpbValue.class, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<FpbValue> PARSER =
-        new com.google.protobuf.AbstractParser<FpbValue>() {
-      public FpbValue parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new FpbValue(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<FpbValue> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // required bytes value = 1;
-    public static final int VALUE_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString value_;
-    /**
-     * <code>required bytes value = 1;</code>
-     */
-    public boolean hasValue() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required bytes value = 1;</code>
-     */
-    public com.google.protobuf.ByteString getValue() {
-      return value_;
-    }
-
-    private void initFields() {
-      value_ = com.google.protobuf.ByteString.EMPTY;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      if (!hasValue()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, value_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, value_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.FpbValue prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code FpbValue}
-     *
-     * <pre>
-     *Response for a transaction
-     * </pre>
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.basho.riak.protobuf.AntidotePB.FpbValue.class, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder.class);
-      }
-
-      // Construct using com.basho.riak.protobuf.AntidotePB.FpbValue.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        value_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_descriptor;
-      }
-
-      public com.basho.riak.protobuf.AntidotePB.FpbValue getDefaultInstanceForType() {
-        return com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
-      }
-
-      public com.basho.riak.protobuf.AntidotePB.FpbValue build() {
-        com.basho.riak.protobuf.AntidotePB.FpbValue result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.basho.riak.protobuf.AntidotePB.FpbValue buildPartial() {
-        com.basho.riak.protobuf.AntidotePB.FpbValue result = new com.basho.riak.protobuf.AntidotePB.FpbValue(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.value_ = value_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.basho.riak.protobuf.AntidotePB.FpbValue) {
-          return mergeFrom((com.basho.riak.protobuf.AntidotePB.FpbValue)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbValue other) {
-        if (other == com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance()) return this;
-        if (other.hasValue()) {
-          setValue(other.getValue());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasValue()) {
-          
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.basho.riak.protobuf.AntidotePB.FpbValue parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.basho.riak.protobuf.AntidotePB.FpbValue) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // required bytes value = 1;
-      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>required bytes value = 1;</code>
-       */
-      public boolean hasValue() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required bytes value = 1;</code>
-       */
-      public com.google.protobuf.ByteString getValue() {
-        return value_;
-      }
-      /**
-       * <code>required bytes value = 1;</code>
-       */
-      public Builder setValue(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        value_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required bytes value = 1;</code>
-       */
-      public Builder clearValue() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        value_ = getDefaultInstance().getValue();
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:FpbValue)
-    }
-
-    static {
-      defaultInstance = new FpbValue(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:FpbValue)
-  }
-
   public interface FpbTxIdOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -9969,6 +9786,12452 @@ public final class AntidotePB {
     // @@protoc_insertion_point(class_scope:FpbTxId)
   }
 
+  public interface FpbValueOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint32 field = 1 [default = 12];
+    /**
+     * <code>required uint32 field = 1 [default = 12];</code>
+     */
+    boolean hasField();
+    /**
+     * <code>required uint32 field = 1 [default = 12];</code>
+     */
+    int getField();
+
+    // optional .TpccCustomer customer = 2;
+    /**
+     * <code>optional .TpccCustomer customer = 2;</code>
+     */
+    boolean hasCustomer();
+    /**
+     * <code>optional .TpccCustomer customer = 2;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccCustomer getCustomer();
+    /**
+     * <code>optional .TpccCustomer customer = 2;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder getCustomerOrBuilder();
+
+    // optional .TpccCustomerLookup clookup = 3;
+    /**
+     * <code>optional .TpccCustomerLookup clookup = 3;</code>
+     */
+    boolean hasClookup();
+    /**
+     * <code>optional .TpccCustomerLookup clookup = 3;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup getClookup();
+    /**
+     * <code>optional .TpccCustomerLookup clookup = 3;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder getClookupOrBuilder();
+
+    // optional .TpccDistrict district = 4;
+    /**
+     * <code>optional .TpccDistrict district = 4;</code>
+     */
+    boolean hasDistrict();
+    /**
+     * <code>optional .TpccDistrict district = 4;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccDistrict getDistrict();
+    /**
+     * <code>optional .TpccDistrict district = 4;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder getDistrictOrBuilder();
+
+    // optional .TpccHistory history = 5;
+    /**
+     * <code>optional .TpccHistory history = 5;</code>
+     */
+    boolean hasHistory();
+    /**
+     * <code>optional .TpccHistory history = 5;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccHistory getHistory();
+    /**
+     * <code>optional .TpccHistory history = 5;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder getHistoryOrBuilder();
+
+    // optional .TpccItem item = 6;
+    /**
+     * <code>optional .TpccItem item = 6;</code>
+     */
+    boolean hasItem();
+    /**
+     * <code>optional .TpccItem item = 6;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccItem getItem();
+    /**
+     * <code>optional .TpccItem item = 6;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder getItemOrBuilder();
+
+    // optional .TpccNewOrder neworder = 7;
+    /**
+     * <code>optional .TpccNewOrder neworder = 7;</code>
+     */
+    boolean hasNeworder();
+    /**
+     * <code>optional .TpccNewOrder neworder = 7;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccNewOrder getNeworder();
+    /**
+     * <code>optional .TpccNewOrder neworder = 7;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder getNeworderOrBuilder();
+
+    // optional .TpccOrder order = 8;
+    /**
+     * <code>optional .TpccOrder order = 8;</code>
+     */
+    boolean hasOrder();
+    /**
+     * <code>optional .TpccOrder order = 8;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccOrder getOrder();
+    /**
+     * <code>optional .TpccOrder order = 8;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder getOrderOrBuilder();
+
+    // optional .TpccOrderLine orderline = 9;
+    /**
+     * <code>optional .TpccOrderLine orderline = 9;</code>
+     */
+    boolean hasOrderline();
+    /**
+     * <code>optional .TpccOrderLine orderline = 9;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccOrderLine getOrderline();
+    /**
+     * <code>optional .TpccOrderLine orderline = 9;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder getOrderlineOrBuilder();
+
+    // optional .TpccStock stock = 10;
+    /**
+     * <code>optional .TpccStock stock = 10;</code>
+     */
+    boolean hasStock();
+    /**
+     * <code>optional .TpccStock stock = 10;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccStock getStock();
+    /**
+     * <code>optional .TpccStock stock = 10;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder getStockOrBuilder();
+
+    // optional .TpccWarehouse warehouse = 11;
+    /**
+     * <code>optional .TpccWarehouse warehouse = 11;</code>
+     */
+    boolean hasWarehouse();
+    /**
+     * <code>optional .TpccWarehouse warehouse = 11;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccWarehouse getWarehouse();
+    /**
+     * <code>optional .TpccWarehouse warehouse = 11;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder getWarehouseOrBuilder();
+
+    // optional bytes value = 12;
+    /**
+     * <code>optional bytes value = 12;</code>
+     */
+    boolean hasValue();
+    /**
+     * <code>optional bytes value = 12;</code>
+     */
+    com.google.protobuf.ByteString getValue();
+  }
+  /**
+   * Protobuf type {@code FpbValue}
+   */
+  public static final class FpbValue extends
+      com.google.protobuf.GeneratedMessage
+      implements FpbValueOrBuilder {
+    // Use FpbValue.newBuilder() to construct.
+    private FpbValue(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private FpbValue(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final FpbValue defaultInstance;
+    public static FpbValue getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public FpbValue getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FpbValue(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              field_ = input.readUInt32();
+              break;
+            }
+            case 18: {
+              com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = customer_.toBuilder();
+              }
+              customer_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccCustomer.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(customer_);
+                customer_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = clookup_.toBuilder();
+              }
+              clookup_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(clookup_);
+                clookup_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 34: {
+              com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = district_.toBuilder();
+              }
+              district_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccDistrict.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(district_);
+                district_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 42: {
+              com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = history_.toBuilder();
+              }
+              history_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccHistory.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(history_);
+                history_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
+              break;
+            }
+            case 50: {
+              com.basho.riak.protobuf.AntidotePB.TpccItem.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = item_.toBuilder();
+              }
+              item_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccItem.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(item_);
+                item_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
+              break;
+            }
+            case 58: {
+              com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = neworder_.toBuilder();
+              }
+              neworder_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccNewOrder.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(neworder_);
+                neworder_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
+              break;
+            }
+            case 66: {
+              com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                subBuilder = order_.toBuilder();
+              }
+              order_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccOrder.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(order_);
+                order_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000080;
+              break;
+            }
+            case 74: {
+              com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000100) == 0x00000100)) {
+                subBuilder = orderline_.toBuilder();
+              }
+              orderline_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccOrderLine.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(orderline_);
+                orderline_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000100;
+              break;
+            }
+            case 82: {
+              com.basho.riak.protobuf.AntidotePB.TpccStock.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000200) == 0x00000200)) {
+                subBuilder = stock_.toBuilder();
+              }
+              stock_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccStock.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(stock_);
+                stock_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000200;
+              break;
+            }
+            case 90: {
+              com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000400) == 0x00000400)) {
+                subBuilder = warehouse_.toBuilder();
+              }
+              warehouse_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccWarehouse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(warehouse_);
+                warehouse_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000400;
+              break;
+            }
+            case 98: {
+              bitField0_ |= 0x00000800;
+              value_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.FpbValue.class, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<FpbValue> PARSER =
+        new com.google.protobuf.AbstractParser<FpbValue>() {
+      public FpbValue parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FpbValue(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FpbValue> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint32 field = 1 [default = 12];
+    public static final int FIELD_FIELD_NUMBER = 1;
+    private int field_;
+    /**
+     * <code>required uint32 field = 1 [default = 12];</code>
+     */
+    public boolean hasField() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 field = 1 [default = 12];</code>
+     */
+    public int getField() {
+      return field_;
+    }
+
+    // optional .TpccCustomer customer = 2;
+    public static final int CUSTOMER_FIELD_NUMBER = 2;
+    private com.basho.riak.protobuf.AntidotePB.TpccCustomer customer_;
+    /**
+     * <code>optional .TpccCustomer customer = 2;</code>
+     */
+    public boolean hasCustomer() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .TpccCustomer customer = 2;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccCustomer getCustomer() {
+      return customer_;
+    }
+    /**
+     * <code>optional .TpccCustomer customer = 2;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder getCustomerOrBuilder() {
+      return customer_;
+    }
+
+    // optional .TpccCustomerLookup clookup = 3;
+    public static final int CLOOKUP_FIELD_NUMBER = 3;
+    private com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup clookup_;
+    /**
+     * <code>optional .TpccCustomerLookup clookup = 3;</code>
+     */
+    public boolean hasClookup() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .TpccCustomerLookup clookup = 3;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup getClookup() {
+      return clookup_;
+    }
+    /**
+     * <code>optional .TpccCustomerLookup clookup = 3;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder getClookupOrBuilder() {
+      return clookup_;
+    }
+
+    // optional .TpccDistrict district = 4;
+    public static final int DISTRICT_FIELD_NUMBER = 4;
+    private com.basho.riak.protobuf.AntidotePB.TpccDistrict district_;
+    /**
+     * <code>optional .TpccDistrict district = 4;</code>
+     */
+    public boolean hasDistrict() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .TpccDistrict district = 4;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccDistrict getDistrict() {
+      return district_;
+    }
+    /**
+     * <code>optional .TpccDistrict district = 4;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder getDistrictOrBuilder() {
+      return district_;
+    }
+
+    // optional .TpccHistory history = 5;
+    public static final int HISTORY_FIELD_NUMBER = 5;
+    private com.basho.riak.protobuf.AntidotePB.TpccHistory history_;
+    /**
+     * <code>optional .TpccHistory history = 5;</code>
+     */
+    public boolean hasHistory() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .TpccHistory history = 5;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccHistory getHistory() {
+      return history_;
+    }
+    /**
+     * <code>optional .TpccHistory history = 5;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder getHistoryOrBuilder() {
+      return history_;
+    }
+
+    // optional .TpccItem item = 6;
+    public static final int ITEM_FIELD_NUMBER = 6;
+    private com.basho.riak.protobuf.AntidotePB.TpccItem item_;
+    /**
+     * <code>optional .TpccItem item = 6;</code>
+     */
+    public boolean hasItem() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .TpccItem item = 6;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccItem getItem() {
+      return item_;
+    }
+    /**
+     * <code>optional .TpccItem item = 6;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder getItemOrBuilder() {
+      return item_;
+    }
+
+    // optional .TpccNewOrder neworder = 7;
+    public static final int NEWORDER_FIELD_NUMBER = 7;
+    private com.basho.riak.protobuf.AntidotePB.TpccNewOrder neworder_;
+    /**
+     * <code>optional .TpccNewOrder neworder = 7;</code>
+     */
+    public boolean hasNeworder() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .TpccNewOrder neworder = 7;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccNewOrder getNeworder() {
+      return neworder_;
+    }
+    /**
+     * <code>optional .TpccNewOrder neworder = 7;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder getNeworderOrBuilder() {
+      return neworder_;
+    }
+
+    // optional .TpccOrder order = 8;
+    public static final int ORDER_FIELD_NUMBER = 8;
+    private com.basho.riak.protobuf.AntidotePB.TpccOrder order_;
+    /**
+     * <code>optional .TpccOrder order = 8;</code>
+     */
+    public boolean hasOrder() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .TpccOrder order = 8;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccOrder getOrder() {
+      return order_;
+    }
+    /**
+     * <code>optional .TpccOrder order = 8;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder getOrderOrBuilder() {
+      return order_;
+    }
+
+    // optional .TpccOrderLine orderline = 9;
+    public static final int ORDERLINE_FIELD_NUMBER = 9;
+    private com.basho.riak.protobuf.AntidotePB.TpccOrderLine orderline_;
+    /**
+     * <code>optional .TpccOrderLine orderline = 9;</code>
+     */
+    public boolean hasOrderline() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .TpccOrderLine orderline = 9;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccOrderLine getOrderline() {
+      return orderline_;
+    }
+    /**
+     * <code>optional .TpccOrderLine orderline = 9;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder getOrderlineOrBuilder() {
+      return orderline_;
+    }
+
+    // optional .TpccStock stock = 10;
+    public static final int STOCK_FIELD_NUMBER = 10;
+    private com.basho.riak.protobuf.AntidotePB.TpccStock stock_;
+    /**
+     * <code>optional .TpccStock stock = 10;</code>
+     */
+    public boolean hasStock() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional .TpccStock stock = 10;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccStock getStock() {
+      return stock_;
+    }
+    /**
+     * <code>optional .TpccStock stock = 10;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder getStockOrBuilder() {
+      return stock_;
+    }
+
+    // optional .TpccWarehouse warehouse = 11;
+    public static final int WAREHOUSE_FIELD_NUMBER = 11;
+    private com.basho.riak.protobuf.AntidotePB.TpccWarehouse warehouse_;
+    /**
+     * <code>optional .TpccWarehouse warehouse = 11;</code>
+     */
+    public boolean hasWarehouse() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional .TpccWarehouse warehouse = 11;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccWarehouse getWarehouse() {
+      return warehouse_;
+    }
+    /**
+     * <code>optional .TpccWarehouse warehouse = 11;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder getWarehouseOrBuilder() {
+      return warehouse_;
+    }
+
+    // optional bytes value = 12;
+    public static final int VALUE_FIELD_NUMBER = 12;
+    private com.google.protobuf.ByteString value_;
+    /**
+     * <code>optional bytes value = 12;</code>
+     */
+    public boolean hasValue() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional bytes value = 12;</code>
+     */
+    public com.google.protobuf.ByteString getValue() {
+      return value_;
+    }
+
+    private void initFields() {
+      field_ = 12;
+      customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
+      clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
+      district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
+      history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
+      item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
+      neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
+      order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
+      orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
+      stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
+      warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
+      value_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasField()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasCustomer()) {
+        if (!getCustomer().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasClookup()) {
+        if (!getClookup().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasDistrict()) {
+        if (!getDistrict().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasHistory()) {
+        if (!getHistory().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasItem()) {
+        if (!getItem().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasNeworder()) {
+        if (!getNeworder().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasOrder()) {
+        if (!getOrder().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasOrderline()) {
+        if (!getOrderline().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasStock()) {
+        if (!getStock().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasWarehouse()) {
+        if (!getWarehouse().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, field_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, customer_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, clookup_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(4, district_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, history_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(6, item_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(7, neworder_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeMessage(8, order_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(9, orderline_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeMessage(10, stock_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeMessage(11, warehouse_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeBytes(12, value_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, field_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, customer_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, clookup_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, district_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, history_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, item_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, neworder_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, order_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, orderline_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, stock_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, warehouse_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(12, value_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbValue parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.FpbValue prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code FpbValue}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.FpbValueOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.FpbValue.class, com.basho.riak.protobuf.AntidotePB.FpbValue.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.FpbValue.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getCustomerFieldBuilder();
+          getClookupFieldBuilder();
+          getDistrictFieldBuilder();
+          getHistoryFieldBuilder();
+          getItemFieldBuilder();
+          getNeworderFieldBuilder();
+          getOrderFieldBuilder();
+          getOrderlineFieldBuilder();
+          getStockFieldBuilder();
+          getWarehouseFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        field_ = 12;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (customerBuilder_ == null) {
+          customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
+        } else {
+          customerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (clookupBuilder_ == null) {
+          clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
+        } else {
+          clookupBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (districtBuilder_ == null) {
+          district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
+        } else {
+          districtBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (historyBuilder_ == null) {
+          history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
+        } else {
+          historyBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        if (itemBuilder_ == null) {
+          item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
+        } else {
+          itemBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        if (neworderBuilder_ == null) {
+          neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
+        } else {
+          neworderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        if (orderBuilder_ == null) {
+          order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
+        } else {
+          orderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        if (orderlineBuilder_ == null) {
+          orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
+        } else {
+          orderlineBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000100);
+        if (stockBuilder_ == null) {
+          stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
+        } else {
+          stockBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        if (warehouseBuilder_ == null) {
+          warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
+        } else {
+          warehouseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        value_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbValue_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.FpbValue getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.FpbValue build() {
+        com.basho.riak.protobuf.AntidotePB.FpbValue result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.FpbValue buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.FpbValue result = new com.basho.riak.protobuf.AntidotePB.FpbValue(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.field_ = field_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (customerBuilder_ == null) {
+          result.customer_ = customer_;
+        } else {
+          result.customer_ = customerBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (clookupBuilder_ == null) {
+          result.clookup_ = clookup_;
+        } else {
+          result.clookup_ = clookupBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (districtBuilder_ == null) {
+          result.district_ = district_;
+        } else {
+          result.district_ = districtBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (historyBuilder_ == null) {
+          result.history_ = history_;
+        } else {
+          result.history_ = historyBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (itemBuilder_ == null) {
+          result.item_ = item_;
+        } else {
+          result.item_ = itemBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (neworderBuilder_ == null) {
+          result.neworder_ = neworder_;
+        } else {
+          result.neworder_ = neworderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        if (orderBuilder_ == null) {
+          result.order_ = order_;
+        } else {
+          result.order_ = orderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        if (orderlineBuilder_ == null) {
+          result.orderline_ = orderline_;
+        } else {
+          result.orderline_ = orderlineBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        if (stockBuilder_ == null) {
+          result.stock_ = stock_;
+        } else {
+          result.stock_ = stockBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        if (warehouseBuilder_ == null) {
+          result.warehouse_ = warehouse_;
+        } else {
+          result.warehouse_ = warehouseBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.value_ = value_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.FpbValue) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.FpbValue)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbValue other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance()) return this;
+        if (other.hasField()) {
+          setField(other.getField());
+        }
+        if (other.hasCustomer()) {
+          mergeCustomer(other.getCustomer());
+        }
+        if (other.hasClookup()) {
+          mergeClookup(other.getClookup());
+        }
+        if (other.hasDistrict()) {
+          mergeDistrict(other.getDistrict());
+        }
+        if (other.hasHistory()) {
+          mergeHistory(other.getHistory());
+        }
+        if (other.hasItem()) {
+          mergeItem(other.getItem());
+        }
+        if (other.hasNeworder()) {
+          mergeNeworder(other.getNeworder());
+        }
+        if (other.hasOrder()) {
+          mergeOrder(other.getOrder());
+        }
+        if (other.hasOrderline()) {
+          mergeOrderline(other.getOrderline());
+        }
+        if (other.hasStock()) {
+          mergeStock(other.getStock());
+        }
+        if (other.hasWarehouse()) {
+          mergeWarehouse(other.getWarehouse());
+        }
+        if (other.hasValue()) {
+          setValue(other.getValue());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasField()) {
+          
+          return false;
+        }
+        if (hasCustomer()) {
+          if (!getCustomer().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasClookup()) {
+          if (!getClookup().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasDistrict()) {
+          if (!getDistrict().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasHistory()) {
+          if (!getHistory().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasItem()) {
+          if (!getItem().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasNeworder()) {
+          if (!getNeworder().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasOrder()) {
+          if (!getOrder().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasOrderline()) {
+          if (!getOrderline().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasStock()) {
+          if (!getStock().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasWarehouse()) {
+          if (!getWarehouse().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.FpbValue parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.FpbValue) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint32 field = 1 [default = 12];
+      private int field_ = 12;
+      /**
+       * <code>required uint32 field = 1 [default = 12];</code>
+       */
+      public boolean hasField() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 field = 1 [default = 12];</code>
+       */
+      public int getField() {
+        return field_;
+      }
+      /**
+       * <code>required uint32 field = 1 [default = 12];</code>
+       */
+      public Builder setField(int value) {
+        bitField0_ |= 0x00000001;
+        field_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 field = 1 [default = 12];</code>
+       */
+      public Builder clearField() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        field_ = 12;
+        onChanged();
+        return this;
+      }
+
+      // optional .TpccCustomer customer = 2;
+      private com.basho.riak.protobuf.AntidotePB.TpccCustomer customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccCustomer, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder> customerBuilder_;
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public boolean hasCustomer() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomer getCustomer() {
+        if (customerBuilder_ == null) {
+          return customer_;
+        } else {
+          return customerBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public Builder setCustomer(com.basho.riak.protobuf.AntidotePB.TpccCustomer value) {
+        if (customerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          customer_ = value;
+          onChanged();
+        } else {
+          customerBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public Builder setCustomer(
+          com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder builderForValue) {
+        if (customerBuilder_ == null) {
+          customer_ = builderForValue.build();
+          onChanged();
+        } else {
+          customerBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public Builder mergeCustomer(com.basho.riak.protobuf.AntidotePB.TpccCustomer value) {
+        if (customerBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              customer_ != com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance()) {
+            customer_ =
+              com.basho.riak.protobuf.AntidotePB.TpccCustomer.newBuilder(customer_).mergeFrom(value).buildPartial();
+          } else {
+            customer_ = value;
+          }
+          onChanged();
+        } else {
+          customerBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public Builder clearCustomer() {
+        if (customerBuilder_ == null) {
+          customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
+          onChanged();
+        } else {
+          customerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder getCustomerBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getCustomerFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder getCustomerOrBuilder() {
+        if (customerBuilder_ != null) {
+          return customerBuilder_.getMessageOrBuilder();
+        } else {
+          return customer_;
+        }
+      }
+      /**
+       * <code>optional .TpccCustomer customer = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccCustomer, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder> 
+          getCustomerFieldBuilder() {
+        if (customerBuilder_ == null) {
+          customerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccCustomer, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder>(
+                  customer_,
+                  getParentForChildren(),
+                  isClean());
+          customer_ = null;
+        }
+        return customerBuilder_;
+      }
+
+      // optional .TpccCustomerLookup clookup = 3;
+      private com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder> clookupBuilder_;
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public boolean hasClookup() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup getClookup() {
+        if (clookupBuilder_ == null) {
+          return clookup_;
+        } else {
+          return clookupBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public Builder setClookup(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup value) {
+        if (clookupBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          clookup_ = value;
+          onChanged();
+        } else {
+          clookupBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public Builder setClookup(
+          com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder builderForValue) {
+        if (clookupBuilder_ == null) {
+          clookup_ = builderForValue.build();
+          onChanged();
+        } else {
+          clookupBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public Builder mergeClookup(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup value) {
+        if (clookupBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              clookup_ != com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance()) {
+            clookup_ =
+              com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.newBuilder(clookup_).mergeFrom(value).buildPartial();
+          } else {
+            clookup_ = value;
+          }
+          onChanged();
+        } else {
+          clookupBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public Builder clearClookup() {
+        if (clookupBuilder_ == null) {
+          clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
+          onChanged();
+        } else {
+          clookupBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder getClookupBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getClookupFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder getClookupOrBuilder() {
+        if (clookupBuilder_ != null) {
+          return clookupBuilder_.getMessageOrBuilder();
+        } else {
+          return clookup_;
+        }
+      }
+      /**
+       * <code>optional .TpccCustomerLookup clookup = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder> 
+          getClookupFieldBuilder() {
+        if (clookupBuilder_ == null) {
+          clookupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder>(
+                  clookup_,
+                  getParentForChildren(),
+                  isClean());
+          clookup_ = null;
+        }
+        return clookupBuilder_;
+      }
+
+      // optional .TpccDistrict district = 4;
+      private com.basho.riak.protobuf.AntidotePB.TpccDistrict district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccDistrict, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder, com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder> districtBuilder_;
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public boolean hasDistrict() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccDistrict getDistrict() {
+        if (districtBuilder_ == null) {
+          return district_;
+        } else {
+          return districtBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public Builder setDistrict(com.basho.riak.protobuf.AntidotePB.TpccDistrict value) {
+        if (districtBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          district_ = value;
+          onChanged();
+        } else {
+          districtBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public Builder setDistrict(
+          com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder builderForValue) {
+        if (districtBuilder_ == null) {
+          district_ = builderForValue.build();
+          onChanged();
+        } else {
+          districtBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public Builder mergeDistrict(com.basho.riak.protobuf.AntidotePB.TpccDistrict value) {
+        if (districtBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              district_ != com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance()) {
+            district_ =
+              com.basho.riak.protobuf.AntidotePB.TpccDistrict.newBuilder(district_).mergeFrom(value).buildPartial();
+          } else {
+            district_ = value;
+          }
+          onChanged();
+        } else {
+          districtBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public Builder clearDistrict() {
+        if (districtBuilder_ == null) {
+          district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
+          onChanged();
+        } else {
+          districtBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder getDistrictBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getDistrictFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder getDistrictOrBuilder() {
+        if (districtBuilder_ != null) {
+          return districtBuilder_.getMessageOrBuilder();
+        } else {
+          return district_;
+        }
+      }
+      /**
+       * <code>optional .TpccDistrict district = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccDistrict, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder, com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder> 
+          getDistrictFieldBuilder() {
+        if (districtBuilder_ == null) {
+          districtBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccDistrict, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder, com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder>(
+                  district_,
+                  getParentForChildren(),
+                  isClean());
+          district_ = null;
+        }
+        return districtBuilder_;
+      }
+
+      // optional .TpccHistory history = 5;
+      private com.basho.riak.protobuf.AntidotePB.TpccHistory history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccHistory, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder, com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder> historyBuilder_;
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public boolean hasHistory() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccHistory getHistory() {
+        if (historyBuilder_ == null) {
+          return history_;
+        } else {
+          return historyBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public Builder setHistory(com.basho.riak.protobuf.AntidotePB.TpccHistory value) {
+        if (historyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          history_ = value;
+          onChanged();
+        } else {
+          historyBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public Builder setHistory(
+          com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder builderForValue) {
+        if (historyBuilder_ == null) {
+          history_ = builderForValue.build();
+          onChanged();
+        } else {
+          historyBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public Builder mergeHistory(com.basho.riak.protobuf.AntidotePB.TpccHistory value) {
+        if (historyBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              history_ != com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance()) {
+            history_ =
+              com.basho.riak.protobuf.AntidotePB.TpccHistory.newBuilder(history_).mergeFrom(value).buildPartial();
+          } else {
+            history_ = value;
+          }
+          onChanged();
+        } else {
+          historyBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public Builder clearHistory() {
+        if (historyBuilder_ == null) {
+          history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
+          onChanged();
+        } else {
+          historyBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder getHistoryBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getHistoryFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder getHistoryOrBuilder() {
+        if (historyBuilder_ != null) {
+          return historyBuilder_.getMessageOrBuilder();
+        } else {
+          return history_;
+        }
+      }
+      /**
+       * <code>optional .TpccHistory history = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccHistory, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder, com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder> 
+          getHistoryFieldBuilder() {
+        if (historyBuilder_ == null) {
+          historyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccHistory, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder, com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder>(
+                  history_,
+                  getParentForChildren(),
+                  isClean());
+          history_ = null;
+        }
+        return historyBuilder_;
+      }
+
+      // optional .TpccItem item = 6;
+      private com.basho.riak.protobuf.AntidotePB.TpccItem item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccItem, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder, com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder> itemBuilder_;
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public boolean hasItem() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccItem getItem() {
+        if (itemBuilder_ == null) {
+          return item_;
+        } else {
+          return itemBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public Builder setItem(com.basho.riak.protobuf.AntidotePB.TpccItem value) {
+        if (itemBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          item_ = value;
+          onChanged();
+        } else {
+          itemBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public Builder setItem(
+          com.basho.riak.protobuf.AntidotePB.TpccItem.Builder builderForValue) {
+        if (itemBuilder_ == null) {
+          item_ = builderForValue.build();
+          onChanged();
+        } else {
+          itemBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public Builder mergeItem(com.basho.riak.protobuf.AntidotePB.TpccItem value) {
+        if (itemBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              item_ != com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance()) {
+            item_ =
+              com.basho.riak.protobuf.AntidotePB.TpccItem.newBuilder(item_).mergeFrom(value).buildPartial();
+          } else {
+            item_ = value;
+          }
+          onChanged();
+        } else {
+          itemBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public Builder clearItem() {
+        if (itemBuilder_ == null) {
+          item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
+          onChanged();
+        } else {
+          itemBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccItem.Builder getItemBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getItemFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder getItemOrBuilder() {
+        if (itemBuilder_ != null) {
+          return itemBuilder_.getMessageOrBuilder();
+        } else {
+          return item_;
+        }
+      }
+      /**
+       * <code>optional .TpccItem item = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccItem, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder, com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder> 
+          getItemFieldBuilder() {
+        if (itemBuilder_ == null) {
+          itemBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccItem, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder, com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder>(
+                  item_,
+                  getParentForChildren(),
+                  isClean());
+          item_ = null;
+        }
+        return itemBuilder_;
+      }
+
+      // optional .TpccNewOrder neworder = 7;
+      private com.basho.riak.protobuf.AntidotePB.TpccNewOrder neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccNewOrder, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder> neworderBuilder_;
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public boolean hasNeworder() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccNewOrder getNeworder() {
+        if (neworderBuilder_ == null) {
+          return neworder_;
+        } else {
+          return neworderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public Builder setNeworder(com.basho.riak.protobuf.AntidotePB.TpccNewOrder value) {
+        if (neworderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          neworder_ = value;
+          onChanged();
+        } else {
+          neworderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public Builder setNeworder(
+          com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder builderForValue) {
+        if (neworderBuilder_ == null) {
+          neworder_ = builderForValue.build();
+          onChanged();
+        } else {
+          neworderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public Builder mergeNeworder(com.basho.riak.protobuf.AntidotePB.TpccNewOrder value) {
+        if (neworderBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              neworder_ != com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance()) {
+            neworder_ =
+              com.basho.riak.protobuf.AntidotePB.TpccNewOrder.newBuilder(neworder_).mergeFrom(value).buildPartial();
+          } else {
+            neworder_ = value;
+          }
+          onChanged();
+        } else {
+          neworderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public Builder clearNeworder() {
+        if (neworderBuilder_ == null) {
+          neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
+          onChanged();
+        } else {
+          neworderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder getNeworderBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getNeworderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder getNeworderOrBuilder() {
+        if (neworderBuilder_ != null) {
+          return neworderBuilder_.getMessageOrBuilder();
+        } else {
+          return neworder_;
+        }
+      }
+      /**
+       * <code>optional .TpccNewOrder neworder = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccNewOrder, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder> 
+          getNeworderFieldBuilder() {
+        if (neworderBuilder_ == null) {
+          neworderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccNewOrder, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder>(
+                  neworder_,
+                  getParentForChildren(),
+                  isClean());
+          neworder_ = null;
+        }
+        return neworderBuilder_;
+      }
+
+      // optional .TpccOrder order = 8;
+      private com.basho.riak.protobuf.AntidotePB.TpccOrder order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccOrder, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder> orderBuilder_;
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public boolean hasOrder() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccOrder getOrder() {
+        if (orderBuilder_ == null) {
+          return order_;
+        } else {
+          return orderBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public Builder setOrder(com.basho.riak.protobuf.AntidotePB.TpccOrder value) {
+        if (orderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          order_ = value;
+          onChanged();
+        } else {
+          orderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public Builder setOrder(
+          com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder builderForValue) {
+        if (orderBuilder_ == null) {
+          order_ = builderForValue.build();
+          onChanged();
+        } else {
+          orderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public Builder mergeOrder(com.basho.riak.protobuf.AntidotePB.TpccOrder value) {
+        if (orderBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+              order_ != com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance()) {
+            order_ =
+              com.basho.riak.protobuf.AntidotePB.TpccOrder.newBuilder(order_).mergeFrom(value).buildPartial();
+          } else {
+            order_ = value;
+          }
+          onChanged();
+        } else {
+          orderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public Builder clearOrder() {
+        if (orderBuilder_ == null) {
+          order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
+          onChanged();
+        } else {
+          orderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder getOrderBuilder() {
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return getOrderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder getOrderOrBuilder() {
+        if (orderBuilder_ != null) {
+          return orderBuilder_.getMessageOrBuilder();
+        } else {
+          return order_;
+        }
+      }
+      /**
+       * <code>optional .TpccOrder order = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccOrder, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder> 
+          getOrderFieldBuilder() {
+        if (orderBuilder_ == null) {
+          orderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccOrder, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder>(
+                  order_,
+                  getParentForChildren(),
+                  isClean());
+          order_ = null;
+        }
+        return orderBuilder_;
+      }
+
+      // optional .TpccOrderLine orderline = 9;
+      private com.basho.riak.protobuf.AntidotePB.TpccOrderLine orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccOrderLine, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder> orderlineBuilder_;
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public boolean hasOrderline() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccOrderLine getOrderline() {
+        if (orderlineBuilder_ == null) {
+          return orderline_;
+        } else {
+          return orderlineBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public Builder setOrderline(com.basho.riak.protobuf.AntidotePB.TpccOrderLine value) {
+        if (orderlineBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          orderline_ = value;
+          onChanged();
+        } else {
+          orderlineBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000100;
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public Builder setOrderline(
+          com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder builderForValue) {
+        if (orderlineBuilder_ == null) {
+          orderline_ = builderForValue.build();
+          onChanged();
+        } else {
+          orderlineBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000100;
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public Builder mergeOrderline(com.basho.riak.protobuf.AntidotePB.TpccOrderLine value) {
+        if (orderlineBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100) &&
+              orderline_ != com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance()) {
+            orderline_ =
+              com.basho.riak.protobuf.AntidotePB.TpccOrderLine.newBuilder(orderline_).mergeFrom(value).buildPartial();
+          } else {
+            orderline_ = value;
+          }
+          onChanged();
+        } else {
+          orderlineBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000100;
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public Builder clearOrderline() {
+        if (orderlineBuilder_ == null) {
+          orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
+          onChanged();
+        } else {
+          orderlineBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder getOrderlineBuilder() {
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return getOrderlineFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder getOrderlineOrBuilder() {
+        if (orderlineBuilder_ != null) {
+          return orderlineBuilder_.getMessageOrBuilder();
+        } else {
+          return orderline_;
+        }
+      }
+      /**
+       * <code>optional .TpccOrderLine orderline = 9;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccOrderLine, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder> 
+          getOrderlineFieldBuilder() {
+        if (orderlineBuilder_ == null) {
+          orderlineBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccOrderLine, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder>(
+                  orderline_,
+                  getParentForChildren(),
+                  isClean());
+          orderline_ = null;
+        }
+        return orderlineBuilder_;
+      }
+
+      // optional .TpccStock stock = 10;
+      private com.basho.riak.protobuf.AntidotePB.TpccStock stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccStock, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder, com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder> stockBuilder_;
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public boolean hasStock() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccStock getStock() {
+        if (stockBuilder_ == null) {
+          return stock_;
+        } else {
+          return stockBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public Builder setStock(com.basho.riak.protobuf.AntidotePB.TpccStock value) {
+        if (stockBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          stock_ = value;
+          onChanged();
+        } else {
+          stockBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public Builder setStock(
+          com.basho.riak.protobuf.AntidotePB.TpccStock.Builder builderForValue) {
+        if (stockBuilder_ == null) {
+          stock_ = builderForValue.build();
+          onChanged();
+        } else {
+          stockBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public Builder mergeStock(com.basho.riak.protobuf.AntidotePB.TpccStock value) {
+        if (stockBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200) &&
+              stock_ != com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance()) {
+            stock_ =
+              com.basho.riak.protobuf.AntidotePB.TpccStock.newBuilder(stock_).mergeFrom(value).buildPartial();
+          } else {
+            stock_ = value;
+          }
+          onChanged();
+        } else {
+          stockBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public Builder clearStock() {
+        if (stockBuilder_ == null) {
+          stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
+          onChanged();
+        } else {
+          stockBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccStock.Builder getStockBuilder() {
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return getStockFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder getStockOrBuilder() {
+        if (stockBuilder_ != null) {
+          return stockBuilder_.getMessageOrBuilder();
+        } else {
+          return stock_;
+        }
+      }
+      /**
+       * <code>optional .TpccStock stock = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccStock, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder, com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder> 
+          getStockFieldBuilder() {
+        if (stockBuilder_ == null) {
+          stockBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccStock, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder, com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder>(
+                  stock_,
+                  getParentForChildren(),
+                  isClean());
+          stock_ = null;
+        }
+        return stockBuilder_;
+      }
+
+      // optional .TpccWarehouse warehouse = 11;
+      private com.basho.riak.protobuf.AntidotePB.TpccWarehouse warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccWarehouse, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder, com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder> warehouseBuilder_;
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public boolean hasWarehouse() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccWarehouse getWarehouse() {
+        if (warehouseBuilder_ == null) {
+          return warehouse_;
+        } else {
+          return warehouseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public Builder setWarehouse(com.basho.riak.protobuf.AntidotePB.TpccWarehouse value) {
+        if (warehouseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          warehouse_ = value;
+          onChanged();
+        } else {
+          warehouseBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public Builder setWarehouse(
+          com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder builderForValue) {
+        if (warehouseBuilder_ == null) {
+          warehouse_ = builderForValue.build();
+          onChanged();
+        } else {
+          warehouseBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public Builder mergeWarehouse(com.basho.riak.protobuf.AntidotePB.TpccWarehouse value) {
+        if (warehouseBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              warehouse_ != com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance()) {
+            warehouse_ =
+              com.basho.riak.protobuf.AntidotePB.TpccWarehouse.newBuilder(warehouse_).mergeFrom(value).buildPartial();
+          } else {
+            warehouse_ = value;
+          }
+          onChanged();
+        } else {
+          warehouseBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public Builder clearWarehouse() {
+        if (warehouseBuilder_ == null) {
+          warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
+          onChanged();
+        } else {
+          warehouseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder getWarehouseBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getWarehouseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder getWarehouseOrBuilder() {
+        if (warehouseBuilder_ != null) {
+          return warehouseBuilder_.getMessageOrBuilder();
+        } else {
+          return warehouse_;
+        }
+      }
+      /**
+       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.TpccWarehouse, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder, com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder> 
+          getWarehouseFieldBuilder() {
+        if (warehouseBuilder_ == null) {
+          warehouseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.TpccWarehouse, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder, com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder>(
+                  warehouse_,
+                  getParentForChildren(),
+                  isClean());
+          warehouse_ = null;
+        }
+        return warehouseBuilder_;
+      }
+
+      // optional bytes value = 12;
+      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes value = 12;</code>
+       */
+      public boolean hasValue() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional bytes value = 12;</code>
+       */
+      public com.google.protobuf.ByteString getValue() {
+        return value_;
+      }
+      /**
+       * <code>optional bytes value = 12;</code>
+       */
+      public Builder setValue(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes value = 12;</code>
+       */
+      public Builder clearValue() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        value_ = getDefaultInstance().getValue();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:FpbValue)
+    }
+
+    static {
+      defaultInstance = new FpbValue(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:FpbValue)
+  }
+
+  public interface TpccCustomerOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required bytes c_first = 1;
+    /**
+     * <code>required bytes c_first = 1;</code>
+     */
+    boolean hasCFirst();
+    /**
+     * <code>required bytes c_first = 1;</code>
+     */
+    com.google.protobuf.ByteString getCFirst();
+
+    // required bytes c_middle = 2;
+    /**
+     * <code>required bytes c_middle = 2;</code>
+     */
+    boolean hasCMiddle();
+    /**
+     * <code>required bytes c_middle = 2;</code>
+     */
+    com.google.protobuf.ByteString getCMiddle();
+
+    // required bytes c_last = 3;
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    boolean hasCLast();
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    com.google.protobuf.ByteString getCLast();
+
+    // required bytes c_street1 = 4;
+    /**
+     * <code>required bytes c_street1 = 4;</code>
+     */
+    boolean hasCStreet1();
+    /**
+     * <code>required bytes c_street1 = 4;</code>
+     */
+    com.google.protobuf.ByteString getCStreet1();
+
+    // required bytes c_street2 = 5;
+    /**
+     * <code>required bytes c_street2 = 5;</code>
+     */
+    boolean hasCStreet2();
+    /**
+     * <code>required bytes c_street2 = 5;</code>
+     */
+    com.google.protobuf.ByteString getCStreet2();
+
+    // required bytes c_city = 6;
+    /**
+     * <code>required bytes c_city = 6;</code>
+     */
+    boolean hasCCity();
+    /**
+     * <code>required bytes c_city = 6;</code>
+     */
+    com.google.protobuf.ByteString getCCity();
+
+    // required bytes c_state = 7;
+    /**
+     * <code>required bytes c_state = 7;</code>
+     */
+    boolean hasCState();
+    /**
+     * <code>required bytes c_state = 7;</code>
+     */
+    com.google.protobuf.ByteString getCState();
+
+    // required bytes c_zip = 8;
+    /**
+     * <code>required bytes c_zip = 8;</code>
+     */
+    boolean hasCZip();
+    /**
+     * <code>required bytes c_zip = 8;</code>
+     */
+    com.google.protobuf.ByteString getCZip();
+
+    // required bytes c_phone = 9;
+    /**
+     * <code>required bytes c_phone = 9;</code>
+     */
+    boolean hasCPhone();
+    /**
+     * <code>required bytes c_phone = 9;</code>
+     */
+    com.google.protobuf.ByteString getCPhone();
+
+    // required uint64 c_since = 10;
+    /**
+     * <code>required uint64 c_since = 10;</code>
+     */
+    boolean hasCSince();
+    /**
+     * <code>required uint64 c_since = 10;</code>
+     */
+    long getCSince();
+
+    // required bytes c_credit = 11;
+    /**
+     * <code>required bytes c_credit = 11;</code>
+     */
+    boolean hasCCredit();
+    /**
+     * <code>required bytes c_credit = 11;</code>
+     */
+    com.google.protobuf.ByteString getCCredit();
+
+    // required double c_credit_lim = 12;
+    /**
+     * <code>required double c_credit_lim = 12;</code>
+     */
+    boolean hasCCreditLim();
+    /**
+     * <code>required double c_credit_lim = 12;</code>
+     */
+    double getCCreditLim();
+
+    // required double c_discount = 13;
+    /**
+     * <code>required double c_discount = 13;</code>
+     */
+    boolean hasCDiscount();
+    /**
+     * <code>required double c_discount = 13;</code>
+     */
+    double getCDiscount();
+
+    // required double c_ytd_payment = 14;
+    /**
+     * <code>required double c_ytd_payment = 14;</code>
+     */
+    boolean hasCYtdPayment();
+    /**
+     * <code>required double c_ytd_payment = 14;</code>
+     */
+    double getCYtdPayment();
+
+    // required int32 c_payment_cnt = 15;
+    /**
+     * <code>required int32 c_payment_cnt = 15;</code>
+     */
+    boolean hasCPaymentCnt();
+    /**
+     * <code>required int32 c_payment_cnt = 15;</code>
+     */
+    int getCPaymentCnt();
+
+    // required int32 c_delivery_cnt = 16;
+    /**
+     * <code>required int32 c_delivery_cnt = 16;</code>
+     */
+    boolean hasCDeliveryCnt();
+    /**
+     * <code>required int32 c_delivery_cnt = 16;</code>
+     */
+    int getCDeliveryCnt();
+
+    // required bytes c_data = 17;
+    /**
+     * <code>required bytes c_data = 17;</code>
+     */
+    boolean hasCData();
+    /**
+     * <code>required bytes c_data = 17;</code>
+     */
+    com.google.protobuf.ByteString getCData();
+  }
+  /**
+   * Protobuf type {@code TpccCustomer}
+   */
+  public static final class TpccCustomer extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccCustomerOrBuilder {
+    // Use TpccCustomer.newBuilder() to construct.
+    private TpccCustomer(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccCustomer(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccCustomer defaultInstance;
+    public static TpccCustomer getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccCustomer getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccCustomer(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              cFirst_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              cMiddle_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              cLast_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              cStreet1_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              cStreet2_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              cCity_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              cState_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              cZip_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              cPhone_ = input.readBytes();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              cSince_ = input.readUInt64();
+              break;
+            }
+            case 90: {
+              bitField0_ |= 0x00000400;
+              cCredit_ = input.readBytes();
+              break;
+            }
+            case 97: {
+              bitField0_ |= 0x00000800;
+              cCreditLim_ = input.readDouble();
+              break;
+            }
+            case 105: {
+              bitField0_ |= 0x00001000;
+              cDiscount_ = input.readDouble();
+              break;
+            }
+            case 113: {
+              bitField0_ |= 0x00002000;
+              cYtdPayment_ = input.readDouble();
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00004000;
+              cPaymentCnt_ = input.readInt32();
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00008000;
+              cDeliveryCnt_ = input.readInt32();
+              break;
+            }
+            case 138: {
+              bitField0_ |= 0x00010000;
+              cData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomer_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomer_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccCustomer.class, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccCustomer> PARSER =
+        new com.google.protobuf.AbstractParser<TpccCustomer>() {
+      public TpccCustomer parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccCustomer(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccCustomer> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required bytes c_first = 1;
+    public static final int C_FIRST_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString cFirst_;
+    /**
+     * <code>required bytes c_first = 1;</code>
+     */
+    public boolean hasCFirst() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bytes c_first = 1;</code>
+     */
+    public com.google.protobuf.ByteString getCFirst() {
+      return cFirst_;
+    }
+
+    // required bytes c_middle = 2;
+    public static final int C_MIDDLE_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString cMiddle_;
+    /**
+     * <code>required bytes c_middle = 2;</code>
+     */
+    public boolean hasCMiddle() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes c_middle = 2;</code>
+     */
+    public com.google.protobuf.ByteString getCMiddle() {
+      return cMiddle_;
+    }
+
+    // required bytes c_last = 3;
+    public static final int C_LAST_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString cLast_;
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    public boolean hasCLast() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    public com.google.protobuf.ByteString getCLast() {
+      return cLast_;
+    }
+
+    // required bytes c_street1 = 4;
+    public static final int C_STREET1_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString cStreet1_;
+    /**
+     * <code>required bytes c_street1 = 4;</code>
+     */
+    public boolean hasCStreet1() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required bytes c_street1 = 4;</code>
+     */
+    public com.google.protobuf.ByteString getCStreet1() {
+      return cStreet1_;
+    }
+
+    // required bytes c_street2 = 5;
+    public static final int C_STREET2_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString cStreet2_;
+    /**
+     * <code>required bytes c_street2 = 5;</code>
+     */
+    public boolean hasCStreet2() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required bytes c_street2 = 5;</code>
+     */
+    public com.google.protobuf.ByteString getCStreet2() {
+      return cStreet2_;
+    }
+
+    // required bytes c_city = 6;
+    public static final int C_CITY_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString cCity_;
+    /**
+     * <code>required bytes c_city = 6;</code>
+     */
+    public boolean hasCCity() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required bytes c_city = 6;</code>
+     */
+    public com.google.protobuf.ByteString getCCity() {
+      return cCity_;
+    }
+
+    // required bytes c_state = 7;
+    public static final int C_STATE_FIELD_NUMBER = 7;
+    private com.google.protobuf.ByteString cState_;
+    /**
+     * <code>required bytes c_state = 7;</code>
+     */
+    public boolean hasCState() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required bytes c_state = 7;</code>
+     */
+    public com.google.protobuf.ByteString getCState() {
+      return cState_;
+    }
+
+    // required bytes c_zip = 8;
+    public static final int C_ZIP_FIELD_NUMBER = 8;
+    private com.google.protobuf.ByteString cZip_;
+    /**
+     * <code>required bytes c_zip = 8;</code>
+     */
+    public boolean hasCZip() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required bytes c_zip = 8;</code>
+     */
+    public com.google.protobuf.ByteString getCZip() {
+      return cZip_;
+    }
+
+    // required bytes c_phone = 9;
+    public static final int C_PHONE_FIELD_NUMBER = 9;
+    private com.google.protobuf.ByteString cPhone_;
+    /**
+     * <code>required bytes c_phone = 9;</code>
+     */
+    public boolean hasCPhone() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>required bytes c_phone = 9;</code>
+     */
+    public com.google.protobuf.ByteString getCPhone() {
+      return cPhone_;
+    }
+
+    // required uint64 c_since = 10;
+    public static final int C_SINCE_FIELD_NUMBER = 10;
+    private long cSince_;
+    /**
+     * <code>required uint64 c_since = 10;</code>
+     */
+    public boolean hasCSince() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>required uint64 c_since = 10;</code>
+     */
+    public long getCSince() {
+      return cSince_;
+    }
+
+    // required bytes c_credit = 11;
+    public static final int C_CREDIT_FIELD_NUMBER = 11;
+    private com.google.protobuf.ByteString cCredit_;
+    /**
+     * <code>required bytes c_credit = 11;</code>
+     */
+    public boolean hasCCredit() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>required bytes c_credit = 11;</code>
+     */
+    public com.google.protobuf.ByteString getCCredit() {
+      return cCredit_;
+    }
+
+    // required double c_credit_lim = 12;
+    public static final int C_CREDIT_LIM_FIELD_NUMBER = 12;
+    private double cCreditLim_;
+    /**
+     * <code>required double c_credit_lim = 12;</code>
+     */
+    public boolean hasCCreditLim() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>required double c_credit_lim = 12;</code>
+     */
+    public double getCCreditLim() {
+      return cCreditLim_;
+    }
+
+    // required double c_discount = 13;
+    public static final int C_DISCOUNT_FIELD_NUMBER = 13;
+    private double cDiscount_;
+    /**
+     * <code>required double c_discount = 13;</code>
+     */
+    public boolean hasCDiscount() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>required double c_discount = 13;</code>
+     */
+    public double getCDiscount() {
+      return cDiscount_;
+    }
+
+    // required double c_ytd_payment = 14;
+    public static final int C_YTD_PAYMENT_FIELD_NUMBER = 14;
+    private double cYtdPayment_;
+    /**
+     * <code>required double c_ytd_payment = 14;</code>
+     */
+    public boolean hasCYtdPayment() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>required double c_ytd_payment = 14;</code>
+     */
+    public double getCYtdPayment() {
+      return cYtdPayment_;
+    }
+
+    // required int32 c_payment_cnt = 15;
+    public static final int C_PAYMENT_CNT_FIELD_NUMBER = 15;
+    private int cPaymentCnt_;
+    /**
+     * <code>required int32 c_payment_cnt = 15;</code>
+     */
+    public boolean hasCPaymentCnt() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>required int32 c_payment_cnt = 15;</code>
+     */
+    public int getCPaymentCnt() {
+      return cPaymentCnt_;
+    }
+
+    // required int32 c_delivery_cnt = 16;
+    public static final int C_DELIVERY_CNT_FIELD_NUMBER = 16;
+    private int cDeliveryCnt_;
+    /**
+     * <code>required int32 c_delivery_cnt = 16;</code>
+     */
+    public boolean hasCDeliveryCnt() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>required int32 c_delivery_cnt = 16;</code>
+     */
+    public int getCDeliveryCnt() {
+      return cDeliveryCnt_;
+    }
+
+    // required bytes c_data = 17;
+    public static final int C_DATA_FIELD_NUMBER = 17;
+    private com.google.protobuf.ByteString cData_;
+    /**
+     * <code>required bytes c_data = 17;</code>
+     */
+    public boolean hasCData() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <code>required bytes c_data = 17;</code>
+     */
+    public com.google.protobuf.ByteString getCData() {
+      return cData_;
+    }
+
+    private void initFields() {
+      cFirst_ = com.google.protobuf.ByteString.EMPTY;
+      cMiddle_ = com.google.protobuf.ByteString.EMPTY;
+      cLast_ = com.google.protobuf.ByteString.EMPTY;
+      cStreet1_ = com.google.protobuf.ByteString.EMPTY;
+      cStreet2_ = com.google.protobuf.ByteString.EMPTY;
+      cCity_ = com.google.protobuf.ByteString.EMPTY;
+      cState_ = com.google.protobuf.ByteString.EMPTY;
+      cZip_ = com.google.protobuf.ByteString.EMPTY;
+      cPhone_ = com.google.protobuf.ByteString.EMPTY;
+      cSince_ = 0L;
+      cCredit_ = com.google.protobuf.ByteString.EMPTY;
+      cCreditLim_ = 0D;
+      cDiscount_ = 0D;
+      cYtdPayment_ = 0D;
+      cPaymentCnt_ = 0;
+      cDeliveryCnt_ = 0;
+      cData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasCFirst()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCMiddle()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCLast()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCStreet1()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCStreet2()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCCity()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCState()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCZip()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCPhone()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCSince()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCCredit()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCCreditLim()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCDiscount()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCYtdPayment()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCPaymentCnt()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCDeliveryCnt()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCData()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, cFirst_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, cMiddle_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, cLast_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, cStreet1_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, cStreet2_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, cCity_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, cState_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, cZip_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, cPhone_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeUInt64(10, cSince_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBytes(11, cCredit_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeDouble(12, cCreditLim_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeDouble(13, cDiscount_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeDouble(14, cYtdPayment_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt32(15, cPaymentCnt_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeInt32(16, cDeliveryCnt_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeBytes(17, cData_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, cFirst_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, cMiddle_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, cLast_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, cStreet1_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, cStreet2_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, cCity_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, cState_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, cZip_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, cPhone_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(10, cSince_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(11, cCredit_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(12, cCreditLim_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(13, cDiscount_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(14, cYtdPayment_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(15, cPaymentCnt_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(16, cDeliveryCnt_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(17, cData_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomer parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccCustomer prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccCustomer}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomer_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomer_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccCustomer.class, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccCustomer.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        cFirst_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        cMiddle_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        cLast_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        cStreet1_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        cStreet2_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        cCity_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        cState_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        cZip_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        cPhone_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        cSince_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        cCredit_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        cCreditLim_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        cDiscount_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        cYtdPayment_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        cPaymentCnt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00004000);
+        cDeliveryCnt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00008000);
+        cData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00010000);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomer_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomer getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomer build() {
+        com.basho.riak.protobuf.AntidotePB.TpccCustomer result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomer buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccCustomer result = new com.basho.riak.protobuf.AntidotePB.TpccCustomer(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.cFirst_ = cFirst_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.cMiddle_ = cMiddle_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.cLast_ = cLast_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.cStreet1_ = cStreet1_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.cStreet2_ = cStreet2_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.cCity_ = cCity_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.cState_ = cState_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.cZip_ = cZip_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.cPhone_ = cPhone_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.cSince_ = cSince_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.cCredit_ = cCredit_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.cCreditLim_ = cCreditLim_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.cDiscount_ = cDiscount_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.cYtdPayment_ = cYtdPayment_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.cPaymentCnt_ = cPaymentCnt_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.cDeliveryCnt_ = cDeliveryCnt_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        result.cData_ = cData_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccCustomer) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccCustomer)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccCustomer other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance()) return this;
+        if (other.hasCFirst()) {
+          setCFirst(other.getCFirst());
+        }
+        if (other.hasCMiddle()) {
+          setCMiddle(other.getCMiddle());
+        }
+        if (other.hasCLast()) {
+          setCLast(other.getCLast());
+        }
+        if (other.hasCStreet1()) {
+          setCStreet1(other.getCStreet1());
+        }
+        if (other.hasCStreet2()) {
+          setCStreet2(other.getCStreet2());
+        }
+        if (other.hasCCity()) {
+          setCCity(other.getCCity());
+        }
+        if (other.hasCState()) {
+          setCState(other.getCState());
+        }
+        if (other.hasCZip()) {
+          setCZip(other.getCZip());
+        }
+        if (other.hasCPhone()) {
+          setCPhone(other.getCPhone());
+        }
+        if (other.hasCSince()) {
+          setCSince(other.getCSince());
+        }
+        if (other.hasCCredit()) {
+          setCCredit(other.getCCredit());
+        }
+        if (other.hasCCreditLim()) {
+          setCCreditLim(other.getCCreditLim());
+        }
+        if (other.hasCDiscount()) {
+          setCDiscount(other.getCDiscount());
+        }
+        if (other.hasCYtdPayment()) {
+          setCYtdPayment(other.getCYtdPayment());
+        }
+        if (other.hasCPaymentCnt()) {
+          setCPaymentCnt(other.getCPaymentCnt());
+        }
+        if (other.hasCDeliveryCnt()) {
+          setCDeliveryCnt(other.getCDeliveryCnt());
+        }
+        if (other.hasCData()) {
+          setCData(other.getCData());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasCFirst()) {
+          
+          return false;
+        }
+        if (!hasCMiddle()) {
+          
+          return false;
+        }
+        if (!hasCLast()) {
+          
+          return false;
+        }
+        if (!hasCStreet1()) {
+          
+          return false;
+        }
+        if (!hasCStreet2()) {
+          
+          return false;
+        }
+        if (!hasCCity()) {
+          
+          return false;
+        }
+        if (!hasCState()) {
+          
+          return false;
+        }
+        if (!hasCZip()) {
+          
+          return false;
+        }
+        if (!hasCPhone()) {
+          
+          return false;
+        }
+        if (!hasCSince()) {
+          
+          return false;
+        }
+        if (!hasCCredit()) {
+          
+          return false;
+        }
+        if (!hasCCreditLim()) {
+          
+          return false;
+        }
+        if (!hasCDiscount()) {
+          
+          return false;
+        }
+        if (!hasCYtdPayment()) {
+          
+          return false;
+        }
+        if (!hasCPaymentCnt()) {
+          
+          return false;
+        }
+        if (!hasCDeliveryCnt()) {
+          
+          return false;
+        }
+        if (!hasCData()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccCustomer parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccCustomer) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required bytes c_first = 1;
+      private com.google.protobuf.ByteString cFirst_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_first = 1;</code>
+       */
+      public boolean hasCFirst() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes c_first = 1;</code>
+       */
+      public com.google.protobuf.ByteString getCFirst() {
+        return cFirst_;
+      }
+      /**
+       * <code>required bytes c_first = 1;</code>
+       */
+      public Builder setCFirst(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        cFirst_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_first = 1;</code>
+       */
+      public Builder clearCFirst() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        cFirst_ = getDefaultInstance().getCFirst();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_middle = 2;
+      private com.google.protobuf.ByteString cMiddle_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_middle = 2;</code>
+       */
+      public boolean hasCMiddle() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes c_middle = 2;</code>
+       */
+      public com.google.protobuf.ByteString getCMiddle() {
+        return cMiddle_;
+      }
+      /**
+       * <code>required bytes c_middle = 2;</code>
+       */
+      public Builder setCMiddle(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        cMiddle_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_middle = 2;</code>
+       */
+      public Builder clearCMiddle() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        cMiddle_ = getDefaultInstance().getCMiddle();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_last = 3;
+      private com.google.protobuf.ByteString cLast_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public boolean hasCLast() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public com.google.protobuf.ByteString getCLast() {
+        return cLast_;
+      }
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public Builder setCLast(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        cLast_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public Builder clearCLast() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        cLast_ = getDefaultInstance().getCLast();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_street1 = 4;
+      private com.google.protobuf.ByteString cStreet1_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_street1 = 4;</code>
+       */
+      public boolean hasCStreet1() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required bytes c_street1 = 4;</code>
+       */
+      public com.google.protobuf.ByteString getCStreet1() {
+        return cStreet1_;
+      }
+      /**
+       * <code>required bytes c_street1 = 4;</code>
+       */
+      public Builder setCStreet1(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        cStreet1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_street1 = 4;</code>
+       */
+      public Builder clearCStreet1() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        cStreet1_ = getDefaultInstance().getCStreet1();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_street2 = 5;
+      private com.google.protobuf.ByteString cStreet2_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_street2 = 5;</code>
+       */
+      public boolean hasCStreet2() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required bytes c_street2 = 5;</code>
+       */
+      public com.google.protobuf.ByteString getCStreet2() {
+        return cStreet2_;
+      }
+      /**
+       * <code>required bytes c_street2 = 5;</code>
+       */
+      public Builder setCStreet2(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        cStreet2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_street2 = 5;</code>
+       */
+      public Builder clearCStreet2() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        cStreet2_ = getDefaultInstance().getCStreet2();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_city = 6;
+      private com.google.protobuf.ByteString cCity_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_city = 6;</code>
+       */
+      public boolean hasCCity() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required bytes c_city = 6;</code>
+       */
+      public com.google.protobuf.ByteString getCCity() {
+        return cCity_;
+      }
+      /**
+       * <code>required bytes c_city = 6;</code>
+       */
+      public Builder setCCity(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        cCity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_city = 6;</code>
+       */
+      public Builder clearCCity() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        cCity_ = getDefaultInstance().getCCity();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_state = 7;
+      private com.google.protobuf.ByteString cState_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_state = 7;</code>
+       */
+      public boolean hasCState() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required bytes c_state = 7;</code>
+       */
+      public com.google.protobuf.ByteString getCState() {
+        return cState_;
+      }
+      /**
+       * <code>required bytes c_state = 7;</code>
+       */
+      public Builder setCState(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        cState_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_state = 7;</code>
+       */
+      public Builder clearCState() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        cState_ = getDefaultInstance().getCState();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_zip = 8;
+      private com.google.protobuf.ByteString cZip_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_zip = 8;</code>
+       */
+      public boolean hasCZip() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>required bytes c_zip = 8;</code>
+       */
+      public com.google.protobuf.ByteString getCZip() {
+        return cZip_;
+      }
+      /**
+       * <code>required bytes c_zip = 8;</code>
+       */
+      public Builder setCZip(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        cZip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_zip = 8;</code>
+       */
+      public Builder clearCZip() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        cZip_ = getDefaultInstance().getCZip();
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_phone = 9;
+      private com.google.protobuf.ByteString cPhone_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_phone = 9;</code>
+       */
+      public boolean hasCPhone() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>required bytes c_phone = 9;</code>
+       */
+      public com.google.protobuf.ByteString getCPhone() {
+        return cPhone_;
+      }
+      /**
+       * <code>required bytes c_phone = 9;</code>
+       */
+      public Builder setCPhone(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        cPhone_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_phone = 9;</code>
+       */
+      public Builder clearCPhone() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        cPhone_ = getDefaultInstance().getCPhone();
+        onChanged();
+        return this;
+      }
+
+      // required uint64 c_since = 10;
+      private long cSince_ ;
+      /**
+       * <code>required uint64 c_since = 10;</code>
+       */
+      public boolean hasCSince() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>required uint64 c_since = 10;</code>
+       */
+      public long getCSince() {
+        return cSince_;
+      }
+      /**
+       * <code>required uint64 c_since = 10;</code>
+       */
+      public Builder setCSince(long value) {
+        bitField0_ |= 0x00000200;
+        cSince_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 c_since = 10;</code>
+       */
+      public Builder clearCSince() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        cSince_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_credit = 11;
+      private com.google.protobuf.ByteString cCredit_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_credit = 11;</code>
+       */
+      public boolean hasCCredit() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>required bytes c_credit = 11;</code>
+       */
+      public com.google.protobuf.ByteString getCCredit() {
+        return cCredit_;
+      }
+      /**
+       * <code>required bytes c_credit = 11;</code>
+       */
+      public Builder setCCredit(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        cCredit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_credit = 11;</code>
+       */
+      public Builder clearCCredit() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        cCredit_ = getDefaultInstance().getCCredit();
+        onChanged();
+        return this;
+      }
+
+      // required double c_credit_lim = 12;
+      private double cCreditLim_ ;
+      /**
+       * <code>required double c_credit_lim = 12;</code>
+       */
+      public boolean hasCCreditLim() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>required double c_credit_lim = 12;</code>
+       */
+      public double getCCreditLim() {
+        return cCreditLim_;
+      }
+      /**
+       * <code>required double c_credit_lim = 12;</code>
+       */
+      public Builder setCCreditLim(double value) {
+        bitField0_ |= 0x00000800;
+        cCreditLim_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double c_credit_lim = 12;</code>
+       */
+      public Builder clearCCreditLim() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        cCreditLim_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // required double c_discount = 13;
+      private double cDiscount_ ;
+      /**
+       * <code>required double c_discount = 13;</code>
+       */
+      public boolean hasCDiscount() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>required double c_discount = 13;</code>
+       */
+      public double getCDiscount() {
+        return cDiscount_;
+      }
+      /**
+       * <code>required double c_discount = 13;</code>
+       */
+      public Builder setCDiscount(double value) {
+        bitField0_ |= 0x00001000;
+        cDiscount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double c_discount = 13;</code>
+       */
+      public Builder clearCDiscount() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        cDiscount_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // required double c_ytd_payment = 14;
+      private double cYtdPayment_ ;
+      /**
+       * <code>required double c_ytd_payment = 14;</code>
+       */
+      public boolean hasCYtdPayment() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>required double c_ytd_payment = 14;</code>
+       */
+      public double getCYtdPayment() {
+        return cYtdPayment_;
+      }
+      /**
+       * <code>required double c_ytd_payment = 14;</code>
+       */
+      public Builder setCYtdPayment(double value) {
+        bitField0_ |= 0x00002000;
+        cYtdPayment_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double c_ytd_payment = 14;</code>
+       */
+      public Builder clearCYtdPayment() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        cYtdPayment_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // required int32 c_payment_cnt = 15;
+      private int cPaymentCnt_ ;
+      /**
+       * <code>required int32 c_payment_cnt = 15;</code>
+       */
+      public boolean hasCPaymentCnt() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>required int32 c_payment_cnt = 15;</code>
+       */
+      public int getCPaymentCnt() {
+        return cPaymentCnt_;
+      }
+      /**
+       * <code>required int32 c_payment_cnt = 15;</code>
+       */
+      public Builder setCPaymentCnt(int value) {
+        bitField0_ |= 0x00004000;
+        cPaymentCnt_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 c_payment_cnt = 15;</code>
+       */
+      public Builder clearCPaymentCnt() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        cPaymentCnt_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 c_delivery_cnt = 16;
+      private int cDeliveryCnt_ ;
+      /**
+       * <code>required int32 c_delivery_cnt = 16;</code>
+       */
+      public boolean hasCDeliveryCnt() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <code>required int32 c_delivery_cnt = 16;</code>
+       */
+      public int getCDeliveryCnt() {
+        return cDeliveryCnt_;
+      }
+      /**
+       * <code>required int32 c_delivery_cnt = 16;</code>
+       */
+      public Builder setCDeliveryCnt(int value) {
+        bitField0_ |= 0x00008000;
+        cDeliveryCnt_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 c_delivery_cnt = 16;</code>
+       */
+      public Builder clearCDeliveryCnt() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        cDeliveryCnt_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_data = 17;
+      private com.google.protobuf.ByteString cData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_data = 17;</code>
+       */
+      public boolean hasCData() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <code>required bytes c_data = 17;</code>
+       */
+      public com.google.protobuf.ByteString getCData() {
+        return cData_;
+      }
+      /**
+       * <code>required bytes c_data = 17;</code>
+       */
+      public Builder setCData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00010000;
+        cData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_data = 17;</code>
+       */
+      public Builder clearCData() {
+        bitField0_ = (bitField0_ & ~0x00010000);
+        cData_ = getDefaultInstance().getCData();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccCustomer)
+    }
+
+    static {
+      defaultInstance = new TpccCustomer(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccCustomer)
+  }
+
+  public interface TpccCustomerLookupOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint64 c_w_id = 1;
+    /**
+     * <code>required uint64 c_w_id = 1;</code>
+     */
+    boolean hasCWId();
+    /**
+     * <code>required uint64 c_w_id = 1;</code>
+     */
+    long getCWId();
+
+    // required uint64 c_d_id = 2;
+    /**
+     * <code>required uint64 c_d_id = 2;</code>
+     */
+    boolean hasCDId();
+    /**
+     * <code>required uint64 c_d_id = 2;</code>
+     */
+    long getCDId();
+
+    // required bytes c_last = 3;
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    boolean hasCLast();
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    com.google.protobuf.ByteString getCLast();
+
+    // repeated int64 ids = 4;
+    /**
+     * <code>repeated int64 ids = 4;</code>
+     */
+    java.util.List<java.lang.Long> getIdsList();
+    /**
+     * <code>repeated int64 ids = 4;</code>
+     */
+    int getIdsCount();
+    /**
+     * <code>repeated int64 ids = 4;</code>
+     */
+    long getIds(int index);
+  }
+  /**
+   * Protobuf type {@code TpccCustomerLookup}
+   */
+  public static final class TpccCustomerLookup extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccCustomerLookupOrBuilder {
+    // Use TpccCustomerLookup.newBuilder() to construct.
+    private TpccCustomerLookup(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccCustomerLookup(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccCustomerLookup defaultInstance;
+    public static TpccCustomerLookup getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccCustomerLookup getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccCustomerLookup(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              cWId_ = input.readUInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              cDId_ = input.readUInt64();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              cLast_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                ids_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              ids_.add(input.readInt64());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                ids_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                ids_.add(input.readInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          ids_ = java.util.Collections.unmodifiableList(ids_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomerLookup_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomerLookup_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.class, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccCustomerLookup> PARSER =
+        new com.google.protobuf.AbstractParser<TpccCustomerLookup>() {
+      public TpccCustomerLookup parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccCustomerLookup(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccCustomerLookup> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint64 c_w_id = 1;
+    public static final int C_W_ID_FIELD_NUMBER = 1;
+    private long cWId_;
+    /**
+     * <code>required uint64 c_w_id = 1;</code>
+     */
+    public boolean hasCWId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 c_w_id = 1;</code>
+     */
+    public long getCWId() {
+      return cWId_;
+    }
+
+    // required uint64 c_d_id = 2;
+    public static final int C_D_ID_FIELD_NUMBER = 2;
+    private long cDId_;
+    /**
+     * <code>required uint64 c_d_id = 2;</code>
+     */
+    public boolean hasCDId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint64 c_d_id = 2;</code>
+     */
+    public long getCDId() {
+      return cDId_;
+    }
+
+    // required bytes c_last = 3;
+    public static final int C_LAST_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString cLast_;
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    public boolean hasCLast() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bytes c_last = 3;</code>
+     */
+    public com.google.protobuf.ByteString getCLast() {
+      return cLast_;
+    }
+
+    // repeated int64 ids = 4;
+    public static final int IDS_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Long> ids_;
+    /**
+     * <code>repeated int64 ids = 4;</code>
+     */
+    public java.util.List<java.lang.Long>
+        getIdsList() {
+      return ids_;
+    }
+    /**
+     * <code>repeated int64 ids = 4;</code>
+     */
+    public int getIdsCount() {
+      return ids_.size();
+    }
+    /**
+     * <code>repeated int64 ids = 4;</code>
+     */
+    public long getIds(int index) {
+      return ids_.get(index);
+    }
+
+    private void initFields() {
+      cWId_ = 0L;
+      cDId_ = 0L;
+      cLast_ = com.google.protobuf.ByteString.EMPTY;
+      ids_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasCWId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCDId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCLast()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, cWId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt64(2, cDId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, cLast_);
+      }
+      for (int i = 0; i < ids_.size(); i++) {
+        output.writeInt64(4, ids_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, cWId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, cDId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, cLast_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < ids_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt64SizeNoTag(ids_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getIdsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccCustomerLookup}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomerLookup_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomerLookup_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.class, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        cWId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        cDId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        cLast_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        ids_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccCustomerLookup_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup build() {
+        com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup result = new com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.cWId_ = cWId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.cDId_ = cDId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.cLast_ = cLast_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          ids_ = java.util.Collections.unmodifiableList(ids_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.ids_ = ids_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance()) return this;
+        if (other.hasCWId()) {
+          setCWId(other.getCWId());
+        }
+        if (other.hasCDId()) {
+          setCDId(other.getCDId());
+        }
+        if (other.hasCLast()) {
+          setCLast(other.getCLast());
+        }
+        if (!other.ids_.isEmpty()) {
+          if (ids_.isEmpty()) {
+            ids_ = other.ids_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureIdsIsMutable();
+            ids_.addAll(other.ids_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasCWId()) {
+          
+          return false;
+        }
+        if (!hasCDId()) {
+          
+          return false;
+        }
+        if (!hasCLast()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint64 c_w_id = 1;
+      private long cWId_ ;
+      /**
+       * <code>required uint64 c_w_id = 1;</code>
+       */
+      public boolean hasCWId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint64 c_w_id = 1;</code>
+       */
+      public long getCWId() {
+        return cWId_;
+      }
+      /**
+       * <code>required uint64 c_w_id = 1;</code>
+       */
+      public Builder setCWId(long value) {
+        bitField0_ |= 0x00000001;
+        cWId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 c_w_id = 1;</code>
+       */
+      public Builder clearCWId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        cWId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 c_d_id = 2;
+      private long cDId_ ;
+      /**
+       * <code>required uint64 c_d_id = 2;</code>
+       */
+      public boolean hasCDId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint64 c_d_id = 2;</code>
+       */
+      public long getCDId() {
+        return cDId_;
+      }
+      /**
+       * <code>required uint64 c_d_id = 2;</code>
+       */
+      public Builder setCDId(long value) {
+        bitField0_ |= 0x00000002;
+        cDId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 c_d_id = 2;</code>
+       */
+      public Builder clearCDId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        cDId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required bytes c_last = 3;
+      private com.google.protobuf.ByteString cLast_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public boolean hasCLast() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public com.google.protobuf.ByteString getCLast() {
+        return cLast_;
+      }
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public Builder setCLast(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        cLast_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes c_last = 3;</code>
+       */
+      public Builder clearCLast() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        cLast_ = getDefaultInstance().getCLast();
+        onChanged();
+        return this;
+      }
+
+      // repeated int64 ids = 4;
+      private java.util.List<java.lang.Long> ids_ = java.util.Collections.emptyList();
+      private void ensureIdsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          ids_ = new java.util.ArrayList<java.lang.Long>(ids_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated int64 ids = 4;</code>
+       */
+      public java.util.List<java.lang.Long>
+          getIdsList() {
+        return java.util.Collections.unmodifiableList(ids_);
+      }
+      /**
+       * <code>repeated int64 ids = 4;</code>
+       */
+      public int getIdsCount() {
+        return ids_.size();
+      }
+      /**
+       * <code>repeated int64 ids = 4;</code>
+       */
+      public long getIds(int index) {
+        return ids_.get(index);
+      }
+      /**
+       * <code>repeated int64 ids = 4;</code>
+       */
+      public Builder setIds(
+          int index, long value) {
+        ensureIdsIsMutable();
+        ids_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 ids = 4;</code>
+       */
+      public Builder addIds(long value) {
+        ensureIdsIsMutable();
+        ids_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 ids = 4;</code>
+       */
+      public Builder addAllIds(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureIdsIsMutable();
+        super.addAll(values, ids_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 ids = 4;</code>
+       */
+      public Builder clearIds() {
+        ids_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccCustomerLookup)
+    }
+
+    static {
+      defaultInstance = new TpccCustomerLookup(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccCustomerLookup)
+  }
+
+  public interface TpccDistrictOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required bytes d_name = 1;
+    /**
+     * <code>required bytes d_name = 1;</code>
+     */
+    boolean hasDName();
+    /**
+     * <code>required bytes d_name = 1;</code>
+     */
+    com.google.protobuf.ByteString getDName();
+
+    // required bytes d_street1 = 2;
+    /**
+     * <code>required bytes d_street1 = 2;</code>
+     */
+    boolean hasDStreet1();
+    /**
+     * <code>required bytes d_street1 = 2;</code>
+     */
+    com.google.protobuf.ByteString getDStreet1();
+
+    // required bytes d_street2 = 3;
+    /**
+     * <code>required bytes d_street2 = 3;</code>
+     */
+    boolean hasDStreet2();
+    /**
+     * <code>required bytes d_street2 = 3;</code>
+     */
+    com.google.protobuf.ByteString getDStreet2();
+
+    // required bytes d_city = 4;
+    /**
+     * <code>required bytes d_city = 4;</code>
+     */
+    boolean hasDCity();
+    /**
+     * <code>required bytes d_city = 4;</code>
+     */
+    com.google.protobuf.ByteString getDCity();
+
+    // required bytes d_state = 5;
+    /**
+     * <code>required bytes d_state = 5;</code>
+     */
+    boolean hasDState();
+    /**
+     * <code>required bytes d_state = 5;</code>
+     */
+    com.google.protobuf.ByteString getDState();
+
+    // required bytes d_zip = 6;
+    /**
+     * <code>required bytes d_zip = 6;</code>
+     */
+    boolean hasDZip();
+    /**
+     * <code>required bytes d_zip = 6;</code>
+     */
+    com.google.protobuf.ByteString getDZip();
+
+    // required double d_tax = 7;
+    /**
+     * <code>required double d_tax = 7;</code>
+     */
+    boolean hasDTax();
+    /**
+     * <code>required double d_tax = 7;</code>
+     */
+    double getDTax();
+
+    // required uint64 d_next_o_id = 8;
+    /**
+     * <code>required uint64 d_next_o_id = 8;</code>
+     */
+    boolean hasDNextOId();
+    /**
+     * <code>required uint64 d_next_o_id = 8;</code>
+     */
+    long getDNextOId();
+  }
+  /**
+   * Protobuf type {@code TpccDistrict}
+   */
+  public static final class TpccDistrict extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccDistrictOrBuilder {
+    // Use TpccDistrict.newBuilder() to construct.
+    private TpccDistrict(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccDistrict(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccDistrict defaultInstance;
+    public static TpccDistrict getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccDistrict getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccDistrict(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              dName_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              dStreet1_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              dStreet2_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              dCity_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              dState_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              dZip_ = input.readBytes();
+              break;
+            }
+            case 57: {
+              bitField0_ |= 0x00000040;
+              dTax_ = input.readDouble();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              dNextOId_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccDistrict_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccDistrict_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccDistrict.class, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccDistrict> PARSER =
+        new com.google.protobuf.AbstractParser<TpccDistrict>() {
+      public TpccDistrict parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccDistrict(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccDistrict> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required bytes d_name = 1;
+    public static final int D_NAME_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString dName_;
+    /**
+     * <code>required bytes d_name = 1;</code>
+     */
+    public boolean hasDName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bytes d_name = 1;</code>
+     */
+    public com.google.protobuf.ByteString getDName() {
+      return dName_;
+    }
+
+    // required bytes d_street1 = 2;
+    public static final int D_STREET1_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString dStreet1_;
+    /**
+     * <code>required bytes d_street1 = 2;</code>
+     */
+    public boolean hasDStreet1() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes d_street1 = 2;</code>
+     */
+    public com.google.protobuf.ByteString getDStreet1() {
+      return dStreet1_;
+    }
+
+    // required bytes d_street2 = 3;
+    public static final int D_STREET2_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString dStreet2_;
+    /**
+     * <code>required bytes d_street2 = 3;</code>
+     */
+    public boolean hasDStreet2() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bytes d_street2 = 3;</code>
+     */
+    public com.google.protobuf.ByteString getDStreet2() {
+      return dStreet2_;
+    }
+
+    // required bytes d_city = 4;
+    public static final int D_CITY_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString dCity_;
+    /**
+     * <code>required bytes d_city = 4;</code>
+     */
+    public boolean hasDCity() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required bytes d_city = 4;</code>
+     */
+    public com.google.protobuf.ByteString getDCity() {
+      return dCity_;
+    }
+
+    // required bytes d_state = 5;
+    public static final int D_STATE_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString dState_;
+    /**
+     * <code>required bytes d_state = 5;</code>
+     */
+    public boolean hasDState() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required bytes d_state = 5;</code>
+     */
+    public com.google.protobuf.ByteString getDState() {
+      return dState_;
+    }
+
+    // required bytes d_zip = 6;
+    public static final int D_ZIP_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString dZip_;
+    /**
+     * <code>required bytes d_zip = 6;</code>
+     */
+    public boolean hasDZip() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required bytes d_zip = 6;</code>
+     */
+    public com.google.protobuf.ByteString getDZip() {
+      return dZip_;
+    }
+
+    // required double d_tax = 7;
+    public static final int D_TAX_FIELD_NUMBER = 7;
+    private double dTax_;
+    /**
+     * <code>required double d_tax = 7;</code>
+     */
+    public boolean hasDTax() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required double d_tax = 7;</code>
+     */
+    public double getDTax() {
+      return dTax_;
+    }
+
+    // required uint64 d_next_o_id = 8;
+    public static final int D_NEXT_O_ID_FIELD_NUMBER = 8;
+    private long dNextOId_;
+    /**
+     * <code>required uint64 d_next_o_id = 8;</code>
+     */
+    public boolean hasDNextOId() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required uint64 d_next_o_id = 8;</code>
+     */
+    public long getDNextOId() {
+      return dNextOId_;
+    }
+
+    private void initFields() {
+      dName_ = com.google.protobuf.ByteString.EMPTY;
+      dStreet1_ = com.google.protobuf.ByteString.EMPTY;
+      dStreet2_ = com.google.protobuf.ByteString.EMPTY;
+      dCity_ = com.google.protobuf.ByteString.EMPTY;
+      dState_ = com.google.protobuf.ByteString.EMPTY;
+      dZip_ = com.google.protobuf.ByteString.EMPTY;
+      dTax_ = 0D;
+      dNextOId_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasDName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDStreet1()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDStreet2()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDCity()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDState()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDZip()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDTax()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDNextOId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, dName_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, dStreet1_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, dStreet2_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, dCity_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, dState_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, dZip_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeDouble(7, dTax_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeUInt64(8, dNextOId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, dName_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, dStreet1_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, dStreet2_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, dCity_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, dState_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, dZip_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(7, dTax_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(8, dNextOId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccDistrict parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccDistrict prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccDistrict}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccDistrict_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccDistrict_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccDistrict.class, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccDistrict.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        dName_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        dStreet1_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dStreet2_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        dCity_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        dState_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        dZip_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        dTax_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        dNextOId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccDistrict_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccDistrict getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccDistrict build() {
+        com.basho.riak.protobuf.AntidotePB.TpccDistrict result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccDistrict buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccDistrict result = new com.basho.riak.protobuf.AntidotePB.TpccDistrict(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.dName_ = dName_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.dStreet1_ = dStreet1_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.dStreet2_ = dStreet2_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.dCity_ = dCity_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.dState_ = dState_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.dZip_ = dZip_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.dTax_ = dTax_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.dNextOId_ = dNextOId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccDistrict) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccDistrict)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccDistrict other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance()) return this;
+        if (other.hasDName()) {
+          setDName(other.getDName());
+        }
+        if (other.hasDStreet1()) {
+          setDStreet1(other.getDStreet1());
+        }
+        if (other.hasDStreet2()) {
+          setDStreet2(other.getDStreet2());
+        }
+        if (other.hasDCity()) {
+          setDCity(other.getDCity());
+        }
+        if (other.hasDState()) {
+          setDState(other.getDState());
+        }
+        if (other.hasDZip()) {
+          setDZip(other.getDZip());
+        }
+        if (other.hasDTax()) {
+          setDTax(other.getDTax());
+        }
+        if (other.hasDNextOId()) {
+          setDNextOId(other.getDNextOId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasDName()) {
+          
+          return false;
+        }
+        if (!hasDStreet1()) {
+          
+          return false;
+        }
+        if (!hasDStreet2()) {
+          
+          return false;
+        }
+        if (!hasDCity()) {
+          
+          return false;
+        }
+        if (!hasDState()) {
+          
+          return false;
+        }
+        if (!hasDZip()) {
+          
+          return false;
+        }
+        if (!hasDTax()) {
+          
+          return false;
+        }
+        if (!hasDNextOId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccDistrict parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccDistrict) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required bytes d_name = 1;
+      private com.google.protobuf.ByteString dName_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes d_name = 1;</code>
+       */
+      public boolean hasDName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes d_name = 1;</code>
+       */
+      public com.google.protobuf.ByteString getDName() {
+        return dName_;
+      }
+      /**
+       * <code>required bytes d_name = 1;</code>
+       */
+      public Builder setDName(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        dName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes d_name = 1;</code>
+       */
+      public Builder clearDName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        dName_ = getDefaultInstance().getDName();
+        onChanged();
+        return this;
+      }
+
+      // required bytes d_street1 = 2;
+      private com.google.protobuf.ByteString dStreet1_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes d_street1 = 2;</code>
+       */
+      public boolean hasDStreet1() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes d_street1 = 2;</code>
+       */
+      public com.google.protobuf.ByteString getDStreet1() {
+        return dStreet1_;
+      }
+      /**
+       * <code>required bytes d_street1 = 2;</code>
+       */
+      public Builder setDStreet1(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        dStreet1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes d_street1 = 2;</code>
+       */
+      public Builder clearDStreet1() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dStreet1_ = getDefaultInstance().getDStreet1();
+        onChanged();
+        return this;
+      }
+
+      // required bytes d_street2 = 3;
+      private com.google.protobuf.ByteString dStreet2_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes d_street2 = 3;</code>
+       */
+      public boolean hasDStreet2() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes d_street2 = 3;</code>
+       */
+      public com.google.protobuf.ByteString getDStreet2() {
+        return dStreet2_;
+      }
+      /**
+       * <code>required bytes d_street2 = 3;</code>
+       */
+      public Builder setDStreet2(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        dStreet2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes d_street2 = 3;</code>
+       */
+      public Builder clearDStreet2() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        dStreet2_ = getDefaultInstance().getDStreet2();
+        onChanged();
+        return this;
+      }
+
+      // required bytes d_city = 4;
+      private com.google.protobuf.ByteString dCity_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes d_city = 4;</code>
+       */
+      public boolean hasDCity() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required bytes d_city = 4;</code>
+       */
+      public com.google.protobuf.ByteString getDCity() {
+        return dCity_;
+      }
+      /**
+       * <code>required bytes d_city = 4;</code>
+       */
+      public Builder setDCity(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        dCity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes d_city = 4;</code>
+       */
+      public Builder clearDCity() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        dCity_ = getDefaultInstance().getDCity();
+        onChanged();
+        return this;
+      }
+
+      // required bytes d_state = 5;
+      private com.google.protobuf.ByteString dState_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes d_state = 5;</code>
+       */
+      public boolean hasDState() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required bytes d_state = 5;</code>
+       */
+      public com.google.protobuf.ByteString getDState() {
+        return dState_;
+      }
+      /**
+       * <code>required bytes d_state = 5;</code>
+       */
+      public Builder setDState(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        dState_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes d_state = 5;</code>
+       */
+      public Builder clearDState() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        dState_ = getDefaultInstance().getDState();
+        onChanged();
+        return this;
+      }
+
+      // required bytes d_zip = 6;
+      private com.google.protobuf.ByteString dZip_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes d_zip = 6;</code>
+       */
+      public boolean hasDZip() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required bytes d_zip = 6;</code>
+       */
+      public com.google.protobuf.ByteString getDZip() {
+        return dZip_;
+      }
+      /**
+       * <code>required bytes d_zip = 6;</code>
+       */
+      public Builder setDZip(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        dZip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes d_zip = 6;</code>
+       */
+      public Builder clearDZip() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        dZip_ = getDefaultInstance().getDZip();
+        onChanged();
+        return this;
+      }
+
+      // required double d_tax = 7;
+      private double dTax_ ;
+      /**
+       * <code>required double d_tax = 7;</code>
+       */
+      public boolean hasDTax() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required double d_tax = 7;</code>
+       */
+      public double getDTax() {
+        return dTax_;
+      }
+      /**
+       * <code>required double d_tax = 7;</code>
+       */
+      public Builder setDTax(double value) {
+        bitField0_ |= 0x00000040;
+        dTax_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double d_tax = 7;</code>
+       */
+      public Builder clearDTax() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        dTax_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 d_next_o_id = 8;
+      private long dNextOId_ ;
+      /**
+       * <code>required uint64 d_next_o_id = 8;</code>
+       */
+      public boolean hasDNextOId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>required uint64 d_next_o_id = 8;</code>
+       */
+      public long getDNextOId() {
+        return dNextOId_;
+      }
+      /**
+       * <code>required uint64 d_next_o_id = 8;</code>
+       */
+      public Builder setDNextOId(long value) {
+        bitField0_ |= 0x00000080;
+        dNextOId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 d_next_o_id = 8;</code>
+       */
+      public Builder clearDNextOId() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        dNextOId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccDistrict)
+    }
+
+    static {
+      defaultInstance = new TpccDistrict(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccDistrict)
+  }
+
+  public interface TpccHistoryOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint64 h_c_id = 1;
+    /**
+     * <code>required uint64 h_c_id = 1;</code>
+     */
+    boolean hasHCId();
+    /**
+     * <code>required uint64 h_c_id = 1;</code>
+     */
+    long getHCId();
+  }
+  /**
+   * Protobuf type {@code TpccHistory}
+   */
+  public static final class TpccHistory extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccHistoryOrBuilder {
+    // Use TpccHistory.newBuilder() to construct.
+    private TpccHistory(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccHistory(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccHistory defaultInstance;
+    public static TpccHistory getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccHistory getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccHistory(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              hCId_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccHistory_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccHistory_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccHistory.class, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccHistory> PARSER =
+        new com.google.protobuf.AbstractParser<TpccHistory>() {
+      public TpccHistory parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccHistory(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccHistory> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint64 h_c_id = 1;
+    public static final int H_C_ID_FIELD_NUMBER = 1;
+    private long hCId_;
+    /**
+     * <code>required uint64 h_c_id = 1;</code>
+     */
+    public boolean hasHCId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 h_c_id = 1;</code>
+     */
+    public long getHCId() {
+      return hCId_;
+    }
+
+    private void initFields() {
+      hCId_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasHCId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, hCId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, hCId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccHistory parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccHistory prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccHistory}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccHistory_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccHistory_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccHistory.class, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccHistory.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        hCId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccHistory_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccHistory getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccHistory build() {
+        com.basho.riak.protobuf.AntidotePB.TpccHistory result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccHistory buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccHistory result = new com.basho.riak.protobuf.AntidotePB.TpccHistory(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.hCId_ = hCId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccHistory) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccHistory)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccHistory other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance()) return this;
+        if (other.hasHCId()) {
+          setHCId(other.getHCId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHCId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccHistory parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccHistory) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint64 h_c_id = 1;
+      private long hCId_ ;
+      /**
+       * <code>required uint64 h_c_id = 1;</code>
+       */
+      public boolean hasHCId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint64 h_c_id = 1;</code>
+       */
+      public long getHCId() {
+        return hCId_;
+      }
+      /**
+       * <code>required uint64 h_c_id = 1;</code>
+       */
+      public Builder setHCId(long value) {
+        bitField0_ |= 0x00000001;
+        hCId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 h_c_id = 1;</code>
+       */
+      public Builder clearHCId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        hCId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccHistory)
+    }
+
+    static {
+      defaultInstance = new TpccHistory(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccHistory)
+  }
+
+  public interface TpccItemOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint64 i_im_id = 1;
+    /**
+     * <code>required uint64 i_im_id = 1;</code>
+     */
+    boolean hasIImId();
+    /**
+     * <code>required uint64 i_im_id = 1;</code>
+     */
+    long getIImId();
+
+    // required bytes i_name = 2;
+    /**
+     * <code>required bytes i_name = 2;</code>
+     */
+    boolean hasIName();
+    /**
+     * <code>required bytes i_name = 2;</code>
+     */
+    com.google.protobuf.ByteString getIName();
+
+    // required double i_price = 3;
+    /**
+     * <code>required double i_price = 3;</code>
+     */
+    boolean hasIPrice();
+    /**
+     * <code>required double i_price = 3;</code>
+     */
+    double getIPrice();
+
+    // required bytes i_data = 4;
+    /**
+     * <code>required bytes i_data = 4;</code>
+     */
+    boolean hasIData();
+    /**
+     * <code>required bytes i_data = 4;</code>
+     */
+    com.google.protobuf.ByteString getIData();
+  }
+  /**
+   * Protobuf type {@code TpccItem}
+   */
+  public static final class TpccItem extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccItemOrBuilder {
+    // Use TpccItem.newBuilder() to construct.
+    private TpccItem(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccItem(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccItem defaultInstance;
+    public static TpccItem getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccItem getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccItem(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              iImId_ = input.readUInt64();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              iName_ = input.readBytes();
+              break;
+            }
+            case 25: {
+              bitField0_ |= 0x00000004;
+              iPrice_ = input.readDouble();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              iData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccItem_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccItem_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccItem.class, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccItem> PARSER =
+        new com.google.protobuf.AbstractParser<TpccItem>() {
+      public TpccItem parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccItem(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccItem> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint64 i_im_id = 1;
+    public static final int I_IM_ID_FIELD_NUMBER = 1;
+    private long iImId_;
+    /**
+     * <code>required uint64 i_im_id = 1;</code>
+     */
+    public boolean hasIImId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 i_im_id = 1;</code>
+     */
+    public long getIImId() {
+      return iImId_;
+    }
+
+    // required bytes i_name = 2;
+    public static final int I_NAME_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString iName_;
+    /**
+     * <code>required bytes i_name = 2;</code>
+     */
+    public boolean hasIName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes i_name = 2;</code>
+     */
+    public com.google.protobuf.ByteString getIName() {
+      return iName_;
+    }
+
+    // required double i_price = 3;
+    public static final int I_PRICE_FIELD_NUMBER = 3;
+    private double iPrice_;
+    /**
+     * <code>required double i_price = 3;</code>
+     */
+    public boolean hasIPrice() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required double i_price = 3;</code>
+     */
+    public double getIPrice() {
+      return iPrice_;
+    }
+
+    // required bytes i_data = 4;
+    public static final int I_DATA_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString iData_;
+    /**
+     * <code>required bytes i_data = 4;</code>
+     */
+    public boolean hasIData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required bytes i_data = 4;</code>
+     */
+    public com.google.protobuf.ByteString getIData() {
+      return iData_;
+    }
+
+    private void initFields() {
+      iImId_ = 0L;
+      iName_ = com.google.protobuf.ByteString.EMPTY;
+      iPrice_ = 0D;
+      iData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasIImId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIPrice()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIData()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, iImId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, iName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeDouble(3, iPrice_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, iData_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, iImId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, iName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, iPrice_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, iData_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccItem parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccItem prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccItem}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccItem_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccItem_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccItem.class, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccItem.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        iImId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        iName_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        iPrice_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        iData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccItem_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccItem getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccItem build() {
+        com.basho.riak.protobuf.AntidotePB.TpccItem result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccItem buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccItem result = new com.basho.riak.protobuf.AntidotePB.TpccItem(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.iImId_ = iImId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.iName_ = iName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.iPrice_ = iPrice_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.iData_ = iData_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccItem) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccItem)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccItem other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance()) return this;
+        if (other.hasIImId()) {
+          setIImId(other.getIImId());
+        }
+        if (other.hasIName()) {
+          setIName(other.getIName());
+        }
+        if (other.hasIPrice()) {
+          setIPrice(other.getIPrice());
+        }
+        if (other.hasIData()) {
+          setIData(other.getIData());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasIImId()) {
+          
+          return false;
+        }
+        if (!hasIName()) {
+          
+          return false;
+        }
+        if (!hasIPrice()) {
+          
+          return false;
+        }
+        if (!hasIData()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccItem parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccItem) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint64 i_im_id = 1;
+      private long iImId_ ;
+      /**
+       * <code>required uint64 i_im_id = 1;</code>
+       */
+      public boolean hasIImId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint64 i_im_id = 1;</code>
+       */
+      public long getIImId() {
+        return iImId_;
+      }
+      /**
+       * <code>required uint64 i_im_id = 1;</code>
+       */
+      public Builder setIImId(long value) {
+        bitField0_ |= 0x00000001;
+        iImId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 i_im_id = 1;</code>
+       */
+      public Builder clearIImId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        iImId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required bytes i_name = 2;
+      private com.google.protobuf.ByteString iName_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes i_name = 2;</code>
+       */
+      public boolean hasIName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes i_name = 2;</code>
+       */
+      public com.google.protobuf.ByteString getIName() {
+        return iName_;
+      }
+      /**
+       * <code>required bytes i_name = 2;</code>
+       */
+      public Builder setIName(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        iName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes i_name = 2;</code>
+       */
+      public Builder clearIName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        iName_ = getDefaultInstance().getIName();
+        onChanged();
+        return this;
+      }
+
+      // required double i_price = 3;
+      private double iPrice_ ;
+      /**
+       * <code>required double i_price = 3;</code>
+       */
+      public boolean hasIPrice() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required double i_price = 3;</code>
+       */
+      public double getIPrice() {
+        return iPrice_;
+      }
+      /**
+       * <code>required double i_price = 3;</code>
+       */
+      public Builder setIPrice(double value) {
+        bitField0_ |= 0x00000004;
+        iPrice_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double i_price = 3;</code>
+       */
+      public Builder clearIPrice() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        iPrice_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // required bytes i_data = 4;
+      private com.google.protobuf.ByteString iData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes i_data = 4;</code>
+       */
+      public boolean hasIData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required bytes i_data = 4;</code>
+       */
+      public com.google.protobuf.ByteString getIData() {
+        return iData_;
+      }
+      /**
+       * <code>required bytes i_data = 4;</code>
+       */
+      public Builder setIData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        iData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes i_data = 4;</code>
+       */
+      public Builder clearIData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        iData_ = getDefaultInstance().getIData();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccItem)
+    }
+
+    static {
+      defaultInstance = new TpccItem(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccItem)
+  }
+
+  public interface TpccNewOrderOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint64 no_o_id = 1;
+    /**
+     * <code>required uint64 no_o_id = 1;</code>
+     */
+    boolean hasNoOId();
+    /**
+     * <code>required uint64 no_o_id = 1;</code>
+     */
+    long getNoOId();
+
+    // required uint64 no_d_id = 2;
+    /**
+     * <code>required uint64 no_d_id = 2;</code>
+     */
+    boolean hasNoDId();
+    /**
+     * <code>required uint64 no_d_id = 2;</code>
+     */
+    long getNoDId();
+
+    // required uint64 no_w_id = 3;
+    /**
+     * <code>required uint64 no_w_id = 3;</code>
+     */
+    boolean hasNoWId();
+    /**
+     * <code>required uint64 no_w_id = 3;</code>
+     */
+    long getNoWId();
+  }
+  /**
+   * Protobuf type {@code TpccNewOrder}
+   */
+  public static final class TpccNewOrder extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccNewOrderOrBuilder {
+    // Use TpccNewOrder.newBuilder() to construct.
+    private TpccNewOrder(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccNewOrder(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccNewOrder defaultInstance;
+    public static TpccNewOrder getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccNewOrder getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccNewOrder(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              noOId_ = input.readUInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              noDId_ = input.readUInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              noWId_ = input.readUInt64();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccNewOrder_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccNewOrder_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccNewOrder.class, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccNewOrder> PARSER =
+        new com.google.protobuf.AbstractParser<TpccNewOrder>() {
+      public TpccNewOrder parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccNewOrder(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccNewOrder> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint64 no_o_id = 1;
+    public static final int NO_O_ID_FIELD_NUMBER = 1;
+    private long noOId_;
+    /**
+     * <code>required uint64 no_o_id = 1;</code>
+     */
+    public boolean hasNoOId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 no_o_id = 1;</code>
+     */
+    public long getNoOId() {
+      return noOId_;
+    }
+
+    // required uint64 no_d_id = 2;
+    public static final int NO_D_ID_FIELD_NUMBER = 2;
+    private long noDId_;
+    /**
+     * <code>required uint64 no_d_id = 2;</code>
+     */
+    public boolean hasNoDId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint64 no_d_id = 2;</code>
+     */
+    public long getNoDId() {
+      return noDId_;
+    }
+
+    // required uint64 no_w_id = 3;
+    public static final int NO_W_ID_FIELD_NUMBER = 3;
+    private long noWId_;
+    /**
+     * <code>required uint64 no_w_id = 3;</code>
+     */
+    public boolean hasNoWId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint64 no_w_id = 3;</code>
+     */
+    public long getNoWId() {
+      return noWId_;
+    }
+
+    private void initFields() {
+      noOId_ = 0L;
+      noDId_ = 0L;
+      noWId_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasNoOId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNoDId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNoWId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, noOId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt64(2, noDId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt64(3, noWId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, noOId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, noDId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, noWId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccNewOrder parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccNewOrder prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccNewOrder}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccNewOrder_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccNewOrder_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccNewOrder.class, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccNewOrder.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        noOId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        noDId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        noWId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccNewOrder_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccNewOrder getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccNewOrder build() {
+        com.basho.riak.protobuf.AntidotePB.TpccNewOrder result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccNewOrder buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccNewOrder result = new com.basho.riak.protobuf.AntidotePB.TpccNewOrder(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.noOId_ = noOId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.noDId_ = noDId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.noWId_ = noWId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccNewOrder) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccNewOrder)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccNewOrder other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance()) return this;
+        if (other.hasNoOId()) {
+          setNoOId(other.getNoOId());
+        }
+        if (other.hasNoDId()) {
+          setNoDId(other.getNoDId());
+        }
+        if (other.hasNoWId()) {
+          setNoWId(other.getNoWId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasNoOId()) {
+          
+          return false;
+        }
+        if (!hasNoDId()) {
+          
+          return false;
+        }
+        if (!hasNoWId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccNewOrder parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccNewOrder) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint64 no_o_id = 1;
+      private long noOId_ ;
+      /**
+       * <code>required uint64 no_o_id = 1;</code>
+       */
+      public boolean hasNoOId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint64 no_o_id = 1;</code>
+       */
+      public long getNoOId() {
+        return noOId_;
+      }
+      /**
+       * <code>required uint64 no_o_id = 1;</code>
+       */
+      public Builder setNoOId(long value) {
+        bitField0_ |= 0x00000001;
+        noOId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 no_o_id = 1;</code>
+       */
+      public Builder clearNoOId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        noOId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 no_d_id = 2;
+      private long noDId_ ;
+      /**
+       * <code>required uint64 no_d_id = 2;</code>
+       */
+      public boolean hasNoDId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint64 no_d_id = 2;</code>
+       */
+      public long getNoDId() {
+        return noDId_;
+      }
+      /**
+       * <code>required uint64 no_d_id = 2;</code>
+       */
+      public Builder setNoDId(long value) {
+        bitField0_ |= 0x00000002;
+        noDId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 no_d_id = 2;</code>
+       */
+      public Builder clearNoDId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        noDId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 no_w_id = 3;
+      private long noWId_ ;
+      /**
+       * <code>required uint64 no_w_id = 3;</code>
+       */
+      public boolean hasNoWId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint64 no_w_id = 3;</code>
+       */
+      public long getNoWId() {
+        return noWId_;
+      }
+      /**
+       * <code>required uint64 no_w_id = 3;</code>
+       */
+      public Builder setNoWId(long value) {
+        bitField0_ |= 0x00000004;
+        noWId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 no_w_id = 3;</code>
+       */
+      public Builder clearNoWId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        noWId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccNewOrder)
+    }
+
+    static {
+      defaultInstance = new TpccNewOrder(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccNewOrder)
+  }
+
+  public interface TpccOrderOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint64 o_c_id = 1;
+    /**
+     * <code>required uint64 o_c_id = 1;</code>
+     */
+    boolean hasOCId();
+    /**
+     * <code>required uint64 o_c_id = 1;</code>
+     */
+    long getOCId();
+
+    // required uint64 o_entry_d = 2;
+    /**
+     * <code>required uint64 o_entry_d = 2;</code>
+     */
+    boolean hasOEntryD();
+    /**
+     * <code>required uint64 o_entry_d = 2;</code>
+     */
+    long getOEntryD();
+
+    // required uint64 o_carrier_id = 3;
+    /**
+     * <code>required uint64 o_carrier_id = 3;</code>
+     */
+    boolean hasOCarrierId();
+    /**
+     * <code>required uint64 o_carrier_id = 3;</code>
+     */
+    long getOCarrierId();
+
+    // required int32 o_ol_cnt = 4;
+    /**
+     * <code>required int32 o_ol_cnt = 4;</code>
+     */
+    boolean hasOOlCnt();
+    /**
+     * <code>required int32 o_ol_cnt = 4;</code>
+     */
+    int getOOlCnt();
+
+    // required int32 o_all_local = 5;
+    /**
+     * <code>required int32 o_all_local = 5;</code>
+     */
+    boolean hasOAllLocal();
+    /**
+     * <code>required int32 o_all_local = 5;</code>
+     */
+    int getOAllLocal();
+  }
+  /**
+   * Protobuf type {@code TpccOrder}
+   */
+  public static final class TpccOrder extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccOrderOrBuilder {
+    // Use TpccOrder.newBuilder() to construct.
+    private TpccOrder(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccOrder(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccOrder defaultInstance;
+    public static TpccOrder getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccOrder getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccOrder(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              oCId_ = input.readUInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              oEntryD_ = input.readUInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              oCarrierId_ = input.readUInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              oOlCnt_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              oAllLocal_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrder_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrder_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccOrder.class, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccOrder> PARSER =
+        new com.google.protobuf.AbstractParser<TpccOrder>() {
+      public TpccOrder parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccOrder(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccOrder> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint64 o_c_id = 1;
+    public static final int O_C_ID_FIELD_NUMBER = 1;
+    private long oCId_;
+    /**
+     * <code>required uint64 o_c_id = 1;</code>
+     */
+    public boolean hasOCId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 o_c_id = 1;</code>
+     */
+    public long getOCId() {
+      return oCId_;
+    }
+
+    // required uint64 o_entry_d = 2;
+    public static final int O_ENTRY_D_FIELD_NUMBER = 2;
+    private long oEntryD_;
+    /**
+     * <code>required uint64 o_entry_d = 2;</code>
+     */
+    public boolean hasOEntryD() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint64 o_entry_d = 2;</code>
+     */
+    public long getOEntryD() {
+      return oEntryD_;
+    }
+
+    // required uint64 o_carrier_id = 3;
+    public static final int O_CARRIER_ID_FIELD_NUMBER = 3;
+    private long oCarrierId_;
+    /**
+     * <code>required uint64 o_carrier_id = 3;</code>
+     */
+    public boolean hasOCarrierId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint64 o_carrier_id = 3;</code>
+     */
+    public long getOCarrierId() {
+      return oCarrierId_;
+    }
+
+    // required int32 o_ol_cnt = 4;
+    public static final int O_OL_CNT_FIELD_NUMBER = 4;
+    private int oOlCnt_;
+    /**
+     * <code>required int32 o_ol_cnt = 4;</code>
+     */
+    public boolean hasOOlCnt() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 o_ol_cnt = 4;</code>
+     */
+    public int getOOlCnt() {
+      return oOlCnt_;
+    }
+
+    // required int32 o_all_local = 5;
+    public static final int O_ALL_LOCAL_FIELD_NUMBER = 5;
+    private int oAllLocal_;
+    /**
+     * <code>required int32 o_all_local = 5;</code>
+     */
+    public boolean hasOAllLocal() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int32 o_all_local = 5;</code>
+     */
+    public int getOAllLocal() {
+      return oAllLocal_;
+    }
+
+    private void initFields() {
+      oCId_ = 0L;
+      oEntryD_ = 0L;
+      oCarrierId_ = 0L;
+      oOlCnt_ = 0;
+      oAllLocal_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasOCId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOEntryD()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOCarrierId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOOlCnt()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOAllLocal()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, oCId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt64(2, oEntryD_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt64(3, oCarrierId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, oOlCnt_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, oAllLocal_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, oCId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, oEntryD_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, oCarrierId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, oOlCnt_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, oAllLocal_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrder parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccOrder prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccOrder}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrder_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrder_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccOrder.class, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccOrder.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        oCId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        oEntryD_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        oCarrierId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        oOlCnt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        oAllLocal_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrder_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccOrder getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccOrder build() {
+        com.basho.riak.protobuf.AntidotePB.TpccOrder result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccOrder buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccOrder result = new com.basho.riak.protobuf.AntidotePB.TpccOrder(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.oCId_ = oCId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.oEntryD_ = oEntryD_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.oCarrierId_ = oCarrierId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.oOlCnt_ = oOlCnt_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.oAllLocal_ = oAllLocal_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccOrder) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccOrder)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccOrder other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance()) return this;
+        if (other.hasOCId()) {
+          setOCId(other.getOCId());
+        }
+        if (other.hasOEntryD()) {
+          setOEntryD(other.getOEntryD());
+        }
+        if (other.hasOCarrierId()) {
+          setOCarrierId(other.getOCarrierId());
+        }
+        if (other.hasOOlCnt()) {
+          setOOlCnt(other.getOOlCnt());
+        }
+        if (other.hasOAllLocal()) {
+          setOAllLocal(other.getOAllLocal());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasOCId()) {
+          
+          return false;
+        }
+        if (!hasOEntryD()) {
+          
+          return false;
+        }
+        if (!hasOCarrierId()) {
+          
+          return false;
+        }
+        if (!hasOOlCnt()) {
+          
+          return false;
+        }
+        if (!hasOAllLocal()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccOrder parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccOrder) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint64 o_c_id = 1;
+      private long oCId_ ;
+      /**
+       * <code>required uint64 o_c_id = 1;</code>
+       */
+      public boolean hasOCId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint64 o_c_id = 1;</code>
+       */
+      public long getOCId() {
+        return oCId_;
+      }
+      /**
+       * <code>required uint64 o_c_id = 1;</code>
+       */
+      public Builder setOCId(long value) {
+        bitField0_ |= 0x00000001;
+        oCId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 o_c_id = 1;</code>
+       */
+      public Builder clearOCId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        oCId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 o_entry_d = 2;
+      private long oEntryD_ ;
+      /**
+       * <code>required uint64 o_entry_d = 2;</code>
+       */
+      public boolean hasOEntryD() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint64 o_entry_d = 2;</code>
+       */
+      public long getOEntryD() {
+        return oEntryD_;
+      }
+      /**
+       * <code>required uint64 o_entry_d = 2;</code>
+       */
+      public Builder setOEntryD(long value) {
+        bitField0_ |= 0x00000002;
+        oEntryD_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 o_entry_d = 2;</code>
+       */
+      public Builder clearOEntryD() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        oEntryD_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 o_carrier_id = 3;
+      private long oCarrierId_ ;
+      /**
+       * <code>required uint64 o_carrier_id = 3;</code>
+       */
+      public boolean hasOCarrierId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint64 o_carrier_id = 3;</code>
+       */
+      public long getOCarrierId() {
+        return oCarrierId_;
+      }
+      /**
+       * <code>required uint64 o_carrier_id = 3;</code>
+       */
+      public Builder setOCarrierId(long value) {
+        bitField0_ |= 0x00000004;
+        oCarrierId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 o_carrier_id = 3;</code>
+       */
+      public Builder clearOCarrierId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        oCarrierId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required int32 o_ol_cnt = 4;
+      private int oOlCnt_ ;
+      /**
+       * <code>required int32 o_ol_cnt = 4;</code>
+       */
+      public boolean hasOOlCnt() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 o_ol_cnt = 4;</code>
+       */
+      public int getOOlCnt() {
+        return oOlCnt_;
+      }
+      /**
+       * <code>required int32 o_ol_cnt = 4;</code>
+       */
+      public Builder setOOlCnt(int value) {
+        bitField0_ |= 0x00000008;
+        oOlCnt_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 o_ol_cnt = 4;</code>
+       */
+      public Builder clearOOlCnt() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        oOlCnt_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 o_all_local = 5;
+      private int oAllLocal_ ;
+      /**
+       * <code>required int32 o_all_local = 5;</code>
+       */
+      public boolean hasOAllLocal() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 o_all_local = 5;</code>
+       */
+      public int getOAllLocal() {
+        return oAllLocal_;
+      }
+      /**
+       * <code>required int32 o_all_local = 5;</code>
+       */
+      public Builder setOAllLocal(int value) {
+        bitField0_ |= 0x00000010;
+        oAllLocal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 o_all_local = 5;</code>
+       */
+      public Builder clearOAllLocal() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        oAllLocal_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccOrder)
+    }
+
+    static {
+      defaultInstance = new TpccOrder(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccOrder)
+  }
+
+  public interface TpccOrderLineOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint64 ol_o_id = 1;
+    /**
+     * <code>required uint64 ol_o_id = 1;</code>
+     */
+    boolean hasOlOId();
+    /**
+     * <code>required uint64 ol_o_id = 1;</code>
+     */
+    long getOlOId();
+
+    // required uint64 ol_d_id = 2;
+    /**
+     * <code>required uint64 ol_d_id = 2;</code>
+     */
+    boolean hasOlDId();
+    /**
+     * <code>required uint64 ol_d_id = 2;</code>
+     */
+    long getOlDId();
+
+    // required uint64 ol_w_id = 3;
+    /**
+     * <code>required uint64 ol_w_id = 3;</code>
+     */
+    boolean hasOlWId();
+    /**
+     * <code>required uint64 ol_w_id = 3;</code>
+     */
+    long getOlWId();
+
+    // required uint64 ol_number = 4;
+    /**
+     * <code>required uint64 ol_number = 4;</code>
+     */
+    boolean hasOlNumber();
+    /**
+     * <code>required uint64 ol_number = 4;</code>
+     */
+    long getOlNumber();
+
+    // required uint64 ol_i_id = 5;
+    /**
+     * <code>required uint64 ol_i_id = 5;</code>
+     */
+    boolean hasOlIId();
+    /**
+     * <code>required uint64 ol_i_id = 5;</code>
+     */
+    long getOlIId();
+
+    // required uint64 ol_supply_w_id = 6;
+    /**
+     * <code>required uint64 ol_supply_w_id = 6;</code>
+     */
+    boolean hasOlSupplyWId();
+    /**
+     * <code>required uint64 ol_supply_w_id = 6;</code>
+     */
+    long getOlSupplyWId();
+
+    // required uint64 ol_delivery_d = 7;
+    /**
+     * <code>required uint64 ol_delivery_d = 7;</code>
+     */
+    boolean hasOlDeliveryD();
+    /**
+     * <code>required uint64 ol_delivery_d = 7;</code>
+     */
+    long getOlDeliveryD();
+
+    // required uint64 ol_quantity = 8;
+    /**
+     * <code>required uint64 ol_quantity = 8;</code>
+     */
+    boolean hasOlQuantity();
+    /**
+     * <code>required uint64 ol_quantity = 8;</code>
+     */
+    long getOlQuantity();
+
+    // required double ol_amount = 9;
+    /**
+     * <code>required double ol_amount = 9;</code>
+     */
+    boolean hasOlAmount();
+    /**
+     * <code>required double ol_amount = 9;</code>
+     */
+    double getOlAmount();
+
+    // required bytes ol_dist_info = 10;
+    /**
+     * <code>required bytes ol_dist_info = 10;</code>
+     */
+    boolean hasOlDistInfo();
+    /**
+     * <code>required bytes ol_dist_info = 10;</code>
+     */
+    com.google.protobuf.ByteString getOlDistInfo();
+  }
+  /**
+   * Protobuf type {@code TpccOrderLine}
+   */
+  public static final class TpccOrderLine extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccOrderLineOrBuilder {
+    // Use TpccOrderLine.newBuilder() to construct.
+    private TpccOrderLine(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccOrderLine(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccOrderLine defaultInstance;
+    public static TpccOrderLine getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccOrderLine getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccOrderLine(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              olOId_ = input.readUInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              olDId_ = input.readUInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              olWId_ = input.readUInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              olNumber_ = input.readUInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              olIId_ = input.readUInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              olSupplyWId_ = input.readUInt64();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              olDeliveryD_ = input.readUInt64();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              olQuantity_ = input.readUInt64();
+              break;
+            }
+            case 73: {
+              bitField0_ |= 0x00000100;
+              olAmount_ = input.readDouble();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000200;
+              olDistInfo_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrderLine_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrderLine_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccOrderLine.class, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccOrderLine> PARSER =
+        new com.google.protobuf.AbstractParser<TpccOrderLine>() {
+      public TpccOrderLine parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccOrderLine(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccOrderLine> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint64 ol_o_id = 1;
+    public static final int OL_O_ID_FIELD_NUMBER = 1;
+    private long olOId_;
+    /**
+     * <code>required uint64 ol_o_id = 1;</code>
+     */
+    public boolean hasOlOId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 ol_o_id = 1;</code>
+     */
+    public long getOlOId() {
+      return olOId_;
+    }
+
+    // required uint64 ol_d_id = 2;
+    public static final int OL_D_ID_FIELD_NUMBER = 2;
+    private long olDId_;
+    /**
+     * <code>required uint64 ol_d_id = 2;</code>
+     */
+    public boolean hasOlDId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint64 ol_d_id = 2;</code>
+     */
+    public long getOlDId() {
+      return olDId_;
+    }
+
+    // required uint64 ol_w_id = 3;
+    public static final int OL_W_ID_FIELD_NUMBER = 3;
+    private long olWId_;
+    /**
+     * <code>required uint64 ol_w_id = 3;</code>
+     */
+    public boolean hasOlWId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint64 ol_w_id = 3;</code>
+     */
+    public long getOlWId() {
+      return olWId_;
+    }
+
+    // required uint64 ol_number = 4;
+    public static final int OL_NUMBER_FIELD_NUMBER = 4;
+    private long olNumber_;
+    /**
+     * <code>required uint64 ol_number = 4;</code>
+     */
+    public boolean hasOlNumber() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint64 ol_number = 4;</code>
+     */
+    public long getOlNumber() {
+      return olNumber_;
+    }
+
+    // required uint64 ol_i_id = 5;
+    public static final int OL_I_ID_FIELD_NUMBER = 5;
+    private long olIId_;
+    /**
+     * <code>required uint64 ol_i_id = 5;</code>
+     */
+    public boolean hasOlIId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required uint64 ol_i_id = 5;</code>
+     */
+    public long getOlIId() {
+      return olIId_;
+    }
+
+    // required uint64 ol_supply_w_id = 6;
+    public static final int OL_SUPPLY_W_ID_FIELD_NUMBER = 6;
+    private long olSupplyWId_;
+    /**
+     * <code>required uint64 ol_supply_w_id = 6;</code>
+     */
+    public boolean hasOlSupplyWId() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required uint64 ol_supply_w_id = 6;</code>
+     */
+    public long getOlSupplyWId() {
+      return olSupplyWId_;
+    }
+
+    // required uint64 ol_delivery_d = 7;
+    public static final int OL_DELIVERY_D_FIELD_NUMBER = 7;
+    private long olDeliveryD_;
+    /**
+     * <code>required uint64 ol_delivery_d = 7;</code>
+     */
+    public boolean hasOlDeliveryD() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required uint64 ol_delivery_d = 7;</code>
+     */
+    public long getOlDeliveryD() {
+      return olDeliveryD_;
+    }
+
+    // required uint64 ol_quantity = 8;
+    public static final int OL_QUANTITY_FIELD_NUMBER = 8;
+    private long olQuantity_;
+    /**
+     * <code>required uint64 ol_quantity = 8;</code>
+     */
+    public boolean hasOlQuantity() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required uint64 ol_quantity = 8;</code>
+     */
+    public long getOlQuantity() {
+      return olQuantity_;
+    }
+
+    // required double ol_amount = 9;
+    public static final int OL_AMOUNT_FIELD_NUMBER = 9;
+    private double olAmount_;
+    /**
+     * <code>required double ol_amount = 9;</code>
+     */
+    public boolean hasOlAmount() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>required double ol_amount = 9;</code>
+     */
+    public double getOlAmount() {
+      return olAmount_;
+    }
+
+    // required bytes ol_dist_info = 10;
+    public static final int OL_DIST_INFO_FIELD_NUMBER = 10;
+    private com.google.protobuf.ByteString olDistInfo_;
+    /**
+     * <code>required bytes ol_dist_info = 10;</code>
+     */
+    public boolean hasOlDistInfo() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>required bytes ol_dist_info = 10;</code>
+     */
+    public com.google.protobuf.ByteString getOlDistInfo() {
+      return olDistInfo_;
+    }
+
+    private void initFields() {
+      olOId_ = 0L;
+      olDId_ = 0L;
+      olWId_ = 0L;
+      olNumber_ = 0L;
+      olIId_ = 0L;
+      olSupplyWId_ = 0L;
+      olDeliveryD_ = 0L;
+      olQuantity_ = 0L;
+      olAmount_ = 0D;
+      olDistInfo_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasOlOId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlDId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlWId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlNumber()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlIId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlSupplyWId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlDeliveryD()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlQuantity()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlAmount()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOlDistInfo()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, olOId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt64(2, olDId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt64(3, olWId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt64(4, olNumber_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeUInt64(5, olIId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeUInt64(6, olSupplyWId_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeUInt64(7, olDeliveryD_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeUInt64(8, olQuantity_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeDouble(9, olAmount_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(10, olDistInfo_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, olOId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, olDId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, olWId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(4, olNumber_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(5, olIId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(6, olSupplyWId_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(7, olDeliveryD_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(8, olQuantity_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(9, olAmount_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, olDistInfo_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccOrderLine parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccOrderLine prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccOrderLine}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrderLine_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrderLine_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccOrderLine.class, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccOrderLine.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        olOId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        olDId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        olWId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        olNumber_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        olIId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        olSupplyWId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        olDeliveryD_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        olQuantity_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        olAmount_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        olDistInfo_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccOrderLine_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccOrderLine getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccOrderLine build() {
+        com.basho.riak.protobuf.AntidotePB.TpccOrderLine result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccOrderLine buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccOrderLine result = new com.basho.riak.protobuf.AntidotePB.TpccOrderLine(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.olOId_ = olOId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.olDId_ = olDId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.olWId_ = olWId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.olNumber_ = olNumber_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.olIId_ = olIId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.olSupplyWId_ = olSupplyWId_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.olDeliveryD_ = olDeliveryD_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.olQuantity_ = olQuantity_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.olAmount_ = olAmount_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.olDistInfo_ = olDistInfo_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccOrderLine) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccOrderLine)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccOrderLine other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance()) return this;
+        if (other.hasOlOId()) {
+          setOlOId(other.getOlOId());
+        }
+        if (other.hasOlDId()) {
+          setOlDId(other.getOlDId());
+        }
+        if (other.hasOlWId()) {
+          setOlWId(other.getOlWId());
+        }
+        if (other.hasOlNumber()) {
+          setOlNumber(other.getOlNumber());
+        }
+        if (other.hasOlIId()) {
+          setOlIId(other.getOlIId());
+        }
+        if (other.hasOlSupplyWId()) {
+          setOlSupplyWId(other.getOlSupplyWId());
+        }
+        if (other.hasOlDeliveryD()) {
+          setOlDeliveryD(other.getOlDeliveryD());
+        }
+        if (other.hasOlQuantity()) {
+          setOlQuantity(other.getOlQuantity());
+        }
+        if (other.hasOlAmount()) {
+          setOlAmount(other.getOlAmount());
+        }
+        if (other.hasOlDistInfo()) {
+          setOlDistInfo(other.getOlDistInfo());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasOlOId()) {
+          
+          return false;
+        }
+        if (!hasOlDId()) {
+          
+          return false;
+        }
+        if (!hasOlWId()) {
+          
+          return false;
+        }
+        if (!hasOlNumber()) {
+          
+          return false;
+        }
+        if (!hasOlIId()) {
+          
+          return false;
+        }
+        if (!hasOlSupplyWId()) {
+          
+          return false;
+        }
+        if (!hasOlDeliveryD()) {
+          
+          return false;
+        }
+        if (!hasOlQuantity()) {
+          
+          return false;
+        }
+        if (!hasOlAmount()) {
+          
+          return false;
+        }
+        if (!hasOlDistInfo()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccOrderLine parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccOrderLine) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint64 ol_o_id = 1;
+      private long olOId_ ;
+      /**
+       * <code>required uint64 ol_o_id = 1;</code>
+       */
+      public boolean hasOlOId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint64 ol_o_id = 1;</code>
+       */
+      public long getOlOId() {
+        return olOId_;
+      }
+      /**
+       * <code>required uint64 ol_o_id = 1;</code>
+       */
+      public Builder setOlOId(long value) {
+        bitField0_ |= 0x00000001;
+        olOId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_o_id = 1;</code>
+       */
+      public Builder clearOlOId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        olOId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 ol_d_id = 2;
+      private long olDId_ ;
+      /**
+       * <code>required uint64 ol_d_id = 2;</code>
+       */
+      public boolean hasOlDId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint64 ol_d_id = 2;</code>
+       */
+      public long getOlDId() {
+        return olDId_;
+      }
+      /**
+       * <code>required uint64 ol_d_id = 2;</code>
+       */
+      public Builder setOlDId(long value) {
+        bitField0_ |= 0x00000002;
+        olDId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_d_id = 2;</code>
+       */
+      public Builder clearOlDId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        olDId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 ol_w_id = 3;
+      private long olWId_ ;
+      /**
+       * <code>required uint64 ol_w_id = 3;</code>
+       */
+      public boolean hasOlWId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint64 ol_w_id = 3;</code>
+       */
+      public long getOlWId() {
+        return olWId_;
+      }
+      /**
+       * <code>required uint64 ol_w_id = 3;</code>
+       */
+      public Builder setOlWId(long value) {
+        bitField0_ |= 0x00000004;
+        olWId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_w_id = 3;</code>
+       */
+      public Builder clearOlWId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        olWId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 ol_number = 4;
+      private long olNumber_ ;
+      /**
+       * <code>required uint64 ol_number = 4;</code>
+       */
+      public boolean hasOlNumber() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint64 ol_number = 4;</code>
+       */
+      public long getOlNumber() {
+        return olNumber_;
+      }
+      /**
+       * <code>required uint64 ol_number = 4;</code>
+       */
+      public Builder setOlNumber(long value) {
+        bitField0_ |= 0x00000008;
+        olNumber_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_number = 4;</code>
+       */
+      public Builder clearOlNumber() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        olNumber_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 ol_i_id = 5;
+      private long olIId_ ;
+      /**
+       * <code>required uint64 ol_i_id = 5;</code>
+       */
+      public boolean hasOlIId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required uint64 ol_i_id = 5;</code>
+       */
+      public long getOlIId() {
+        return olIId_;
+      }
+      /**
+       * <code>required uint64 ol_i_id = 5;</code>
+       */
+      public Builder setOlIId(long value) {
+        bitField0_ |= 0x00000010;
+        olIId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_i_id = 5;</code>
+       */
+      public Builder clearOlIId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        olIId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 ol_supply_w_id = 6;
+      private long olSupplyWId_ ;
+      /**
+       * <code>required uint64 ol_supply_w_id = 6;</code>
+       */
+      public boolean hasOlSupplyWId() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required uint64 ol_supply_w_id = 6;</code>
+       */
+      public long getOlSupplyWId() {
+        return olSupplyWId_;
+      }
+      /**
+       * <code>required uint64 ol_supply_w_id = 6;</code>
+       */
+      public Builder setOlSupplyWId(long value) {
+        bitField0_ |= 0x00000020;
+        olSupplyWId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_supply_w_id = 6;</code>
+       */
+      public Builder clearOlSupplyWId() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        olSupplyWId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 ol_delivery_d = 7;
+      private long olDeliveryD_ ;
+      /**
+       * <code>required uint64 ol_delivery_d = 7;</code>
+       */
+      public boolean hasOlDeliveryD() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required uint64 ol_delivery_d = 7;</code>
+       */
+      public long getOlDeliveryD() {
+        return olDeliveryD_;
+      }
+      /**
+       * <code>required uint64 ol_delivery_d = 7;</code>
+       */
+      public Builder setOlDeliveryD(long value) {
+        bitField0_ |= 0x00000040;
+        olDeliveryD_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_delivery_d = 7;</code>
+       */
+      public Builder clearOlDeliveryD() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        olDeliveryD_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 ol_quantity = 8;
+      private long olQuantity_ ;
+      /**
+       * <code>required uint64 ol_quantity = 8;</code>
+       */
+      public boolean hasOlQuantity() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>required uint64 ol_quantity = 8;</code>
+       */
+      public long getOlQuantity() {
+        return olQuantity_;
+      }
+      /**
+       * <code>required uint64 ol_quantity = 8;</code>
+       */
+      public Builder setOlQuantity(long value) {
+        bitField0_ |= 0x00000080;
+        olQuantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 ol_quantity = 8;</code>
+       */
+      public Builder clearOlQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        olQuantity_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required double ol_amount = 9;
+      private double olAmount_ ;
+      /**
+       * <code>required double ol_amount = 9;</code>
+       */
+      public boolean hasOlAmount() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>required double ol_amount = 9;</code>
+       */
+      public double getOlAmount() {
+        return olAmount_;
+      }
+      /**
+       * <code>required double ol_amount = 9;</code>
+       */
+      public Builder setOlAmount(double value) {
+        bitField0_ |= 0x00000100;
+        olAmount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double ol_amount = 9;</code>
+       */
+      public Builder clearOlAmount() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        olAmount_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // required bytes ol_dist_info = 10;
+      private com.google.protobuf.ByteString olDistInfo_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes ol_dist_info = 10;</code>
+       */
+      public boolean hasOlDistInfo() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>required bytes ol_dist_info = 10;</code>
+       */
+      public com.google.protobuf.ByteString getOlDistInfo() {
+        return olDistInfo_;
+      }
+      /**
+       * <code>required bytes ol_dist_info = 10;</code>
+       */
+      public Builder setOlDistInfo(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        olDistInfo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes ol_dist_info = 10;</code>
+       */
+      public Builder clearOlDistInfo() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        olDistInfo_ = getDefaultInstance().getOlDistInfo();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccOrderLine)
+    }
+
+    static {
+      defaultInstance = new TpccOrderLine(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccOrderLine)
+  }
+
+  public interface TpccStockOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint64 s_quantity = 1;
+    /**
+     * <code>required uint64 s_quantity = 1;</code>
+     */
+    boolean hasSQuantity();
+    /**
+     * <code>required uint64 s_quantity = 1;</code>
+     */
+    long getSQuantity();
+
+    // required bytes s_dist_01 = 2;
+    /**
+     * <code>required bytes s_dist_01 = 2;</code>
+     */
+    boolean hasSDist01();
+    /**
+     * <code>required bytes s_dist_01 = 2;</code>
+     */
+    com.google.protobuf.ByteString getSDist01();
+
+    // required bytes s_dist_02 = 3;
+    /**
+     * <code>required bytes s_dist_02 = 3;</code>
+     */
+    boolean hasSDist02();
+    /**
+     * <code>required bytes s_dist_02 = 3;</code>
+     */
+    com.google.protobuf.ByteString getSDist02();
+
+    // required bytes s_dist_03 = 4;
+    /**
+     * <code>required bytes s_dist_03 = 4;</code>
+     */
+    boolean hasSDist03();
+    /**
+     * <code>required bytes s_dist_03 = 4;</code>
+     */
+    com.google.protobuf.ByteString getSDist03();
+
+    // required bytes s_dist_04 = 5;
+    /**
+     * <code>required bytes s_dist_04 = 5;</code>
+     */
+    boolean hasSDist04();
+    /**
+     * <code>required bytes s_dist_04 = 5;</code>
+     */
+    com.google.protobuf.ByteString getSDist04();
+
+    // required bytes s_dist_05 = 6;
+    /**
+     * <code>required bytes s_dist_05 = 6;</code>
+     */
+    boolean hasSDist05();
+    /**
+     * <code>required bytes s_dist_05 = 6;</code>
+     */
+    com.google.protobuf.ByteString getSDist05();
+
+    // required bytes s_dist_06 = 7;
+    /**
+     * <code>required bytes s_dist_06 = 7;</code>
+     */
+    boolean hasSDist06();
+    /**
+     * <code>required bytes s_dist_06 = 7;</code>
+     */
+    com.google.protobuf.ByteString getSDist06();
+
+    // required bytes s_dist_07 = 8;
+    /**
+     * <code>required bytes s_dist_07 = 8;</code>
+     */
+    boolean hasSDist07();
+    /**
+     * <code>required bytes s_dist_07 = 8;</code>
+     */
+    com.google.protobuf.ByteString getSDist07();
+
+    // required bytes s_dist_08 = 9;
+    /**
+     * <code>required bytes s_dist_08 = 9;</code>
+     */
+    boolean hasSDist08();
+    /**
+     * <code>required bytes s_dist_08 = 9;</code>
+     */
+    com.google.protobuf.ByteString getSDist08();
+
+    // required bytes s_dist_09 = 10;
+    /**
+     * <code>required bytes s_dist_09 = 10;</code>
+     */
+    boolean hasSDist09();
+    /**
+     * <code>required bytes s_dist_09 = 10;</code>
+     */
+    com.google.protobuf.ByteString getSDist09();
+
+    // required bytes s_dist_10 = 11;
+    /**
+     * <code>required bytes s_dist_10 = 11;</code>
+     */
+    boolean hasSDist10();
+    /**
+     * <code>required bytes s_dist_10 = 11;</code>
+     */
+    com.google.protobuf.ByteString getSDist10();
+
+    // required uint64 s_ytd = 12;
+    /**
+     * <code>required uint64 s_ytd = 12;</code>
+     */
+    boolean hasSYtd();
+    /**
+     * <code>required uint64 s_ytd = 12;</code>
+     */
+    long getSYtd();
+
+    // required int32 s_order_cnt = 13;
+    /**
+     * <code>required int32 s_order_cnt = 13;</code>
+     */
+    boolean hasSOrderCnt();
+    /**
+     * <code>required int32 s_order_cnt = 13;</code>
+     */
+    int getSOrderCnt();
+
+    // required int32 s_remote_cnt = 14;
+    /**
+     * <code>required int32 s_remote_cnt = 14;</code>
+     */
+    boolean hasSRemoteCnt();
+    /**
+     * <code>required int32 s_remote_cnt = 14;</code>
+     */
+    int getSRemoteCnt();
+
+    // required bytes s_data = 15;
+    /**
+     * <code>required bytes s_data = 15;</code>
+     */
+    boolean hasSData();
+    /**
+     * <code>required bytes s_data = 15;</code>
+     */
+    com.google.protobuf.ByteString getSData();
+  }
+  /**
+   * Protobuf type {@code TpccStock}
+   */
+  public static final class TpccStock extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccStockOrBuilder {
+    // Use TpccStock.newBuilder() to construct.
+    private TpccStock(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccStock(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccStock defaultInstance;
+    public static TpccStock getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccStock getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccStock(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              sQuantity_ = input.readUInt64();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              sDist01_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              sDist02_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              sDist03_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              sDist04_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              sDist05_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              sDist06_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              sDist07_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              sDist08_ = input.readBytes();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000200;
+              sDist09_ = input.readBytes();
+              break;
+            }
+            case 90: {
+              bitField0_ |= 0x00000400;
+              sDist10_ = input.readBytes();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000800;
+              sYtd_ = input.readUInt64();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00001000;
+              sOrderCnt_ = input.readInt32();
+              break;
+            }
+            case 112: {
+              bitField0_ |= 0x00002000;
+              sRemoteCnt_ = input.readInt32();
+              break;
+            }
+            case 122: {
+              bitField0_ |= 0x00004000;
+              sData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccStock_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccStock_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccStock.class, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccStock> PARSER =
+        new com.google.protobuf.AbstractParser<TpccStock>() {
+      public TpccStock parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccStock(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccStock> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint64 s_quantity = 1;
+    public static final int S_QUANTITY_FIELD_NUMBER = 1;
+    private long sQuantity_;
+    /**
+     * <code>required uint64 s_quantity = 1;</code>
+     */
+    public boolean hasSQuantity() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 s_quantity = 1;</code>
+     */
+    public long getSQuantity() {
+      return sQuantity_;
+    }
+
+    // required bytes s_dist_01 = 2;
+    public static final int S_DIST_01_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString sDist01_;
+    /**
+     * <code>required bytes s_dist_01 = 2;</code>
+     */
+    public boolean hasSDist01() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes s_dist_01 = 2;</code>
+     */
+    public com.google.protobuf.ByteString getSDist01() {
+      return sDist01_;
+    }
+
+    // required bytes s_dist_02 = 3;
+    public static final int S_DIST_02_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString sDist02_;
+    /**
+     * <code>required bytes s_dist_02 = 3;</code>
+     */
+    public boolean hasSDist02() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bytes s_dist_02 = 3;</code>
+     */
+    public com.google.protobuf.ByteString getSDist02() {
+      return sDist02_;
+    }
+
+    // required bytes s_dist_03 = 4;
+    public static final int S_DIST_03_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString sDist03_;
+    /**
+     * <code>required bytes s_dist_03 = 4;</code>
+     */
+    public boolean hasSDist03() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required bytes s_dist_03 = 4;</code>
+     */
+    public com.google.protobuf.ByteString getSDist03() {
+      return sDist03_;
+    }
+
+    // required bytes s_dist_04 = 5;
+    public static final int S_DIST_04_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString sDist04_;
+    /**
+     * <code>required bytes s_dist_04 = 5;</code>
+     */
+    public boolean hasSDist04() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required bytes s_dist_04 = 5;</code>
+     */
+    public com.google.protobuf.ByteString getSDist04() {
+      return sDist04_;
+    }
+
+    // required bytes s_dist_05 = 6;
+    public static final int S_DIST_05_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString sDist05_;
+    /**
+     * <code>required bytes s_dist_05 = 6;</code>
+     */
+    public boolean hasSDist05() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required bytes s_dist_05 = 6;</code>
+     */
+    public com.google.protobuf.ByteString getSDist05() {
+      return sDist05_;
+    }
+
+    // required bytes s_dist_06 = 7;
+    public static final int S_DIST_06_FIELD_NUMBER = 7;
+    private com.google.protobuf.ByteString sDist06_;
+    /**
+     * <code>required bytes s_dist_06 = 7;</code>
+     */
+    public boolean hasSDist06() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required bytes s_dist_06 = 7;</code>
+     */
+    public com.google.protobuf.ByteString getSDist06() {
+      return sDist06_;
+    }
+
+    // required bytes s_dist_07 = 8;
+    public static final int S_DIST_07_FIELD_NUMBER = 8;
+    private com.google.protobuf.ByteString sDist07_;
+    /**
+     * <code>required bytes s_dist_07 = 8;</code>
+     */
+    public boolean hasSDist07() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required bytes s_dist_07 = 8;</code>
+     */
+    public com.google.protobuf.ByteString getSDist07() {
+      return sDist07_;
+    }
+
+    // required bytes s_dist_08 = 9;
+    public static final int S_DIST_08_FIELD_NUMBER = 9;
+    private com.google.protobuf.ByteString sDist08_;
+    /**
+     * <code>required bytes s_dist_08 = 9;</code>
+     */
+    public boolean hasSDist08() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>required bytes s_dist_08 = 9;</code>
+     */
+    public com.google.protobuf.ByteString getSDist08() {
+      return sDist08_;
+    }
+
+    // required bytes s_dist_09 = 10;
+    public static final int S_DIST_09_FIELD_NUMBER = 10;
+    private com.google.protobuf.ByteString sDist09_;
+    /**
+     * <code>required bytes s_dist_09 = 10;</code>
+     */
+    public boolean hasSDist09() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>required bytes s_dist_09 = 10;</code>
+     */
+    public com.google.protobuf.ByteString getSDist09() {
+      return sDist09_;
+    }
+
+    // required bytes s_dist_10 = 11;
+    public static final int S_DIST_10_FIELD_NUMBER = 11;
+    private com.google.protobuf.ByteString sDist10_;
+    /**
+     * <code>required bytes s_dist_10 = 11;</code>
+     */
+    public boolean hasSDist10() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>required bytes s_dist_10 = 11;</code>
+     */
+    public com.google.protobuf.ByteString getSDist10() {
+      return sDist10_;
+    }
+
+    // required uint64 s_ytd = 12;
+    public static final int S_YTD_FIELD_NUMBER = 12;
+    private long sYtd_;
+    /**
+     * <code>required uint64 s_ytd = 12;</code>
+     */
+    public boolean hasSYtd() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>required uint64 s_ytd = 12;</code>
+     */
+    public long getSYtd() {
+      return sYtd_;
+    }
+
+    // required int32 s_order_cnt = 13;
+    public static final int S_ORDER_CNT_FIELD_NUMBER = 13;
+    private int sOrderCnt_;
+    /**
+     * <code>required int32 s_order_cnt = 13;</code>
+     */
+    public boolean hasSOrderCnt() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>required int32 s_order_cnt = 13;</code>
+     */
+    public int getSOrderCnt() {
+      return sOrderCnt_;
+    }
+
+    // required int32 s_remote_cnt = 14;
+    public static final int S_REMOTE_CNT_FIELD_NUMBER = 14;
+    private int sRemoteCnt_;
+    /**
+     * <code>required int32 s_remote_cnt = 14;</code>
+     */
+    public boolean hasSRemoteCnt() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>required int32 s_remote_cnt = 14;</code>
+     */
+    public int getSRemoteCnt() {
+      return sRemoteCnt_;
+    }
+
+    // required bytes s_data = 15;
+    public static final int S_DATA_FIELD_NUMBER = 15;
+    private com.google.protobuf.ByteString sData_;
+    /**
+     * <code>required bytes s_data = 15;</code>
+     */
+    public boolean hasSData() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>required bytes s_data = 15;</code>
+     */
+    public com.google.protobuf.ByteString getSData() {
+      return sData_;
+    }
+
+    private void initFields() {
+      sQuantity_ = 0L;
+      sDist01_ = com.google.protobuf.ByteString.EMPTY;
+      sDist02_ = com.google.protobuf.ByteString.EMPTY;
+      sDist03_ = com.google.protobuf.ByteString.EMPTY;
+      sDist04_ = com.google.protobuf.ByteString.EMPTY;
+      sDist05_ = com.google.protobuf.ByteString.EMPTY;
+      sDist06_ = com.google.protobuf.ByteString.EMPTY;
+      sDist07_ = com.google.protobuf.ByteString.EMPTY;
+      sDist08_ = com.google.protobuf.ByteString.EMPTY;
+      sDist09_ = com.google.protobuf.ByteString.EMPTY;
+      sDist10_ = com.google.protobuf.ByteString.EMPTY;
+      sYtd_ = 0L;
+      sOrderCnt_ = 0;
+      sRemoteCnt_ = 0;
+      sData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasSQuantity()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist01()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist02()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist03()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist04()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist05()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist06()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist07()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist08()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist09()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSDist10()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSYtd()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSOrderCnt()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSRemoteCnt()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSData()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, sQuantity_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, sDist01_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, sDist02_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, sDist03_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, sDist04_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, sDist05_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, sDist06_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, sDist07_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, sDist08_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(10, sDist09_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBytes(11, sDist10_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeUInt64(12, sYtd_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeInt32(13, sOrderCnt_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeInt32(14, sRemoteCnt_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeBytes(15, sData_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, sQuantity_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, sDist01_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, sDist02_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, sDist03_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, sDist04_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, sDist05_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, sDist06_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, sDist07_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, sDist08_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, sDist09_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(11, sDist10_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(12, sYtd_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, sOrderCnt_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(14, sRemoteCnt_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(15, sData_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccStock parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccStock prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccStock}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccStock_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccStock_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccStock.class, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccStock.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        sQuantity_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        sDist01_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        sDist02_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        sDist03_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        sDist04_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        sDist05_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        sDist06_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        sDist07_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        sDist08_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        sDist09_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        sDist10_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        sYtd_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        sOrderCnt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        sRemoteCnt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        sData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00004000);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccStock_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccStock getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccStock build() {
+        com.basho.riak.protobuf.AntidotePB.TpccStock result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccStock buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccStock result = new com.basho.riak.protobuf.AntidotePB.TpccStock(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.sQuantity_ = sQuantity_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.sDist01_ = sDist01_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.sDist02_ = sDist02_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.sDist03_ = sDist03_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.sDist04_ = sDist04_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.sDist05_ = sDist05_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.sDist06_ = sDist06_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.sDist07_ = sDist07_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.sDist08_ = sDist08_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.sDist09_ = sDist09_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.sDist10_ = sDist10_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.sYtd_ = sYtd_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.sOrderCnt_ = sOrderCnt_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.sRemoteCnt_ = sRemoteCnt_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.sData_ = sData_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccStock) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccStock)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccStock other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance()) return this;
+        if (other.hasSQuantity()) {
+          setSQuantity(other.getSQuantity());
+        }
+        if (other.hasSDist01()) {
+          setSDist01(other.getSDist01());
+        }
+        if (other.hasSDist02()) {
+          setSDist02(other.getSDist02());
+        }
+        if (other.hasSDist03()) {
+          setSDist03(other.getSDist03());
+        }
+        if (other.hasSDist04()) {
+          setSDist04(other.getSDist04());
+        }
+        if (other.hasSDist05()) {
+          setSDist05(other.getSDist05());
+        }
+        if (other.hasSDist06()) {
+          setSDist06(other.getSDist06());
+        }
+        if (other.hasSDist07()) {
+          setSDist07(other.getSDist07());
+        }
+        if (other.hasSDist08()) {
+          setSDist08(other.getSDist08());
+        }
+        if (other.hasSDist09()) {
+          setSDist09(other.getSDist09());
+        }
+        if (other.hasSDist10()) {
+          setSDist10(other.getSDist10());
+        }
+        if (other.hasSYtd()) {
+          setSYtd(other.getSYtd());
+        }
+        if (other.hasSOrderCnt()) {
+          setSOrderCnt(other.getSOrderCnt());
+        }
+        if (other.hasSRemoteCnt()) {
+          setSRemoteCnt(other.getSRemoteCnt());
+        }
+        if (other.hasSData()) {
+          setSData(other.getSData());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasSQuantity()) {
+          
+          return false;
+        }
+        if (!hasSDist01()) {
+          
+          return false;
+        }
+        if (!hasSDist02()) {
+          
+          return false;
+        }
+        if (!hasSDist03()) {
+          
+          return false;
+        }
+        if (!hasSDist04()) {
+          
+          return false;
+        }
+        if (!hasSDist05()) {
+          
+          return false;
+        }
+        if (!hasSDist06()) {
+          
+          return false;
+        }
+        if (!hasSDist07()) {
+          
+          return false;
+        }
+        if (!hasSDist08()) {
+          
+          return false;
+        }
+        if (!hasSDist09()) {
+          
+          return false;
+        }
+        if (!hasSDist10()) {
+          
+          return false;
+        }
+        if (!hasSYtd()) {
+          
+          return false;
+        }
+        if (!hasSOrderCnt()) {
+          
+          return false;
+        }
+        if (!hasSRemoteCnt()) {
+          
+          return false;
+        }
+        if (!hasSData()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccStock parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccStock) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint64 s_quantity = 1;
+      private long sQuantity_ ;
+      /**
+       * <code>required uint64 s_quantity = 1;</code>
+       */
+      public boolean hasSQuantity() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint64 s_quantity = 1;</code>
+       */
+      public long getSQuantity() {
+        return sQuantity_;
+      }
+      /**
+       * <code>required uint64 s_quantity = 1;</code>
+       */
+      public Builder setSQuantity(long value) {
+        bitField0_ |= 0x00000001;
+        sQuantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 s_quantity = 1;</code>
+       */
+      public Builder clearSQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        sQuantity_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_01 = 2;
+      private com.google.protobuf.ByteString sDist01_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_01 = 2;</code>
+       */
+      public boolean hasSDist01() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes s_dist_01 = 2;</code>
+       */
+      public com.google.protobuf.ByteString getSDist01() {
+        return sDist01_;
+      }
+      /**
+       * <code>required bytes s_dist_01 = 2;</code>
+       */
+      public Builder setSDist01(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        sDist01_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_01 = 2;</code>
+       */
+      public Builder clearSDist01() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        sDist01_ = getDefaultInstance().getSDist01();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_02 = 3;
+      private com.google.protobuf.ByteString sDist02_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_02 = 3;</code>
+       */
+      public boolean hasSDist02() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes s_dist_02 = 3;</code>
+       */
+      public com.google.protobuf.ByteString getSDist02() {
+        return sDist02_;
+      }
+      /**
+       * <code>required bytes s_dist_02 = 3;</code>
+       */
+      public Builder setSDist02(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        sDist02_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_02 = 3;</code>
+       */
+      public Builder clearSDist02() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        sDist02_ = getDefaultInstance().getSDist02();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_03 = 4;
+      private com.google.protobuf.ByteString sDist03_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_03 = 4;</code>
+       */
+      public boolean hasSDist03() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required bytes s_dist_03 = 4;</code>
+       */
+      public com.google.protobuf.ByteString getSDist03() {
+        return sDist03_;
+      }
+      /**
+       * <code>required bytes s_dist_03 = 4;</code>
+       */
+      public Builder setSDist03(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        sDist03_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_03 = 4;</code>
+       */
+      public Builder clearSDist03() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        sDist03_ = getDefaultInstance().getSDist03();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_04 = 5;
+      private com.google.protobuf.ByteString sDist04_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_04 = 5;</code>
+       */
+      public boolean hasSDist04() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required bytes s_dist_04 = 5;</code>
+       */
+      public com.google.protobuf.ByteString getSDist04() {
+        return sDist04_;
+      }
+      /**
+       * <code>required bytes s_dist_04 = 5;</code>
+       */
+      public Builder setSDist04(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        sDist04_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_04 = 5;</code>
+       */
+      public Builder clearSDist04() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        sDist04_ = getDefaultInstance().getSDist04();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_05 = 6;
+      private com.google.protobuf.ByteString sDist05_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_05 = 6;</code>
+       */
+      public boolean hasSDist05() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required bytes s_dist_05 = 6;</code>
+       */
+      public com.google.protobuf.ByteString getSDist05() {
+        return sDist05_;
+      }
+      /**
+       * <code>required bytes s_dist_05 = 6;</code>
+       */
+      public Builder setSDist05(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        sDist05_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_05 = 6;</code>
+       */
+      public Builder clearSDist05() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        sDist05_ = getDefaultInstance().getSDist05();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_06 = 7;
+      private com.google.protobuf.ByteString sDist06_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_06 = 7;</code>
+       */
+      public boolean hasSDist06() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required bytes s_dist_06 = 7;</code>
+       */
+      public com.google.protobuf.ByteString getSDist06() {
+        return sDist06_;
+      }
+      /**
+       * <code>required bytes s_dist_06 = 7;</code>
+       */
+      public Builder setSDist06(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        sDist06_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_06 = 7;</code>
+       */
+      public Builder clearSDist06() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        sDist06_ = getDefaultInstance().getSDist06();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_07 = 8;
+      private com.google.protobuf.ByteString sDist07_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_07 = 8;</code>
+       */
+      public boolean hasSDist07() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>required bytes s_dist_07 = 8;</code>
+       */
+      public com.google.protobuf.ByteString getSDist07() {
+        return sDist07_;
+      }
+      /**
+       * <code>required bytes s_dist_07 = 8;</code>
+       */
+      public Builder setSDist07(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        sDist07_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_07 = 8;</code>
+       */
+      public Builder clearSDist07() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        sDist07_ = getDefaultInstance().getSDist07();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_08 = 9;
+      private com.google.protobuf.ByteString sDist08_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_08 = 9;</code>
+       */
+      public boolean hasSDist08() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>required bytes s_dist_08 = 9;</code>
+       */
+      public com.google.protobuf.ByteString getSDist08() {
+        return sDist08_;
+      }
+      /**
+       * <code>required bytes s_dist_08 = 9;</code>
+       */
+      public Builder setSDist08(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        sDist08_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_08 = 9;</code>
+       */
+      public Builder clearSDist08() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        sDist08_ = getDefaultInstance().getSDist08();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_09 = 10;
+      private com.google.protobuf.ByteString sDist09_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_09 = 10;</code>
+       */
+      public boolean hasSDist09() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>required bytes s_dist_09 = 10;</code>
+       */
+      public com.google.protobuf.ByteString getSDist09() {
+        return sDist09_;
+      }
+      /**
+       * <code>required bytes s_dist_09 = 10;</code>
+       */
+      public Builder setSDist09(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        sDist09_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_09 = 10;</code>
+       */
+      public Builder clearSDist09() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        sDist09_ = getDefaultInstance().getSDist09();
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_dist_10 = 11;
+      private com.google.protobuf.ByteString sDist10_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_dist_10 = 11;</code>
+       */
+      public boolean hasSDist10() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>required bytes s_dist_10 = 11;</code>
+       */
+      public com.google.protobuf.ByteString getSDist10() {
+        return sDist10_;
+      }
+      /**
+       * <code>required bytes s_dist_10 = 11;</code>
+       */
+      public Builder setSDist10(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        sDist10_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_dist_10 = 11;</code>
+       */
+      public Builder clearSDist10() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        sDist10_ = getDefaultInstance().getSDist10();
+        onChanged();
+        return this;
+      }
+
+      // required uint64 s_ytd = 12;
+      private long sYtd_ ;
+      /**
+       * <code>required uint64 s_ytd = 12;</code>
+       */
+      public boolean hasSYtd() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>required uint64 s_ytd = 12;</code>
+       */
+      public long getSYtd() {
+        return sYtd_;
+      }
+      /**
+       * <code>required uint64 s_ytd = 12;</code>
+       */
+      public Builder setSYtd(long value) {
+        bitField0_ |= 0x00000800;
+        sYtd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 s_ytd = 12;</code>
+       */
+      public Builder clearSYtd() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        sYtd_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required int32 s_order_cnt = 13;
+      private int sOrderCnt_ ;
+      /**
+       * <code>required int32 s_order_cnt = 13;</code>
+       */
+      public boolean hasSOrderCnt() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>required int32 s_order_cnt = 13;</code>
+       */
+      public int getSOrderCnt() {
+        return sOrderCnt_;
+      }
+      /**
+       * <code>required int32 s_order_cnt = 13;</code>
+       */
+      public Builder setSOrderCnt(int value) {
+        bitField0_ |= 0x00001000;
+        sOrderCnt_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 s_order_cnt = 13;</code>
+       */
+      public Builder clearSOrderCnt() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        sOrderCnt_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required int32 s_remote_cnt = 14;
+      private int sRemoteCnt_ ;
+      /**
+       * <code>required int32 s_remote_cnt = 14;</code>
+       */
+      public boolean hasSRemoteCnt() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>required int32 s_remote_cnt = 14;</code>
+       */
+      public int getSRemoteCnt() {
+        return sRemoteCnt_;
+      }
+      /**
+       * <code>required int32 s_remote_cnt = 14;</code>
+       */
+      public Builder setSRemoteCnt(int value) {
+        bitField0_ |= 0x00002000;
+        sRemoteCnt_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 s_remote_cnt = 14;</code>
+       */
+      public Builder clearSRemoteCnt() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        sRemoteCnt_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required bytes s_data = 15;
+      private com.google.protobuf.ByteString sData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes s_data = 15;</code>
+       */
+      public boolean hasSData() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>required bytes s_data = 15;</code>
+       */
+      public com.google.protobuf.ByteString getSData() {
+        return sData_;
+      }
+      /**
+       * <code>required bytes s_data = 15;</code>
+       */
+      public Builder setSData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00004000;
+        sData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes s_data = 15;</code>
+       */
+      public Builder clearSData() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        sData_ = getDefaultInstance().getSData();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccStock)
+    }
+
+    static {
+      defaultInstance = new TpccStock(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccStock)
+  }
+
+  public interface TpccWarehouseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required bytes w_name = 1;
+    /**
+     * <code>required bytes w_name = 1;</code>
+     */
+    boolean hasWName();
+    /**
+     * <code>required bytes w_name = 1;</code>
+     */
+    com.google.protobuf.ByteString getWName();
+
+    // required bytes w_street1 = 2;
+    /**
+     * <code>required bytes w_street1 = 2;</code>
+     */
+    boolean hasWStreet1();
+    /**
+     * <code>required bytes w_street1 = 2;</code>
+     */
+    com.google.protobuf.ByteString getWStreet1();
+
+    // required bytes w_street2 = 3;
+    /**
+     * <code>required bytes w_street2 = 3;</code>
+     */
+    boolean hasWStreet2();
+    /**
+     * <code>required bytes w_street2 = 3;</code>
+     */
+    com.google.protobuf.ByteString getWStreet2();
+
+    // required bytes w_city = 4;
+    /**
+     * <code>required bytes w_city = 4;</code>
+     */
+    boolean hasWCity();
+    /**
+     * <code>required bytes w_city = 4;</code>
+     */
+    com.google.protobuf.ByteString getWCity();
+
+    // required bytes w_state = 5;
+    /**
+     * <code>required bytes w_state = 5;</code>
+     */
+    boolean hasWState();
+    /**
+     * <code>required bytes w_state = 5;</code>
+     */
+    com.google.protobuf.ByteString getWState();
+
+    // required bytes w_zip = 6;
+    /**
+     * <code>required bytes w_zip = 6;</code>
+     */
+    boolean hasWZip();
+    /**
+     * <code>required bytes w_zip = 6;</code>
+     */
+    com.google.protobuf.ByteString getWZip();
+
+    // required double w_tax = 7;
+    /**
+     * <code>required double w_tax = 7;</code>
+     */
+    boolean hasWTax();
+    /**
+     * <code>required double w_tax = 7;</code>
+     */
+    double getWTax();
+  }
+  /**
+   * Protobuf type {@code TpccWarehouse}
+   */
+  public static final class TpccWarehouse extends
+      com.google.protobuf.GeneratedMessage
+      implements TpccWarehouseOrBuilder {
+    // Use TpccWarehouse.newBuilder() to construct.
+    private TpccWarehouse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TpccWarehouse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TpccWarehouse defaultInstance;
+    public static TpccWarehouse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TpccWarehouse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TpccWarehouse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              wName_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              wStreet1_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              wStreet2_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              wCity_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              wState_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              wZip_ = input.readBytes();
+              break;
+            }
+            case 57: {
+              bitField0_ |= 0x00000040;
+              wTax_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccWarehouse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_TpccWarehouse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.TpccWarehouse.class, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TpccWarehouse> PARSER =
+        new com.google.protobuf.AbstractParser<TpccWarehouse>() {
+      public TpccWarehouse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TpccWarehouse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TpccWarehouse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required bytes w_name = 1;
+    public static final int W_NAME_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString wName_;
+    /**
+     * <code>required bytes w_name = 1;</code>
+     */
+    public boolean hasWName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bytes w_name = 1;</code>
+     */
+    public com.google.protobuf.ByteString getWName() {
+      return wName_;
+    }
+
+    // required bytes w_street1 = 2;
+    public static final int W_STREET1_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString wStreet1_;
+    /**
+     * <code>required bytes w_street1 = 2;</code>
+     */
+    public boolean hasWStreet1() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes w_street1 = 2;</code>
+     */
+    public com.google.protobuf.ByteString getWStreet1() {
+      return wStreet1_;
+    }
+
+    // required bytes w_street2 = 3;
+    public static final int W_STREET2_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString wStreet2_;
+    /**
+     * <code>required bytes w_street2 = 3;</code>
+     */
+    public boolean hasWStreet2() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bytes w_street2 = 3;</code>
+     */
+    public com.google.protobuf.ByteString getWStreet2() {
+      return wStreet2_;
+    }
+
+    // required bytes w_city = 4;
+    public static final int W_CITY_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString wCity_;
+    /**
+     * <code>required bytes w_city = 4;</code>
+     */
+    public boolean hasWCity() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required bytes w_city = 4;</code>
+     */
+    public com.google.protobuf.ByteString getWCity() {
+      return wCity_;
+    }
+
+    // required bytes w_state = 5;
+    public static final int W_STATE_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString wState_;
+    /**
+     * <code>required bytes w_state = 5;</code>
+     */
+    public boolean hasWState() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required bytes w_state = 5;</code>
+     */
+    public com.google.protobuf.ByteString getWState() {
+      return wState_;
+    }
+
+    // required bytes w_zip = 6;
+    public static final int W_ZIP_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString wZip_;
+    /**
+     * <code>required bytes w_zip = 6;</code>
+     */
+    public boolean hasWZip() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required bytes w_zip = 6;</code>
+     */
+    public com.google.protobuf.ByteString getWZip() {
+      return wZip_;
+    }
+
+    // required double w_tax = 7;
+    public static final int W_TAX_FIELD_NUMBER = 7;
+    private double wTax_;
+    /**
+     * <code>required double w_tax = 7;</code>
+     */
+    public boolean hasWTax() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required double w_tax = 7;</code>
+     */
+    public double getWTax() {
+      return wTax_;
+    }
+
+    private void initFields() {
+      wName_ = com.google.protobuf.ByteString.EMPTY;
+      wStreet1_ = com.google.protobuf.ByteString.EMPTY;
+      wStreet2_ = com.google.protobuf.ByteString.EMPTY;
+      wCity_ = com.google.protobuf.ByteString.EMPTY;
+      wState_ = com.google.protobuf.ByteString.EMPTY;
+      wZip_ = com.google.protobuf.ByteString.EMPTY;
+      wTax_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasWName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWStreet1()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWStreet2()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWCity()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWState()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWZip()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWTax()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, wName_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, wStreet1_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, wStreet2_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, wCity_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, wState_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, wZip_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeDouble(7, wTax_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, wName_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, wStreet1_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, wStreet2_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, wCity_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, wState_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, wZip_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(7, wTax_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.TpccWarehouse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.TpccWarehouse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TpccWarehouse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccWarehouse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccWarehouse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.TpccWarehouse.class, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.TpccWarehouse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        wName_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        wStreet1_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        wStreet2_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        wCity_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        wState_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        wZip_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        wTax_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_TpccWarehouse_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccWarehouse getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccWarehouse build() {
+        com.basho.riak.protobuf.AntidotePB.TpccWarehouse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.TpccWarehouse buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.TpccWarehouse result = new com.basho.riak.protobuf.AntidotePB.TpccWarehouse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.wName_ = wName_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.wStreet1_ = wStreet1_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.wStreet2_ = wStreet2_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.wCity_ = wCity_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.wState_ = wState_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.wZip_ = wZip_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.wTax_ = wTax_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.TpccWarehouse) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.TpccWarehouse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccWarehouse other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance()) return this;
+        if (other.hasWName()) {
+          setWName(other.getWName());
+        }
+        if (other.hasWStreet1()) {
+          setWStreet1(other.getWStreet1());
+        }
+        if (other.hasWStreet2()) {
+          setWStreet2(other.getWStreet2());
+        }
+        if (other.hasWCity()) {
+          setWCity(other.getWCity());
+        }
+        if (other.hasWState()) {
+          setWState(other.getWState());
+        }
+        if (other.hasWZip()) {
+          setWZip(other.getWZip());
+        }
+        if (other.hasWTax()) {
+          setWTax(other.getWTax());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasWName()) {
+          
+          return false;
+        }
+        if (!hasWStreet1()) {
+          
+          return false;
+        }
+        if (!hasWStreet2()) {
+          
+          return false;
+        }
+        if (!hasWCity()) {
+          
+          return false;
+        }
+        if (!hasWState()) {
+          
+          return false;
+        }
+        if (!hasWZip()) {
+          
+          return false;
+        }
+        if (!hasWTax()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.TpccWarehouse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.TpccWarehouse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required bytes w_name = 1;
+      private com.google.protobuf.ByteString wName_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes w_name = 1;</code>
+       */
+      public boolean hasWName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes w_name = 1;</code>
+       */
+      public com.google.protobuf.ByteString getWName() {
+        return wName_;
+      }
+      /**
+       * <code>required bytes w_name = 1;</code>
+       */
+      public Builder setWName(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        wName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes w_name = 1;</code>
+       */
+      public Builder clearWName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        wName_ = getDefaultInstance().getWName();
+        onChanged();
+        return this;
+      }
+
+      // required bytes w_street1 = 2;
+      private com.google.protobuf.ByteString wStreet1_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes w_street1 = 2;</code>
+       */
+      public boolean hasWStreet1() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes w_street1 = 2;</code>
+       */
+      public com.google.protobuf.ByteString getWStreet1() {
+        return wStreet1_;
+      }
+      /**
+       * <code>required bytes w_street1 = 2;</code>
+       */
+      public Builder setWStreet1(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        wStreet1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes w_street1 = 2;</code>
+       */
+      public Builder clearWStreet1() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        wStreet1_ = getDefaultInstance().getWStreet1();
+        onChanged();
+        return this;
+      }
+
+      // required bytes w_street2 = 3;
+      private com.google.protobuf.ByteString wStreet2_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes w_street2 = 3;</code>
+       */
+      public boolean hasWStreet2() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes w_street2 = 3;</code>
+       */
+      public com.google.protobuf.ByteString getWStreet2() {
+        return wStreet2_;
+      }
+      /**
+       * <code>required bytes w_street2 = 3;</code>
+       */
+      public Builder setWStreet2(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        wStreet2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes w_street2 = 3;</code>
+       */
+      public Builder clearWStreet2() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        wStreet2_ = getDefaultInstance().getWStreet2();
+        onChanged();
+        return this;
+      }
+
+      // required bytes w_city = 4;
+      private com.google.protobuf.ByteString wCity_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes w_city = 4;</code>
+       */
+      public boolean hasWCity() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required bytes w_city = 4;</code>
+       */
+      public com.google.protobuf.ByteString getWCity() {
+        return wCity_;
+      }
+      /**
+       * <code>required bytes w_city = 4;</code>
+       */
+      public Builder setWCity(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        wCity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes w_city = 4;</code>
+       */
+      public Builder clearWCity() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        wCity_ = getDefaultInstance().getWCity();
+        onChanged();
+        return this;
+      }
+
+      // required bytes w_state = 5;
+      private com.google.protobuf.ByteString wState_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes w_state = 5;</code>
+       */
+      public boolean hasWState() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required bytes w_state = 5;</code>
+       */
+      public com.google.protobuf.ByteString getWState() {
+        return wState_;
+      }
+      /**
+       * <code>required bytes w_state = 5;</code>
+       */
+      public Builder setWState(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        wState_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes w_state = 5;</code>
+       */
+      public Builder clearWState() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        wState_ = getDefaultInstance().getWState();
+        onChanged();
+        return this;
+      }
+
+      // required bytes w_zip = 6;
+      private com.google.protobuf.ByteString wZip_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes w_zip = 6;</code>
+       */
+      public boolean hasWZip() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required bytes w_zip = 6;</code>
+       */
+      public com.google.protobuf.ByteString getWZip() {
+        return wZip_;
+      }
+      /**
+       * <code>required bytes w_zip = 6;</code>
+       */
+      public Builder setWZip(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        wZip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes w_zip = 6;</code>
+       */
+      public Builder clearWZip() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        wZip_ = getDefaultInstance().getWZip();
+        onChanged();
+        return this;
+      }
+
+      // required double w_tax = 7;
+      private double wTax_ ;
+      /**
+       * <code>required double w_tax = 7;</code>
+       */
+      public boolean hasWTax() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required double w_tax = 7;</code>
+       */
+      public double getWTax() {
+        return wTax_;
+      }
+      /**
+       * <code>required double w_tax = 7;</code>
+       */
+      public Builder setWTax(double value) {
+        bitField0_ |= 0x00000040;
+        wTax_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double w_tax = 7;</code>
+       */
+      public Builder clearWTax() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        wTax_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:TpccWarehouse)
+    }
+
+    static {
+      defaultInstance = new TpccWarehouse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:TpccWarehouse)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_FpbStartTxnReq_descriptor;
   private static
@@ -10040,15 +22303,65 @@ public final class AntidotePB {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_FpbTxnResp_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_FpbTxId_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_FpbTxId_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_FpbValue_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_FpbValue_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_FpbTxId_descriptor;
+    internal_static_TpccCustomer_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_FpbTxId_fieldAccessorTable;
+      internal_static_TpccCustomer_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccCustomerLookup_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccCustomerLookup_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccDistrict_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccDistrict_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccHistory_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccHistory_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccItem_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccItem_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccNewOrder_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccNewOrder_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccOrder_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccOrder_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccOrderLine_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccOrderLine_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccStock_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccStock_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TpccWarehouse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TpccWarehouse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10069,20 +22382,66 @@ public final class AntidotePB {
       " \002(\010\022\023\n\013commit_time\030\002 \001(\004\"G\n\nFpbReadReq\022" +
       "\026\n\004txid\030\001 \001(\0132\010.FpbTxId\022\013\n\003key\030\002 \002(\014\022\024\n\014",
       "partition_id\030\003 \002(\r\"\036\n\016FpbPartListReq\022\014\n\004" +
-      "noop\030\001 \001(\010\"B\n\016FpbSingleUpReq\022\013\n\003key\030\001 \002(" +
-      "\014\022\r\n\005value\030\002 \002(\014\022\024\n\014partition_id\030\003 \002(\r\"/" +
-      "\n\013FpbPartList\022 \n\nnode_parts\030\001 \003(\0132\014.FpbN" +
-      "odePart\"1\n\013FpbNodePart\022\n\n\002ip\030\001 \002(\014\022\026\n\016nu" +
-      "m_partitions\030\002 \002(\r\"\'\n\tFpbUpdate\022\013\n\003key\030\001" +
-      " \002(\014\022\r\n\005value\030\002 \002(\014\"2\n\tFpbTxnReq\022\r\n\005cloc" +
-      "k\030\001 \001(\014\022\026\n\003ops\030\002 \003(\0132\t.FpbTxnOp\"K\n\010FpbTx" +
-      "nOp\022\014\n\004type\030\001 \002(\r\022\013\n\003key\030\002 \002(\r\022\021\n\toperat" +
-      "ion\030\003 \001(\r\022\021\n\tparameter\030\004 \001(\014\"H\n\nFpbTxnRe",
-      "sp\022\017\n\007success\030\001 \002(\010\022\r\n\005clock\030\002 \001(\014\022\032\n\007re" +
-      "sults\030\003 \003(\0132\t.FpbValue\"\031\n\010FpbValue\022\r\n\005va" +
-      "lue\030\001 \002(\014\"(\n\007FpbTxId\022\020\n\010snapshot\030\001 \002(\004\022\013" +
-      "\n\003pid\030\002 \002(\014B%\n\027com.basho.riak.protobufB\n" +
-      "AntidotePB"
+      "noop\030\001 \001(\010\"M\n\016FpbSingleUpReq\022\013\n\003key\030\001 \002(" +
+      "\014\022\030\n\005value\030\002 \002(\0132\t.FpbValue\022\024\n\014partition" +
+      "_id\030\003 \002(\r\"/\n\013FpbPartList\022 \n\nnode_parts\030\001" +
+      " \003(\0132\014.FpbNodePart\"1\n\013FpbNodePart\022\n\n\002ip\030" +
+      "\001 \002(\014\022\026\n\016num_partitions\030\002 \002(\r\"2\n\tFpbUpda" +
+      "te\022\013\n\003key\030\001 \002(\014\022\030\n\005value\030\002 \002(\0132\t.FpbValu" +
+      "e\"2\n\tFpbTxnReq\022\r\n\005clock\030\001 \001(\014\022\026\n\003ops\030\002 \003" +
+      "(\0132\t.FpbTxnOp\"K\n\010FpbTxnOp\022\014\n\004type\030\001 \002(\r\022" +
+      "\013\n\003key\030\002 \002(\r\022\021\n\toperation\030\003 \001(\r\022\021\n\tparam",
+      "eter\030\004 \001(\014\"H\n\nFpbTxnResp\022\017\n\007success\030\001 \002(" +
+      "\010\022\r\n\005clock\030\002 \001(\014\022\032\n\007results\030\003 \003(\0132\t.FpbV" +
+      "alue\"(\n\007FpbTxId\022\020\n\010snapshot\030\001 \002(\004\022\013\n\003pid" +
+      "\030\002 \002(\014\"\351\002\n\010FpbValue\022\021\n\005field\030\001 \002(\r:\00212\022\037" +
+      "\n\010customer\030\002 \001(\0132\r.TpccCustomer\022$\n\007clook" +
+      "up\030\003 \001(\0132\023.TpccCustomerLookup\022\037\n\010distric" +
+      "t\030\004 \001(\0132\r.TpccDistrict\022\035\n\007history\030\005 \001(\0132" +
+      "\014.TpccHistory\022\027\n\004item\030\006 \001(\0132\t.TpccItem\022\037" +
+      "\n\010neworder\030\007 \001(\0132\r.TpccNewOrder\022\031\n\005order" +
+      "\030\010 \001(\0132\n.TpccOrder\022!\n\torderline\030\t \001(\0132\016.",
+      "TpccOrderLine\022\031\n\005stock\030\n \001(\0132\n.TpccStock" +
+      "\022!\n\twarehouse\030\013 \001(\0132\016.TpccWarehouse\022\r\n\005v" +
+      "alue\030\014 \001(\014\"\313\002\n\014TpccCustomer\022\017\n\007c_first\030\001" +
+      " \002(\014\022\020\n\010c_middle\030\002 \002(\014\022\016\n\006c_last\030\003 \002(\014\022\021" +
+      "\n\tc_street1\030\004 \002(\014\022\021\n\tc_street2\030\005 \002(\014\022\016\n\006" +
+      "c_city\030\006 \002(\014\022\017\n\007c_state\030\007 \002(\014\022\r\n\005c_zip\030\010" +
+      " \002(\014\022\017\n\007c_phone\030\t \002(\014\022\017\n\007c_since\030\n \002(\004\022\020" +
+      "\n\010c_credit\030\013 \002(\014\022\024\n\014c_credit_lim\030\014 \002(\001\022\022" +
+      "\n\nc_discount\030\r \002(\001\022\025\n\rc_ytd_payment\030\016 \002(" +
+      "\001\022\025\n\rc_payment_cnt\030\017 \002(\005\022\026\n\016c_delivery_c",
+      "nt\030\020 \002(\005\022\016\n\006c_data\030\021 \002(\014\"Q\n\022TpccCustomer" +
+      "Lookup\022\016\n\006c_w_id\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016" +
+      "\n\006c_last\030\003 \002(\014\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDist" +
+      "rict\022\016\n\006d_name\030\001 \002(\014\022\021\n\td_street1\030\002 \002(\014\022" +
+      "\021\n\td_street2\030\003 \002(\014\022\016\n\006d_city\030\004 \002(\014\022\017\n\007d_" +
+      "state\030\005 \002(\014\022\r\n\005d_zip\030\006 \002(\014\022\r\n\005d_tax\030\007 \002(" +
+      "\001\022\023\n\013d_next_o_id\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n" +
+      "\006h_c_id\030\001 \002(\004\"L\n\010TpccItem\022\017\n\007i_im_id\030\001 \002" +
+      "(\004\022\016\n\006i_name\030\002 \002(\014\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i" +
+      "_data\030\004 \002(\014\"A\n\014TpccNewOrder\022\017\n\007no_o_id\030\001",
+      " \002(\004\022\017\n\007no_d_id\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k" +
+      "\n\tTpccOrder\022\016\n\006o_c_id\030\001 \002(\004\022\021\n\to_entry_d" +
+      "\030\002 \002(\004\022\024\n\014o_carrier_id\030\003 \002(\004\022\020\n\010o_ol_cnt" +
+      "\030\004 \002(\005\022\023\n\013o_all_local\030\005 \002(\005\"\323\001\n\rTpccOrde" +
+      "rLine\022\017\n\007ol_o_id\030\001 \002(\004\022\017\n\007ol_d_id\030\002 \002(\004\022" +
+      "\017\n\007ol_w_id\030\003 \002(\004\022\021\n\tol_number\030\004 \002(\004\022\017\n\007o" +
+      "l_i_id\030\005 \002(\004\022\026\n\016ol_supply_w_id\030\006 \002(\004\022\025\n\r" +
+      "ol_delivery_d\030\007 \002(\004\022\023\n\013ol_quantity\030\010 \002(\004" +
+      "\022\021\n\tol_amount\030\t \002(\001\022\024\n\014ol_dist_info\030\n \002(" +
+      "\014\"\247\002\n\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts",
+      "_dist_01\030\002 \002(\014\022\021\n\ts_dist_02\030\003 \002(\014\022\021\n\ts_d" +
+      "ist_03\030\004 \002(\014\022\021\n\ts_dist_04\030\005 \002(\014\022\021\n\ts_dis" +
+      "t_05\030\006 \002(\014\022\021\n\ts_dist_06\030\007 \002(\014\022\021\n\ts_dist_" +
+      "07\030\010 \002(\014\022\021\n\ts_dist_08\030\t \002(\014\022\021\n\ts_dist_09" +
+      "\030\n \002(\014\022\021\n\ts_dist_10\030\013 \002(\014\022\r\n\005s_ytd\030\014 \002(\004" +
+      "\022\023\n\013s_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 " +
+      "\002(\005\022\016\n\006s_data\030\017 \002(\014\"\204\001\n\rTpccWarehouse\022\016\n" +
+      "\006w_name\030\001 \002(\014\022\021\n\tw_street1\030\002 \002(\014\022\021\n\tw_st" +
+      "reet2\030\003 \002(\014\022\016\n\006w_city\030\004 \002(\014\022\017\n\007w_state\030\005" +
+      " \002(\014\022\r\n\005w_zip\030\006 \002(\014\022\r\n\005w_tax\030\007 \002(\001B%\n\027co",
+      "m.basho.riak.protobufB\nAntidotePB"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10173,18 +22532,78 @@ public final class AntidotePB {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbTxnResp_descriptor,
               new java.lang.String[] { "Success", "Clock", "Results", });
-          internal_static_FpbValue_descriptor =
-            getDescriptor().getMessageTypes().get(14);
-          internal_static_FpbValue_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_FpbValue_descriptor,
-              new java.lang.String[] { "Value", });
           internal_static_FpbTxId_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_FpbTxId_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbTxId_descriptor,
               new java.lang.String[] { "Snapshot", "Pid", });
+          internal_static_FpbValue_descriptor =
+            getDescriptor().getMessageTypes().get(15);
+          internal_static_FpbValue_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_FpbValue_descriptor,
+              new java.lang.String[] { "Field", "Customer", "Clookup", "District", "History", "Item", "Neworder", "Order", "Orderline", "Stock", "Warehouse", "Value", });
+          internal_static_TpccCustomer_descriptor =
+            getDescriptor().getMessageTypes().get(16);
+          internal_static_TpccCustomer_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccCustomer_descriptor,
+              new java.lang.String[] { "CFirst", "CMiddle", "CLast", "CStreet1", "CStreet2", "CCity", "CState", "CZip", "CPhone", "CSince", "CCredit", "CCreditLim", "CDiscount", "CYtdPayment", "CPaymentCnt", "CDeliveryCnt", "CData", });
+          internal_static_TpccCustomerLookup_descriptor =
+            getDescriptor().getMessageTypes().get(17);
+          internal_static_TpccCustomerLookup_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccCustomerLookup_descriptor,
+              new java.lang.String[] { "CWId", "CDId", "CLast", "Ids", });
+          internal_static_TpccDistrict_descriptor =
+            getDescriptor().getMessageTypes().get(18);
+          internal_static_TpccDistrict_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccDistrict_descriptor,
+              new java.lang.String[] { "DName", "DStreet1", "DStreet2", "DCity", "DState", "DZip", "DTax", "DNextOId", });
+          internal_static_TpccHistory_descriptor =
+            getDescriptor().getMessageTypes().get(19);
+          internal_static_TpccHistory_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccHistory_descriptor,
+              new java.lang.String[] { "HCId", });
+          internal_static_TpccItem_descriptor =
+            getDescriptor().getMessageTypes().get(20);
+          internal_static_TpccItem_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccItem_descriptor,
+              new java.lang.String[] { "IImId", "IName", "IPrice", "IData", });
+          internal_static_TpccNewOrder_descriptor =
+            getDescriptor().getMessageTypes().get(21);
+          internal_static_TpccNewOrder_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccNewOrder_descriptor,
+              new java.lang.String[] { "NoOId", "NoDId", "NoWId", });
+          internal_static_TpccOrder_descriptor =
+            getDescriptor().getMessageTypes().get(22);
+          internal_static_TpccOrder_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccOrder_descriptor,
+              new java.lang.String[] { "OCId", "OEntryD", "OCarrierId", "OOlCnt", "OAllLocal", });
+          internal_static_TpccOrderLine_descriptor =
+            getDescriptor().getMessageTypes().get(23);
+          internal_static_TpccOrderLine_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccOrderLine_descriptor,
+              new java.lang.String[] { "OlOId", "OlDId", "OlWId", "OlNumber", "OlIId", "OlSupplyWId", "OlDeliveryD", "OlQuantity", "OlAmount", "OlDistInfo", });
+          internal_static_TpccStock_descriptor =
+            getDescriptor().getMessageTypes().get(24);
+          internal_static_TpccStock_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccStock_descriptor,
+              new java.lang.String[] { "SQuantity", "SDist01", "SDist02", "SDist03", "SDist04", "SDist05", "SDist06", "SDist07", "SDist08", "SDist09", "SDist10", "SYtd", "SOrderCnt", "SRemoteCnt", "SData", });
+          internal_static_TpccWarehouse_descriptor =
+            getDescriptor().getMessageTypes().get(25);
+          internal_static_TpccWarehouse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TpccWarehouse_descriptor,
+              new java.lang.String[] { "WName", "WStreet1", "WStreet2", "WCity", "WState", "WZip", "WTax", });
           return null;
         }
       };

@@ -3,6 +3,11 @@ package org.radargun.tpcc.domain;
 import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccOrder;
+import com.basho.riak.protobuf.AntidotePB.TpccOrderLine;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -134,7 +139,14 @@ public class OrderLine implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccOrderLine orderline = TpccOrderLine.newBuilder()
+			   .setOlDId(ol_i_id).setOlSupplyWId(ol_supply_w_id)
+			   .setOlDeliveryD(ol_supply_w_id).setOlQuantity(ol_quantity)
+			   .setOlAmount(ol_amount).setOlDistInfo(ByteString.copyFromUtf8(ol_dist_info)).build();
+	   
+	   FpbValue value = FpbValue.newBuilder().setOrderline(orderline).setField(9).build();
+	   
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override
@@ -149,16 +161,16 @@ public class OrderLine implements Serializable, DomainObject {
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
-      OrderLine loaded = (OrderLine) wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  if (value == null) return false;
+	  TpccOrderLine orderline = value.getOrderline();
 
-      if (loaded == null) return false;
-
-      this.ol_i_id = loaded.ol_i_id;
-      this.ol_supply_w_id = loaded.ol_supply_w_id;
-      this.ol_delivery_d = loaded.ol_delivery_d;
-      this.ol_quantity = loaded.ol_quantity;
-      this.ol_amount = loaded.ol_amount;
-      this.ol_dist_info = loaded.ol_dist_info;
+      this.ol_i_id = orderline.getOlIId();
+      this.ol_supply_w_id = orderline.getOlSupplyWId();
+      this.ol_delivery_d = orderline.getOlDeliveryD();
+      this.ol_quantity = orderline.getOlQuantity();
+      this.ol_amount = orderline.getOlAmount();
+      this.ol_dist_info = orderline.getOlDistInfo().toString();
 
 
       return true;

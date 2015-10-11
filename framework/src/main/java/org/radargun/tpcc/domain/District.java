@@ -5,6 +5,10 @@ import org.radargun.LocatedKey;
 import org.radargun.tpcc.DomainObject;
 import org.radargun.tpcc.TpccTools;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 
 /**
@@ -164,7 +168,15 @@ public class District implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), this);
+	   TpccDistrict district = TpccDistrict.newBuilder()
+			   .setDName(ByteString.copyFromUtf8(d_name)).setDStreet1(ByteString.copyFromUtf8(d_street1))
+			   .setDStreet2(ByteString.copyFromUtf8(d_street2)).setDCity(ByteString.copyFromUtf8(d_city))
+			   .setDState(ByteString.copyFromUtf8(d_state)).setDZip(ByteString.copyFromUtf8(d_zip))
+			   .setDTax(d_tax).setDNextOId(d_next_o_id).build();
+	   
+	   FpbValue value = FpbValue.newBuilder().setDistrict(district).setField(4).build();
+			   
+       wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
 
    @Override
@@ -179,18 +191,18 @@ public class District implements Serializable, DomainObject {
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
-      District loaded = (District) wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+      if (value == null) return false;
+      TpccDistrict district = value.getDistrict();
 
-      if (loaded == null) return false;
-
-      this.d_city = loaded.d_city;
-      this.d_name = loaded.d_name;
-      this.d_next_o_id = loaded.d_next_o_id;
-      this.d_state = loaded.d_state;
-      this.d_street1 = loaded.d_street1;
-      this.d_street2 = loaded.d_street2;
-      this.d_tax = loaded.d_tax;
-      this.d_zip = loaded.d_zip;
+      this.d_city = district.getDCity().toString();
+      this.d_name = district.getDName().toString();
+      this.d_next_o_id = district.getDNextOId();
+      this.d_state = district.getDState().toString();
+      this.d_street1 = district.getDStreet1().toString();
+      this.d_street2 = district.getDStreet2().toString();
+      this.d_tax = district.getDTax();
+      this.d_zip = district.getDZip().toString();
 
 
       return true;

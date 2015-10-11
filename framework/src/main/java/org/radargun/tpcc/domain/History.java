@@ -3,6 +3,11 @@ package org.radargun.tpcc.domain;
 import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
+import com.basho.riak.protobuf.AntidotePB.FpbValue;
+import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
+import com.basho.riak.protobuf.AntidotePB.TpccHistory;
+import com.google.protobuf.ByteString;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
@@ -117,10 +122,15 @@ public class History implements Serializable, DomainObject {
       return String.valueOf(slaveIndex) + String.valueOf(History.idGenerator.incrementAndGet());
    }
 
+   //!TODO: Since History is never loaded, we just need to store a small portion..
    @Override
    public void store(CacheWrapper wrapper, int slaveIndex) throws Throwable {
+	   TpccHistory history = TpccHistory.newBuilder()
+			   .setHCId(h_c_id).build();
+	   
+	  FpbValue value = FpbValue.newBuilder().setHistory(history).setField(5).build();
       String id = generateId(slaveIndex);
-      wrapper.put(null, wrapper.createKey(id, slaveIndex), this);
+      wrapper.put(null, wrapper.createKey(id, slaveIndex), value);
    }
 
    @Override
