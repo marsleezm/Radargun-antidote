@@ -169,6 +169,7 @@ public class ClusterValidationStage extends AbstractDistStage {
    }
 
    private int replicationCount() throws Exception {
+	  log.info("Check replication count");
       int clusterSize = getActiveSlaveCount();
       int replicaCount = 0;
       for (int i = 0; i < clusterSize; i++) {
@@ -176,7 +177,9 @@ public class ClusterValidationStage extends AbstractDistStage {
          if (i == currentSlaveIndex && !isPassiveReplication && clusterSize > 1) { //the master in passive replication can only see himself data
             continue;
          }
+         log.info("Before try to get");
          Object data = tryGet(i);
+         log.info("After try to get");
          if (data == null || !"true".equals(data)) {
             log.trace("Cache with index " + i + " did *NOT* replicate");
          } else {
