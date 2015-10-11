@@ -16,7 +16,7 @@ public class DCManager {
 	static List<AntidoteConnection> connections = new ArrayList<AntidoteConnection>();
 	static List<Integer> nodePartitionNum = new ArrayList<Integer>();
 	static List<Pair<Integer, Integer>> nodePartList = new ArrayList<Pair<Integer, Integer>>();
-	static Integer nodeIndex;
+	static Integer nodeIndex = -1;
 	static String localIp;
 	private static Log log = LogFactory.getLog(DCManager.class);
 	
@@ -27,9 +27,7 @@ public class DCManager {
 		try {
 			InetAddress addr = InetAddress.getLocalHost();
 			localIp = addr.getHostAddress();
-			getHashFun();
-			nodeIndex = allNodes.indexOf("'antidote@"+localIp+"'");
-			log.info("Local node Ip:"+localIp+", index is "+nodeIndex);
+			initHashFun();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,27 +114,31 @@ public class DCManager {
          */
 	}
 	
-	static private void getHashFun(){
+	static private void initHashFun(){
 		try {
 			AntidoteConnection tempConnection = new AntidoteConnection(localIp);
 			
 			tempConnection.send(MSG_PartListReq, FpbPartListReq.newBuilder().setNoop(true).build());
 			FpbPartList partList = FpbPartList.parseFrom(tempConnection.receive(MSG_PartList));
-			int currentNodeIndex = 0;
+			int index = 0;
 			for(FpbNodePart nodePart : partList.getNodePartsList())
 			{	
 				String nodeName = nodePart.getIp().toStringUtf8();
+				
 				nodePartitionNum.add(nodePart.getNumPartitions());
 				for(int i=0; i<nodePart.getNumPartitions(); ++i)
-					nodePartList.add(new Pair<Integer, Integer>(currentNodeIndex,i));
+					nodePartList.add(new Pair<Integer, Integer>(index,i));
 				allNodes.add(nodeName);
-				log.warn("ip:"+nodeName+", partitions:"+nodePart.getNumPartitions());
+				
 				String ip = nodeName.split("@")[1].replace("'", "");
 				if (ip.equals(localIp))
+				{
 					connections.add(tempConnection);
+					nodeIndex = index;
+				}
 				else
 					connections.add(new AntidoteConnection(ip));
-				++currentNodeIndex;
+				++index;
 			}
 			log.info("Allnodes are"+allNodes);
 		} catch (IOException e) {
