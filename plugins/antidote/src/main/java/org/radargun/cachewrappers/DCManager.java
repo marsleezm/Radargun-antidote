@@ -28,7 +28,8 @@ public class DCManager {
 			InetAddress addr = InetAddress.getLocalHost();
 			localIp = addr.getHostAddress();
 			getHashFun();
-			nodeIndex = allNodes.indexOf(localIp);
+			nodeIndex = allNodes.indexOf("'antidote@"+localIp+"'");
+			log.info("Local node Ip:"+localIp+", index is "+nodeIndex);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

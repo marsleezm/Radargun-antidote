@@ -128,9 +128,7 @@ public class ClusterValidationStage extends AbstractDistStage {
       while (tryCount < 5) {
          try {
             if (!wrapper.isPassiveReplication() || wrapper.isTheMaster()) {
-            	log.warn("Trying to put whatever"+tryCount);
                wrapper.put(nodeBucket(getSlaveIndex()), key(getSlaveIndex()), "true");
-               log.warn("Done trying to put"+tryCount);
             }
             return;
          }
@@ -139,14 +137,11 @@ public class ClusterValidationStage extends AbstractDistStage {
             tryCount++;
          }
       }
-      log.warn("Could not acoomplish addition"+tryCount);
       throw new Exception("Couldn't accomplish addition before replication!");
    }
 
    private int checkReplicationSeveralTimes() throws Exception {
-	  log.warn("check ReplicationServeral Times");
       tryToPut();
-      log.warn("Done to check replication times");
       int replCount = 0;
       for (int i = 0; i < replicationTryCount; i++) {
          replCount = replicationCount();
