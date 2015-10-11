@@ -38,8 +38,8 @@ public class TransactionManager {
     private boolean isInTxn = false;
     
     private FpbTxId txId;
-    private Map<Object, String> writeBuffer = new HashMap<Object, String>();
-    private Map<Object, String> readBuffer = new HashMap<Object, String>();
+    private Map<Object, Object> writeBuffer = new HashMap<Object, Object>();
+    private Map<Object, Object> readBuffer = new HashMap<Object, Object>();
 	
 	public void begin() throws IOException {
 		FpbStartTxnReq startTxnReq = FpbStartTxnReq.newBuilder().setClock(0).build();
@@ -78,30 +78,33 @@ public class TransactionManager {
 				log.info("Sent message");
 				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
 				log.info("Got resp reply!"+resp.getSuccess());
-				if (!resp.getSuccess())
+				if (resp.getSuccess() == false)
 					throw new Exception();
 			}
 		}
 	}
 
 	public Object get(Object key) {
-		String value = writeBuffer.get(key);
-		if( value == null)
+		if(isInTxn)
 		{
-			value = readBuffer.get(key);
-			if ( value == null)
+			Object value = writeBuffer.get(key);
+			if( value == null )
 			{
-				value = getKeyFromServer(key);
-				readBuffer.put(key, value);
-				return value;
+				value = readBuffer.get(key);
+				if ( value == null)
+				{
+					value = getKeyFromServer(key, isInTxn);
+					readBuffer.put(key, value);
+					return value;
+				}
+				else
+					return value;
 			}
 			else
 				return value;
 		}
 		else
-		{
-			return value;
-		}
+			return getKeyFromServer(key, isInTxn);
 	}
 
 	public void commit() throws Exception {
@@ -114,7 +117,7 @@ public class TransactionManager {
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
 				remoteUpdates = FpbNodeUps.newBuilder();
 		
-		for(Map.Entry<Object, String> entry : writeBuffer.entrySet())
+		for(Map.Entry<Object, Object> entry : writeBuffer.entrySet())
 		{	
 			MagicKey mKey = (MagicKey)entry.getKey();
 			int keyNode, hashCode;
@@ -132,7 +135,7 @@ public class TransactionManager {
 				{
 					FpbPerNodeUp.Builder upBuilder= localKeySet.get(index);
 					upBuilder.addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(realKey)).
-							setValue(ByteString.copyFromUtf8(entry.getValue())));
+							setValue(ByteString.copyFromUtf8(entry.getValue().toString())));
 				}
 			}
 			else
@@ -148,7 +151,7 @@ public class TransactionManager {
 					if (nodesUp.containsKey(index)) {
 						FpbPerNodeUp.Builder upBuilder= nodesUp.get(index);
 						upBuilder.addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(realKey)).
-								setValue(ByteString.copyFromUtf8(entry.getValue())));
+								setValue(ByteString.copyFromUtf8(entry.getValue().toString())));
 					}
 					else{
 						nodesUp.put(index, newUpBuilder(DCManager.getNodeIp(keyNode), index, realKey, entry.getValue()));
@@ -176,11 +179,11 @@ public class TransactionManager {
 			throw new Exception();
 	}
 	
-	private FpbPerNodeUp.Builder newUpBuilder(String ip, int part_id, String key, String value)
+	private FpbPerNodeUp.Builder newUpBuilder(String ip, int part_id, String key, Object value)
 	{
 		return FpbPerNodeUp.newBuilder().setNode(ByteString.copyFromUtf8(ip))
 				.setPartitionId(part_id + 1).addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(key)).
-						setValue(ByteString.copyFromUtf8(value)));
+						setValue(ByteString.copyFromUtf8(value.toString())));
 	}
 
 	public void abort() {
@@ -216,7 +219,8 @@ public class TransactionManager {
 		return true;
 	}
 	
-	private String getKeyFromServer(Object key) {
+	
+	private Object getKeyFromServer(Object key, boolean isInTxn) {
 		int keyNode, partitionId;
 
 		AntidoteConnection connection;
@@ -234,21 +238,25 @@ public class TransactionManager {
 				partitionId = key.hashCode() % DCManager.getPartNum(location.snd);				
 			}
 			
-			
-			FpbReadReq readReq = FpbReadReq.newBuilder().setTxid(txId).setPartitionId(partitionId+1).
+			FpbReadReq readReq;
+			if (isInTxn == true)
+				readReq = FpbReadReq.newBuilder().setTxid(txId).setPartitionId(partitionId+1).
 					setKey(ByteString.copyFromUtf8(((MagicKey)key).key)).build();
+			else
+				readReq = FpbReadReq.newBuilder().setPartitionId(partitionId+1).
+				setKey(ByteString.copyFromUtf8(((MagicKey)key).key)).build();
+			
 			try {
 				connection.send(MSG_ReadReq, readReq);
 				FpbValue value = FpbValue.parseFrom(connection.receive(MSG_Value));
-				return value.getValue().toString();
+				return value.getValue();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return null;
-			}
+			} 
 		}
 		catch (Exception e){
-			System.exit(0);
 			return null;
 		}
 		

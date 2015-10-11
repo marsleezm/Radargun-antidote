@@ -3387,17 +3387,17 @@ public final class AntidotePB {
   public interface FpbReadReqOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required .FpbTxId txid = 1;
+    // optional .FpbTxId txid = 1;
     /**
-     * <code>required .FpbTxId txid = 1;</code>
+     * <code>optional .FpbTxId txid = 1;</code>
      */
     boolean hasTxid();
     /**
-     * <code>required .FpbTxId txid = 1;</code>
+     * <code>optional .FpbTxId txid = 1;</code>
      */
     com.basho.riak.protobuf.AntidotePB.FpbTxId getTxid();
     /**
-     * <code>required .FpbTxId txid = 1;</code>
+     * <code>optional .FpbTxId txid = 1;</code>
      */
     com.basho.riak.protobuf.AntidotePB.FpbTxIdOrBuilder getTxidOrBuilder();
 
@@ -3535,23 +3535,23 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required .FpbTxId txid = 1;
+    // optional .FpbTxId txid = 1;
     public static final int TXID_FIELD_NUMBER = 1;
     private com.basho.riak.protobuf.AntidotePB.FpbTxId txid_;
     /**
-     * <code>required .FpbTxId txid = 1;</code>
+     * <code>optional .FpbTxId txid = 1;</code>
      */
     public boolean hasTxid() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required .FpbTxId txid = 1;</code>
+     * <code>optional .FpbTxId txid = 1;</code>
      */
     public com.basho.riak.protobuf.AntidotePB.FpbTxId getTxid() {
       return txid_;
     }
     /**
-     * <code>required .FpbTxId txid = 1;</code>
+     * <code>optional .FpbTxId txid = 1;</code>
      */
     public com.basho.riak.protobuf.AntidotePB.FpbTxIdOrBuilder getTxidOrBuilder() {
       return txid_;
@@ -3599,10 +3599,6 @@ public final class AntidotePB {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasTxid()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasKey()) {
         memoizedIsInitialized = 0;
         return false;
@@ -3611,9 +3607,11 @@ public final class AntidotePB {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!getTxid().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
+      if (hasTxid()) {
+        if (!getTxid().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -3853,10 +3851,6 @@ public final class AntidotePB {
       }
 
       public final boolean isInitialized() {
-        if (!hasTxid()) {
-          
-          return false;
-        }
         if (!hasKey()) {
           
           return false;
@@ -3865,9 +3859,11 @@ public final class AntidotePB {
           
           return false;
         }
-        if (!getTxid().isInitialized()) {
-          
-          return false;
+        if (hasTxid()) {
+          if (!getTxid().isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -3891,18 +3887,18 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required .FpbTxId txid = 1;
+      // optional .FpbTxId txid = 1;
       private com.basho.riak.protobuf.AntidotePB.FpbTxId txid_ = com.basho.riak.protobuf.AntidotePB.FpbTxId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.basho.riak.protobuf.AntidotePB.FpbTxId, com.basho.riak.protobuf.AntidotePB.FpbTxId.Builder, com.basho.riak.protobuf.AntidotePB.FpbTxIdOrBuilder> txidBuilder_;
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public boolean hasTxid() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public com.basho.riak.protobuf.AntidotePB.FpbTxId getTxid() {
         if (txidBuilder_ == null) {
@@ -3912,7 +3908,7 @@ public final class AntidotePB {
         }
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public Builder setTxid(com.basho.riak.protobuf.AntidotePB.FpbTxId value) {
         if (txidBuilder_ == null) {
@@ -3928,7 +3924,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public Builder setTxid(
           com.basho.riak.protobuf.AntidotePB.FpbTxId.Builder builderForValue) {
@@ -3942,7 +3938,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public Builder mergeTxid(com.basho.riak.protobuf.AntidotePB.FpbTxId value) {
         if (txidBuilder_ == null) {
@@ -3961,7 +3957,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public Builder clearTxid() {
         if (txidBuilder_ == null) {
@@ -3974,7 +3970,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public com.basho.riak.protobuf.AntidotePB.FpbTxId.Builder getTxidBuilder() {
         bitField0_ |= 0x00000001;
@@ -3982,7 +3978,7 @@ public final class AntidotePB {
         return getTxidFieldBuilder().getBuilder();
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       public com.basho.riak.protobuf.AntidotePB.FpbTxIdOrBuilder getTxidOrBuilder() {
         if (txidBuilder_ != null) {
@@ -3992,7 +3988,7 @@ public final class AntidotePB {
         }
       }
       /**
-       * <code>required .FpbTxId txid = 1;</code>
+       * <code>optional .FpbTxId txid = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.basho.riak.protobuf.AntidotePB.FpbTxId, com.basho.riak.protobuf.AntidotePB.FpbTxId.Builder, com.basho.riak.protobuf.AntidotePB.FpbTxIdOrBuilder> 
@@ -10071,7 +10067,7 @@ public final class AntidotePB {
       "(\014\022\024\n\014partition_id\030\002 \002(\r\022\027\n\003ups\030\003 \003(\0132\n." +
       "FpbUpdate\"6\n\016FpbPrepTxnResp\022\017\n\007success\030\001" +
       " \002(\010\022\023\n\013commit_time\030\002 \001(\004\"G\n\nFpbReadReq\022" +
-      "\026\n\004txid\030\001 \002(\0132\010.FpbTxId\022\013\n\003key\030\002 \002(\014\022\024\n\014",
+      "\026\n\004txid\030\001 \001(\0132\010.FpbTxId\022\013\n\003key\030\002 \002(\014\022\024\n\014",
       "partition_id\030\003 \002(\r\"\036\n\016FpbPartListReq\022\014\n\004" +
       "noop\030\001 \001(\010\"B\n\016FpbSingleUpReq\022\013\n\003key\030\001 \002(" +
       "\014\022\r\n\005value\030\002 \002(\014\022\024\n\014partition_id\030\003 \002(\r\"/" +
