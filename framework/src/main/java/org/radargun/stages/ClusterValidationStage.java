@@ -128,7 +128,9 @@ public class ClusterValidationStage extends AbstractDistStage {
       while (tryCount < 5) {
          try {
             if (!wrapper.isPassiveReplication() || wrapper.isTheMaster()) {
+            	log.warn("Trying to put whatever");
                wrapper.put(nodeBucket(getSlaveIndex()), key(getSlaveIndex()), "true");
+               log.warn("Done trying to put");
             }
             return;
          }
