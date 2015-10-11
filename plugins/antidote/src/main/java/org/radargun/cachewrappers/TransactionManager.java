@@ -77,6 +77,7 @@ public class TransactionManager {
 				connection.send(MSG_SingleUpReq, singleUpReq);
 				log.info("Sent message");
 				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+				log.info("Got resp reply!");
 				if (!resp.getSuccess())
 					throw new Exception();
 			}
