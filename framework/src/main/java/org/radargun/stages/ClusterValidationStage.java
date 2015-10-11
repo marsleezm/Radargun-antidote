@@ -65,9 +65,11 @@ public class ClusterValidationStage extends AbstractDistStage {
    }
 
    private int confirmReplication() throws Exception {
+	  log.warn("In confirmReplication");
       wrapper.put(nodeBucket(getSlaveIndex()), confirmationKey(getSlaveIndex()), "true");
       for (int i = 0; i < getActiveSlaveCount(); i++) {
          for (int j = 0; j < 10 && (wrapper.get(nodeBucket(i), confirmationKey(i)) == null); j++) {
+        	log.warn("Put something already"+i+" "+j);
             tryToPut();
             wrapper.put(nodeBucket(getSlaveIndex()), confirmationKey(getSlaveIndex()), "true");
             Thread.sleep(1000);
@@ -140,6 +142,7 @@ public class ClusterValidationStage extends AbstractDistStage {
 
 
    private int checkReplicationSeveralTimes() throws Exception {
+	  log.warn("check ReplicationServeral Times");
       tryToPut();
       int replCount = 0;
       for (int i = 0; i < replicationTryCount; i++) {
