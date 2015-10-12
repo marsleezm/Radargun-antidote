@@ -4,7 +4,6 @@ import org.radargun.CacheWrapper;
 import org.radargun.tpcc.DomainObject;
 
 import com.basho.riak.protobuf.AntidotePB.FpbValue;
-import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
 import com.basho.riak.protobuf.AntidotePB.TpccStock;
 import com.google.protobuf.ByteString;
 
