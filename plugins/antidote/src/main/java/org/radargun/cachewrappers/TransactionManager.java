@@ -53,10 +53,9 @@ public class TransactionManager {
 	public void put(Object key, Object value) throws Exception {
 		FpbValue newValue;
 		if (!(value instanceof FpbValue))
-			newValue = FpbValue.newBuilder().setValue(ByteString.copyFromUtf8(value.toString())).build();
+			newValue = FpbValue.newBuilder().setField(VALUE_FIELD).setValue(ByteString.copyFromUtf8(value.toString())).build();
 		else
 			newValue = (FpbValue)value;
-		
 		
 		if (isInTxn)
 			writeBuffer.put(key, newValue);
