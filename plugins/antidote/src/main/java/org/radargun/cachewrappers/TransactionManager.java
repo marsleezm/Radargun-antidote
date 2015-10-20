@@ -2,6 +2,7 @@ package org.radargun.cachewrappers;
 
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.basho.riak.protobuf.AntidotePB.FpbTxId;
 import com.basho.riak.protobuf.AntidotePB.FpbUpdate;
 import com.basho.riak.protobuf.AntidotePB.FpbValue;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,7 +29,10 @@ import org.radargun.cachewrappers.AntidoteConnection;
 
 public class TransactionManager {
     private AntidoteConnection connection = null;
-    private static final Integer VALUE_FIELD = 12;
+    private static final Integer STRING_FIELD = 12;
+    private static final Integer LONG_FIELD = 13;
+    private static final Integer DOUBLE_FIELD = 14;
+    private static final Integer NULL_FIELD = 0;
     private static final Integer MSG_StartTxnReq = 90;
     private static final Integer MSG_PrepTxnReq = 91;
     private static final Integer MSG_PrepTxnResp = 92;
@@ -41,19 +46,41 @@ public class TransactionManager {
     private FpbTxId txId;
     private Map<Object, FpbValue> writeBuffer = new HashMap<Object, FpbValue>();
     private Map<Object, FpbValue> readBuffer = new HashMap<Object, FpbValue>();
+    
+    private List<AntidoteConnection> connections = new ArrayList<AntidoteConnection>();
 	
+    public TransactionManager(){
+    	log.info("Establishing connection");
+    	for (String ip : DCInfoManager.getIps())
+			try {
+				log.info("Ip is "+ip);
+				connections.add(new AntidoteConnection(ip));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.exit(0);
+			}
+    }
+    
 	public void begin() throws IOException {
 		FpbStartTxnReq startTxnReq = FpbStartTxnReq.newBuilder().setClock(0).build();
-		connection = DCManager.getLocalConnection();
+		connection = connections.get(DCInfoManager.getNodeIndex());
 		connection.send(MSG_StartTxnReq, startTxnReq);
+		//log.info("Sent txn message");
 		txId = FpbTxId.parseFrom(connection.receive(MSG_TxId));
+		//log.info("Got txn id");
 		isInTxn = true;
 	}
 	
 	public void put(Object key, Object value) throws Exception {
+		//log.info("Trying to put "+key+": value is "+value);
 		FpbValue newValue;
-		if (!(value instanceof FpbValue))
-			newValue = FpbValue.newBuilder().setField(VALUE_FIELD).setValue(ByteString.copyFromUtf8(value.toString())).build();
+		if (value instanceof String)
+			newValue = FpbValue.newBuilder().setField(STRING_FIELD).setStrValue((String)value).build();
+		else if(value instanceof Long || value instanceof Integer)
+			newValue = FpbValue.newBuilder().setField(LONG_FIELD).setLongValue((Long)value).build();
+		else if(value instanceof Double || value instanceof Float)
+			newValue = FpbValue.newBuilder().setField(DOUBLE_FIELD).setDoubleValue((Double)value).build();
 		else
 			newValue = (FpbValue)value;
 		
@@ -64,9 +91,10 @@ public class TransactionManager {
 			if( key instanceof MagicKey)
 			{
 				MagicKey mKey = (MagicKey)key;
-				AntidoteConnection connection = DCManager.getConectionByIndex(mKey.node);
-				Integer partitionId = mKey.hashCode() % DCManager.getPartNum(mKey.node);
-				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(ByteString.copyFromUtf8(mKey.key))
+				AntidoteConnection connection = connections.get(mKey.node);
+				Integer partitionId = Math.abs(mKey.hashCode()) % DCInfoManager.getPartNum(mKey.node);
+				log.trace("No transaction put: key is "+key+", node is "+mKey.node+", partitionid is"+partitionId);
+				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.key)
 						.setValue(newValue).setPartitionId(partitionId+1).build();
 				
 				connection.send(MSG_SingleUpReq, singleUpReq);
@@ -76,9 +104,10 @@ public class TransactionManager {
 			}
 			else
 			{	
-				Pair<Integer, Integer> location = DCManager.locateForNormalKey(key);
-				AntidoteConnection connection = DCManager.getConectionByIndex(location.fst);
-				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(ByteString.copyFromUtf8(key.toString()))
+				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
+				AntidoteConnection connection = connections.get(location.fst);
+				log.trace("No transaction put: key is "+key+", node is "+location.fst+", partitionid is "+location.snd);
+				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey((String)key)
 						.setValue(newValue).setPartitionId(location.snd+1).build();
 				
 				connection.send(MSG_SingleUpReq, singleUpReq);
@@ -89,7 +118,8 @@ public class TransactionManager {
 		}
 	}
 
-	public Object get(Object key) {
+	public Object get(Integer processIndex, Object key) {
+		log.trace("Trying to get "+key);
 		FpbValue value;
 		if(isInTxn)
 		{
@@ -103,21 +133,28 @@ public class TransactionManager {
 					readBuffer.put(key, value);
 				}
 			}
-			else
-				return value;
 		}
-		else
+		else{
 			value = getKeyFromServer(key, isInTxn);
+		}
 		
-		if(value.getField() == VALUE_FIELD)
-			return value.getValue().toString();
+		//log.trace("Key is "+ key +", value is "+value.toString());
+		
+		if(value.getField() == STRING_FIELD)
+			return value.getStrValue();
+		else if(value.getField() == LONG_FIELD)
+			return value.getLongValue();
+		else if(value.getField() == DOUBLE_FIELD)
+			return value.getDoubleValue();
+		else if(value.getField() == NULL_FIELD)
+			return null;
 		else
 			return value;
 	}
 
-	public void commit() throws Exception {
-		int localNodeIndex = DCManager.getNodeIndex();
-		String localIp = DCManager.getLocalNodeIp();
+	public boolean commit(int threadId) {
+		int localNodeIndex = DCInfoManager.getNodeIndex();
+		String localName = DCInfoManager.getLocalNodeName();
 		Map<Integer, FpbPerNodeUp.Builder> localKeySet = 
 				new HashMap<Integer, FpbPerNodeUp.Builder>();
 		Map<Integer, Map<Integer, FpbPerNodeUp.Builder>> remoteKeySet = 
@@ -132,37 +169,42 @@ public class TransactionManager {
 			String realKey;
 			keyNode = mKey.node;
 			realKey = mKey.key;
-			hashCode = mKey.hashCode();
+			hashCode = Math.abs(mKey.hashCode());
 			
+			//log.info("Wrapping commitreq for"+mKey.key);
 			if (keyNode == localNodeIndex)
 			{
-				int index = hashCode % DCManager.getPartNum(localNodeIndex);
+				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
+				//log.info("Local index is "+localNodeIndex+"partNum is "+DCInfoManager.getPartNum(localNodeIndex)
+				//		+"Index is "+index);
 				if (localKeySet.get(index)==null)
-					localKeySet.put(index, newUpBuilder(localIp, index, realKey, entry.getValue()));
+					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
 				else
 				{
 					FpbPerNodeUp.Builder upBuilder= localKeySet.get(index);
-					upBuilder.addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(realKey)).
+					upBuilder.addUps(FpbUpdate.newBuilder().setKey(realKey).
 							setValue((entry.getValue())));
 				}
 			}
 			else
 			{
-				int index = hashCode % DCManager.getPartNum(keyNode);
+				int partIndex = hashCode % DCInfoManager.getPartNum(keyNode);
+				//log.info("Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
+				//		+"Index is "+index);
 				if (remoteKeySet.containsKey(keyNode)){
 					Map<Integer, FpbPerNodeUp.Builder> nodesUp = new HashMap<Integer,FpbPerNodeUp.Builder>();
-					nodesUp.put(index, newUpBuilder(DCManager.getNodeIp(keyNode), index, realKey, entry.getValue()));
+					nodesUp.put(partIndex, newUpBuilder(DCInfoManager.getNodeName(keyNode), partIndex, realKey, entry.getValue()));
 					remoteKeySet.put(keyNode, nodesUp);
 				}
 				else{
 					Map<Integer, FpbPerNodeUp.Builder> nodesUp = remoteKeySet.get(keyNode);
-					if (nodesUp.containsKey(index)) {
-						FpbPerNodeUp.Builder upBuilder= nodesUp.get(index);
-						upBuilder.addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(realKey)).
+					if (nodesUp.containsKey(partIndex)) {
+						FpbPerNodeUp.Builder upBuilder= nodesUp.get(partIndex);
+						upBuilder.addUps(FpbUpdate.newBuilder().setKey(realKey).
 								setValue(entry.getValue()));
 					}
 					else{
-						nodesUp.put(index, newUpBuilder(DCManager.getNodeIp(keyNode), index, realKey, entry.getValue()));
+						nodesUp.put(partIndex, newUpBuilder(DCInfoManager.getNodeName(keyNode), partIndex, realKey, entry.getValue()));
 					}
 						
 				}
@@ -177,26 +219,42 @@ public class TransactionManager {
 				remoteUpdates.addPerNodeup(entry2.getValue());
 		}
 		
-		FpbPrepTxnReq prepTxnReq = FpbPrepTxnReq.newBuilder().setTxid(txId).
+		FpbPrepTxnReq prepTxnReq = FpbPrepTxnReq.newBuilder().setTxid(txId).setThreadid(threadId).
 				setLocalUpdates(localUpdates.build()).setRemoteUpdates(remoteUpdates.build()).build();
 		
-		connection = DCManager.getLocalConnection();
-		connection.send(MSG_PrepTxnReq, prepTxnReq);
-		FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-		if (!resp.getSuccess())
-			throw new Exception();
+		connection = connections.get(DCInfoManager.getNodeIndex());
+		try {
+			connection.send(MSG_PrepTxnReq, prepTxnReq);
+			FpbPrepTxnResp resp;
+			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+			isInTxn = false;
+			return resp.getSuccess();
+		} catch (InvalidProtocolBufferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(0);
+			return false;
+		}
+		   catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(0);
+			return false;
+		} 
+
 	}
 	
-	private FpbPerNodeUp.Builder newUpBuilder(String ip, int part_id, String key, FpbValue value)
+	private FpbPerNodeUp.Builder newUpBuilder(String nodeName, int part_id, String key, FpbValue value)
 	{
-		return FpbPerNodeUp.newBuilder().setNode(ByteString.copyFromUtf8(ip))
-				.setPartitionId(part_id + 1).addUps(FpbUpdate.newBuilder().setKey(ByteString.copyFromUtf8(key)).
+		return FpbPerNodeUp.newBuilder().setNode(nodeName)
+				.setPartitionId(part_id + 1).addUps(FpbUpdate.newBuilder().setKey(key).
 						setValue(value));
 	}
 
 	public void abort() {
 		// TODO Auto-generated method stub
-		System.out.println("Something is wrong!!!");
+		isInTxn = false;
+		log.warn("Trying to abort: something is wrong!!!");
 	}
 
 	public Object getStatus() {
@@ -210,7 +268,12 @@ public class TransactionManager {
 	}
 
 	public Object delayedGet(Object key) {
-		return get(key);
+		return get(0, key);
+	}
+	
+	public void stopConnections(){
+		for(AntidoteConnection connection : connections)
+			connection.close();
 	}
 
 	public void delayedPut(Object key, Object value) {
@@ -219,6 +282,7 @@ public class TransactionManager {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 
@@ -230,29 +294,31 @@ public class TransactionManager {
 	
 	private FpbValue getKeyFromServer(Object key, boolean isInTxn) {
 		int keyNode, partitionId;
+		String realKey;
 
 		AntidoteConnection connection;
 		try{
 			if(key instanceof MagicKey){
-				log.info("Is Magic key!!");
 				keyNode = ((MagicKey)key).node;
-				connection = DCManager.getConnectionByKey(key);
-				partitionId = key.hashCode() % DCManager.getPartNum(keyNode);
+				realKey = ((MagicKey) key).key;
+				connection = connections.get(((MagicKey)key).node);;
+				partitionId = Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode);
 			}
-			else{	
-				Pair<Integer, Integer> location = DCManager.locateForNormalKey(key);
+			else{
+				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
 				keyNode = location.fst;
-				connection = DCManager.getConectionByIndex(location.fst);
-				partitionId = key.hashCode() % DCManager.getPartNum(location.snd);				
+				realKey = (String)key;
+				connection = connections.get(location.fst);
+				partitionId = Math.abs(key.hashCode()) % DCInfoManager.getPartNum(location.fst);
 			}
 			
 			FpbReadReq readReq;
 			if (isInTxn == true)
 				readReq = FpbReadReq.newBuilder().setTxid(txId).setPartitionId(partitionId+1).
-					setKey(ByteString.copyFromUtf8(((MagicKey)key).key)).build();
+					setKey(realKey).build();
 			else
 				readReq = FpbReadReq.newBuilder().setPartitionId(partitionId+1).
-				setKey(ByteString.copyFromUtf8(((MagicKey)key).key)).build();
+				setKey(realKey).build();
 			
 			try {
 				connection.send(MSG_ReadReq, readReq);
@@ -264,9 +330,16 @@ public class TransactionManager {
 			} 
 		}
 		catch (Exception e){
+			e.printStackTrace();
+			System.exit(0);
 			return null;
 		}
 		
+	}
+
+	public boolean isInTxn() {
+		// TODO Auto-generated method stub
+		return isInTxn;
 	}
 
 }

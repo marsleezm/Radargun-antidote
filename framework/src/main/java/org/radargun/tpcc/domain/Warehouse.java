@@ -143,10 +143,10 @@ public class Warehouse implements Serializable, DomainObject {
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 	   TpccWarehouse warehouse = TpccWarehouse.newBuilder()
-			   .setWCity(ByteString.copyFromUtf8(w_city)).setWName(ByteString.copyFromUtf8(w_name))
-			   .setWStreet1(ByteString.copyFromUtf8(w_street1)).setWStreet2(ByteString.copyFromUtf8(w_street2))
-			   .setWState(ByteString.copyFromUtf8(w_state)).setWTax(w_tax)
-			   .setWZip(ByteString.copyFromUtf8(w_zip)).build();
+			   .setWCity(w_city).setWName(w_name)
+			   .setWStreet1(w_street1).setWStreet2(w_street2)
+			   .setWState(w_state).setWTax(w_tax)
+			   .setWZip(w_zip).build();
 	      
 	   FpbValue value = FpbValue.newBuilder().setWarehouse(warehouse).setField(11).build();
 	   
@@ -169,13 +169,13 @@ public class Warehouse implements Serializable, DomainObject {
 	  if (value == null) return false;
 	  TpccWarehouse warehouse = value.getWarehouse();
 
-      this.w_city = warehouse.getWCity().toString();
-      this.w_name = warehouse.getWName().toString();
-      this.w_state = warehouse.getWState().toString();
-      this.w_street1 = warehouse.getWStreet1().toString();
-      this.w_street2 = warehouse.getWStreet2().toString();
+      this.w_city = warehouse.getWCity();
+      this.w_name = warehouse.getWName();
+      this.w_state = warehouse.getWState();
+      this.w_street1 = warehouse.getWStreet1();
+      this.w_street2 = warehouse.getWStreet2();
       this.w_tax = warehouse.getWTax();
-      this.w_zip = warehouse.getWZip().toString();
+      this.w_zip = warehouse.getWZip();
 
       return true;
    }

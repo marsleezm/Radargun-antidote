@@ -2,7 +2,7 @@
 option java_package = "com.basho.riak.protobuf";
 option java_outer_classname = "AntidotePB";
 
-//Interactive transaction interface
+//Interactive transaction int32erface
 message FpbStartTxnReq {
     optional uint64 clock = 1;
 }
@@ -29,7 +29,7 @@ message FpbPrepTxnResp {
 }
 
 message FpbReadReq {
-    required FpbTxId txid = 1;
+    optional FpbTxId txid = 1;
     required bytes key = 2;
     required uint32 partition_id = 3;
 }
@@ -40,7 +40,7 @@ message FpbPartListReq {
 
 message FpbSingleUpReq {
     required bytes key = 1;
-    required bytes value = 2;
+    required FpbValue value = 2;
     required uint32 partition_id = 3;
 }
 
@@ -55,7 +55,7 @@ message FpbNodePart {
 
 message FpbUpdate {
     required bytes key = 1;
-    required bytes value = 2;
+    required FpbValue value = 2;
 }
 
 //General transaction that contains all transaction code 
@@ -78,12 +78,126 @@ message FpbTxnResp {
 	repeated FpbValue results = 3;
 }
 
-//Response for a transaction
-message FpbValue {
-    required bytes value = 1;
-}
-
 message FpbTxId {
     required uint64 snapshot = 1;
     required bytes pid = 2;
+}
+
+message FpbValue{
+    required uint32 field = 1 [ default=12 ];
+    optional TpccCustomer customer = 2;
+    optional TpccCustomerLookup clookup = 3;
+    optional TpccDistrict district = 4;
+    optional TpccHistory history = 5;
+    optional TpccItem item = 6;
+    optional TpccNewOrder neworder = 7;
+    optional TpccOrder order = 8;
+    optional TpccOrderLine orderline = 9;
+    optional TpccStock stock = 10;
+    optional TpccWarehouse warehouse = 11; 
+    optional bytes value = 12;
+}
+
+message TpccCustomer{
+   required bytes c_first = 1;
+   required bytes c_middle = 2;
+   required bytes c_last = 3;
+   required bytes c_street1 = 4;
+   required bytes c_street2 = 5;
+   required bytes c_city = 6;
+   required bytes c_state = 7;
+   required bytes c_zip = 8;
+   required bytes c_phone = 9;
+   required uint64 c_since = 10;
+   required bytes c_credit = 11;
+   required double c_credit_lim = 12;
+   required double c_discount = 13;
+   required double c_ytd_payment = 14;
+   required int32 c_payment_cnt = 15;
+   required int32 c_delivery_cnt = 16;
+   required bytes c_data = 17;
+}
+
+message TpccCustomerLookup {
+   required uint64 c_w_id = 1;
+   required uint64 c_d_id = 2;
+   required bytes c_last = 3;
+   repeated int64 ids = 4;
+}
+
+message TpccDistrict {
+   required bytes d_name  = 1;
+   required bytes d_street1  = 2;
+   required bytes d_street2  = 3;
+   required bytes d_city  = 4;
+   required bytes d_state  = 5;
+   required bytes d_zip  = 6;
+   required double d_tax  = 7;
+   required uint64 d_next_o_id  = 8;
+}
+
+message TpccHistory {
+   required uint64 h_c_id  =  1;
+}
+
+message TpccItem {
+   required uint64 i_im_id  =  1;
+   required bytes i_name  =  2;
+   required double i_price  =  3;
+   required bytes i_data  =  4;
+}
+
+message TpccNewOrder {
+   required uint64 no_o_id  = 1;
+   required uint64 no_d_id  =  2;
+   required uint64 no_w_id  =  3;
+}
+
+message TpccOrder {
+   required uint64 o_c_id  =  1;
+   required uint64 o_entry_d  =  2;
+   required uint64 o_carrier_id  =  3;
+   required int32 o_ol_cnt  =  4;
+   required int32 o_all_local  =  5;
+}
+
+message TpccOrderLine {
+   required uint64 ol_o_id  =  1;
+   required uint64 ol_d_id  =  2;
+   required uint64 ol_w_id  =  3;
+   required uint64 ol_number  =  4;
+   required uint64 ol_i_id  =  5;
+   required uint64 ol_supply_w_id  =  6;
+   required uint64 ol_delivery_d  =  7;
+   required uint64 ol_quantity  =  8;
+   required double ol_amount  =  9;
+   required bytes ol_dist_info  = 10;
+}
+
+message TpccStock {
+   required uint64 s_quantity  =  1;
+   required bytes s_dist_01  =  2;
+   required bytes s_dist_02  =  3;
+   required bytes s_dist_03  =  4;
+   required bytes s_dist_04  =  5;
+   required bytes s_dist_05  =  6;
+   required bytes s_dist_06  =  7;
+   required bytes s_dist_07  = 8;
+   required bytes s_dist_08  = 9;
+   required bytes s_dist_09  = 10;
+   required bytes s_dist_10  = 11;
+   required uint64 s_ytd  = 12;
+   required int32 s_order_cnt  = 13;
+   required int32 s_remote_cnt  = 14;
+   required bytes s_data  = 15;
+}
+
+message TpccWarehouse {
+   required bytes w_name  =  1;
+   required bytes w_street1  =  2;
+   required bytes w_street2  =  3;
+   required bytes w_city  =  4;
+   required bytes w_state  =  5;
+   required bytes w_zip  =  6;
+   required double w_tax  =  7;
 }

@@ -43,6 +43,8 @@ public class ThreadParallelTpccPopulation extends TpccPopulation{
                                        int parallelThreads, int elementsPerBlock, boolean populateLocalOnly, 
                                        ThreadTpccToolsManager threadTpccToolsManager) {
       super(wrapper, numWarehouses, slaveIndex, numSlaves, cLastMask, olIdMask, cIdMask, populateLocalOnly);
+      //TODO: Set the number of parallel threads
+ 	  wrapper.setParallelism(parallelThreads);
       this.parallelThreads = parallelThreads;
       this.elementsPerBlock = elementsPerBlock;
 
@@ -357,6 +359,7 @@ public class ThreadParallelTpccPopulation extends TpccPopulation{
       }
 
       public PopulateItemThread(int threadIdx, long low, long up){
+    	 log.info("Creating populating item thread:"+threadIdx+" with name:"+Thread.currentThread().getName());
          this.lowerBound = low;
          this.upperBound = up;
          this.threadIdx = threadIdx;
@@ -418,6 +421,7 @@ public class ThreadParallelTpccPopulation extends TpccPopulation{
       }
 
       public void run(){
+    	 log.info("Populating stock!");
          tpccTools.set(threadTpccToolsManager.getTpccTools(threadIdx));
          logStart(toString());
 

@@ -21,6 +21,8 @@ public class PassiveReplicationTpccPopulation extends ThreadParallelTpccPopulati
                                            int elementsPerBlock) {
       super(wrapper, numWarehouses, slaveIndex, numSlaves, cLastMask, olIdMask, cIdMask, parallelThreads, 
             elementsPerBlock, false, new ThreadTpccToolsManager(System.nanoTime()));
+	  log.info("Passive replication Tpcc Population, numWarehouses:"+numWarehouses+",slaveIndex:"+slaveIndex
+			  +", numSlave:"+numSlaves+"parallelThreads:"+parallelThreads);
    }
 
    @Override
@@ -36,6 +38,7 @@ public class PassiveReplicationTpccPopulation extends ThreadParallelTpccPopulati
 
    @Override
    protected void initializeToolsParameters() {
+	  log.info("Initialize tools parameters");
       initTpccTools();
 
       long c_c_last = tpccTools.get().randomNumber(0, TpccTools.A_C_LAST);
@@ -75,7 +78,7 @@ public class PassiveReplicationTpccPopulation extends ThreadParallelTpccPopulati
 
    @Override
    protected void populateWarehouses() {
-      log.trace("Populate warehouses");
+      log.info("Populate warehouses");
 
       for (int warehouseId = 1; warehouseId <= this.numWarehouses; warehouseId++) {
          log.info("Populate Warehouse " + warehouseId);
@@ -110,7 +113,7 @@ public class PassiveReplicationTpccPopulation extends ThreadParallelTpccPopulati
 
    @Override
    protected void populateItem() {
-      log.trace("Populating Items");
+      log.info("Populating Items");
 
       performMultiThreadPopulation(1, TpccTools.NB_MAX_ITEM, new ThreadCreator() {
          @Override
@@ -126,7 +129,7 @@ public class PassiveReplicationTpccPopulation extends ThreadParallelTpccPopulati
          log.warn("Trying to populate Stock for a negative warehouse ID. skipping...");
          return;
       }
-      log.trace("Populating Stock for warehouse " + warehouseId);
+      log.info("Populating Stock for warehouse " + warehouseId);
 
       performMultiThreadPopulation(1, TpccTools.NB_MAX_ITEM, new ThreadCreator() {
          @Override

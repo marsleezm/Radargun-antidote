@@ -13,6 +13,8 @@ import java.util.Date;
 import static org.radargun.utils.Utils.memString;
 
 /**
+ * The mother class of any TpccPopulation. 
+ * 
  * @author peluso@gsd.inesc-id.pt , peluso@dis.uniroma1.it
  * @author Diego Didona, didona@gsd.inesc-id.pt
  * @author Pedro Ruivo
@@ -77,6 +79,8 @@ public class TpccPopulation {
    }
 
    public void performPopulation(){
+	  log.info("Trying to populate");
+	   
       initializeToolsParameters();
 
       populateItem();
@@ -98,6 +102,7 @@ public class TpccPopulation {
          boolean successful = false;
          while (!successful) {
             try {
+               System.out.println("Trying to put C_C_LAST");
                wrapper.put(null, "C_C_LAST", c_c_last);
                successful = true;
             } catch (Throwable e) {

@@ -47,6 +47,6 @@ public class MagicKey implements LocatedKey, Serializable {
     
     @Override
     public String toString() {
-        return this.node + " owns " + this.key; 
+        return this.node + "-" + this.key; 
     }
 }

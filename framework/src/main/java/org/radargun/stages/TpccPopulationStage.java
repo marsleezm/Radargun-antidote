@@ -9,7 +9,7 @@ import org.radargun.stressors.TpccPopulationStressor;
 import java.util.List;
 
 /**
- * This stage shuld be run before the <b>TpccBenchmarkStage</b>. It will perform the population of
+ * This stage should be run before the <b>TpccBenchmarkStage</b>. It will perform the population of
  * <b>numWarehouses</b> warehouses in cache. Note: this stage won't clear the added data from
  * slave.
  * <pre>

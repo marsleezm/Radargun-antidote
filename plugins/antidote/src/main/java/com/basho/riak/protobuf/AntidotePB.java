@@ -456,6 +456,16 @@ public final class AntidotePB {
      * <code>optional .FpbNodeUps remote_updates = 3;</code>
      */
     com.basho.riak.protobuf.AntidotePB.FpbNodeUpsOrBuilder getRemoteUpdatesOrBuilder();
+
+    // required uint32 threadid = 4;
+    /**
+     * <code>required uint32 threadid = 4;</code>
+     */
+    boolean hasThreadid();
+    /**
+     * <code>required uint32 threadid = 4;</code>
+     */
+    int getThreadid();
   }
   /**
    * Protobuf type {@code FpbPrepTxnReq}
@@ -545,6 +555,11 @@ public final class AntidotePB {
                 remoteUpdates_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000004;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              threadid_ = input.readUInt32();
               break;
             }
           }
@@ -653,10 +668,27 @@ public final class AntidotePB {
       return remoteUpdates_;
     }
 
+    // required uint32 threadid = 4;
+    public static final int THREADID_FIELD_NUMBER = 4;
+    private int threadid_;
+    /**
+     * <code>required uint32 threadid = 4;</code>
+     */
+    public boolean hasThreadid() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint32 threadid = 4;</code>
+     */
+    public int getThreadid() {
+      return threadid_;
+    }
+
     private void initFields() {
       txid_ = com.basho.riak.protobuf.AntidotePB.FpbTxId.getDefaultInstance();
       localUpdates_ = com.basho.riak.protobuf.AntidotePB.FpbNodeUps.getDefaultInstance();
       remoteUpdates_ = com.basho.riak.protobuf.AntidotePB.FpbNodeUps.getDefaultInstance();
+      threadid_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -664,6 +696,10 @@ public final class AntidotePB {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasTxid()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasThreadid()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -699,6 +735,9 @@ public final class AntidotePB {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(3, remoteUpdates_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, threadid_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -719,6 +758,10 @@ public final class AntidotePB {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, remoteUpdates_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, threadid_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -857,6 +900,8 @@ public final class AntidotePB {
           remoteUpdatesBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
+        threadid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -909,6 +954,10 @@ public final class AntidotePB {
         } else {
           result.remoteUpdates_ = remoteUpdatesBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.threadid_ = threadid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -934,12 +983,19 @@ public final class AntidotePB {
         if (other.hasRemoteUpdates()) {
           mergeRemoteUpdates(other.getRemoteUpdates());
         }
+        if (other.hasThreadid()) {
+          setThreadid(other.getThreadid());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasTxid()) {
+          
+          return false;
+        }
+        if (!hasThreadid()) {
           
           return false;
         }
@@ -1330,6 +1386,39 @@ public final class AntidotePB {
           remoteUpdates_ = null;
         }
         return remoteUpdatesBuilder_;
+      }
+
+      // required uint32 threadid = 4;
+      private int threadid_ ;
+      /**
+       * <code>required uint32 threadid = 4;</code>
+       */
+      public boolean hasThreadid() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint32 threadid = 4;</code>
+       */
+      public int getThreadid() {
+        return threadid_;
+      }
+      /**
+       * <code>required uint32 threadid = 4;</code>
+       */
+      public Builder setThreadid(int value) {
+        bitField0_ |= 0x00000008;
+        threadid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 threadid = 4;</code>
+       */
+      public Builder clearThreadid() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        threadid_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:FpbPrepTxnReq)
@@ -2032,15 +2121,20 @@ public final class AntidotePB {
   public interface FpbPerNodeUpOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes node = 1;
+    // required string node = 1;
     /**
-     * <code>required bytes node = 1;</code>
+     * <code>required string node = 1;</code>
      */
     boolean hasNode();
     /**
-     * <code>required bytes node = 1;</code>
+     * <code>required string node = 1;</code>
      */
-    com.google.protobuf.ByteString getNode();
+    java.lang.String getNode();
+    /**
+     * <code>required string node = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNodeBytes();
 
     // required uint32 partition_id = 2;
     /**
@@ -2189,20 +2283,47 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required bytes node = 1;
+    // required string node = 1;
     public static final int NODE_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString node_;
+    private java.lang.Object node_;
     /**
-     * <code>required bytes node = 1;</code>
+     * <code>required string node = 1;</code>
      */
     public boolean hasNode() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes node = 1;</code>
+     * <code>required string node = 1;</code>
      */
-    public com.google.protobuf.ByteString getNode() {
-      return node_;
+    public java.lang.String getNode() {
+      java.lang.Object ref = node_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          node_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string node = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNodeBytes() {
+      java.lang.Object ref = node_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        node_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required uint32 partition_id = 2;
@@ -2258,7 +2379,7 @@ public final class AntidotePB {
     }
 
     private void initFields() {
-      node_ = com.google.protobuf.ByteString.EMPTY;
+      node_ = "";
       partitionId_ = 0;
       ups_ = java.util.Collections.emptyList();
     }
@@ -2289,7 +2410,7 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, node_);
+        output.writeBytes(1, getNodeBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeUInt32(2, partitionId_);
@@ -2308,7 +2429,7 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, node_);
+          .computeBytesSize(1, getNodeBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2435,7 +2556,7 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        node_ = com.google.protobuf.ByteString.EMPTY;
+        node_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         partitionId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2507,7 +2628,9 @@ public final class AntidotePB {
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbPerNodeUp other) {
         if (other == com.basho.riak.protobuf.AntidotePB.FpbPerNodeUp.getDefaultInstance()) return this;
         if (other.hasNode()) {
-          setNode(other.getNode());
+          bitField0_ |= 0x00000001;
+          node_ = other.node_;
+          onChanged();
         }
         if (other.hasPartitionId()) {
           setPartitionId(other.getPartitionId());
@@ -2579,24 +2702,49 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required bytes node = 1;
-      private com.google.protobuf.ByteString node_ = com.google.protobuf.ByteString.EMPTY;
+      // required string node = 1;
+      private java.lang.Object node_ = "";
       /**
-       * <code>required bytes node = 1;</code>
+       * <code>required string node = 1;</code>
        */
       public boolean hasNode() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes node = 1;</code>
+       * <code>required string node = 1;</code>
        */
-      public com.google.protobuf.ByteString getNode() {
-        return node_;
+      public java.lang.String getNode() {
+        java.lang.Object ref = node_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          node_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes node = 1;</code>
+       * <code>required string node = 1;</code>
        */
-      public Builder setNode(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getNodeBytes() {
+        java.lang.Object ref = node_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          node_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string node = 1;</code>
+       */
+      public Builder setNode(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2606,11 +2754,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes node = 1;</code>
+       * <code>required string node = 1;</code>
        */
       public Builder clearNode() {
         bitField0_ = (bitField0_ & ~0x00000001);
         node_ = getDefaultInstance().getNode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string node = 1;</code>
+       */
+      public Builder setNodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        node_ = value;
         onChanged();
         return this;
       }
@@ -3401,15 +3562,20 @@ public final class AntidotePB {
      */
     com.basho.riak.protobuf.AntidotePB.FpbTxIdOrBuilder getTxidOrBuilder();
 
-    // required bytes key = 2;
+    // required string key = 2;
     /**
-     * <code>required bytes key = 2;</code>
+     * <code>required string key = 2;</code>
      */
     boolean hasKey();
     /**
-     * <code>required bytes key = 2;</code>
+     * <code>required string key = 2;</code>
      */
-    com.google.protobuf.ByteString getKey();
+    java.lang.String getKey();
+    /**
+     * <code>required string key = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
 
     // required uint32 partition_id = 3;
     /**
@@ -3557,20 +3723,47 @@ public final class AntidotePB {
       return txid_;
     }
 
-    // required bytes key = 2;
+    // required string key = 2;
     public static final int KEY_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString key_;
+    private java.lang.Object key_;
     /**
-     * <code>required bytes key = 2;</code>
+     * <code>required string key = 2;</code>
      */
     public boolean hasKey() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes key = 2;</code>
+     * <code>required string key = 2;</code>
      */
-    public com.google.protobuf.ByteString getKey() {
-      return key_;
+    public java.lang.String getKey() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          key_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string key = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        key_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required uint32 partition_id = 3;
@@ -3591,7 +3784,7 @@ public final class AntidotePB {
 
     private void initFields() {
       txid_ = com.basho.riak.protobuf.AntidotePB.FpbTxId.getDefaultInstance();
-      key_ = com.google.protobuf.ByteString.EMPTY;
+      key_ = "";
       partitionId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -3624,7 +3817,7 @@ public final class AntidotePB {
         output.writeMessage(1, txid_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, key_);
+        output.writeBytes(2, getKeyBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeUInt32(3, partitionId_);
@@ -3644,7 +3837,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, key_);
+          .computeBytesSize(2, getKeyBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3773,7 +3966,7 @@ public final class AntidotePB {
           txidBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        key_ = com.google.protobuf.ByteString.EMPTY;
+        key_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         partitionId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3841,7 +4034,9 @@ public final class AntidotePB {
           mergeTxid(other.getTxid());
         }
         if (other.hasKey()) {
-          setKey(other.getKey());
+          bitField0_ |= 0x00000002;
+          key_ = other.key_;
+          onChanged();
         }
         if (other.hasPartitionId()) {
           setPartitionId(other.getPartitionId());
@@ -4004,24 +4199,49 @@ public final class AntidotePB {
         return txidBuilder_;
       }
 
-      // required bytes key = 2;
-      private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
+      // required string key = 2;
+      private java.lang.Object key_ = "";
       /**
-       * <code>required bytes key = 2;</code>
+       * <code>required string key = 2;</code>
        */
       public boolean hasKey() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes key = 2;</code>
+       * <code>required string key = 2;</code>
        */
-      public com.google.protobuf.ByteString getKey() {
-        return key_;
+      public java.lang.String getKey() {
+        java.lang.Object ref = key_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          key_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes key = 2;</code>
+       * <code>required string key = 2;</code>
        */
-      public Builder setKey(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string key = 2;</code>
+       */
+      public Builder setKey(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -4031,11 +4251,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes key = 2;</code>
+       * <code>required string key = 2;</code>
        */
       public Builder clearKey() {
         bitField0_ = (bitField0_ & ~0x00000002);
         key_ = getDefaultInstance().getKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string key = 2;</code>
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        key_ = value;
         onChanged();
         return this;
       }
@@ -4483,15 +4716,20 @@ public final class AntidotePB {
   public interface FpbSingleUpReqOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes key = 1;
+    // required string key = 1;
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
     boolean hasKey();
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
-    com.google.protobuf.ByteString getKey();
+    java.lang.String getKey();
+    /**
+     * <code>required string key = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
 
     // required .FpbValue value = 2;
     /**
@@ -4631,20 +4869,47 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required bytes key = 1;
+    // required string key = 1;
     public static final int KEY_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString key_;
+    private java.lang.Object key_;
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
     public boolean hasKey() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
-    public com.google.protobuf.ByteString getKey() {
-      return key_;
+    public java.lang.String getKey() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          key_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        key_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required .FpbValue value = 2;
@@ -4686,7 +4951,7 @@ public final class AntidotePB {
     }
 
     private void initFields() {
-      key_ = com.google.protobuf.ByteString.EMPTY;
+      key_ = "";
       value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
       partitionId_ = 0;
     }
@@ -4719,7 +4984,7 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, key_);
+        output.writeBytes(1, getKeyBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, value_);
@@ -4738,7 +5003,7 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, key_);
+          .computeBytesSize(1, getKeyBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4865,7 +5130,7 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        key_ = com.google.protobuf.ByteString.EMPTY;
+        key_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (valueBuilder_ == null) {
           value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
@@ -4936,7 +5201,9 @@ public final class AntidotePB {
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbSingleUpReq other) {
         if (other == com.basho.riak.protobuf.AntidotePB.FpbSingleUpReq.getDefaultInstance()) return this;
         if (other.hasKey()) {
-          setKey(other.getKey());
+          bitField0_ |= 0x00000001;
+          key_ = other.key_;
+          onChanged();
         }
         if (other.hasValue()) {
           mergeValue(other.getValue());
@@ -4987,24 +5254,49 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required bytes key = 1;
-      private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
+      // required string key = 1;
+      private java.lang.Object key_ = "";
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
       public boolean hasKey() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
-      public com.google.protobuf.ByteString getKey() {
-        return key_;
+      public java.lang.String getKey() {
+        java.lang.Object ref = key_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          key_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
-      public Builder setKey(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKey(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -5014,11 +5306,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
       public Builder clearKey() {
         bitField0_ = (bitField0_ & ~0x00000001);
         key_ = getDefaultInstance().getKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        key_ = value;
         onChanged();
         return this;
       }
@@ -5873,15 +6178,20 @@ public final class AntidotePB {
   public interface FpbNodePartOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes ip = 1;
+    // required string ip = 1;
     /**
-     * <code>required bytes ip = 1;</code>
+     * <code>required string ip = 1;</code>
      */
     boolean hasIp();
     /**
-     * <code>required bytes ip = 1;</code>
+     * <code>required string ip = 1;</code>
      */
-    com.google.protobuf.ByteString getIp();
+    java.lang.String getIp();
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
 
     // required uint32 num_partitions = 2;
     /**
@@ -5994,20 +6304,47 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required bytes ip = 1;
+    // required string ip = 1;
     public static final int IP_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ip_;
+    private java.lang.Object ip_;
     /**
-     * <code>required bytes ip = 1;</code>
+     * <code>required string ip = 1;</code>
      */
     public boolean hasIp() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes ip = 1;</code>
+     * <code>required string ip = 1;</code>
      */
-    public com.google.protobuf.ByteString getIp() {
-      return ip_;
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          ip_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required uint32 num_partitions = 2;
@@ -6027,7 +6364,7 @@ public final class AntidotePB {
     }
 
     private void initFields() {
-      ip_ = com.google.protobuf.ByteString.EMPTY;
+      ip_ = "";
       numPartitions_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -6051,7 +6388,7 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, ip_);
+        output.writeBytes(1, getIpBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeUInt32(2, numPartitions_);
@@ -6067,7 +6404,7 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, ip_);
+          .computeBytesSize(1, getIpBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6189,7 +6526,7 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        ip_ = com.google.protobuf.ByteString.EMPTY;
+        ip_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         numPartitions_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -6246,7 +6583,9 @@ public final class AntidotePB {
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbNodePart other) {
         if (other == com.basho.riak.protobuf.AntidotePB.FpbNodePart.getDefaultInstance()) return this;
         if (other.hasIp()) {
-          setIp(other.getIp());
+          bitField0_ |= 0x00000001;
+          ip_ = other.ip_;
+          onChanged();
         }
         if (other.hasNumPartitions()) {
           setNumPartitions(other.getNumPartitions());
@@ -6286,24 +6625,49 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required bytes ip = 1;
-      private com.google.protobuf.ByteString ip_ = com.google.protobuf.ByteString.EMPTY;
+      // required string ip = 1;
+      private java.lang.Object ip_ = "";
       /**
-       * <code>required bytes ip = 1;</code>
+       * <code>required string ip = 1;</code>
        */
       public boolean hasIp() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes ip = 1;</code>
+       * <code>required string ip = 1;</code>
        */
-      public com.google.protobuf.ByteString getIp() {
-        return ip_;
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          ip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes ip = 1;</code>
+       * <code>required string ip = 1;</code>
        */
-      public Builder setIp(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public Builder setIp(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -6313,11 +6677,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes ip = 1;</code>
+       * <code>required string ip = 1;</code>
        */
       public Builder clearIp() {
         bitField0_ = (bitField0_ & ~0x00000001);
         ip_ = getDefaultInstance().getIp();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        ip_ = value;
         onChanged();
         return this;
       }
@@ -6369,15 +6746,20 @@ public final class AntidotePB {
   public interface FpbUpdateOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes key = 1;
+    // required string key = 1;
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
     boolean hasKey();
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
-    com.google.protobuf.ByteString getKey();
+    java.lang.String getKey();
+    /**
+     * <code>required string key = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
 
     // required .FpbValue value = 2;
     /**
@@ -6502,20 +6884,47 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required bytes key = 1;
+    // required string key = 1;
     public static final int KEY_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString key_;
+    private java.lang.Object key_;
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
     public boolean hasKey() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes key = 1;</code>
+     * <code>required string key = 1;</code>
      */
-    public com.google.protobuf.ByteString getKey() {
-      return key_;
+    public java.lang.String getKey() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          key_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        key_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required .FpbValue value = 2;
@@ -6541,7 +6950,7 @@ public final class AntidotePB {
     }
 
     private void initFields() {
-      key_ = com.google.protobuf.ByteString.EMPTY;
+      key_ = "";
       value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -6569,7 +6978,7 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, key_);
+        output.writeBytes(1, getKeyBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, value_);
@@ -6585,7 +6994,7 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, key_);
+          .computeBytesSize(1, getKeyBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6708,7 +7117,7 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        key_ = com.google.protobuf.ByteString.EMPTY;
+        key_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (valueBuilder_ == null) {
           value_ = com.basho.riak.protobuf.AntidotePB.FpbValue.getDefaultInstance();
@@ -6773,7 +7182,9 @@ public final class AntidotePB {
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbUpdate other) {
         if (other == com.basho.riak.protobuf.AntidotePB.FpbUpdate.getDefaultInstance()) return this;
         if (other.hasKey()) {
-          setKey(other.getKey());
+          bitField0_ |= 0x00000001;
+          key_ = other.key_;
+          onChanged();
         }
         if (other.hasValue()) {
           mergeValue(other.getValue());
@@ -6817,24 +7228,49 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required bytes key = 1;
-      private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
+      // required string key = 1;
+      private java.lang.Object key_ = "";
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
       public boolean hasKey() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
-      public com.google.protobuf.ByteString getKey() {
-        return key_;
+      public java.lang.String getKey() {
+        java.lang.Object ref = key_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          key_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
-      public Builder setKey(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKey(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -6844,11 +7280,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes key = 1;</code>
+       * <code>required string key = 1;</code>
        */
       public Builder clearKey() {
         bitField0_ = (bitField0_ & ~0x00000001);
         key_ = getDefaultInstance().getKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        key_ = value;
         onChanged();
         return this;
       }
@@ -9939,15 +10388,40 @@ public final class AntidotePB {
      */
     com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder getWarehouseOrBuilder();
 
-    // optional bytes value = 12;
+    // optional string str_value = 12;
     /**
-     * <code>optional bytes value = 12;</code>
+     * <code>optional string str_value = 12;</code>
      */
-    boolean hasValue();
+    boolean hasStrValue();
     /**
-     * <code>optional bytes value = 12;</code>
+     * <code>optional string str_value = 12;</code>
      */
-    com.google.protobuf.ByteString getValue();
+    java.lang.String getStrValue();
+    /**
+     * <code>optional string str_value = 12;</code>
+     */
+    com.google.protobuf.ByteString
+        getStrValueBytes();
+
+    // optional int64 long_value = 13;
+    /**
+     * <code>optional int64 long_value = 13;</code>
+     */
+    boolean hasLongValue();
+    /**
+     * <code>optional int64 long_value = 13;</code>
+     */
+    long getLongValue();
+
+    // optional double double_value = 14;
+    /**
+     * <code>optional double double_value = 14;</code>
+     */
+    boolean hasDoubleValue();
+    /**
+     * <code>optional double double_value = 14;</code>
+     */
+    double getDoubleValue();
   }
   /**
    * Protobuf type {@code FpbValue}
@@ -10137,7 +10611,17 @@ public final class AntidotePB {
             }
             case 98: {
               bitField0_ |= 0x00000800;
-              value_ = input.readBytes();
+              strValue_ = input.readBytes();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00001000;
+              longValue_ = input.readInt64();
+              break;
+            }
+            case 113: {
+              bitField0_ |= 0x00002000;
+              doubleValue_ = input.readDouble();
               break;
             }
           }
@@ -10416,20 +10900,79 @@ public final class AntidotePB {
       return warehouse_;
     }
 
-    // optional bytes value = 12;
-    public static final int VALUE_FIELD_NUMBER = 12;
-    private com.google.protobuf.ByteString value_;
+    // optional string str_value = 12;
+    public static final int STR_VALUE_FIELD_NUMBER = 12;
+    private java.lang.Object strValue_;
     /**
-     * <code>optional bytes value = 12;</code>
+     * <code>optional string str_value = 12;</code>
      */
-    public boolean hasValue() {
+    public boolean hasStrValue() {
       return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
-     * <code>optional bytes value = 12;</code>
+     * <code>optional string str_value = 12;</code>
      */
-    public com.google.protobuf.ByteString getValue() {
-      return value_;
+    public java.lang.String getStrValue() {
+      java.lang.Object ref = strValue_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          strValue_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string str_value = 12;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStrValueBytes() {
+      java.lang.Object ref = strValue_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        strValue_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int64 long_value = 13;
+    public static final int LONG_VALUE_FIELD_NUMBER = 13;
+    private long longValue_;
+    /**
+     * <code>optional int64 long_value = 13;</code>
+     */
+    public boolean hasLongValue() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional int64 long_value = 13;</code>
+     */
+    public long getLongValue() {
+      return longValue_;
+    }
+
+    // optional double double_value = 14;
+    public static final int DOUBLE_VALUE_FIELD_NUMBER = 14;
+    private double doubleValue_;
+    /**
+     * <code>optional double double_value = 14;</code>
+     */
+    public boolean hasDoubleValue() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <code>optional double double_value = 14;</code>
+     */
+    public double getDoubleValue() {
+      return doubleValue_;
     }
 
     private void initFields() {
@@ -10444,7 +10987,9 @@ public final class AntidotePB {
       orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
       stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
       warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
-      value_ = com.google.protobuf.ByteString.EMPTY;
+      strValue_ = "";
+      longValue_ = 0L;
+      doubleValue_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10556,7 +11101,13 @@ public final class AntidotePB {
         output.writeMessage(11, warehouse_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeBytes(12, value_);
+        output.writeBytes(12, getStrValueBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeInt64(13, longValue_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeDouble(14, doubleValue_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -10613,7 +11164,15 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, value_);
+          .computeBytesSize(12, getStrValueBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(13, longValue_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(14, doubleValue_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10803,8 +11362,12 @@ public final class AntidotePB {
           warehouseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000400);
-        value_ = com.google.protobuf.ByteString.EMPTY;
+        strValue_ = "";
         bitField0_ = (bitField0_ & ~0x00000800);
+        longValue_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        doubleValue_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -10920,7 +11483,15 @@ public final class AntidotePB {
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.value_ = value_;
+        result.strValue_ = strValue_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.longValue_ = longValue_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.doubleValue_ = doubleValue_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10970,8 +11541,16 @@ public final class AntidotePB {
         if (other.hasWarehouse()) {
           mergeWarehouse(other.getWarehouse());
         }
-        if (other.hasValue()) {
-          setValue(other.getValue());
+        if (other.hasStrValue()) {
+          bitField0_ |= 0x00000800;
+          strValue_ = other.strValue_;
+          onChanged();
+        }
+        if (other.hasLongValue()) {
+          setLongValue(other.getLongValue());
+        }
+        if (other.hasDoubleValue()) {
+          setDoubleValue(other.getDoubleValue());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -12267,38 +12846,142 @@ public final class AntidotePB {
         return warehouseBuilder_;
       }
 
-      // optional bytes value = 12;
-      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      // optional string str_value = 12;
+      private java.lang.Object strValue_ = "";
       /**
-       * <code>optional bytes value = 12;</code>
+       * <code>optional string str_value = 12;</code>
        */
-      public boolean hasValue() {
+      public boolean hasStrValue() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional bytes value = 12;</code>
+       * <code>optional string str_value = 12;</code>
        */
-      public com.google.protobuf.ByteString getValue() {
-        return value_;
+      public java.lang.String getStrValue() {
+        java.lang.Object ref = strValue_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          strValue_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional bytes value = 12;</code>
+       * <code>optional string str_value = 12;</code>
        */
-      public Builder setValue(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getStrValueBytes() {
+        java.lang.Object ref = strValue_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          strValue_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string str_value = 12;</code>
+       */
+      public Builder setStrValue(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000800;
-        value_ = value;
+        strValue_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bytes value = 12;</code>
+       * <code>optional string str_value = 12;</code>
        */
-      public Builder clearValue() {
+      public Builder clearStrValue() {
         bitField0_ = (bitField0_ & ~0x00000800);
-        value_ = getDefaultInstance().getValue();
+        strValue_ = getDefaultInstance().getStrValue();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string str_value = 12;</code>
+       */
+      public Builder setStrValueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+        strValue_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int64 long_value = 13;
+      private long longValue_ ;
+      /**
+       * <code>optional int64 long_value = 13;</code>
+       */
+      public boolean hasLongValue() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional int64 long_value = 13;</code>
+       */
+      public long getLongValue() {
+        return longValue_;
+      }
+      /**
+       * <code>optional int64 long_value = 13;</code>
+       */
+      public Builder setLongValue(long value) {
+        bitField0_ |= 0x00001000;
+        longValue_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 long_value = 13;</code>
+       */
+      public Builder clearLongValue() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        longValue_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // optional double double_value = 14;
+      private double doubleValue_ ;
+      /**
+       * <code>optional double double_value = 14;</code>
+       */
+      public boolean hasDoubleValue() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional double double_value = 14;</code>
+       */
+      public double getDoubleValue() {
+        return doubleValue_;
+      }
+      /**
+       * <code>optional double double_value = 14;</code>
+       */
+      public Builder setDoubleValue(double value) {
+        bitField0_ |= 0x00002000;
+        doubleValue_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double double_value = 14;</code>
+       */
+      public Builder clearDoubleValue() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        doubleValue_ = 0D;
         onChanged();
         return this;
       }
@@ -12317,95 +13000,140 @@ public final class AntidotePB {
   public interface TpccCustomerOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes c_first = 1;
+    // required string c_first = 1;
     /**
-     * <code>required bytes c_first = 1;</code>
+     * <code>required string c_first = 1;</code>
      */
     boolean hasCFirst();
     /**
-     * <code>required bytes c_first = 1;</code>
+     * <code>required string c_first = 1;</code>
      */
-    com.google.protobuf.ByteString getCFirst();
-
-    // required bytes c_middle = 2;
+    java.lang.String getCFirst();
     /**
-     * <code>required bytes c_middle = 2;</code>
+     * <code>required string c_first = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCFirstBytes();
+
+    // required string c_middle = 2;
+    /**
+     * <code>required string c_middle = 2;</code>
      */
     boolean hasCMiddle();
     /**
-     * <code>required bytes c_middle = 2;</code>
+     * <code>required string c_middle = 2;</code>
      */
-    com.google.protobuf.ByteString getCMiddle();
-
-    // required bytes c_last = 3;
+    java.lang.String getCMiddle();
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_middle = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getCMiddleBytes();
+
+    // required string c_last = 3;
+    /**
+     * <code>required string c_last = 3;</code>
      */
     boolean hasCLast();
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_last = 3;</code>
      */
-    com.google.protobuf.ByteString getCLast();
-
-    // required bytes c_street1 = 4;
+    java.lang.String getCLast();
     /**
-     * <code>required bytes c_street1 = 4;</code>
+     * <code>required string c_last = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getCLastBytes();
+
+    // required string c_street1 = 4;
+    /**
+     * <code>required string c_street1 = 4;</code>
      */
     boolean hasCStreet1();
     /**
-     * <code>required bytes c_street1 = 4;</code>
+     * <code>required string c_street1 = 4;</code>
      */
-    com.google.protobuf.ByteString getCStreet1();
-
-    // required bytes c_street2 = 5;
+    java.lang.String getCStreet1();
     /**
-     * <code>required bytes c_street2 = 5;</code>
+     * <code>required string c_street1 = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getCStreet1Bytes();
+
+    // required string c_street2 = 5;
+    /**
+     * <code>required string c_street2 = 5;</code>
      */
     boolean hasCStreet2();
     /**
-     * <code>required bytes c_street2 = 5;</code>
+     * <code>required string c_street2 = 5;</code>
      */
-    com.google.protobuf.ByteString getCStreet2();
-
-    // required bytes c_city = 6;
+    java.lang.String getCStreet2();
     /**
-     * <code>required bytes c_city = 6;</code>
+     * <code>required string c_street2 = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getCStreet2Bytes();
+
+    // required string c_city = 6;
+    /**
+     * <code>required string c_city = 6;</code>
      */
     boolean hasCCity();
     /**
-     * <code>required bytes c_city = 6;</code>
+     * <code>required string c_city = 6;</code>
      */
-    com.google.protobuf.ByteString getCCity();
-
-    // required bytes c_state = 7;
+    java.lang.String getCCity();
     /**
-     * <code>required bytes c_state = 7;</code>
+     * <code>required string c_city = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getCCityBytes();
+
+    // required string c_state = 7;
+    /**
+     * <code>required string c_state = 7;</code>
      */
     boolean hasCState();
     /**
-     * <code>required bytes c_state = 7;</code>
+     * <code>required string c_state = 7;</code>
      */
-    com.google.protobuf.ByteString getCState();
-
-    // required bytes c_zip = 8;
+    java.lang.String getCState();
     /**
-     * <code>required bytes c_zip = 8;</code>
+     * <code>required string c_state = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getCStateBytes();
+
+    // required string c_zip = 8;
+    /**
+     * <code>required string c_zip = 8;</code>
      */
     boolean hasCZip();
     /**
-     * <code>required bytes c_zip = 8;</code>
+     * <code>required string c_zip = 8;</code>
      */
-    com.google.protobuf.ByteString getCZip();
-
-    // required bytes c_phone = 9;
+    java.lang.String getCZip();
     /**
-     * <code>required bytes c_phone = 9;</code>
+     * <code>required string c_zip = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getCZipBytes();
+
+    // required string c_phone = 9;
+    /**
+     * <code>required string c_phone = 9;</code>
      */
     boolean hasCPhone();
     /**
-     * <code>required bytes c_phone = 9;</code>
+     * <code>required string c_phone = 9;</code>
      */
-    com.google.protobuf.ByteString getCPhone();
+    java.lang.String getCPhone();
+    /**
+     * <code>required string c_phone = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getCPhoneBytes();
 
     // required uint64 c_since = 10;
     /**
@@ -12417,15 +13145,20 @@ public final class AntidotePB {
      */
     long getCSince();
 
-    // required bytes c_credit = 11;
+    // required string c_credit = 11;
     /**
-     * <code>required bytes c_credit = 11;</code>
+     * <code>required string c_credit = 11;</code>
      */
     boolean hasCCredit();
     /**
-     * <code>required bytes c_credit = 11;</code>
+     * <code>required string c_credit = 11;</code>
      */
-    com.google.protobuf.ByteString getCCredit();
+    java.lang.String getCCredit();
+    /**
+     * <code>required string c_credit = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getCCreditBytes();
 
     // required double c_credit_lim = 12;
     /**
@@ -12477,15 +13210,20 @@ public final class AntidotePB {
      */
     int getCDeliveryCnt();
 
-    // required bytes c_data = 17;
+    // required string c_data = 17;
     /**
-     * <code>required bytes c_data = 17;</code>
+     * <code>required string c_data = 17;</code>
      */
     boolean hasCData();
     /**
-     * <code>required bytes c_data = 17;</code>
+     * <code>required string c_data = 17;</code>
      */
-    com.google.protobuf.ByteString getCData();
+    java.lang.String getCData();
+    /**
+     * <code>required string c_data = 17;</code>
+     */
+    com.google.protobuf.ByteString
+        getCDataBytes();
   }
   /**
    * Protobuf type {@code TpccCustomer}
@@ -12663,148 +13401,391 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required bytes c_first = 1;
+    // required string c_first = 1;
     public static final int C_FIRST_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString cFirst_;
+    private java.lang.Object cFirst_;
     /**
-     * <code>required bytes c_first = 1;</code>
+     * <code>required string c_first = 1;</code>
      */
     public boolean hasCFirst() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes c_first = 1;</code>
+     * <code>required string c_first = 1;</code>
      */
-    public com.google.protobuf.ByteString getCFirst() {
-      return cFirst_;
+    public java.lang.String getCFirst() {
+      java.lang.Object ref = cFirst_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cFirst_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_first = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCFirstBytes() {
+      java.lang.Object ref = cFirst_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cFirst_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_middle = 2;
+    // required string c_middle = 2;
     public static final int C_MIDDLE_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString cMiddle_;
+    private java.lang.Object cMiddle_;
     /**
-     * <code>required bytes c_middle = 2;</code>
+     * <code>required string c_middle = 2;</code>
      */
     public boolean hasCMiddle() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes c_middle = 2;</code>
+     * <code>required string c_middle = 2;</code>
      */
-    public com.google.protobuf.ByteString getCMiddle() {
-      return cMiddle_;
+    public java.lang.String getCMiddle() {
+      java.lang.Object ref = cMiddle_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cMiddle_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_middle = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCMiddleBytes() {
+      java.lang.Object ref = cMiddle_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cMiddle_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_last = 3;
+    // required string c_last = 3;
     public static final int C_LAST_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString cLast_;
+    private java.lang.Object cLast_;
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_last = 3;</code>
      */
     public boolean hasCLast() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_last = 3;</code>
      */
-    public com.google.protobuf.ByteString getCLast() {
-      return cLast_;
+    public java.lang.String getCLast() {
+      java.lang.Object ref = cLast_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cLast_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_last = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCLastBytes() {
+      java.lang.Object ref = cLast_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cLast_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_street1 = 4;
+    // required string c_street1 = 4;
     public static final int C_STREET1_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString cStreet1_;
+    private java.lang.Object cStreet1_;
     /**
-     * <code>required bytes c_street1 = 4;</code>
+     * <code>required string c_street1 = 4;</code>
      */
     public boolean hasCStreet1() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required bytes c_street1 = 4;</code>
+     * <code>required string c_street1 = 4;</code>
      */
-    public com.google.protobuf.ByteString getCStreet1() {
-      return cStreet1_;
+    public java.lang.String getCStreet1() {
+      java.lang.Object ref = cStreet1_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cStreet1_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_street1 = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCStreet1Bytes() {
+      java.lang.Object ref = cStreet1_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cStreet1_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_street2 = 5;
+    // required string c_street2 = 5;
     public static final int C_STREET2_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString cStreet2_;
+    private java.lang.Object cStreet2_;
     /**
-     * <code>required bytes c_street2 = 5;</code>
+     * <code>required string c_street2 = 5;</code>
      */
     public boolean hasCStreet2() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required bytes c_street2 = 5;</code>
+     * <code>required string c_street2 = 5;</code>
      */
-    public com.google.protobuf.ByteString getCStreet2() {
-      return cStreet2_;
+    public java.lang.String getCStreet2() {
+      java.lang.Object ref = cStreet2_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cStreet2_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_street2 = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCStreet2Bytes() {
+      java.lang.Object ref = cStreet2_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cStreet2_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_city = 6;
+    // required string c_city = 6;
     public static final int C_CITY_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString cCity_;
+    private java.lang.Object cCity_;
     /**
-     * <code>required bytes c_city = 6;</code>
+     * <code>required string c_city = 6;</code>
      */
     public boolean hasCCity() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required bytes c_city = 6;</code>
+     * <code>required string c_city = 6;</code>
      */
-    public com.google.protobuf.ByteString getCCity() {
-      return cCity_;
+    public java.lang.String getCCity() {
+      java.lang.Object ref = cCity_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cCity_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_city = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCCityBytes() {
+      java.lang.Object ref = cCity_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cCity_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_state = 7;
+    // required string c_state = 7;
     public static final int C_STATE_FIELD_NUMBER = 7;
-    private com.google.protobuf.ByteString cState_;
+    private java.lang.Object cState_;
     /**
-     * <code>required bytes c_state = 7;</code>
+     * <code>required string c_state = 7;</code>
      */
     public boolean hasCState() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>required bytes c_state = 7;</code>
+     * <code>required string c_state = 7;</code>
      */
-    public com.google.protobuf.ByteString getCState() {
-      return cState_;
+    public java.lang.String getCState() {
+      java.lang.Object ref = cState_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cState_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_state = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCStateBytes() {
+      java.lang.Object ref = cState_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cState_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_zip = 8;
+    // required string c_zip = 8;
     public static final int C_ZIP_FIELD_NUMBER = 8;
-    private com.google.protobuf.ByteString cZip_;
+    private java.lang.Object cZip_;
     /**
-     * <code>required bytes c_zip = 8;</code>
+     * <code>required string c_zip = 8;</code>
      */
     public boolean hasCZip() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>required bytes c_zip = 8;</code>
+     * <code>required string c_zip = 8;</code>
      */
-    public com.google.protobuf.ByteString getCZip() {
-      return cZip_;
+    public java.lang.String getCZip() {
+      java.lang.Object ref = cZip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cZip_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_zip = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCZipBytes() {
+      java.lang.Object ref = cZip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cZip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes c_phone = 9;
+    // required string c_phone = 9;
     public static final int C_PHONE_FIELD_NUMBER = 9;
-    private com.google.protobuf.ByteString cPhone_;
+    private java.lang.Object cPhone_;
     /**
-     * <code>required bytes c_phone = 9;</code>
+     * <code>required string c_phone = 9;</code>
      */
     public boolean hasCPhone() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>required bytes c_phone = 9;</code>
+     * <code>required string c_phone = 9;</code>
      */
-    public com.google.protobuf.ByteString getCPhone() {
-      return cPhone_;
+    public java.lang.String getCPhone() {
+      java.lang.Object ref = cPhone_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cPhone_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_phone = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCPhoneBytes() {
+      java.lang.Object ref = cPhone_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cPhone_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required uint64 c_since = 10;
@@ -12823,20 +13804,47 @@ public final class AntidotePB {
       return cSince_;
     }
 
-    // required bytes c_credit = 11;
+    // required string c_credit = 11;
     public static final int C_CREDIT_FIELD_NUMBER = 11;
-    private com.google.protobuf.ByteString cCredit_;
+    private java.lang.Object cCredit_;
     /**
-     * <code>required bytes c_credit = 11;</code>
+     * <code>required string c_credit = 11;</code>
      */
     public boolean hasCCredit() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
-     * <code>required bytes c_credit = 11;</code>
+     * <code>required string c_credit = 11;</code>
      */
-    public com.google.protobuf.ByteString getCCredit() {
-      return cCredit_;
+    public java.lang.String getCCredit() {
+      java.lang.Object ref = cCredit_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cCredit_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_credit = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCCreditBytes() {
+      java.lang.Object ref = cCredit_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cCredit_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required double c_credit_lim = 12;
@@ -12919,40 +13927,67 @@ public final class AntidotePB {
       return cDeliveryCnt_;
     }
 
-    // required bytes c_data = 17;
+    // required string c_data = 17;
     public static final int C_DATA_FIELD_NUMBER = 17;
-    private com.google.protobuf.ByteString cData_;
+    private java.lang.Object cData_;
     /**
-     * <code>required bytes c_data = 17;</code>
+     * <code>required string c_data = 17;</code>
      */
     public boolean hasCData() {
       return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     /**
-     * <code>required bytes c_data = 17;</code>
+     * <code>required string c_data = 17;</code>
      */
-    public com.google.protobuf.ByteString getCData() {
-      return cData_;
+    public java.lang.String getCData() {
+      java.lang.Object ref = cData_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cData_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_data = 17;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCDataBytes() {
+      java.lang.Object ref = cData_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
-      cFirst_ = com.google.protobuf.ByteString.EMPTY;
-      cMiddle_ = com.google.protobuf.ByteString.EMPTY;
-      cLast_ = com.google.protobuf.ByteString.EMPTY;
-      cStreet1_ = com.google.protobuf.ByteString.EMPTY;
-      cStreet2_ = com.google.protobuf.ByteString.EMPTY;
-      cCity_ = com.google.protobuf.ByteString.EMPTY;
-      cState_ = com.google.protobuf.ByteString.EMPTY;
-      cZip_ = com.google.protobuf.ByteString.EMPTY;
-      cPhone_ = com.google.protobuf.ByteString.EMPTY;
+      cFirst_ = "";
+      cMiddle_ = "";
+      cLast_ = "";
+      cStreet1_ = "";
+      cStreet2_ = "";
+      cCity_ = "";
+      cState_ = "";
+      cZip_ = "";
+      cPhone_ = "";
       cSince_ = 0L;
-      cCredit_ = com.google.protobuf.ByteString.EMPTY;
+      cCredit_ = "";
       cCreditLim_ = 0D;
       cDiscount_ = 0D;
       cYtdPayment_ = 0D;
       cPaymentCnt_ = 0;
       cDeliveryCnt_ = 0;
-      cData_ = com.google.protobuf.ByteString.EMPTY;
+      cData_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -13035,37 +14070,37 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, cFirst_);
+        output.writeBytes(1, getCFirstBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, cMiddle_);
+        output.writeBytes(2, getCMiddleBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, cLast_);
+        output.writeBytes(3, getCLastBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, cStreet1_);
+        output.writeBytes(4, getCStreet1Bytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, cStreet2_);
+        output.writeBytes(5, getCStreet2Bytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, cCity_);
+        output.writeBytes(6, getCCityBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(7, cState_);
+        output.writeBytes(7, getCStateBytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(8, cZip_);
+        output.writeBytes(8, getCZipBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(9, cPhone_);
+        output.writeBytes(9, getCPhoneBytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeUInt64(10, cSince_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBytes(11, cCredit_);
+        output.writeBytes(11, getCCreditBytes());
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeDouble(12, cCreditLim_);
@@ -13083,7 +14118,7 @@ public final class AntidotePB {
         output.writeInt32(16, cDeliveryCnt_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeBytes(17, cData_);
+        output.writeBytes(17, getCDataBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -13096,39 +14131,39 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, cFirst_);
+          .computeBytesSize(1, getCFirstBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, cMiddle_);
+          .computeBytesSize(2, getCMiddleBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, cLast_);
+          .computeBytesSize(3, getCLastBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, cStreet1_);
+          .computeBytesSize(4, getCStreet1Bytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, cStreet2_);
+          .computeBytesSize(5, getCStreet2Bytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, cCity_);
+          .computeBytesSize(6, getCCityBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, cState_);
+          .computeBytesSize(7, getCStateBytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, cZip_);
+          .computeBytesSize(8, getCZipBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, cPhone_);
+          .computeBytesSize(9, getCPhoneBytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
@@ -13136,7 +14171,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, cCredit_);
+          .computeBytesSize(11, getCCreditBytes());
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
@@ -13160,7 +14195,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(17, cData_);
+          .computeBytesSize(17, getCDataBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13278,27 +14313,27 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        cFirst_ = com.google.protobuf.ByteString.EMPTY;
+        cFirst_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        cMiddle_ = com.google.protobuf.ByteString.EMPTY;
+        cMiddle_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        cLast_ = com.google.protobuf.ByteString.EMPTY;
+        cLast_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        cStreet1_ = com.google.protobuf.ByteString.EMPTY;
+        cStreet1_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        cStreet2_ = com.google.protobuf.ByteString.EMPTY;
+        cStreet2_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        cCity_ = com.google.protobuf.ByteString.EMPTY;
+        cCity_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        cState_ = com.google.protobuf.ByteString.EMPTY;
+        cState_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        cZip_ = com.google.protobuf.ByteString.EMPTY;
+        cZip_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
-        cPhone_ = com.google.protobuf.ByteString.EMPTY;
+        cPhone_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
         cSince_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000200);
-        cCredit_ = com.google.protobuf.ByteString.EMPTY;
+        cCredit_ = "";
         bitField0_ = (bitField0_ & ~0x00000400);
         cCreditLim_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000800);
@@ -13310,7 +14345,7 @@ public final class AntidotePB {
         bitField0_ = (bitField0_ & ~0x00004000);
         cDeliveryCnt_ = 0;
         bitField0_ = (bitField0_ & ~0x00008000);
-        cData_ = com.google.protobuf.ByteString.EMPTY;
+        cData_ = "";
         bitField0_ = (bitField0_ & ~0x00010000);
         return this;
       }
@@ -13425,37 +14460,57 @@ public final class AntidotePB {
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccCustomer other) {
         if (other == com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance()) return this;
         if (other.hasCFirst()) {
-          setCFirst(other.getCFirst());
+          bitField0_ |= 0x00000001;
+          cFirst_ = other.cFirst_;
+          onChanged();
         }
         if (other.hasCMiddle()) {
-          setCMiddle(other.getCMiddle());
+          bitField0_ |= 0x00000002;
+          cMiddle_ = other.cMiddle_;
+          onChanged();
         }
         if (other.hasCLast()) {
-          setCLast(other.getCLast());
+          bitField0_ |= 0x00000004;
+          cLast_ = other.cLast_;
+          onChanged();
         }
         if (other.hasCStreet1()) {
-          setCStreet1(other.getCStreet1());
+          bitField0_ |= 0x00000008;
+          cStreet1_ = other.cStreet1_;
+          onChanged();
         }
         if (other.hasCStreet2()) {
-          setCStreet2(other.getCStreet2());
+          bitField0_ |= 0x00000010;
+          cStreet2_ = other.cStreet2_;
+          onChanged();
         }
         if (other.hasCCity()) {
-          setCCity(other.getCCity());
+          bitField0_ |= 0x00000020;
+          cCity_ = other.cCity_;
+          onChanged();
         }
         if (other.hasCState()) {
-          setCState(other.getCState());
+          bitField0_ |= 0x00000040;
+          cState_ = other.cState_;
+          onChanged();
         }
         if (other.hasCZip()) {
-          setCZip(other.getCZip());
+          bitField0_ |= 0x00000080;
+          cZip_ = other.cZip_;
+          onChanged();
         }
         if (other.hasCPhone()) {
-          setCPhone(other.getCPhone());
+          bitField0_ |= 0x00000100;
+          cPhone_ = other.cPhone_;
+          onChanged();
         }
         if (other.hasCSince()) {
           setCSince(other.getCSince());
         }
         if (other.hasCCredit()) {
-          setCCredit(other.getCCredit());
+          bitField0_ |= 0x00000400;
+          cCredit_ = other.cCredit_;
+          onChanged();
         }
         if (other.hasCCreditLim()) {
           setCCreditLim(other.getCCreditLim());
@@ -13473,7 +14528,9 @@ public final class AntidotePB {
           setCDeliveryCnt(other.getCDeliveryCnt());
         }
         if (other.hasCData()) {
-          setCData(other.getCData());
+          bitField0_ |= 0x00010000;
+          cData_ = other.cData_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -13570,24 +14627,49 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required bytes c_first = 1;
-      private com.google.protobuf.ByteString cFirst_ = com.google.protobuf.ByteString.EMPTY;
+      // required string c_first = 1;
+      private java.lang.Object cFirst_ = "";
       /**
-       * <code>required bytes c_first = 1;</code>
+       * <code>required string c_first = 1;</code>
        */
       public boolean hasCFirst() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes c_first = 1;</code>
+       * <code>required string c_first = 1;</code>
        */
-      public com.google.protobuf.ByteString getCFirst() {
-        return cFirst_;
+      public java.lang.String getCFirst() {
+        java.lang.Object ref = cFirst_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cFirst_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_first = 1;</code>
+       * <code>required string c_first = 1;</code>
        */
-      public Builder setCFirst(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCFirstBytes() {
+        java.lang.Object ref = cFirst_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cFirst_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_first = 1;</code>
+       */
+      public Builder setCFirst(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13597,7 +14679,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_first = 1;</code>
+       * <code>required string c_first = 1;</code>
        */
       public Builder clearCFirst() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -13605,25 +14687,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_middle = 2;
-      private com.google.protobuf.ByteString cMiddle_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_middle = 2;</code>
+       * <code>required string c_first = 1;</code>
+       */
+      public Builder setCFirstBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        cFirst_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_middle = 2;
+      private java.lang.Object cMiddle_ = "";
+      /**
+       * <code>required string c_middle = 2;</code>
        */
       public boolean hasCMiddle() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes c_middle = 2;</code>
+       * <code>required string c_middle = 2;</code>
        */
-      public com.google.protobuf.ByteString getCMiddle() {
-        return cMiddle_;
+      public java.lang.String getCMiddle() {
+        java.lang.Object ref = cMiddle_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cMiddle_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_middle = 2;</code>
+       * <code>required string c_middle = 2;</code>
        */
-      public Builder setCMiddle(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCMiddleBytes() {
+        java.lang.Object ref = cMiddle_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cMiddle_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_middle = 2;</code>
+       */
+      public Builder setCMiddle(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13633,7 +14753,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_middle = 2;</code>
+       * <code>required string c_middle = 2;</code>
        */
       public Builder clearCMiddle() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -13641,25 +14761,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_last = 3;
-      private com.google.protobuf.ByteString cLast_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_middle = 2;</code>
+       */
+      public Builder setCMiddleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        cMiddle_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_last = 3;
+      private java.lang.Object cLast_ = "";
+      /**
+       * <code>required string c_last = 3;</code>
        */
       public boolean hasCLast() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_last = 3;</code>
        */
-      public com.google.protobuf.ByteString getCLast() {
-        return cLast_;
+      public java.lang.String getCLast() {
+        java.lang.Object ref = cLast_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cLast_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_last = 3;</code>
        */
-      public Builder setCLast(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCLastBytes() {
+        java.lang.Object ref = cLast_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cLast_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_last = 3;</code>
+       */
+      public Builder setCLast(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13669,7 +14827,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_last = 3;</code>
        */
       public Builder clearCLast() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -13677,25 +14835,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_street1 = 4;
-      private com.google.protobuf.ByteString cStreet1_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_street1 = 4;</code>
+       * <code>required string c_last = 3;</code>
+       */
+      public Builder setCLastBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        cLast_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_street1 = 4;
+      private java.lang.Object cStreet1_ = "";
+      /**
+       * <code>required string c_street1 = 4;</code>
        */
       public boolean hasCStreet1() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required bytes c_street1 = 4;</code>
+       * <code>required string c_street1 = 4;</code>
        */
-      public com.google.protobuf.ByteString getCStreet1() {
-        return cStreet1_;
+      public java.lang.String getCStreet1() {
+        java.lang.Object ref = cStreet1_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cStreet1_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_street1 = 4;</code>
+       * <code>required string c_street1 = 4;</code>
        */
-      public Builder setCStreet1(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCStreet1Bytes() {
+        java.lang.Object ref = cStreet1_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cStreet1_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_street1 = 4;</code>
+       */
+      public Builder setCStreet1(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13705,7 +14901,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_street1 = 4;</code>
+       * <code>required string c_street1 = 4;</code>
        */
       public Builder clearCStreet1() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -13713,25 +14909,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_street2 = 5;
-      private com.google.protobuf.ByteString cStreet2_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_street2 = 5;</code>
+       * <code>required string c_street1 = 4;</code>
+       */
+      public Builder setCStreet1Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        cStreet1_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_street2 = 5;
+      private java.lang.Object cStreet2_ = "";
+      /**
+       * <code>required string c_street2 = 5;</code>
        */
       public boolean hasCStreet2() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required bytes c_street2 = 5;</code>
+       * <code>required string c_street2 = 5;</code>
        */
-      public com.google.protobuf.ByteString getCStreet2() {
-        return cStreet2_;
+      public java.lang.String getCStreet2() {
+        java.lang.Object ref = cStreet2_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cStreet2_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_street2 = 5;</code>
+       * <code>required string c_street2 = 5;</code>
        */
-      public Builder setCStreet2(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCStreet2Bytes() {
+        java.lang.Object ref = cStreet2_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cStreet2_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_street2 = 5;</code>
+       */
+      public Builder setCStreet2(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13741,7 +14975,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_street2 = 5;</code>
+       * <code>required string c_street2 = 5;</code>
        */
       public Builder clearCStreet2() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -13749,25 +14983,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_city = 6;
-      private com.google.protobuf.ByteString cCity_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_city = 6;</code>
+       * <code>required string c_street2 = 5;</code>
+       */
+      public Builder setCStreet2Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        cStreet2_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_city = 6;
+      private java.lang.Object cCity_ = "";
+      /**
+       * <code>required string c_city = 6;</code>
        */
       public boolean hasCCity() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required bytes c_city = 6;</code>
+       * <code>required string c_city = 6;</code>
        */
-      public com.google.protobuf.ByteString getCCity() {
-        return cCity_;
+      public java.lang.String getCCity() {
+        java.lang.Object ref = cCity_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cCity_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_city = 6;</code>
+       * <code>required string c_city = 6;</code>
        */
-      public Builder setCCity(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCCityBytes() {
+        java.lang.Object ref = cCity_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cCity_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_city = 6;</code>
+       */
+      public Builder setCCity(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13777,7 +15049,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_city = 6;</code>
+       * <code>required string c_city = 6;</code>
        */
       public Builder clearCCity() {
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -13785,25 +15057,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_state = 7;
-      private com.google.protobuf.ByteString cState_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_state = 7;</code>
+       * <code>required string c_city = 6;</code>
+       */
+      public Builder setCCityBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        cCity_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_state = 7;
+      private java.lang.Object cState_ = "";
+      /**
+       * <code>required string c_state = 7;</code>
        */
       public boolean hasCState() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required bytes c_state = 7;</code>
+       * <code>required string c_state = 7;</code>
        */
-      public com.google.protobuf.ByteString getCState() {
-        return cState_;
+      public java.lang.String getCState() {
+        java.lang.Object ref = cState_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cState_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_state = 7;</code>
+       * <code>required string c_state = 7;</code>
        */
-      public Builder setCState(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCStateBytes() {
+        java.lang.Object ref = cState_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cState_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_state = 7;</code>
+       */
+      public Builder setCState(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13813,7 +15123,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_state = 7;</code>
+       * <code>required string c_state = 7;</code>
        */
       public Builder clearCState() {
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -13821,25 +15131,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_zip = 8;
-      private com.google.protobuf.ByteString cZip_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_zip = 8;</code>
+       * <code>required string c_state = 7;</code>
+       */
+      public Builder setCStateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        cState_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_zip = 8;
+      private java.lang.Object cZip_ = "";
+      /**
+       * <code>required string c_zip = 8;</code>
        */
       public boolean hasCZip() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required bytes c_zip = 8;</code>
+       * <code>required string c_zip = 8;</code>
        */
-      public com.google.protobuf.ByteString getCZip() {
-        return cZip_;
+      public java.lang.String getCZip() {
+        java.lang.Object ref = cZip_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cZip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_zip = 8;</code>
+       * <code>required string c_zip = 8;</code>
        */
-      public Builder setCZip(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCZipBytes() {
+        java.lang.Object ref = cZip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cZip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_zip = 8;</code>
+       */
+      public Builder setCZip(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13849,7 +15197,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_zip = 8;</code>
+       * <code>required string c_zip = 8;</code>
        */
       public Builder clearCZip() {
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -13857,25 +15205,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes c_phone = 9;
-      private com.google.protobuf.ByteString cPhone_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes c_phone = 9;</code>
+       * <code>required string c_zip = 8;</code>
+       */
+      public Builder setCZipBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        cZip_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string c_phone = 9;
+      private java.lang.Object cPhone_ = "";
+      /**
+       * <code>required string c_phone = 9;</code>
        */
       public boolean hasCPhone() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>required bytes c_phone = 9;</code>
+       * <code>required string c_phone = 9;</code>
        */
-      public com.google.protobuf.ByteString getCPhone() {
-        return cPhone_;
+      public java.lang.String getCPhone() {
+        java.lang.Object ref = cPhone_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cPhone_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_phone = 9;</code>
+       * <code>required string c_phone = 9;</code>
        */
-      public Builder setCPhone(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCPhoneBytes() {
+        java.lang.Object ref = cPhone_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cPhone_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_phone = 9;</code>
+       */
+      public Builder setCPhone(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13885,11 +15271,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_phone = 9;</code>
+       * <code>required string c_phone = 9;</code>
        */
       public Builder clearCPhone() {
         bitField0_ = (bitField0_ & ~0x00000100);
         cPhone_ = getDefaultInstance().getCPhone();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string c_phone = 9;</code>
+       */
+      public Builder setCPhoneBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        cPhone_ = value;
         onChanged();
         return this;
       }
@@ -13927,24 +15326,49 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes c_credit = 11;
-      private com.google.protobuf.ByteString cCredit_ = com.google.protobuf.ByteString.EMPTY;
+      // required string c_credit = 11;
+      private java.lang.Object cCredit_ = "";
       /**
-       * <code>required bytes c_credit = 11;</code>
+       * <code>required string c_credit = 11;</code>
        */
       public boolean hasCCredit() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
-       * <code>required bytes c_credit = 11;</code>
+       * <code>required string c_credit = 11;</code>
        */
-      public com.google.protobuf.ByteString getCCredit() {
-        return cCredit_;
+      public java.lang.String getCCredit() {
+        java.lang.Object ref = cCredit_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cCredit_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_credit = 11;</code>
+       * <code>required string c_credit = 11;</code>
        */
-      public Builder setCCredit(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCCreditBytes() {
+        java.lang.Object ref = cCredit_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cCredit_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_credit = 11;</code>
+       */
+      public Builder setCCredit(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -13954,11 +15378,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_credit = 11;</code>
+       * <code>required string c_credit = 11;</code>
        */
       public Builder clearCCredit() {
         bitField0_ = (bitField0_ & ~0x00000400);
         cCredit_ = getDefaultInstance().getCCredit();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string c_credit = 11;</code>
+       */
+      public Builder setCCreditBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        cCredit_ = value;
         onChanged();
         return this;
       }
@@ -14128,24 +15565,49 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes c_data = 17;
-      private com.google.protobuf.ByteString cData_ = com.google.protobuf.ByteString.EMPTY;
+      // required string c_data = 17;
+      private java.lang.Object cData_ = "";
       /**
-       * <code>required bytes c_data = 17;</code>
+       * <code>required string c_data = 17;</code>
        */
       public boolean hasCData() {
         return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       /**
-       * <code>required bytes c_data = 17;</code>
+       * <code>required string c_data = 17;</code>
        */
-      public com.google.protobuf.ByteString getCData() {
-        return cData_;
+      public java.lang.String getCData() {
+        java.lang.Object ref = cData_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cData_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_data = 17;</code>
+       * <code>required string c_data = 17;</code>
        */
-      public Builder setCData(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCDataBytes() {
+        java.lang.Object ref = cData_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cData_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_data = 17;</code>
+       */
+      public Builder setCData(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -14155,11 +15617,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_data = 17;</code>
+       * <code>required string c_data = 17;</code>
        */
       public Builder clearCData() {
         bitField0_ = (bitField0_ & ~0x00010000);
         cData_ = getDefaultInstance().getCData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string c_data = 17;</code>
+       */
+      public Builder setCDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00010000;
+        cData_ = value;
         onChanged();
         return this;
       }
@@ -14198,15 +15673,20 @@ public final class AntidotePB {
      */
     long getCDId();
 
-    // required bytes c_last = 3;
+    // required string c_last = 3;
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_last = 3;</code>
      */
     boolean hasCLast();
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_last = 3;</code>
      */
-    com.google.protobuf.ByteString getCLast();
+    java.lang.String getCLast();
+    /**
+     * <code>required string c_last = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getCLastBytes();
 
     // repeated int64 ids = 4;
     /**
@@ -14384,20 +15864,47 @@ public final class AntidotePB {
       return cDId_;
     }
 
-    // required bytes c_last = 3;
+    // required string c_last = 3;
     public static final int C_LAST_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString cLast_;
+    private java.lang.Object cLast_;
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_last = 3;</code>
      */
     public boolean hasCLast() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required bytes c_last = 3;</code>
+     * <code>required string c_last = 3;</code>
      */
-    public com.google.protobuf.ByteString getCLast() {
-      return cLast_;
+    public java.lang.String getCLast() {
+      java.lang.Object ref = cLast_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cLast_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string c_last = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCLastBytes() {
+      java.lang.Object ref = cLast_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cLast_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // repeated int64 ids = 4;
@@ -14426,7 +15933,7 @@ public final class AntidotePB {
     private void initFields() {
       cWId_ = 0L;
       cDId_ = 0L;
-      cLast_ = com.google.protobuf.ByteString.EMPTY;
+      cLast_ = "";
       ids_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -14460,7 +15967,7 @@ public final class AntidotePB {
         output.writeUInt64(2, cDId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, cLast_);
+        output.writeBytes(3, getCLastBytes());
       }
       for (int i = 0; i < ids_.size(); i++) {
         output.writeInt64(4, ids_.get(i));
@@ -14484,7 +15991,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, cLast_);
+          .computeBytesSize(3, getCLastBytes());
       }
       {
         int dataSize = 0;
@@ -14615,7 +16122,7 @@ public final class AntidotePB {
         bitField0_ = (bitField0_ & ~0x00000001);
         cDId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        cLast_ = com.google.protobuf.ByteString.EMPTY;
+        cLast_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
         ids_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -14687,7 +16194,9 @@ public final class AntidotePB {
           setCDId(other.getCDId());
         }
         if (other.hasCLast()) {
-          setCLast(other.getCLast());
+          bitField0_ |= 0x00000004;
+          cLast_ = other.cLast_;
+          onChanged();
         }
         if (!other.ids_.isEmpty()) {
           if (ids_.isEmpty()) {
@@ -14804,24 +16313,49 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes c_last = 3;
-      private com.google.protobuf.ByteString cLast_ = com.google.protobuf.ByteString.EMPTY;
+      // required string c_last = 3;
+      private java.lang.Object cLast_ = "";
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_last = 3;</code>
        */
       public boolean hasCLast() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_last = 3;</code>
        */
-      public com.google.protobuf.ByteString getCLast() {
-        return cLast_;
+      public java.lang.String getCLast() {
+        java.lang.Object ref = cLast_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          cLast_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_last = 3;</code>
        */
-      public Builder setCLast(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getCLastBytes() {
+        java.lang.Object ref = cLast_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cLast_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string c_last = 3;</code>
+       */
+      public Builder setCLast(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -14831,11 +16365,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes c_last = 3;</code>
+       * <code>required string c_last = 3;</code>
        */
       public Builder clearCLast() {
         bitField0_ = (bitField0_ & ~0x00000004);
         cLast_ = getDefaultInstance().getCLast();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string c_last = 3;</code>
+       */
+      public Builder setCLastBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        cLast_ = value;
         onChanged();
         return this;
       }
@@ -14920,65 +16467,95 @@ public final class AntidotePB {
   public interface TpccDistrictOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes d_name = 1;
+    // required string d_name = 1;
     /**
-     * <code>required bytes d_name = 1;</code>
+     * <code>required string d_name = 1;</code>
      */
     boolean hasDName();
     /**
-     * <code>required bytes d_name = 1;</code>
+     * <code>required string d_name = 1;</code>
      */
-    com.google.protobuf.ByteString getDName();
-
-    // required bytes d_street1 = 2;
+    java.lang.String getDName();
     /**
-     * <code>required bytes d_street1 = 2;</code>
+     * <code>required string d_name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getDNameBytes();
+
+    // required string d_street1 = 2;
+    /**
+     * <code>required string d_street1 = 2;</code>
      */
     boolean hasDStreet1();
     /**
-     * <code>required bytes d_street1 = 2;</code>
+     * <code>required string d_street1 = 2;</code>
      */
-    com.google.protobuf.ByteString getDStreet1();
-
-    // required bytes d_street2 = 3;
+    java.lang.String getDStreet1();
     /**
-     * <code>required bytes d_street2 = 3;</code>
+     * <code>required string d_street1 = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDStreet1Bytes();
+
+    // required string d_street2 = 3;
+    /**
+     * <code>required string d_street2 = 3;</code>
      */
     boolean hasDStreet2();
     /**
-     * <code>required bytes d_street2 = 3;</code>
+     * <code>required string d_street2 = 3;</code>
      */
-    com.google.protobuf.ByteString getDStreet2();
-
-    // required bytes d_city = 4;
+    java.lang.String getDStreet2();
     /**
-     * <code>required bytes d_city = 4;</code>
+     * <code>required string d_street2 = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getDStreet2Bytes();
+
+    // required string d_city = 4;
+    /**
+     * <code>required string d_city = 4;</code>
      */
     boolean hasDCity();
     /**
-     * <code>required bytes d_city = 4;</code>
+     * <code>required string d_city = 4;</code>
      */
-    com.google.protobuf.ByteString getDCity();
-
-    // required bytes d_state = 5;
+    java.lang.String getDCity();
     /**
-     * <code>required bytes d_state = 5;</code>
+     * <code>required string d_city = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getDCityBytes();
+
+    // required string d_state = 5;
+    /**
+     * <code>required string d_state = 5;</code>
      */
     boolean hasDState();
     /**
-     * <code>required bytes d_state = 5;</code>
+     * <code>required string d_state = 5;</code>
      */
-    com.google.protobuf.ByteString getDState();
-
-    // required bytes d_zip = 6;
+    java.lang.String getDState();
     /**
-     * <code>required bytes d_zip = 6;</code>
+     * <code>required string d_state = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getDStateBytes();
+
+    // required string d_zip = 6;
+    /**
+     * <code>required string d_zip = 6;</code>
      */
     boolean hasDZip();
     /**
-     * <code>required bytes d_zip = 6;</code>
+     * <code>required string d_zip = 6;</code>
      */
-    com.google.protobuf.ByteString getDZip();
+    java.lang.String getDZip();
+    /**
+     * <code>required string d_zip = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getDZipBytes();
 
     // required double d_tax = 7;
     /**
@@ -15131,100 +16708,262 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required bytes d_name = 1;
+    // required string d_name = 1;
     public static final int D_NAME_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString dName_;
+    private java.lang.Object dName_;
     /**
-     * <code>required bytes d_name = 1;</code>
+     * <code>required string d_name = 1;</code>
      */
     public boolean hasDName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes d_name = 1;</code>
+     * <code>required string d_name = 1;</code>
      */
-    public com.google.protobuf.ByteString getDName() {
-      return dName_;
+    public java.lang.String getDName() {
+      java.lang.Object ref = dName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string d_name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDNameBytes() {
+      java.lang.Object ref = dName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes d_street1 = 2;
+    // required string d_street1 = 2;
     public static final int D_STREET1_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString dStreet1_;
+    private java.lang.Object dStreet1_;
     /**
-     * <code>required bytes d_street1 = 2;</code>
+     * <code>required string d_street1 = 2;</code>
      */
     public boolean hasDStreet1() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes d_street1 = 2;</code>
+     * <code>required string d_street1 = 2;</code>
      */
-    public com.google.protobuf.ByteString getDStreet1() {
-      return dStreet1_;
+    public java.lang.String getDStreet1() {
+      java.lang.Object ref = dStreet1_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dStreet1_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string d_street1 = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDStreet1Bytes() {
+      java.lang.Object ref = dStreet1_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dStreet1_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes d_street2 = 3;
+    // required string d_street2 = 3;
     public static final int D_STREET2_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString dStreet2_;
+    private java.lang.Object dStreet2_;
     /**
-     * <code>required bytes d_street2 = 3;</code>
+     * <code>required string d_street2 = 3;</code>
      */
     public boolean hasDStreet2() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required bytes d_street2 = 3;</code>
+     * <code>required string d_street2 = 3;</code>
      */
-    public com.google.protobuf.ByteString getDStreet2() {
-      return dStreet2_;
+    public java.lang.String getDStreet2() {
+      java.lang.Object ref = dStreet2_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dStreet2_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string d_street2 = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDStreet2Bytes() {
+      java.lang.Object ref = dStreet2_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dStreet2_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes d_city = 4;
+    // required string d_city = 4;
     public static final int D_CITY_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString dCity_;
+    private java.lang.Object dCity_;
     /**
-     * <code>required bytes d_city = 4;</code>
+     * <code>required string d_city = 4;</code>
      */
     public boolean hasDCity() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required bytes d_city = 4;</code>
+     * <code>required string d_city = 4;</code>
      */
-    public com.google.protobuf.ByteString getDCity() {
-      return dCity_;
+    public java.lang.String getDCity() {
+      java.lang.Object ref = dCity_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dCity_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string d_city = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDCityBytes() {
+      java.lang.Object ref = dCity_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dCity_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes d_state = 5;
+    // required string d_state = 5;
     public static final int D_STATE_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString dState_;
+    private java.lang.Object dState_;
     /**
-     * <code>required bytes d_state = 5;</code>
+     * <code>required string d_state = 5;</code>
      */
     public boolean hasDState() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required bytes d_state = 5;</code>
+     * <code>required string d_state = 5;</code>
      */
-    public com.google.protobuf.ByteString getDState() {
-      return dState_;
+    public java.lang.String getDState() {
+      java.lang.Object ref = dState_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dState_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string d_state = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDStateBytes() {
+      java.lang.Object ref = dState_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dState_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes d_zip = 6;
+    // required string d_zip = 6;
     public static final int D_ZIP_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString dZip_;
+    private java.lang.Object dZip_;
     /**
-     * <code>required bytes d_zip = 6;</code>
+     * <code>required string d_zip = 6;</code>
      */
     public boolean hasDZip() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required bytes d_zip = 6;</code>
+     * <code>required string d_zip = 6;</code>
      */
-    public com.google.protobuf.ByteString getDZip() {
-      return dZip_;
+    public java.lang.String getDZip() {
+      java.lang.Object ref = dZip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dZip_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string d_zip = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDZipBytes() {
+      java.lang.Object ref = dZip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dZip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required double d_tax = 7;
@@ -15260,12 +16999,12 @@ public final class AntidotePB {
     }
 
     private void initFields() {
-      dName_ = com.google.protobuf.ByteString.EMPTY;
-      dStreet1_ = com.google.protobuf.ByteString.EMPTY;
-      dStreet2_ = com.google.protobuf.ByteString.EMPTY;
-      dCity_ = com.google.protobuf.ByteString.EMPTY;
-      dState_ = com.google.protobuf.ByteString.EMPTY;
-      dZip_ = com.google.protobuf.ByteString.EMPTY;
+      dName_ = "";
+      dStreet1_ = "";
+      dStreet2_ = "";
+      dCity_ = "";
+      dState_ = "";
+      dZip_ = "";
       dTax_ = 0D;
       dNextOId_ = 0L;
     }
@@ -15314,22 +17053,22 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, dName_);
+        output.writeBytes(1, getDNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, dStreet1_);
+        output.writeBytes(2, getDStreet1Bytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, dStreet2_);
+        output.writeBytes(3, getDStreet2Bytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, dCity_);
+        output.writeBytes(4, getDCityBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, dState_);
+        output.writeBytes(5, getDStateBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, dZip_);
+        output.writeBytes(6, getDZipBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeDouble(7, dTax_);
@@ -15348,27 +17087,27 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, dName_);
+          .computeBytesSize(1, getDNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, dStreet1_);
+          .computeBytesSize(2, getDStreet1Bytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, dStreet2_);
+          .computeBytesSize(3, getDStreet2Bytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, dCity_);
+          .computeBytesSize(4, getDCityBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, dState_);
+          .computeBytesSize(5, getDStateBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, dZip_);
+          .computeBytesSize(6, getDZipBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -15494,17 +17233,17 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        dName_ = com.google.protobuf.ByteString.EMPTY;
+        dName_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        dStreet1_ = com.google.protobuf.ByteString.EMPTY;
+        dStreet1_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        dStreet2_ = com.google.protobuf.ByteString.EMPTY;
+        dStreet2_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        dCity_ = com.google.protobuf.ByteString.EMPTY;
+        dCity_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        dState_ = com.google.protobuf.ByteString.EMPTY;
+        dState_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        dZip_ = com.google.protobuf.ByteString.EMPTY;
+        dZip_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
         dTax_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -15587,22 +17326,34 @@ public final class AntidotePB {
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccDistrict other) {
         if (other == com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance()) return this;
         if (other.hasDName()) {
-          setDName(other.getDName());
+          bitField0_ |= 0x00000001;
+          dName_ = other.dName_;
+          onChanged();
         }
         if (other.hasDStreet1()) {
-          setDStreet1(other.getDStreet1());
+          bitField0_ |= 0x00000002;
+          dStreet1_ = other.dStreet1_;
+          onChanged();
         }
         if (other.hasDStreet2()) {
-          setDStreet2(other.getDStreet2());
+          bitField0_ |= 0x00000004;
+          dStreet2_ = other.dStreet2_;
+          onChanged();
         }
         if (other.hasDCity()) {
-          setDCity(other.getDCity());
+          bitField0_ |= 0x00000008;
+          dCity_ = other.dCity_;
+          onChanged();
         }
         if (other.hasDState()) {
-          setDState(other.getDState());
+          bitField0_ |= 0x00000010;
+          dState_ = other.dState_;
+          onChanged();
         }
         if (other.hasDZip()) {
-          setDZip(other.getDZip());
+          bitField0_ |= 0x00000020;
+          dZip_ = other.dZip_;
+          onChanged();
         }
         if (other.hasDTax()) {
           setDTax(other.getDTax());
@@ -15669,24 +17420,49 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required bytes d_name = 1;
-      private com.google.protobuf.ByteString dName_ = com.google.protobuf.ByteString.EMPTY;
+      // required string d_name = 1;
+      private java.lang.Object dName_ = "";
       /**
-       * <code>required bytes d_name = 1;</code>
+       * <code>required string d_name = 1;</code>
        */
       public boolean hasDName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes d_name = 1;</code>
+       * <code>required string d_name = 1;</code>
        */
-      public com.google.protobuf.ByteString getDName() {
-        return dName_;
+      public java.lang.String getDName() {
+        java.lang.Object ref = dName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          dName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes d_name = 1;</code>
+       * <code>required string d_name = 1;</code>
        */
-      public Builder setDName(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getDNameBytes() {
+        java.lang.Object ref = dName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string d_name = 1;</code>
+       */
+      public Builder setDName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -15696,7 +17472,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes d_name = 1;</code>
+       * <code>required string d_name = 1;</code>
        */
       public Builder clearDName() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -15704,25 +17480,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes d_street1 = 2;
-      private com.google.protobuf.ByteString dStreet1_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes d_street1 = 2;</code>
+       * <code>required string d_name = 1;</code>
+       */
+      public Builder setDNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        dName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string d_street1 = 2;
+      private java.lang.Object dStreet1_ = "";
+      /**
+       * <code>required string d_street1 = 2;</code>
        */
       public boolean hasDStreet1() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes d_street1 = 2;</code>
+       * <code>required string d_street1 = 2;</code>
        */
-      public com.google.protobuf.ByteString getDStreet1() {
-        return dStreet1_;
+      public java.lang.String getDStreet1() {
+        java.lang.Object ref = dStreet1_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          dStreet1_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes d_street1 = 2;</code>
+       * <code>required string d_street1 = 2;</code>
        */
-      public Builder setDStreet1(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getDStreet1Bytes() {
+        java.lang.Object ref = dStreet1_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dStreet1_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string d_street1 = 2;</code>
+       */
+      public Builder setDStreet1(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -15732,7 +17546,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes d_street1 = 2;</code>
+       * <code>required string d_street1 = 2;</code>
        */
       public Builder clearDStreet1() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -15740,25 +17554,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes d_street2 = 3;
-      private com.google.protobuf.ByteString dStreet2_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes d_street2 = 3;</code>
+       * <code>required string d_street1 = 2;</code>
+       */
+      public Builder setDStreet1Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        dStreet1_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string d_street2 = 3;
+      private java.lang.Object dStreet2_ = "";
+      /**
+       * <code>required string d_street2 = 3;</code>
        */
       public boolean hasDStreet2() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required bytes d_street2 = 3;</code>
+       * <code>required string d_street2 = 3;</code>
        */
-      public com.google.protobuf.ByteString getDStreet2() {
-        return dStreet2_;
+      public java.lang.String getDStreet2() {
+        java.lang.Object ref = dStreet2_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          dStreet2_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes d_street2 = 3;</code>
+       * <code>required string d_street2 = 3;</code>
        */
-      public Builder setDStreet2(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getDStreet2Bytes() {
+        java.lang.Object ref = dStreet2_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dStreet2_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string d_street2 = 3;</code>
+       */
+      public Builder setDStreet2(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -15768,7 +17620,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes d_street2 = 3;</code>
+       * <code>required string d_street2 = 3;</code>
        */
       public Builder clearDStreet2() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -15776,25 +17628,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes d_city = 4;
-      private com.google.protobuf.ByteString dCity_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes d_city = 4;</code>
+       * <code>required string d_street2 = 3;</code>
+       */
+      public Builder setDStreet2Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        dStreet2_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string d_city = 4;
+      private java.lang.Object dCity_ = "";
+      /**
+       * <code>required string d_city = 4;</code>
        */
       public boolean hasDCity() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required bytes d_city = 4;</code>
+       * <code>required string d_city = 4;</code>
        */
-      public com.google.protobuf.ByteString getDCity() {
-        return dCity_;
+      public java.lang.String getDCity() {
+        java.lang.Object ref = dCity_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          dCity_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes d_city = 4;</code>
+       * <code>required string d_city = 4;</code>
        */
-      public Builder setDCity(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getDCityBytes() {
+        java.lang.Object ref = dCity_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dCity_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string d_city = 4;</code>
+       */
+      public Builder setDCity(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -15804,7 +17694,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes d_city = 4;</code>
+       * <code>required string d_city = 4;</code>
        */
       public Builder clearDCity() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -15812,25 +17702,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes d_state = 5;
-      private com.google.protobuf.ByteString dState_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes d_state = 5;</code>
+       * <code>required string d_city = 4;</code>
+       */
+      public Builder setDCityBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        dCity_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string d_state = 5;
+      private java.lang.Object dState_ = "";
+      /**
+       * <code>required string d_state = 5;</code>
        */
       public boolean hasDState() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required bytes d_state = 5;</code>
+       * <code>required string d_state = 5;</code>
        */
-      public com.google.protobuf.ByteString getDState() {
-        return dState_;
+      public java.lang.String getDState() {
+        java.lang.Object ref = dState_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          dState_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes d_state = 5;</code>
+       * <code>required string d_state = 5;</code>
        */
-      public Builder setDState(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getDStateBytes() {
+        java.lang.Object ref = dState_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dState_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string d_state = 5;</code>
+       */
+      public Builder setDState(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -15840,7 +17768,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes d_state = 5;</code>
+       * <code>required string d_state = 5;</code>
        */
       public Builder clearDState() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -15848,25 +17776,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes d_zip = 6;
-      private com.google.protobuf.ByteString dZip_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes d_zip = 6;</code>
+       * <code>required string d_state = 5;</code>
+       */
+      public Builder setDStateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        dState_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string d_zip = 6;
+      private java.lang.Object dZip_ = "";
+      /**
+       * <code>required string d_zip = 6;</code>
        */
       public boolean hasDZip() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required bytes d_zip = 6;</code>
+       * <code>required string d_zip = 6;</code>
        */
-      public com.google.protobuf.ByteString getDZip() {
-        return dZip_;
+      public java.lang.String getDZip() {
+        java.lang.Object ref = dZip_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          dZip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes d_zip = 6;</code>
+       * <code>required string d_zip = 6;</code>
        */
-      public Builder setDZip(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getDZipBytes() {
+        java.lang.Object ref = dZip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dZip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string d_zip = 6;</code>
+       */
+      public Builder setDZip(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -15876,11 +17842,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes d_zip = 6;</code>
+       * <code>required string d_zip = 6;</code>
        */
       public Builder clearDZip() {
         bitField0_ = (bitField0_ & ~0x00000020);
         dZip_ = getDefaultInstance().getDZip();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string d_zip = 6;</code>
+       */
+      public Builder setDZipBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        dZip_ = value;
         onChanged();
         return this;
       }
@@ -16379,15 +18358,20 @@ public final class AntidotePB {
      */
     long getIImId();
 
-    // required bytes i_name = 2;
+    // required string i_name = 2;
     /**
-     * <code>required bytes i_name = 2;</code>
+     * <code>required string i_name = 2;</code>
      */
     boolean hasIName();
     /**
-     * <code>required bytes i_name = 2;</code>
+     * <code>required string i_name = 2;</code>
      */
-    com.google.protobuf.ByteString getIName();
+    java.lang.String getIName();
+    /**
+     * <code>required string i_name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getINameBytes();
 
     // required double i_price = 3;
     /**
@@ -16399,15 +18383,20 @@ public final class AntidotePB {
      */
     double getIPrice();
 
-    // required bytes i_data = 4;
+    // required string i_data = 4;
     /**
-     * <code>required bytes i_data = 4;</code>
+     * <code>required string i_data = 4;</code>
      */
     boolean hasIData();
     /**
-     * <code>required bytes i_data = 4;</code>
+     * <code>required string i_data = 4;</code>
      */
-    com.google.protobuf.ByteString getIData();
+    java.lang.String getIData();
+    /**
+     * <code>required string i_data = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getIDataBytes();
   }
   /**
    * Protobuf type {@code TpccItem}
@@ -16536,20 +18525,47 @@ public final class AntidotePB {
       return iImId_;
     }
 
-    // required bytes i_name = 2;
+    // required string i_name = 2;
     public static final int I_NAME_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString iName_;
+    private java.lang.Object iName_;
     /**
-     * <code>required bytes i_name = 2;</code>
+     * <code>required string i_name = 2;</code>
      */
     public boolean hasIName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes i_name = 2;</code>
+     * <code>required string i_name = 2;</code>
      */
-    public com.google.protobuf.ByteString getIName() {
-      return iName_;
+    public java.lang.String getIName() {
+      java.lang.Object ref = iName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          iName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string i_name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getINameBytes() {
+      java.lang.Object ref = iName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        iName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required double i_price = 3;
@@ -16568,27 +18584,54 @@ public final class AntidotePB {
       return iPrice_;
     }
 
-    // required bytes i_data = 4;
+    // required string i_data = 4;
     public static final int I_DATA_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString iData_;
+    private java.lang.Object iData_;
     /**
-     * <code>required bytes i_data = 4;</code>
+     * <code>required string i_data = 4;</code>
      */
     public boolean hasIData() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required bytes i_data = 4;</code>
+     * <code>required string i_data = 4;</code>
      */
-    public com.google.protobuf.ByteString getIData() {
-      return iData_;
+    public java.lang.String getIData() {
+      java.lang.Object ref = iData_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          iData_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string i_data = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIDataBytes() {
+      java.lang.Object ref = iData_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        iData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
       iImId_ = 0L;
-      iName_ = com.google.protobuf.ByteString.EMPTY;
+      iName_ = "";
       iPrice_ = 0D;
-      iData_ = com.google.protobuf.ByteString.EMPTY;
+      iData_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16622,13 +18665,13 @@ public final class AntidotePB {
         output.writeUInt64(1, iImId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, iName_);
+        output.writeBytes(2, getINameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeDouble(3, iPrice_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, iData_);
+        output.writeBytes(4, getIDataBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -16645,7 +18688,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, iName_);
+          .computeBytesSize(2, getINameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -16653,7 +18696,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, iData_);
+          .computeBytesSize(4, getIDataBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16773,11 +18816,11 @@ public final class AntidotePB {
         super.clear();
         iImId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
-        iName_ = com.google.protobuf.ByteString.EMPTY;
+        iName_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         iPrice_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000004);
-        iData_ = com.google.protobuf.ByteString.EMPTY;
+        iData_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -16843,13 +18886,17 @@ public final class AntidotePB {
           setIImId(other.getIImId());
         }
         if (other.hasIName()) {
-          setIName(other.getIName());
+          bitField0_ |= 0x00000002;
+          iName_ = other.iName_;
+          onChanged();
         }
         if (other.hasIPrice()) {
           setIPrice(other.getIPrice());
         }
         if (other.hasIData()) {
-          setIData(other.getIData());
+          bitField0_ |= 0x00000008;
+          iData_ = other.iData_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -16927,24 +18974,49 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes i_name = 2;
-      private com.google.protobuf.ByteString iName_ = com.google.protobuf.ByteString.EMPTY;
+      // required string i_name = 2;
+      private java.lang.Object iName_ = "";
       /**
-       * <code>required bytes i_name = 2;</code>
+       * <code>required string i_name = 2;</code>
        */
       public boolean hasIName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes i_name = 2;</code>
+       * <code>required string i_name = 2;</code>
        */
-      public com.google.protobuf.ByteString getIName() {
-        return iName_;
+      public java.lang.String getIName() {
+        java.lang.Object ref = iName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          iName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes i_name = 2;</code>
+       * <code>required string i_name = 2;</code>
        */
-      public Builder setIName(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getINameBytes() {
+        java.lang.Object ref = iName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          iName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string i_name = 2;</code>
+       */
+      public Builder setIName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -16954,11 +19026,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes i_name = 2;</code>
+       * <code>required string i_name = 2;</code>
        */
       public Builder clearIName() {
         bitField0_ = (bitField0_ & ~0x00000002);
         iName_ = getDefaultInstance().getIName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string i_name = 2;</code>
+       */
+      public Builder setINameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        iName_ = value;
         onChanged();
         return this;
       }
@@ -16996,24 +19081,49 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes i_data = 4;
-      private com.google.protobuf.ByteString iData_ = com.google.protobuf.ByteString.EMPTY;
+      // required string i_data = 4;
+      private java.lang.Object iData_ = "";
       /**
-       * <code>required bytes i_data = 4;</code>
+       * <code>required string i_data = 4;</code>
        */
       public boolean hasIData() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required bytes i_data = 4;</code>
+       * <code>required string i_data = 4;</code>
        */
-      public com.google.protobuf.ByteString getIData() {
-        return iData_;
+      public java.lang.String getIData() {
+        java.lang.Object ref = iData_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          iData_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes i_data = 4;</code>
+       * <code>required string i_data = 4;</code>
        */
-      public Builder setIData(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getIDataBytes() {
+        java.lang.Object ref = iData_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          iData_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string i_data = 4;</code>
+       */
+      public Builder setIData(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -17023,11 +19133,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes i_data = 4;</code>
+       * <code>required string i_data = 4;</code>
        */
       public Builder clearIData() {
         bitField0_ = (bitField0_ & ~0x00000008);
         iData_ = getDefaultInstance().getIData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string i_data = 4;</code>
+       */
+      public Builder setIDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        iData_ = value;
         onChanged();
         return this;
       }
@@ -18388,105 +20511,70 @@ public final class AntidotePB {
   public interface TpccOrderLineOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required uint64 ol_o_id = 1;
+    // required uint64 ol_i_id = 1;
     /**
-     * <code>required uint64 ol_o_id = 1;</code>
-     */
-    boolean hasOlOId();
-    /**
-     * <code>required uint64 ol_o_id = 1;</code>
-     */
-    long getOlOId();
-
-    // required uint64 ol_d_id = 2;
-    /**
-     * <code>required uint64 ol_d_id = 2;</code>
-     */
-    boolean hasOlDId();
-    /**
-     * <code>required uint64 ol_d_id = 2;</code>
-     */
-    long getOlDId();
-
-    // required uint64 ol_w_id = 3;
-    /**
-     * <code>required uint64 ol_w_id = 3;</code>
-     */
-    boolean hasOlWId();
-    /**
-     * <code>required uint64 ol_w_id = 3;</code>
-     */
-    long getOlWId();
-
-    // required uint64 ol_number = 4;
-    /**
-     * <code>required uint64 ol_number = 4;</code>
-     */
-    boolean hasOlNumber();
-    /**
-     * <code>required uint64 ol_number = 4;</code>
-     */
-    long getOlNumber();
-
-    // required uint64 ol_i_id = 5;
-    /**
-     * <code>required uint64 ol_i_id = 5;</code>
+     * <code>required uint64 ol_i_id = 1;</code>
      */
     boolean hasOlIId();
     /**
-     * <code>required uint64 ol_i_id = 5;</code>
+     * <code>required uint64 ol_i_id = 1;</code>
      */
     long getOlIId();
 
-    // required uint64 ol_supply_w_id = 6;
+    // required uint64 ol_supply_w_id = 2;
     /**
-     * <code>required uint64 ol_supply_w_id = 6;</code>
+     * <code>required uint64 ol_supply_w_id = 2;</code>
      */
     boolean hasOlSupplyWId();
     /**
-     * <code>required uint64 ol_supply_w_id = 6;</code>
+     * <code>required uint64 ol_supply_w_id = 2;</code>
      */
     long getOlSupplyWId();
 
-    // required uint64 ol_delivery_d = 7;
+    // required uint64 ol_delivery_d = 3;
     /**
-     * <code>required uint64 ol_delivery_d = 7;</code>
+     * <code>required uint64 ol_delivery_d = 3;</code>
      */
     boolean hasOlDeliveryD();
     /**
-     * <code>required uint64 ol_delivery_d = 7;</code>
+     * <code>required uint64 ol_delivery_d = 3;</code>
      */
     long getOlDeliveryD();
 
-    // required uint64 ol_quantity = 8;
+    // required uint64 ol_quantity = 4;
     /**
-     * <code>required uint64 ol_quantity = 8;</code>
+     * <code>required uint64 ol_quantity = 4;</code>
      */
     boolean hasOlQuantity();
     /**
-     * <code>required uint64 ol_quantity = 8;</code>
+     * <code>required uint64 ol_quantity = 4;</code>
      */
     long getOlQuantity();
 
-    // required double ol_amount = 9;
+    // required double ol_amount = 5;
     /**
-     * <code>required double ol_amount = 9;</code>
+     * <code>required double ol_amount = 5;</code>
      */
     boolean hasOlAmount();
     /**
-     * <code>required double ol_amount = 9;</code>
+     * <code>required double ol_amount = 5;</code>
      */
     double getOlAmount();
 
-    // required bytes ol_dist_info = 10;
+    // required string ol_dist_info = 6;
     /**
-     * <code>required bytes ol_dist_info = 10;</code>
+     * <code>required string ol_dist_info = 6;</code>
      */
     boolean hasOlDistInfo();
     /**
-     * <code>required bytes ol_dist_info = 10;</code>
+     * <code>required string ol_dist_info = 6;</code>
      */
-    com.google.protobuf.ByteString getOlDistInfo();
+    java.lang.String getOlDistInfo();
+    /**
+     * <code>required string ol_dist_info = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getOlDistInfoBytes();
   }
   /**
    * Protobuf type {@code TpccOrderLine}
@@ -18541,51 +20629,31 @@ public final class AntidotePB {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              olOId_ = input.readUInt64();
+              olIId_ = input.readUInt64();
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              olDId_ = input.readUInt64();
+              olSupplyWId_ = input.readUInt64();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              olWId_ = input.readUInt64();
+              olDeliveryD_ = input.readUInt64();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              olNumber_ = input.readUInt64();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              olIId_ = input.readUInt64();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              olSupplyWId_ = input.readUInt64();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              olDeliveryD_ = input.readUInt64();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
               olQuantity_ = input.readUInt64();
               break;
             }
-            case 73: {
-              bitField0_ |= 0x00000100;
+            case 41: {
+              bitField0_ |= 0x00000010;
               olAmount_ = input.readDouble();
               break;
             }
-            case 82: {
-              bitField0_ |= 0x00000200;
+            case 50: {
+              bitField0_ |= 0x00000020;
               olDistInfo_ = input.readBytes();
               break;
             }
@@ -18629,199 +20697,142 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required uint64 ol_o_id = 1;
-    public static final int OL_O_ID_FIELD_NUMBER = 1;
-    private long olOId_;
+    // required uint64 ol_i_id = 1;
+    public static final int OL_I_ID_FIELD_NUMBER = 1;
+    private long olIId_;
     /**
-     * <code>required uint64 ol_o_id = 1;</code>
+     * <code>required uint64 ol_i_id = 1;</code>
      */
-    public boolean hasOlOId() {
+    public boolean hasOlIId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required uint64 ol_o_id = 1;</code>
-     */
-    public long getOlOId() {
-      return olOId_;
-    }
-
-    // required uint64 ol_d_id = 2;
-    public static final int OL_D_ID_FIELD_NUMBER = 2;
-    private long olDId_;
-    /**
-     * <code>required uint64 ol_d_id = 2;</code>
-     */
-    public boolean hasOlDId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint64 ol_d_id = 2;</code>
-     */
-    public long getOlDId() {
-      return olDId_;
-    }
-
-    // required uint64 ol_w_id = 3;
-    public static final int OL_W_ID_FIELD_NUMBER = 3;
-    private long olWId_;
-    /**
-     * <code>required uint64 ol_w_id = 3;</code>
-     */
-    public boolean hasOlWId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint64 ol_w_id = 3;</code>
-     */
-    public long getOlWId() {
-      return olWId_;
-    }
-
-    // required uint64 ol_number = 4;
-    public static final int OL_NUMBER_FIELD_NUMBER = 4;
-    private long olNumber_;
-    /**
-     * <code>required uint64 ol_number = 4;</code>
-     */
-    public boolean hasOlNumber() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required uint64 ol_number = 4;</code>
-     */
-    public long getOlNumber() {
-      return olNumber_;
-    }
-
-    // required uint64 ol_i_id = 5;
-    public static final int OL_I_ID_FIELD_NUMBER = 5;
-    private long olIId_;
-    /**
-     * <code>required uint64 ol_i_id = 5;</code>
-     */
-    public boolean hasOlIId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>required uint64 ol_i_id = 5;</code>
+     * <code>required uint64 ol_i_id = 1;</code>
      */
     public long getOlIId() {
       return olIId_;
     }
 
-    // required uint64 ol_supply_w_id = 6;
-    public static final int OL_SUPPLY_W_ID_FIELD_NUMBER = 6;
+    // required uint64 ol_supply_w_id = 2;
+    public static final int OL_SUPPLY_W_ID_FIELD_NUMBER = 2;
     private long olSupplyWId_;
     /**
-     * <code>required uint64 ol_supply_w_id = 6;</code>
+     * <code>required uint64 ol_supply_w_id = 2;</code>
      */
     public boolean hasOlSupplyWId() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required uint64 ol_supply_w_id = 6;</code>
+     * <code>required uint64 ol_supply_w_id = 2;</code>
      */
     public long getOlSupplyWId() {
       return olSupplyWId_;
     }
 
-    // required uint64 ol_delivery_d = 7;
-    public static final int OL_DELIVERY_D_FIELD_NUMBER = 7;
+    // required uint64 ol_delivery_d = 3;
+    public static final int OL_DELIVERY_D_FIELD_NUMBER = 3;
     private long olDeliveryD_;
     /**
-     * <code>required uint64 ol_delivery_d = 7;</code>
+     * <code>required uint64 ol_delivery_d = 3;</code>
      */
     public boolean hasOlDeliveryD() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required uint64 ol_delivery_d = 7;</code>
+     * <code>required uint64 ol_delivery_d = 3;</code>
      */
     public long getOlDeliveryD() {
       return olDeliveryD_;
     }
 
-    // required uint64 ol_quantity = 8;
-    public static final int OL_QUANTITY_FIELD_NUMBER = 8;
+    // required uint64 ol_quantity = 4;
+    public static final int OL_QUANTITY_FIELD_NUMBER = 4;
     private long olQuantity_;
     /**
-     * <code>required uint64 ol_quantity = 8;</code>
+     * <code>required uint64 ol_quantity = 4;</code>
      */
     public boolean hasOlQuantity() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required uint64 ol_quantity = 8;</code>
+     * <code>required uint64 ol_quantity = 4;</code>
      */
     public long getOlQuantity() {
       return olQuantity_;
     }
 
-    // required double ol_amount = 9;
-    public static final int OL_AMOUNT_FIELD_NUMBER = 9;
+    // required double ol_amount = 5;
+    public static final int OL_AMOUNT_FIELD_NUMBER = 5;
     private double olAmount_;
     /**
-     * <code>required double ol_amount = 9;</code>
+     * <code>required double ol_amount = 5;</code>
      */
     public boolean hasOlAmount() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required double ol_amount = 9;</code>
+     * <code>required double ol_amount = 5;</code>
      */
     public double getOlAmount() {
       return olAmount_;
     }
 
-    // required bytes ol_dist_info = 10;
-    public static final int OL_DIST_INFO_FIELD_NUMBER = 10;
-    private com.google.protobuf.ByteString olDistInfo_;
+    // required string ol_dist_info = 6;
+    public static final int OL_DIST_INFO_FIELD_NUMBER = 6;
+    private java.lang.Object olDistInfo_;
     /**
-     * <code>required bytes ol_dist_info = 10;</code>
+     * <code>required string ol_dist_info = 6;</code>
      */
     public boolean hasOlDistInfo() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required bytes ol_dist_info = 10;</code>
+     * <code>required string ol_dist_info = 6;</code>
      */
-    public com.google.protobuf.ByteString getOlDistInfo() {
-      return olDistInfo_;
+    public java.lang.String getOlDistInfo() {
+      java.lang.Object ref = olDistInfo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          olDistInfo_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string ol_dist_info = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOlDistInfoBytes() {
+      java.lang.Object ref = olDistInfo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        olDistInfo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
-      olOId_ = 0L;
-      olDId_ = 0L;
-      olWId_ = 0L;
-      olNumber_ = 0L;
       olIId_ = 0L;
       olSupplyWId_ = 0L;
       olDeliveryD_ = 0L;
       olQuantity_ = 0L;
       olAmount_ = 0D;
-      olDistInfo_ = com.google.protobuf.ByteString.EMPTY;
+      olDistInfo_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasOlOId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasOlDId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasOlWId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasOlNumber()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasOlIId()) {
         memoizedIsInitialized = 0;
         return false;
@@ -18854,34 +20865,22 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt64(1, olOId_);
+        output.writeUInt64(1, olIId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt64(2, olDId_);
+        output.writeUInt64(2, olSupplyWId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt64(3, olWId_);
+        output.writeUInt64(3, olDeliveryD_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeUInt64(4, olNumber_);
+        output.writeUInt64(4, olQuantity_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeUInt64(5, olIId_);
+        output.writeDouble(5, olAmount_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeUInt64(6, olSupplyWId_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeUInt64(7, olDeliveryD_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeUInt64(8, olQuantity_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeDouble(9, olAmount_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBytes(10, olDistInfo_);
+        output.writeBytes(6, getOlDistInfoBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -18894,43 +20893,27 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, olOId_);
+          .computeUInt64Size(1, olIId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(2, olDId_);
+          .computeUInt64Size(2, olSupplyWId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(3, olWId_);
+          .computeUInt64Size(3, olDeliveryD_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(4, olNumber_);
+          .computeUInt64Size(4, olQuantity_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(5, olIId_);
+          .computeDoubleSize(5, olAmount_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(6, olSupplyWId_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(7, olDeliveryD_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(8, olQuantity_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(9, olAmount_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, olDistInfo_);
+          .computeBytesSize(6, getOlDistInfoBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -19048,26 +21031,18 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        olOId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        olDId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        olWId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        olNumber_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
         olIId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000001);
         olSupplyWId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000002);
         olDeliveryD_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000004);
         olQuantity_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000008);
         olAmount_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        olDistInfo_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000010);
+        olDistInfo_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -19099,41 +21074,25 @@ public final class AntidotePB {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.olOId_ = olOId_;
+        result.olIId_ = olIId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.olDId_ = olDId_;
+        result.olSupplyWId_ = olSupplyWId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.olWId_ = olWId_;
+        result.olDeliveryD_ = olDeliveryD_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.olNumber_ = olNumber_;
+        result.olQuantity_ = olQuantity_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.olIId_ = olIId_;
+        result.olAmount_ = olAmount_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
-        }
-        result.olSupplyWId_ = olSupplyWId_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.olDeliveryD_ = olDeliveryD_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.olQuantity_ = olQuantity_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.olAmount_ = olAmount_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
         }
         result.olDistInfo_ = olDistInfo_;
         result.bitField0_ = to_bitField0_;
@@ -19152,18 +21111,6 @@ public final class AntidotePB {
 
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccOrderLine other) {
         if (other == com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance()) return this;
-        if (other.hasOlOId()) {
-          setOlOId(other.getOlOId());
-        }
-        if (other.hasOlDId()) {
-          setOlDId(other.getOlDId());
-        }
-        if (other.hasOlWId()) {
-          setOlWId(other.getOlWId());
-        }
-        if (other.hasOlNumber()) {
-          setOlNumber(other.getOlNumber());
-        }
         if (other.hasOlIId()) {
           setOlIId(other.getOlIId());
         }
@@ -19180,29 +21127,15 @@ public final class AntidotePB {
           setOlAmount(other.getOlAmount());
         }
         if (other.hasOlDistInfo()) {
-          setOlDistInfo(other.getOlDistInfo());
+          bitField0_ |= 0x00000020;
+          olDistInfo_ = other.olDistInfo_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasOlOId()) {
-          
-          return false;
-        }
-        if (!hasOlDId()) {
-          
-          return false;
-        }
-        if (!hasOlWId()) {
-          
-          return false;
-        }
-        if (!hasOlNumber()) {
-          
-          return false;
-        }
         if (!hasOlIId()) {
           
           return false;
@@ -19249,335 +21182,241 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required uint64 ol_o_id = 1;
-      private long olOId_ ;
+      // required uint64 ol_i_id = 1;
+      private long olIId_ ;
       /**
-       * <code>required uint64 ol_o_id = 1;</code>
+       * <code>required uint64 ol_i_id = 1;</code>
        */
-      public boolean hasOlOId() {
+      public boolean hasOlIId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required uint64 ol_o_id = 1;</code>
-       */
-      public long getOlOId() {
-        return olOId_;
-      }
-      /**
-       * <code>required uint64 ol_o_id = 1;</code>
-       */
-      public Builder setOlOId(long value) {
-        bitField0_ |= 0x00000001;
-        olOId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint64 ol_o_id = 1;</code>
-       */
-      public Builder clearOlOId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        olOId_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // required uint64 ol_d_id = 2;
-      private long olDId_ ;
-      /**
-       * <code>required uint64 ol_d_id = 2;</code>
-       */
-      public boolean hasOlDId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint64 ol_d_id = 2;</code>
-       */
-      public long getOlDId() {
-        return olDId_;
-      }
-      /**
-       * <code>required uint64 ol_d_id = 2;</code>
-       */
-      public Builder setOlDId(long value) {
-        bitField0_ |= 0x00000002;
-        olDId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint64 ol_d_id = 2;</code>
-       */
-      public Builder clearOlDId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        olDId_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // required uint64 ol_w_id = 3;
-      private long olWId_ ;
-      /**
-       * <code>required uint64 ol_w_id = 3;</code>
-       */
-      public boolean hasOlWId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required uint64 ol_w_id = 3;</code>
-       */
-      public long getOlWId() {
-        return olWId_;
-      }
-      /**
-       * <code>required uint64 ol_w_id = 3;</code>
-       */
-      public Builder setOlWId(long value) {
-        bitField0_ |= 0x00000004;
-        olWId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint64 ol_w_id = 3;</code>
-       */
-      public Builder clearOlWId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        olWId_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // required uint64 ol_number = 4;
-      private long olNumber_ ;
-      /**
-       * <code>required uint64 ol_number = 4;</code>
-       */
-      public boolean hasOlNumber() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>required uint64 ol_number = 4;</code>
-       */
-      public long getOlNumber() {
-        return olNumber_;
-      }
-      /**
-       * <code>required uint64 ol_number = 4;</code>
-       */
-      public Builder setOlNumber(long value) {
-        bitField0_ |= 0x00000008;
-        olNumber_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint64 ol_number = 4;</code>
-       */
-      public Builder clearOlNumber() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        olNumber_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // required uint64 ol_i_id = 5;
-      private long olIId_ ;
-      /**
-       * <code>required uint64 ol_i_id = 5;</code>
-       */
-      public boolean hasOlIId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>required uint64 ol_i_id = 5;</code>
+       * <code>required uint64 ol_i_id = 1;</code>
        */
       public long getOlIId() {
         return olIId_;
       }
       /**
-       * <code>required uint64 ol_i_id = 5;</code>
+       * <code>required uint64 ol_i_id = 1;</code>
        */
       public Builder setOlIId(long value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000001;
         olIId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required uint64 ol_i_id = 5;</code>
+       * <code>required uint64 ol_i_id = 1;</code>
        */
       public Builder clearOlIId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000001);
         olIId_ = 0L;
         onChanged();
         return this;
       }
 
-      // required uint64 ol_supply_w_id = 6;
+      // required uint64 ol_supply_w_id = 2;
       private long olSupplyWId_ ;
       /**
-       * <code>required uint64 ol_supply_w_id = 6;</code>
+       * <code>required uint64 ol_supply_w_id = 2;</code>
        */
       public boolean hasOlSupplyWId() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required uint64 ol_supply_w_id = 6;</code>
+       * <code>required uint64 ol_supply_w_id = 2;</code>
        */
       public long getOlSupplyWId() {
         return olSupplyWId_;
       }
       /**
-       * <code>required uint64 ol_supply_w_id = 6;</code>
+       * <code>required uint64 ol_supply_w_id = 2;</code>
        */
       public Builder setOlSupplyWId(long value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000002;
         olSupplyWId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required uint64 ol_supply_w_id = 6;</code>
+       * <code>required uint64 ol_supply_w_id = 2;</code>
        */
       public Builder clearOlSupplyWId() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000002);
         olSupplyWId_ = 0L;
         onChanged();
         return this;
       }
 
-      // required uint64 ol_delivery_d = 7;
+      // required uint64 ol_delivery_d = 3;
       private long olDeliveryD_ ;
       /**
-       * <code>required uint64 ol_delivery_d = 7;</code>
+       * <code>required uint64 ol_delivery_d = 3;</code>
        */
       public boolean hasOlDeliveryD() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required uint64 ol_delivery_d = 7;</code>
+       * <code>required uint64 ol_delivery_d = 3;</code>
        */
       public long getOlDeliveryD() {
         return olDeliveryD_;
       }
       /**
-       * <code>required uint64 ol_delivery_d = 7;</code>
+       * <code>required uint64 ol_delivery_d = 3;</code>
        */
       public Builder setOlDeliveryD(long value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000004;
         olDeliveryD_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required uint64 ol_delivery_d = 7;</code>
+       * <code>required uint64 ol_delivery_d = 3;</code>
        */
       public Builder clearOlDeliveryD() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000004);
         olDeliveryD_ = 0L;
         onChanged();
         return this;
       }
 
-      // required uint64 ol_quantity = 8;
+      // required uint64 ol_quantity = 4;
       private long olQuantity_ ;
       /**
-       * <code>required uint64 ol_quantity = 8;</code>
+       * <code>required uint64 ol_quantity = 4;</code>
        */
       public boolean hasOlQuantity() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required uint64 ol_quantity = 8;</code>
+       * <code>required uint64 ol_quantity = 4;</code>
        */
       public long getOlQuantity() {
         return olQuantity_;
       }
       /**
-       * <code>required uint64 ol_quantity = 8;</code>
+       * <code>required uint64 ol_quantity = 4;</code>
        */
       public Builder setOlQuantity(long value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000008;
         olQuantity_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required uint64 ol_quantity = 8;</code>
+       * <code>required uint64 ol_quantity = 4;</code>
        */
       public Builder clearOlQuantity() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000008);
         olQuantity_ = 0L;
         onChanged();
         return this;
       }
 
-      // required double ol_amount = 9;
+      // required double ol_amount = 5;
       private double olAmount_ ;
       /**
-       * <code>required double ol_amount = 9;</code>
+       * <code>required double ol_amount = 5;</code>
        */
       public boolean hasOlAmount() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required double ol_amount = 9;</code>
+       * <code>required double ol_amount = 5;</code>
        */
       public double getOlAmount() {
         return olAmount_;
       }
       /**
-       * <code>required double ol_amount = 9;</code>
+       * <code>required double ol_amount = 5;</code>
        */
       public Builder setOlAmount(double value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000010;
         olAmount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required double ol_amount = 9;</code>
+       * <code>required double ol_amount = 5;</code>
        */
       public Builder clearOlAmount() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000010);
         olAmount_ = 0D;
         onChanged();
         return this;
       }
 
-      // required bytes ol_dist_info = 10;
-      private com.google.protobuf.ByteString olDistInfo_ = com.google.protobuf.ByteString.EMPTY;
+      // required string ol_dist_info = 6;
+      private java.lang.Object olDistInfo_ = "";
       /**
-       * <code>required bytes ol_dist_info = 10;</code>
+       * <code>required string ol_dist_info = 6;</code>
        */
       public boolean hasOlDistInfo() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required bytes ol_dist_info = 10;</code>
+       * <code>required string ol_dist_info = 6;</code>
        */
-      public com.google.protobuf.ByteString getOlDistInfo() {
-        return olDistInfo_;
+      public java.lang.String getOlDistInfo() {
+        java.lang.Object ref = olDistInfo_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          olDistInfo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes ol_dist_info = 10;</code>
+       * <code>required string ol_dist_info = 6;</code>
        */
-      public Builder setOlDistInfo(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getOlDistInfoBytes() {
+        java.lang.Object ref = olDistInfo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          olDistInfo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string ol_dist_info = 6;</code>
+       */
+      public Builder setOlDistInfo(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000020;
         olDistInfo_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required bytes ol_dist_info = 10;</code>
+       * <code>required string ol_dist_info = 6;</code>
        */
       public Builder clearOlDistInfo() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000020);
         olDistInfo_ = getDefaultInstance().getOlDistInfo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string ol_dist_info = 6;</code>
+       */
+      public Builder setOlDistInfoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        olDistInfo_ = value;
         onChanged();
         return this;
       }
@@ -19606,105 +21445,155 @@ public final class AntidotePB {
      */
     long getSQuantity();
 
-    // required bytes s_dist_01 = 2;
+    // required string s_dist_01 = 2;
     /**
-     * <code>required bytes s_dist_01 = 2;</code>
+     * <code>required string s_dist_01 = 2;</code>
      */
     boolean hasSDist01();
     /**
-     * <code>required bytes s_dist_01 = 2;</code>
+     * <code>required string s_dist_01 = 2;</code>
      */
-    com.google.protobuf.ByteString getSDist01();
-
-    // required bytes s_dist_02 = 3;
+    java.lang.String getSDist01();
     /**
-     * <code>required bytes s_dist_02 = 3;</code>
+     * <code>required string s_dist_01 = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist01Bytes();
+
+    // required string s_dist_02 = 3;
+    /**
+     * <code>required string s_dist_02 = 3;</code>
      */
     boolean hasSDist02();
     /**
-     * <code>required bytes s_dist_02 = 3;</code>
+     * <code>required string s_dist_02 = 3;</code>
      */
-    com.google.protobuf.ByteString getSDist02();
-
-    // required bytes s_dist_03 = 4;
+    java.lang.String getSDist02();
     /**
-     * <code>required bytes s_dist_03 = 4;</code>
+     * <code>required string s_dist_02 = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist02Bytes();
+
+    // required string s_dist_03 = 4;
+    /**
+     * <code>required string s_dist_03 = 4;</code>
      */
     boolean hasSDist03();
     /**
-     * <code>required bytes s_dist_03 = 4;</code>
+     * <code>required string s_dist_03 = 4;</code>
      */
-    com.google.protobuf.ByteString getSDist03();
-
-    // required bytes s_dist_04 = 5;
+    java.lang.String getSDist03();
     /**
-     * <code>required bytes s_dist_04 = 5;</code>
+     * <code>required string s_dist_03 = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist03Bytes();
+
+    // required string s_dist_04 = 5;
+    /**
+     * <code>required string s_dist_04 = 5;</code>
      */
     boolean hasSDist04();
     /**
-     * <code>required bytes s_dist_04 = 5;</code>
+     * <code>required string s_dist_04 = 5;</code>
      */
-    com.google.protobuf.ByteString getSDist04();
-
-    // required bytes s_dist_05 = 6;
+    java.lang.String getSDist04();
     /**
-     * <code>required bytes s_dist_05 = 6;</code>
+     * <code>required string s_dist_04 = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist04Bytes();
+
+    // required string s_dist_05 = 6;
+    /**
+     * <code>required string s_dist_05 = 6;</code>
      */
     boolean hasSDist05();
     /**
-     * <code>required bytes s_dist_05 = 6;</code>
+     * <code>required string s_dist_05 = 6;</code>
      */
-    com.google.protobuf.ByteString getSDist05();
-
-    // required bytes s_dist_06 = 7;
+    java.lang.String getSDist05();
     /**
-     * <code>required bytes s_dist_06 = 7;</code>
+     * <code>required string s_dist_05 = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist05Bytes();
+
+    // required string s_dist_06 = 7;
+    /**
+     * <code>required string s_dist_06 = 7;</code>
      */
     boolean hasSDist06();
     /**
-     * <code>required bytes s_dist_06 = 7;</code>
+     * <code>required string s_dist_06 = 7;</code>
      */
-    com.google.protobuf.ByteString getSDist06();
-
-    // required bytes s_dist_07 = 8;
+    java.lang.String getSDist06();
     /**
-     * <code>required bytes s_dist_07 = 8;</code>
+     * <code>required string s_dist_06 = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist06Bytes();
+
+    // required string s_dist_07 = 8;
+    /**
+     * <code>required string s_dist_07 = 8;</code>
      */
     boolean hasSDist07();
     /**
-     * <code>required bytes s_dist_07 = 8;</code>
+     * <code>required string s_dist_07 = 8;</code>
      */
-    com.google.protobuf.ByteString getSDist07();
-
-    // required bytes s_dist_08 = 9;
+    java.lang.String getSDist07();
     /**
-     * <code>required bytes s_dist_08 = 9;</code>
+     * <code>required string s_dist_07 = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist07Bytes();
+
+    // required string s_dist_08 = 9;
+    /**
+     * <code>required string s_dist_08 = 9;</code>
      */
     boolean hasSDist08();
     /**
-     * <code>required bytes s_dist_08 = 9;</code>
+     * <code>required string s_dist_08 = 9;</code>
      */
-    com.google.protobuf.ByteString getSDist08();
-
-    // required bytes s_dist_09 = 10;
+    java.lang.String getSDist08();
     /**
-     * <code>required bytes s_dist_09 = 10;</code>
+     * <code>required string s_dist_08 = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist08Bytes();
+
+    // required string s_dist_09 = 10;
+    /**
+     * <code>required string s_dist_09 = 10;</code>
      */
     boolean hasSDist09();
     /**
-     * <code>required bytes s_dist_09 = 10;</code>
+     * <code>required string s_dist_09 = 10;</code>
      */
-    com.google.protobuf.ByteString getSDist09();
-
-    // required bytes s_dist_10 = 11;
+    java.lang.String getSDist09();
     /**
-     * <code>required bytes s_dist_10 = 11;</code>
+     * <code>required string s_dist_09 = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist09Bytes();
+
+    // required string s_dist_10 = 11;
+    /**
+     * <code>required string s_dist_10 = 11;</code>
      */
     boolean hasSDist10();
     /**
-     * <code>required bytes s_dist_10 = 11;</code>
+     * <code>required string s_dist_10 = 11;</code>
      */
-    com.google.protobuf.ByteString getSDist10();
+    java.lang.String getSDist10();
+    /**
+     * <code>required string s_dist_10 = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDist10Bytes();
 
     // required uint64 s_ytd = 12;
     /**
@@ -19736,15 +21625,20 @@ public final class AntidotePB {
      */
     int getSRemoteCnt();
 
-    // required bytes s_data = 15;
+    // required string s_data = 15;
     /**
-     * <code>required bytes s_data = 15;</code>
+     * <code>required string s_data = 15;</code>
      */
     boolean hasSData();
     /**
-     * <code>required bytes s_data = 15;</code>
+     * <code>required string s_data = 15;</code>
      */
-    com.google.protobuf.ByteString getSData();
+    java.lang.String getSData();
+    /**
+     * <code>required string s_data = 15;</code>
+     */
+    com.google.protobuf.ByteString
+        getSDataBytes();
   }
   /**
    * Protobuf type {@code TpccStock}
@@ -19928,164 +21822,434 @@ public final class AntidotePB {
       return sQuantity_;
     }
 
-    // required bytes s_dist_01 = 2;
+    // required string s_dist_01 = 2;
     public static final int S_DIST_01_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString sDist01_;
+    private java.lang.Object sDist01_;
     /**
-     * <code>required bytes s_dist_01 = 2;</code>
+     * <code>required string s_dist_01 = 2;</code>
      */
     public boolean hasSDist01() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes s_dist_01 = 2;</code>
+     * <code>required string s_dist_01 = 2;</code>
      */
-    public com.google.protobuf.ByteString getSDist01() {
-      return sDist01_;
+    public java.lang.String getSDist01() {
+      java.lang.Object ref = sDist01_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist01_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_01 = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist01Bytes() {
+      java.lang.Object ref = sDist01_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist01_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_02 = 3;
+    // required string s_dist_02 = 3;
     public static final int S_DIST_02_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString sDist02_;
+    private java.lang.Object sDist02_;
     /**
-     * <code>required bytes s_dist_02 = 3;</code>
+     * <code>required string s_dist_02 = 3;</code>
      */
     public boolean hasSDist02() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required bytes s_dist_02 = 3;</code>
+     * <code>required string s_dist_02 = 3;</code>
      */
-    public com.google.protobuf.ByteString getSDist02() {
-      return sDist02_;
+    public java.lang.String getSDist02() {
+      java.lang.Object ref = sDist02_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist02_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_02 = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist02Bytes() {
+      java.lang.Object ref = sDist02_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist02_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_03 = 4;
+    // required string s_dist_03 = 4;
     public static final int S_DIST_03_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString sDist03_;
+    private java.lang.Object sDist03_;
     /**
-     * <code>required bytes s_dist_03 = 4;</code>
+     * <code>required string s_dist_03 = 4;</code>
      */
     public boolean hasSDist03() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required bytes s_dist_03 = 4;</code>
+     * <code>required string s_dist_03 = 4;</code>
      */
-    public com.google.protobuf.ByteString getSDist03() {
-      return sDist03_;
+    public java.lang.String getSDist03() {
+      java.lang.Object ref = sDist03_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist03_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_03 = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist03Bytes() {
+      java.lang.Object ref = sDist03_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist03_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_04 = 5;
+    // required string s_dist_04 = 5;
     public static final int S_DIST_04_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString sDist04_;
+    private java.lang.Object sDist04_;
     /**
-     * <code>required bytes s_dist_04 = 5;</code>
+     * <code>required string s_dist_04 = 5;</code>
      */
     public boolean hasSDist04() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required bytes s_dist_04 = 5;</code>
+     * <code>required string s_dist_04 = 5;</code>
      */
-    public com.google.protobuf.ByteString getSDist04() {
-      return sDist04_;
+    public java.lang.String getSDist04() {
+      java.lang.Object ref = sDist04_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist04_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_04 = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist04Bytes() {
+      java.lang.Object ref = sDist04_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist04_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_05 = 6;
+    // required string s_dist_05 = 6;
     public static final int S_DIST_05_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString sDist05_;
+    private java.lang.Object sDist05_;
     /**
-     * <code>required bytes s_dist_05 = 6;</code>
+     * <code>required string s_dist_05 = 6;</code>
      */
     public boolean hasSDist05() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required bytes s_dist_05 = 6;</code>
+     * <code>required string s_dist_05 = 6;</code>
      */
-    public com.google.protobuf.ByteString getSDist05() {
-      return sDist05_;
+    public java.lang.String getSDist05() {
+      java.lang.Object ref = sDist05_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist05_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_05 = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist05Bytes() {
+      java.lang.Object ref = sDist05_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist05_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_06 = 7;
+    // required string s_dist_06 = 7;
     public static final int S_DIST_06_FIELD_NUMBER = 7;
-    private com.google.protobuf.ByteString sDist06_;
+    private java.lang.Object sDist06_;
     /**
-     * <code>required bytes s_dist_06 = 7;</code>
+     * <code>required string s_dist_06 = 7;</code>
      */
     public boolean hasSDist06() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>required bytes s_dist_06 = 7;</code>
+     * <code>required string s_dist_06 = 7;</code>
      */
-    public com.google.protobuf.ByteString getSDist06() {
-      return sDist06_;
+    public java.lang.String getSDist06() {
+      java.lang.Object ref = sDist06_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist06_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_06 = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist06Bytes() {
+      java.lang.Object ref = sDist06_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist06_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_07 = 8;
+    // required string s_dist_07 = 8;
     public static final int S_DIST_07_FIELD_NUMBER = 8;
-    private com.google.protobuf.ByteString sDist07_;
+    private java.lang.Object sDist07_;
     /**
-     * <code>required bytes s_dist_07 = 8;</code>
+     * <code>required string s_dist_07 = 8;</code>
      */
     public boolean hasSDist07() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>required bytes s_dist_07 = 8;</code>
+     * <code>required string s_dist_07 = 8;</code>
      */
-    public com.google.protobuf.ByteString getSDist07() {
-      return sDist07_;
+    public java.lang.String getSDist07() {
+      java.lang.Object ref = sDist07_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist07_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_07 = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist07Bytes() {
+      java.lang.Object ref = sDist07_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist07_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_08 = 9;
+    // required string s_dist_08 = 9;
     public static final int S_DIST_08_FIELD_NUMBER = 9;
-    private com.google.protobuf.ByteString sDist08_;
+    private java.lang.Object sDist08_;
     /**
-     * <code>required bytes s_dist_08 = 9;</code>
+     * <code>required string s_dist_08 = 9;</code>
      */
     public boolean hasSDist08() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>required bytes s_dist_08 = 9;</code>
+     * <code>required string s_dist_08 = 9;</code>
      */
-    public com.google.protobuf.ByteString getSDist08() {
-      return sDist08_;
+    public java.lang.String getSDist08() {
+      java.lang.Object ref = sDist08_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist08_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_08 = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist08Bytes() {
+      java.lang.Object ref = sDist08_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist08_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_09 = 10;
+    // required string s_dist_09 = 10;
     public static final int S_DIST_09_FIELD_NUMBER = 10;
-    private com.google.protobuf.ByteString sDist09_;
+    private java.lang.Object sDist09_;
     /**
-     * <code>required bytes s_dist_09 = 10;</code>
+     * <code>required string s_dist_09 = 10;</code>
      */
     public boolean hasSDist09() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
-     * <code>required bytes s_dist_09 = 10;</code>
+     * <code>required string s_dist_09 = 10;</code>
      */
-    public com.google.protobuf.ByteString getSDist09() {
-      return sDist09_;
+    public java.lang.String getSDist09() {
+      java.lang.Object ref = sDist09_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist09_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_09 = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist09Bytes() {
+      java.lang.Object ref = sDist09_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist09_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes s_dist_10 = 11;
+    // required string s_dist_10 = 11;
     public static final int S_DIST_10_FIELD_NUMBER = 11;
-    private com.google.protobuf.ByteString sDist10_;
+    private java.lang.Object sDist10_;
     /**
-     * <code>required bytes s_dist_10 = 11;</code>
+     * <code>required string s_dist_10 = 11;</code>
      */
     public boolean hasSDist10() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
-     * <code>required bytes s_dist_10 = 11;</code>
+     * <code>required string s_dist_10 = 11;</code>
      */
-    public com.google.protobuf.ByteString getSDist10() {
-      return sDist10_;
+    public java.lang.String getSDist10() {
+      java.lang.Object ref = sDist10_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sDist10_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_dist_10 = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDist10Bytes() {
+      java.lang.Object ref = sDist10_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sDist10_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required uint64 s_ytd = 12;
@@ -20136,38 +22300,65 @@ public final class AntidotePB {
       return sRemoteCnt_;
     }
 
-    // required bytes s_data = 15;
+    // required string s_data = 15;
     public static final int S_DATA_FIELD_NUMBER = 15;
-    private com.google.protobuf.ByteString sData_;
+    private java.lang.Object sData_;
     /**
-     * <code>required bytes s_data = 15;</code>
+     * <code>required string s_data = 15;</code>
      */
     public boolean hasSData() {
       return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     /**
-     * <code>required bytes s_data = 15;</code>
+     * <code>required string s_data = 15;</code>
      */
-    public com.google.protobuf.ByteString getSData() {
-      return sData_;
+    public java.lang.String getSData() {
+      java.lang.Object ref = sData_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sData_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string s_data = 15;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSDataBytes() {
+      java.lang.Object ref = sData_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
       sQuantity_ = 0L;
-      sDist01_ = com.google.protobuf.ByteString.EMPTY;
-      sDist02_ = com.google.protobuf.ByteString.EMPTY;
-      sDist03_ = com.google.protobuf.ByteString.EMPTY;
-      sDist04_ = com.google.protobuf.ByteString.EMPTY;
-      sDist05_ = com.google.protobuf.ByteString.EMPTY;
-      sDist06_ = com.google.protobuf.ByteString.EMPTY;
-      sDist07_ = com.google.protobuf.ByteString.EMPTY;
-      sDist08_ = com.google.protobuf.ByteString.EMPTY;
-      sDist09_ = com.google.protobuf.ByteString.EMPTY;
-      sDist10_ = com.google.protobuf.ByteString.EMPTY;
+      sDist01_ = "";
+      sDist02_ = "";
+      sDist03_ = "";
+      sDist04_ = "";
+      sDist05_ = "";
+      sDist06_ = "";
+      sDist07_ = "";
+      sDist08_ = "";
+      sDist09_ = "";
+      sDist10_ = "";
       sYtd_ = 0L;
       sOrderCnt_ = 0;
       sRemoteCnt_ = 0;
-      sData_ = com.google.protobuf.ByteString.EMPTY;
+      sData_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -20245,34 +22436,34 @@ public final class AntidotePB {
         output.writeUInt64(1, sQuantity_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, sDist01_);
+        output.writeBytes(2, getSDist01Bytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, sDist02_);
+        output.writeBytes(3, getSDist02Bytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, sDist03_);
+        output.writeBytes(4, getSDist03Bytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, sDist04_);
+        output.writeBytes(5, getSDist04Bytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, sDist05_);
+        output.writeBytes(6, getSDist05Bytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(7, sDist06_);
+        output.writeBytes(7, getSDist06Bytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(8, sDist07_);
+        output.writeBytes(8, getSDist07Bytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(9, sDist08_);
+        output.writeBytes(9, getSDist08Bytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBytes(10, sDist09_);
+        output.writeBytes(10, getSDist09Bytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBytes(11, sDist10_);
+        output.writeBytes(11, getSDist10Bytes());
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeUInt64(12, sYtd_);
@@ -20284,7 +22475,7 @@ public final class AntidotePB {
         output.writeInt32(14, sRemoteCnt_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeBytes(15, sData_);
+        output.writeBytes(15, getSDataBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -20301,43 +22492,43 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, sDist01_);
+          .computeBytesSize(2, getSDist01Bytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, sDist02_);
+          .computeBytesSize(3, getSDist02Bytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, sDist03_);
+          .computeBytesSize(4, getSDist03Bytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, sDist04_);
+          .computeBytesSize(5, getSDist04Bytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, sDist05_);
+          .computeBytesSize(6, getSDist05Bytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(7, sDist06_);
+          .computeBytesSize(7, getSDist06Bytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, sDist07_);
+          .computeBytesSize(8, getSDist07Bytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, sDist08_);
+          .computeBytesSize(9, getSDist08Bytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, sDist09_);
+          .computeBytesSize(10, getSDist09Bytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, sDist10_);
+          .computeBytesSize(11, getSDist10Bytes());
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
@@ -20353,7 +22544,7 @@ public final class AntidotePB {
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(15, sData_);
+          .computeBytesSize(15, getSDataBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -20473,25 +22664,25 @@ public final class AntidotePB {
         super.clear();
         sQuantity_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
-        sDist01_ = com.google.protobuf.ByteString.EMPTY;
+        sDist01_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        sDist02_ = com.google.protobuf.ByteString.EMPTY;
+        sDist02_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        sDist03_ = com.google.protobuf.ByteString.EMPTY;
+        sDist03_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        sDist04_ = com.google.protobuf.ByteString.EMPTY;
+        sDist04_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        sDist05_ = com.google.protobuf.ByteString.EMPTY;
+        sDist05_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        sDist06_ = com.google.protobuf.ByteString.EMPTY;
+        sDist06_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
-        sDist07_ = com.google.protobuf.ByteString.EMPTY;
+        sDist07_ = "";
         bitField0_ = (bitField0_ & ~0x00000080);
-        sDist08_ = com.google.protobuf.ByteString.EMPTY;
+        sDist08_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
-        sDist09_ = com.google.protobuf.ByteString.EMPTY;
+        sDist09_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
-        sDist10_ = com.google.protobuf.ByteString.EMPTY;
+        sDist10_ = "";
         bitField0_ = (bitField0_ & ~0x00000400);
         sYtd_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000800);
@@ -20499,7 +22690,7 @@ public final class AntidotePB {
         bitField0_ = (bitField0_ & ~0x00001000);
         sRemoteCnt_ = 0;
         bitField0_ = (bitField0_ & ~0x00002000);
-        sData_ = com.google.protobuf.ByteString.EMPTY;
+        sData_ = "";
         bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
@@ -20609,34 +22800,54 @@ public final class AntidotePB {
           setSQuantity(other.getSQuantity());
         }
         if (other.hasSDist01()) {
-          setSDist01(other.getSDist01());
+          bitField0_ |= 0x00000002;
+          sDist01_ = other.sDist01_;
+          onChanged();
         }
         if (other.hasSDist02()) {
-          setSDist02(other.getSDist02());
+          bitField0_ |= 0x00000004;
+          sDist02_ = other.sDist02_;
+          onChanged();
         }
         if (other.hasSDist03()) {
-          setSDist03(other.getSDist03());
+          bitField0_ |= 0x00000008;
+          sDist03_ = other.sDist03_;
+          onChanged();
         }
         if (other.hasSDist04()) {
-          setSDist04(other.getSDist04());
+          bitField0_ |= 0x00000010;
+          sDist04_ = other.sDist04_;
+          onChanged();
         }
         if (other.hasSDist05()) {
-          setSDist05(other.getSDist05());
+          bitField0_ |= 0x00000020;
+          sDist05_ = other.sDist05_;
+          onChanged();
         }
         if (other.hasSDist06()) {
-          setSDist06(other.getSDist06());
+          bitField0_ |= 0x00000040;
+          sDist06_ = other.sDist06_;
+          onChanged();
         }
         if (other.hasSDist07()) {
-          setSDist07(other.getSDist07());
+          bitField0_ |= 0x00000080;
+          sDist07_ = other.sDist07_;
+          onChanged();
         }
         if (other.hasSDist08()) {
-          setSDist08(other.getSDist08());
+          bitField0_ |= 0x00000100;
+          sDist08_ = other.sDist08_;
+          onChanged();
         }
         if (other.hasSDist09()) {
-          setSDist09(other.getSDist09());
+          bitField0_ |= 0x00000200;
+          sDist09_ = other.sDist09_;
+          onChanged();
         }
         if (other.hasSDist10()) {
-          setSDist10(other.getSDist10());
+          bitField0_ |= 0x00000400;
+          sDist10_ = other.sDist10_;
+          onChanged();
         }
         if (other.hasSYtd()) {
           setSYtd(other.getSYtd());
@@ -20648,7 +22859,9 @@ public final class AntidotePB {
           setSRemoteCnt(other.getSRemoteCnt());
         }
         if (other.hasSData()) {
-          setSData(other.getSData());
+          bitField0_ |= 0x00004000;
+          sData_ = other.sData_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -20770,24 +22983,49 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes s_dist_01 = 2;
-      private com.google.protobuf.ByteString sDist01_ = com.google.protobuf.ByteString.EMPTY;
+      // required string s_dist_01 = 2;
+      private java.lang.Object sDist01_ = "";
       /**
-       * <code>required bytes s_dist_01 = 2;</code>
+       * <code>required string s_dist_01 = 2;</code>
        */
       public boolean hasSDist01() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes s_dist_01 = 2;</code>
+       * <code>required string s_dist_01 = 2;</code>
        */
-      public com.google.protobuf.ByteString getSDist01() {
-        return sDist01_;
+      public java.lang.String getSDist01() {
+        java.lang.Object ref = sDist01_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist01_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_01 = 2;</code>
+       * <code>required string s_dist_01 = 2;</code>
        */
-      public Builder setSDist01(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist01Bytes() {
+        java.lang.Object ref = sDist01_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist01_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_01 = 2;</code>
+       */
+      public Builder setSDist01(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -20797,7 +23035,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_01 = 2;</code>
+       * <code>required string s_dist_01 = 2;</code>
        */
       public Builder clearSDist01() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -20805,25 +23043,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_02 = 3;
-      private com.google.protobuf.ByteString sDist02_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_02 = 3;</code>
+       * <code>required string s_dist_01 = 2;</code>
+       */
+      public Builder setSDist01Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        sDist01_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_02 = 3;
+      private java.lang.Object sDist02_ = "";
+      /**
+       * <code>required string s_dist_02 = 3;</code>
        */
       public boolean hasSDist02() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required bytes s_dist_02 = 3;</code>
+       * <code>required string s_dist_02 = 3;</code>
        */
-      public com.google.protobuf.ByteString getSDist02() {
-        return sDist02_;
+      public java.lang.String getSDist02() {
+        java.lang.Object ref = sDist02_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist02_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_02 = 3;</code>
+       * <code>required string s_dist_02 = 3;</code>
        */
-      public Builder setSDist02(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist02Bytes() {
+        java.lang.Object ref = sDist02_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist02_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_02 = 3;</code>
+       */
+      public Builder setSDist02(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -20833,7 +23109,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_02 = 3;</code>
+       * <code>required string s_dist_02 = 3;</code>
        */
       public Builder clearSDist02() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -20841,25 +23117,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_03 = 4;
-      private com.google.protobuf.ByteString sDist03_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_03 = 4;</code>
+       * <code>required string s_dist_02 = 3;</code>
+       */
+      public Builder setSDist02Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        sDist02_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_03 = 4;
+      private java.lang.Object sDist03_ = "";
+      /**
+       * <code>required string s_dist_03 = 4;</code>
        */
       public boolean hasSDist03() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required bytes s_dist_03 = 4;</code>
+       * <code>required string s_dist_03 = 4;</code>
        */
-      public com.google.protobuf.ByteString getSDist03() {
-        return sDist03_;
+      public java.lang.String getSDist03() {
+        java.lang.Object ref = sDist03_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist03_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_03 = 4;</code>
+       * <code>required string s_dist_03 = 4;</code>
        */
-      public Builder setSDist03(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist03Bytes() {
+        java.lang.Object ref = sDist03_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist03_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_03 = 4;</code>
+       */
+      public Builder setSDist03(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -20869,7 +23183,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_03 = 4;</code>
+       * <code>required string s_dist_03 = 4;</code>
        */
       public Builder clearSDist03() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -20877,25 +23191,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_04 = 5;
-      private com.google.protobuf.ByteString sDist04_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_04 = 5;</code>
+       * <code>required string s_dist_03 = 4;</code>
+       */
+      public Builder setSDist03Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        sDist03_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_04 = 5;
+      private java.lang.Object sDist04_ = "";
+      /**
+       * <code>required string s_dist_04 = 5;</code>
        */
       public boolean hasSDist04() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required bytes s_dist_04 = 5;</code>
+       * <code>required string s_dist_04 = 5;</code>
        */
-      public com.google.protobuf.ByteString getSDist04() {
-        return sDist04_;
+      public java.lang.String getSDist04() {
+        java.lang.Object ref = sDist04_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist04_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_04 = 5;</code>
+       * <code>required string s_dist_04 = 5;</code>
        */
-      public Builder setSDist04(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist04Bytes() {
+        java.lang.Object ref = sDist04_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist04_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_04 = 5;</code>
+       */
+      public Builder setSDist04(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -20905,7 +23257,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_04 = 5;</code>
+       * <code>required string s_dist_04 = 5;</code>
        */
       public Builder clearSDist04() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -20913,25 +23265,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_05 = 6;
-      private com.google.protobuf.ByteString sDist05_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_05 = 6;</code>
+       * <code>required string s_dist_04 = 5;</code>
+       */
+      public Builder setSDist04Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        sDist04_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_05 = 6;
+      private java.lang.Object sDist05_ = "";
+      /**
+       * <code>required string s_dist_05 = 6;</code>
        */
       public boolean hasSDist05() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required bytes s_dist_05 = 6;</code>
+       * <code>required string s_dist_05 = 6;</code>
        */
-      public com.google.protobuf.ByteString getSDist05() {
-        return sDist05_;
+      public java.lang.String getSDist05() {
+        java.lang.Object ref = sDist05_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist05_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_05 = 6;</code>
+       * <code>required string s_dist_05 = 6;</code>
        */
-      public Builder setSDist05(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist05Bytes() {
+        java.lang.Object ref = sDist05_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist05_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_05 = 6;</code>
+       */
+      public Builder setSDist05(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -20941,7 +23331,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_05 = 6;</code>
+       * <code>required string s_dist_05 = 6;</code>
        */
       public Builder clearSDist05() {
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -20949,25 +23339,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_06 = 7;
-      private com.google.protobuf.ByteString sDist06_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_06 = 7;</code>
+       * <code>required string s_dist_05 = 6;</code>
+       */
+      public Builder setSDist05Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        sDist05_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_06 = 7;
+      private java.lang.Object sDist06_ = "";
+      /**
+       * <code>required string s_dist_06 = 7;</code>
        */
       public boolean hasSDist06() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required bytes s_dist_06 = 7;</code>
+       * <code>required string s_dist_06 = 7;</code>
        */
-      public com.google.protobuf.ByteString getSDist06() {
-        return sDist06_;
+      public java.lang.String getSDist06() {
+        java.lang.Object ref = sDist06_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist06_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_06 = 7;</code>
+       * <code>required string s_dist_06 = 7;</code>
        */
-      public Builder setSDist06(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist06Bytes() {
+        java.lang.Object ref = sDist06_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist06_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_06 = 7;</code>
+       */
+      public Builder setSDist06(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -20977,7 +23405,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_06 = 7;</code>
+       * <code>required string s_dist_06 = 7;</code>
        */
       public Builder clearSDist06() {
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -20985,25 +23413,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_07 = 8;
-      private com.google.protobuf.ByteString sDist07_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_07 = 8;</code>
+       * <code>required string s_dist_06 = 7;</code>
+       */
+      public Builder setSDist06Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        sDist06_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_07 = 8;
+      private java.lang.Object sDist07_ = "";
+      /**
+       * <code>required string s_dist_07 = 8;</code>
        */
       public boolean hasSDist07() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required bytes s_dist_07 = 8;</code>
+       * <code>required string s_dist_07 = 8;</code>
        */
-      public com.google.protobuf.ByteString getSDist07() {
-        return sDist07_;
+      public java.lang.String getSDist07() {
+        java.lang.Object ref = sDist07_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist07_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_07 = 8;</code>
+       * <code>required string s_dist_07 = 8;</code>
        */
-      public Builder setSDist07(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist07Bytes() {
+        java.lang.Object ref = sDist07_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist07_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_07 = 8;</code>
+       */
+      public Builder setSDist07(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -21013,7 +23479,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_07 = 8;</code>
+       * <code>required string s_dist_07 = 8;</code>
        */
       public Builder clearSDist07() {
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -21021,25 +23487,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_08 = 9;
-      private com.google.protobuf.ByteString sDist08_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_08 = 9;</code>
+       * <code>required string s_dist_07 = 8;</code>
+       */
+      public Builder setSDist07Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        sDist07_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_08 = 9;
+      private java.lang.Object sDist08_ = "";
+      /**
+       * <code>required string s_dist_08 = 9;</code>
        */
       public boolean hasSDist08() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>required bytes s_dist_08 = 9;</code>
+       * <code>required string s_dist_08 = 9;</code>
        */
-      public com.google.protobuf.ByteString getSDist08() {
-        return sDist08_;
+      public java.lang.String getSDist08() {
+        java.lang.Object ref = sDist08_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist08_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_08 = 9;</code>
+       * <code>required string s_dist_08 = 9;</code>
        */
-      public Builder setSDist08(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist08Bytes() {
+        java.lang.Object ref = sDist08_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist08_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_08 = 9;</code>
+       */
+      public Builder setSDist08(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -21049,7 +23553,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_08 = 9;</code>
+       * <code>required string s_dist_08 = 9;</code>
        */
       public Builder clearSDist08() {
         bitField0_ = (bitField0_ & ~0x00000100);
@@ -21057,25 +23561,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_09 = 10;
-      private com.google.protobuf.ByteString sDist09_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_09 = 10;</code>
+       * <code>required string s_dist_08 = 9;</code>
+       */
+      public Builder setSDist08Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        sDist08_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_09 = 10;
+      private java.lang.Object sDist09_ = "";
+      /**
+       * <code>required string s_dist_09 = 10;</code>
        */
       public boolean hasSDist09() {
         return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>required bytes s_dist_09 = 10;</code>
+       * <code>required string s_dist_09 = 10;</code>
        */
-      public com.google.protobuf.ByteString getSDist09() {
-        return sDist09_;
+      public java.lang.String getSDist09() {
+        java.lang.Object ref = sDist09_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist09_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_09 = 10;</code>
+       * <code>required string s_dist_09 = 10;</code>
        */
-      public Builder setSDist09(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist09Bytes() {
+        java.lang.Object ref = sDist09_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist09_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_09 = 10;</code>
+       */
+      public Builder setSDist09(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -21085,7 +23627,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_09 = 10;</code>
+       * <code>required string s_dist_09 = 10;</code>
        */
       public Builder clearSDist09() {
         bitField0_ = (bitField0_ & ~0x00000200);
@@ -21093,25 +23635,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes s_dist_10 = 11;
-      private com.google.protobuf.ByteString sDist10_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes s_dist_10 = 11;</code>
+       * <code>required string s_dist_09 = 10;</code>
+       */
+      public Builder setSDist09Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        sDist09_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string s_dist_10 = 11;
+      private java.lang.Object sDist10_ = "";
+      /**
+       * <code>required string s_dist_10 = 11;</code>
        */
       public boolean hasSDist10() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
-       * <code>required bytes s_dist_10 = 11;</code>
+       * <code>required string s_dist_10 = 11;</code>
        */
-      public com.google.protobuf.ByteString getSDist10() {
-        return sDist10_;
+      public java.lang.String getSDist10() {
+        java.lang.Object ref = sDist10_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sDist10_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_dist_10 = 11;</code>
+       * <code>required string s_dist_10 = 11;</code>
        */
-      public Builder setSDist10(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDist10Bytes() {
+        java.lang.Object ref = sDist10_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sDist10_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_dist_10 = 11;</code>
+       */
+      public Builder setSDist10(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -21121,11 +23701,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_dist_10 = 11;</code>
+       * <code>required string s_dist_10 = 11;</code>
        */
       public Builder clearSDist10() {
         bitField0_ = (bitField0_ & ~0x00000400);
         sDist10_ = getDefaultInstance().getSDist10();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string s_dist_10 = 11;</code>
+       */
+      public Builder setSDist10Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        sDist10_ = value;
         onChanged();
         return this;
       }
@@ -21229,24 +23822,49 @@ public final class AntidotePB {
         return this;
       }
 
-      // required bytes s_data = 15;
-      private com.google.protobuf.ByteString sData_ = com.google.protobuf.ByteString.EMPTY;
+      // required string s_data = 15;
+      private java.lang.Object sData_ = "";
       /**
-       * <code>required bytes s_data = 15;</code>
+       * <code>required string s_data = 15;</code>
        */
       public boolean hasSData() {
         return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       /**
-       * <code>required bytes s_data = 15;</code>
+       * <code>required string s_data = 15;</code>
        */
-      public com.google.protobuf.ByteString getSData() {
-        return sData_;
+      public java.lang.String getSData() {
+        java.lang.Object ref = sData_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sData_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes s_data = 15;</code>
+       * <code>required string s_data = 15;</code>
        */
-      public Builder setSData(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getSDataBytes() {
+        java.lang.Object ref = sData_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sData_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string s_data = 15;</code>
+       */
+      public Builder setSData(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -21256,11 +23874,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes s_data = 15;</code>
+       * <code>required string s_data = 15;</code>
        */
       public Builder clearSData() {
         bitField0_ = (bitField0_ & ~0x00004000);
         sData_ = getDefaultInstance().getSData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string s_data = 15;</code>
+       */
+      public Builder setSDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00004000;
+        sData_ = value;
         onChanged();
         return this;
       }
@@ -21279,65 +23910,95 @@ public final class AntidotePB {
   public interface TpccWarehouseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes w_name = 1;
+    // required string w_name = 1;
     /**
-     * <code>required bytes w_name = 1;</code>
+     * <code>required string w_name = 1;</code>
      */
     boolean hasWName();
     /**
-     * <code>required bytes w_name = 1;</code>
+     * <code>required string w_name = 1;</code>
      */
-    com.google.protobuf.ByteString getWName();
-
-    // required bytes w_street1 = 2;
+    java.lang.String getWName();
     /**
-     * <code>required bytes w_street1 = 2;</code>
+     * <code>required string w_name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getWNameBytes();
+
+    // required string w_street1 = 2;
+    /**
+     * <code>required string w_street1 = 2;</code>
      */
     boolean hasWStreet1();
     /**
-     * <code>required bytes w_street1 = 2;</code>
+     * <code>required string w_street1 = 2;</code>
      */
-    com.google.protobuf.ByteString getWStreet1();
-
-    // required bytes w_street2 = 3;
+    java.lang.String getWStreet1();
     /**
-     * <code>required bytes w_street2 = 3;</code>
+     * <code>required string w_street1 = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getWStreet1Bytes();
+
+    // required string w_street2 = 3;
+    /**
+     * <code>required string w_street2 = 3;</code>
      */
     boolean hasWStreet2();
     /**
-     * <code>required bytes w_street2 = 3;</code>
+     * <code>required string w_street2 = 3;</code>
      */
-    com.google.protobuf.ByteString getWStreet2();
-
-    // required bytes w_city = 4;
+    java.lang.String getWStreet2();
     /**
-     * <code>required bytes w_city = 4;</code>
+     * <code>required string w_street2 = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getWStreet2Bytes();
+
+    // required string w_city = 4;
+    /**
+     * <code>required string w_city = 4;</code>
      */
     boolean hasWCity();
     /**
-     * <code>required bytes w_city = 4;</code>
+     * <code>required string w_city = 4;</code>
      */
-    com.google.protobuf.ByteString getWCity();
-
-    // required bytes w_state = 5;
+    java.lang.String getWCity();
     /**
-     * <code>required bytes w_state = 5;</code>
+     * <code>required string w_city = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getWCityBytes();
+
+    // required string w_state = 5;
+    /**
+     * <code>required string w_state = 5;</code>
      */
     boolean hasWState();
     /**
-     * <code>required bytes w_state = 5;</code>
+     * <code>required string w_state = 5;</code>
      */
-    com.google.protobuf.ByteString getWState();
-
-    // required bytes w_zip = 6;
+    java.lang.String getWState();
     /**
-     * <code>required bytes w_zip = 6;</code>
+     * <code>required string w_state = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getWStateBytes();
+
+    // required string w_zip = 6;
+    /**
+     * <code>required string w_zip = 6;</code>
      */
     boolean hasWZip();
     /**
-     * <code>required bytes w_zip = 6;</code>
+     * <code>required string w_zip = 6;</code>
      */
-    com.google.protobuf.ByteString getWZip();
+    java.lang.String getWZip();
+    /**
+     * <code>required string w_zip = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getWZipBytes();
 
     // required double w_tax = 7;
     /**
@@ -21475,100 +24136,262 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required bytes w_name = 1;
+    // required string w_name = 1;
     public static final int W_NAME_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString wName_;
+    private java.lang.Object wName_;
     /**
-     * <code>required bytes w_name = 1;</code>
+     * <code>required string w_name = 1;</code>
      */
     public boolean hasWName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes w_name = 1;</code>
+     * <code>required string w_name = 1;</code>
      */
-    public com.google.protobuf.ByteString getWName() {
-      return wName_;
+    public java.lang.String getWName() {
+      java.lang.Object ref = wName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          wName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string w_name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWNameBytes() {
+      java.lang.Object ref = wName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        wName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes w_street1 = 2;
+    // required string w_street1 = 2;
     public static final int W_STREET1_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString wStreet1_;
+    private java.lang.Object wStreet1_;
     /**
-     * <code>required bytes w_street1 = 2;</code>
+     * <code>required string w_street1 = 2;</code>
      */
     public boolean hasWStreet1() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes w_street1 = 2;</code>
+     * <code>required string w_street1 = 2;</code>
      */
-    public com.google.protobuf.ByteString getWStreet1() {
-      return wStreet1_;
+    public java.lang.String getWStreet1() {
+      java.lang.Object ref = wStreet1_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          wStreet1_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string w_street1 = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWStreet1Bytes() {
+      java.lang.Object ref = wStreet1_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        wStreet1_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes w_street2 = 3;
+    // required string w_street2 = 3;
     public static final int W_STREET2_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString wStreet2_;
+    private java.lang.Object wStreet2_;
     /**
-     * <code>required bytes w_street2 = 3;</code>
+     * <code>required string w_street2 = 3;</code>
      */
     public boolean hasWStreet2() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required bytes w_street2 = 3;</code>
+     * <code>required string w_street2 = 3;</code>
      */
-    public com.google.protobuf.ByteString getWStreet2() {
-      return wStreet2_;
+    public java.lang.String getWStreet2() {
+      java.lang.Object ref = wStreet2_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          wStreet2_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string w_street2 = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWStreet2Bytes() {
+      java.lang.Object ref = wStreet2_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        wStreet2_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes w_city = 4;
+    // required string w_city = 4;
     public static final int W_CITY_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString wCity_;
+    private java.lang.Object wCity_;
     /**
-     * <code>required bytes w_city = 4;</code>
+     * <code>required string w_city = 4;</code>
      */
     public boolean hasWCity() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required bytes w_city = 4;</code>
+     * <code>required string w_city = 4;</code>
      */
-    public com.google.protobuf.ByteString getWCity() {
-      return wCity_;
+    public java.lang.String getWCity() {
+      java.lang.Object ref = wCity_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          wCity_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string w_city = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWCityBytes() {
+      java.lang.Object ref = wCity_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        wCity_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes w_state = 5;
+    // required string w_state = 5;
     public static final int W_STATE_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString wState_;
+    private java.lang.Object wState_;
     /**
-     * <code>required bytes w_state = 5;</code>
+     * <code>required string w_state = 5;</code>
      */
     public boolean hasWState() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required bytes w_state = 5;</code>
+     * <code>required string w_state = 5;</code>
      */
-    public com.google.protobuf.ByteString getWState() {
-      return wState_;
+    public java.lang.String getWState() {
+      java.lang.Object ref = wState_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          wState_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string w_state = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWStateBytes() {
+      java.lang.Object ref = wState_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        wState_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    // required bytes w_zip = 6;
+    // required string w_zip = 6;
     public static final int W_ZIP_FIELD_NUMBER = 6;
-    private com.google.protobuf.ByteString wZip_;
+    private java.lang.Object wZip_;
     /**
-     * <code>required bytes w_zip = 6;</code>
+     * <code>required string w_zip = 6;</code>
      */
     public boolean hasWZip() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required bytes w_zip = 6;</code>
+     * <code>required string w_zip = 6;</code>
      */
-    public com.google.protobuf.ByteString getWZip() {
-      return wZip_;
+    public java.lang.String getWZip() {
+      java.lang.Object ref = wZip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          wZip_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string w_zip = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWZipBytes() {
+      java.lang.Object ref = wZip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        wZip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     // required double w_tax = 7;
@@ -21588,12 +24411,12 @@ public final class AntidotePB {
     }
 
     private void initFields() {
-      wName_ = com.google.protobuf.ByteString.EMPTY;
-      wStreet1_ = com.google.protobuf.ByteString.EMPTY;
-      wStreet2_ = com.google.protobuf.ByteString.EMPTY;
-      wCity_ = com.google.protobuf.ByteString.EMPTY;
-      wState_ = com.google.protobuf.ByteString.EMPTY;
-      wZip_ = com.google.protobuf.ByteString.EMPTY;
+      wName_ = "";
+      wStreet1_ = "";
+      wStreet2_ = "";
+      wCity_ = "";
+      wState_ = "";
+      wZip_ = "";
       wTax_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
@@ -21637,22 +24460,22 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, wName_);
+        output.writeBytes(1, getWNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, wStreet1_);
+        output.writeBytes(2, getWStreet1Bytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, wStreet2_);
+        output.writeBytes(3, getWStreet2Bytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, wCity_);
+        output.writeBytes(4, getWCityBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, wState_);
+        output.writeBytes(5, getWStateBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, wZip_);
+        output.writeBytes(6, getWZipBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeDouble(7, wTax_);
@@ -21668,27 +24491,27 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, wName_);
+          .computeBytesSize(1, getWNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, wStreet1_);
+          .computeBytesSize(2, getWStreet1Bytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, wStreet2_);
+          .computeBytesSize(3, getWStreet2Bytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, wCity_);
+          .computeBytesSize(4, getWCityBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, wState_);
+          .computeBytesSize(5, getWStateBytes());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, wZip_);
+          .computeBytesSize(6, getWZipBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -21810,17 +24633,17 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        wName_ = com.google.protobuf.ByteString.EMPTY;
+        wName_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        wStreet1_ = com.google.protobuf.ByteString.EMPTY;
+        wStreet1_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        wStreet2_ = com.google.protobuf.ByteString.EMPTY;
+        wStreet2_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        wCity_ = com.google.protobuf.ByteString.EMPTY;
+        wCity_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        wState_ = com.google.protobuf.ByteString.EMPTY;
+        wState_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        wZip_ = com.google.protobuf.ByteString.EMPTY;
+        wZip_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
         wTax_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -21897,22 +24720,34 @@ public final class AntidotePB {
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.TpccWarehouse other) {
         if (other == com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance()) return this;
         if (other.hasWName()) {
-          setWName(other.getWName());
+          bitField0_ |= 0x00000001;
+          wName_ = other.wName_;
+          onChanged();
         }
         if (other.hasWStreet1()) {
-          setWStreet1(other.getWStreet1());
+          bitField0_ |= 0x00000002;
+          wStreet1_ = other.wStreet1_;
+          onChanged();
         }
         if (other.hasWStreet2()) {
-          setWStreet2(other.getWStreet2());
+          bitField0_ |= 0x00000004;
+          wStreet2_ = other.wStreet2_;
+          onChanged();
         }
         if (other.hasWCity()) {
-          setWCity(other.getWCity());
+          bitField0_ |= 0x00000008;
+          wCity_ = other.wCity_;
+          onChanged();
         }
         if (other.hasWState()) {
-          setWState(other.getWState());
+          bitField0_ |= 0x00000010;
+          wState_ = other.wState_;
+          onChanged();
         }
         if (other.hasWZip()) {
-          setWZip(other.getWZip());
+          bitField0_ |= 0x00000020;
+          wZip_ = other.wZip_;
+          onChanged();
         }
         if (other.hasWTax()) {
           setWTax(other.getWTax());
@@ -21972,24 +24807,49 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required bytes w_name = 1;
-      private com.google.protobuf.ByteString wName_ = com.google.protobuf.ByteString.EMPTY;
+      // required string w_name = 1;
+      private java.lang.Object wName_ = "";
       /**
-       * <code>required bytes w_name = 1;</code>
+       * <code>required string w_name = 1;</code>
        */
       public boolean hasWName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes w_name = 1;</code>
+       * <code>required string w_name = 1;</code>
        */
-      public com.google.protobuf.ByteString getWName() {
-        return wName_;
+      public java.lang.String getWName() {
+        java.lang.Object ref = wName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          wName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes w_name = 1;</code>
+       * <code>required string w_name = 1;</code>
        */
-      public Builder setWName(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getWNameBytes() {
+        java.lang.Object ref = wName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          wName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string w_name = 1;</code>
+       */
+      public Builder setWName(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -21999,7 +24859,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes w_name = 1;</code>
+       * <code>required string w_name = 1;</code>
        */
       public Builder clearWName() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -22007,25 +24867,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes w_street1 = 2;
-      private com.google.protobuf.ByteString wStreet1_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes w_street1 = 2;</code>
+       * <code>required string w_name = 1;</code>
+       */
+      public Builder setWNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        wName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string w_street1 = 2;
+      private java.lang.Object wStreet1_ = "";
+      /**
+       * <code>required string w_street1 = 2;</code>
        */
       public boolean hasWStreet1() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes w_street1 = 2;</code>
+       * <code>required string w_street1 = 2;</code>
        */
-      public com.google.protobuf.ByteString getWStreet1() {
-        return wStreet1_;
+      public java.lang.String getWStreet1() {
+        java.lang.Object ref = wStreet1_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          wStreet1_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes w_street1 = 2;</code>
+       * <code>required string w_street1 = 2;</code>
        */
-      public Builder setWStreet1(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getWStreet1Bytes() {
+        java.lang.Object ref = wStreet1_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          wStreet1_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string w_street1 = 2;</code>
+       */
+      public Builder setWStreet1(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -22035,7 +24933,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes w_street1 = 2;</code>
+       * <code>required string w_street1 = 2;</code>
        */
       public Builder clearWStreet1() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -22043,25 +24941,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes w_street2 = 3;
-      private com.google.protobuf.ByteString wStreet2_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes w_street2 = 3;</code>
+       * <code>required string w_street1 = 2;</code>
+       */
+      public Builder setWStreet1Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        wStreet1_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string w_street2 = 3;
+      private java.lang.Object wStreet2_ = "";
+      /**
+       * <code>required string w_street2 = 3;</code>
        */
       public boolean hasWStreet2() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required bytes w_street2 = 3;</code>
+       * <code>required string w_street2 = 3;</code>
        */
-      public com.google.protobuf.ByteString getWStreet2() {
-        return wStreet2_;
+      public java.lang.String getWStreet2() {
+        java.lang.Object ref = wStreet2_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          wStreet2_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes w_street2 = 3;</code>
+       * <code>required string w_street2 = 3;</code>
        */
-      public Builder setWStreet2(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getWStreet2Bytes() {
+        java.lang.Object ref = wStreet2_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          wStreet2_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string w_street2 = 3;</code>
+       */
+      public Builder setWStreet2(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -22071,7 +25007,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes w_street2 = 3;</code>
+       * <code>required string w_street2 = 3;</code>
        */
       public Builder clearWStreet2() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -22079,25 +25015,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes w_city = 4;
-      private com.google.protobuf.ByteString wCity_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes w_city = 4;</code>
+       * <code>required string w_street2 = 3;</code>
+       */
+      public Builder setWStreet2Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        wStreet2_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string w_city = 4;
+      private java.lang.Object wCity_ = "";
+      /**
+       * <code>required string w_city = 4;</code>
        */
       public boolean hasWCity() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required bytes w_city = 4;</code>
+       * <code>required string w_city = 4;</code>
        */
-      public com.google.protobuf.ByteString getWCity() {
-        return wCity_;
+      public java.lang.String getWCity() {
+        java.lang.Object ref = wCity_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          wCity_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes w_city = 4;</code>
+       * <code>required string w_city = 4;</code>
        */
-      public Builder setWCity(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getWCityBytes() {
+        java.lang.Object ref = wCity_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          wCity_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string w_city = 4;</code>
+       */
+      public Builder setWCity(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -22107,7 +25081,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes w_city = 4;</code>
+       * <code>required string w_city = 4;</code>
        */
       public Builder clearWCity() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -22115,25 +25089,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes w_state = 5;
-      private com.google.protobuf.ByteString wState_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes w_state = 5;</code>
+       * <code>required string w_city = 4;</code>
+       */
+      public Builder setWCityBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        wCity_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string w_state = 5;
+      private java.lang.Object wState_ = "";
+      /**
+       * <code>required string w_state = 5;</code>
        */
       public boolean hasWState() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required bytes w_state = 5;</code>
+       * <code>required string w_state = 5;</code>
        */
-      public com.google.protobuf.ByteString getWState() {
-        return wState_;
+      public java.lang.String getWState() {
+        java.lang.Object ref = wState_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          wState_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes w_state = 5;</code>
+       * <code>required string w_state = 5;</code>
        */
-      public Builder setWState(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getWStateBytes() {
+        java.lang.Object ref = wState_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          wState_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string w_state = 5;</code>
+       */
+      public Builder setWState(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -22143,7 +25155,7 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes w_state = 5;</code>
+       * <code>required string w_state = 5;</code>
        */
       public Builder clearWState() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -22151,25 +25163,63 @@ public final class AntidotePB {
         onChanged();
         return this;
       }
-
-      // required bytes w_zip = 6;
-      private com.google.protobuf.ByteString wZip_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes w_zip = 6;</code>
+       * <code>required string w_state = 5;</code>
+       */
+      public Builder setWStateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        wState_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required string w_zip = 6;
+      private java.lang.Object wZip_ = "";
+      /**
+       * <code>required string w_zip = 6;</code>
        */
       public boolean hasWZip() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required bytes w_zip = 6;</code>
+       * <code>required string w_zip = 6;</code>
        */
-      public com.google.protobuf.ByteString getWZip() {
-        return wZip_;
+      public java.lang.String getWZip() {
+        java.lang.Object ref = wZip_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          wZip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes w_zip = 6;</code>
+       * <code>required string w_zip = 6;</code>
        */
-      public Builder setWZip(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getWZipBytes() {
+        java.lang.Object ref = wZip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          wZip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string w_zip = 6;</code>
+       */
+      public Builder setWZip(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -22179,11 +25229,24 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required bytes w_zip = 6;</code>
+       * <code>required string w_zip = 6;</code>
        */
       public Builder clearWZip() {
         bitField0_ = (bitField0_ & ~0x00000020);
         wZip_ = getDefaultInstance().getWZip();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string w_zip = 6;</code>
+       */
+      public Builder setWZipBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        wZip_ = value;
         onChanged();
         return this;
       }
@@ -22372,76 +25435,76 @@ public final class AntidotePB {
   static {
     java.lang.String[] descriptorData = {
       "\n\016antidote.proto\"\037\n\016FpbStartTxnReq\022\r\n\005cl" +
-      "ock\030\001 \001(\004\"p\n\rFpbPrepTxnReq\022\026\n\004txid\030\001 \002(\013" +
-      "2\010.FpbTxId\022\"\n\rlocal_updates\030\002 \001(\0132\013.FpbN" +
-      "odeUps\022#\n\016remote_updates\030\003 \001(\0132\013.FpbNode" +
-      "Ups\"/\n\nFpbNodeUps\022!\n\nper_nodeup\030\001 \003(\0132\r." +
-      "FpbPerNodeUp\"K\n\014FpbPerNodeUp\022\014\n\004node\030\001 \002" +
-      "(\014\022\024\n\014partition_id\030\002 \002(\r\022\027\n\003ups\030\003 \003(\0132\n." +
-      "FpbUpdate\"6\n\016FpbPrepTxnResp\022\017\n\007success\030\001" +
-      " \002(\010\022\023\n\013commit_time\030\002 \001(\004\"G\n\nFpbReadReq\022" +
-      "\026\n\004txid\030\001 \001(\0132\010.FpbTxId\022\013\n\003key\030\002 \002(\014\022\024\n\014",
-      "partition_id\030\003 \002(\r\"\036\n\016FpbPartListReq\022\014\n\004" +
-      "noop\030\001 \001(\010\"M\n\016FpbSingleUpReq\022\013\n\003key\030\001 \002(" +
-      "\014\022\030\n\005value\030\002 \002(\0132\t.FpbValue\022\024\n\014partition" +
-      "_id\030\003 \002(\r\"/\n\013FpbPartList\022 \n\nnode_parts\030\001" +
-      " \003(\0132\014.FpbNodePart\"1\n\013FpbNodePart\022\n\n\002ip\030" +
-      "\001 \002(\014\022\026\n\016num_partitions\030\002 \002(\r\"2\n\tFpbUpda" +
-      "te\022\013\n\003key\030\001 \002(\014\022\030\n\005value\030\002 \002(\0132\t.FpbValu" +
-      "e\"2\n\tFpbTxnReq\022\r\n\005clock\030\001 \001(\014\022\026\n\003ops\030\002 \003" +
-      "(\0132\t.FpbTxnOp\"K\n\010FpbTxnOp\022\014\n\004type\030\001 \002(\r\022" +
-      "\013\n\003key\030\002 \002(\r\022\021\n\toperation\030\003 \001(\r\022\021\n\tparam",
-      "eter\030\004 \001(\014\"H\n\nFpbTxnResp\022\017\n\007success\030\001 \002(" +
-      "\010\022\r\n\005clock\030\002 \001(\014\022\032\n\007results\030\003 \003(\0132\t.FpbV" +
-      "alue\"(\n\007FpbTxId\022\020\n\010snapshot\030\001 \002(\004\022\013\n\003pid" +
-      "\030\002 \002(\014\"\351\002\n\010FpbValue\022\021\n\005field\030\001 \002(\r:\00212\022\037" +
-      "\n\010customer\030\002 \001(\0132\r.TpccCustomer\022$\n\007clook" +
-      "up\030\003 \001(\0132\023.TpccCustomerLookup\022\037\n\010distric" +
-      "t\030\004 \001(\0132\r.TpccDistrict\022\035\n\007history\030\005 \001(\0132" +
-      "\014.TpccHistory\022\027\n\004item\030\006 \001(\0132\t.TpccItem\022\037" +
-      "\n\010neworder\030\007 \001(\0132\r.TpccNewOrder\022\031\n\005order" +
-      "\030\010 \001(\0132\n.TpccOrder\022!\n\torderline\030\t \001(\0132\016.",
-      "TpccOrderLine\022\031\n\005stock\030\n \001(\0132\n.TpccStock" +
-      "\022!\n\twarehouse\030\013 \001(\0132\016.TpccWarehouse\022\r\n\005v" +
-      "alue\030\014 \001(\014\"\313\002\n\014TpccCustomer\022\017\n\007c_first\030\001" +
-      " \002(\014\022\020\n\010c_middle\030\002 \002(\014\022\016\n\006c_last\030\003 \002(\014\022\021" +
-      "\n\tc_street1\030\004 \002(\014\022\021\n\tc_street2\030\005 \002(\014\022\016\n\006" +
-      "c_city\030\006 \002(\014\022\017\n\007c_state\030\007 \002(\014\022\r\n\005c_zip\030\010" +
-      " \002(\014\022\017\n\007c_phone\030\t \002(\014\022\017\n\007c_since\030\n \002(\004\022\020" +
-      "\n\010c_credit\030\013 \002(\014\022\024\n\014c_credit_lim\030\014 \002(\001\022\022" +
-      "\n\nc_discount\030\r \002(\001\022\025\n\rc_ytd_payment\030\016 \002(" +
-      "\001\022\025\n\rc_payment_cnt\030\017 \002(\005\022\026\n\016c_delivery_c",
-      "nt\030\020 \002(\005\022\016\n\006c_data\030\021 \002(\014\"Q\n\022TpccCustomer" +
-      "Lookup\022\016\n\006c_w_id\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016" +
-      "\n\006c_last\030\003 \002(\014\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDist" +
-      "rict\022\016\n\006d_name\030\001 \002(\014\022\021\n\td_street1\030\002 \002(\014\022" +
-      "\021\n\td_street2\030\003 \002(\014\022\016\n\006d_city\030\004 \002(\014\022\017\n\007d_" +
-      "state\030\005 \002(\014\022\r\n\005d_zip\030\006 \002(\014\022\r\n\005d_tax\030\007 \002(" +
-      "\001\022\023\n\013d_next_o_id\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n" +
-      "\006h_c_id\030\001 \002(\004\"L\n\010TpccItem\022\017\n\007i_im_id\030\001 \002" +
-      "(\004\022\016\n\006i_name\030\002 \002(\014\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i" +
-      "_data\030\004 \002(\014\"A\n\014TpccNewOrder\022\017\n\007no_o_id\030\001",
-      " \002(\004\022\017\n\007no_d_id\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k" +
-      "\n\tTpccOrder\022\016\n\006o_c_id\030\001 \002(\004\022\021\n\to_entry_d" +
-      "\030\002 \002(\004\022\024\n\014o_carrier_id\030\003 \002(\004\022\020\n\010o_ol_cnt" +
-      "\030\004 \002(\005\022\023\n\013o_all_local\030\005 \002(\005\"\323\001\n\rTpccOrde" +
-      "rLine\022\017\n\007ol_o_id\030\001 \002(\004\022\017\n\007ol_d_id\030\002 \002(\004\022" +
-      "\017\n\007ol_w_id\030\003 \002(\004\022\021\n\tol_number\030\004 \002(\004\022\017\n\007o" +
-      "l_i_id\030\005 \002(\004\022\026\n\016ol_supply_w_id\030\006 \002(\004\022\025\n\r" +
-      "ol_delivery_d\030\007 \002(\004\022\023\n\013ol_quantity\030\010 \002(\004" +
-      "\022\021\n\tol_amount\030\t \002(\001\022\024\n\014ol_dist_info\030\n \002(" +
-      "\014\"\247\002\n\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts",
-      "_dist_01\030\002 \002(\014\022\021\n\ts_dist_02\030\003 \002(\014\022\021\n\ts_d" +
-      "ist_03\030\004 \002(\014\022\021\n\ts_dist_04\030\005 \002(\014\022\021\n\ts_dis" +
-      "t_05\030\006 \002(\014\022\021\n\ts_dist_06\030\007 \002(\014\022\021\n\ts_dist_" +
-      "07\030\010 \002(\014\022\021\n\ts_dist_08\030\t \002(\014\022\021\n\ts_dist_09" +
-      "\030\n \002(\014\022\021\n\ts_dist_10\030\013 \002(\014\022\r\n\005s_ytd\030\014 \002(\004" +
-      "\022\023\n\013s_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 " +
-      "\002(\005\022\016\n\006s_data\030\017 \002(\014\"\204\001\n\rTpccWarehouse\022\016\n" +
-      "\006w_name\030\001 \002(\014\022\021\n\tw_street1\030\002 \002(\014\022\021\n\tw_st" +
-      "reet2\030\003 \002(\014\022\016\n\006w_city\030\004 \002(\014\022\017\n\007w_state\030\005" +
-      " \002(\014\022\r\n\005w_zip\030\006 \002(\014\022\r\n\005w_tax\030\007 \002(\001B%\n\027co",
-      "m.basho.riak.protobufB\nAntidotePB"
+      "ock\030\001 \001(\004\"\202\001\n\rFpbPrepTxnReq\022\026\n\004txid\030\001 \002(" +
+      "\0132\010.FpbTxId\022\"\n\rlocal_updates\030\002 \001(\0132\013.Fpb" +
+      "NodeUps\022#\n\016remote_updates\030\003 \001(\0132\013.FpbNod" +
+      "eUps\022\020\n\010threadid\030\004 \002(\r\"/\n\nFpbNodeUps\022!\n\n" +
+      "per_nodeup\030\001 \003(\0132\r.FpbPerNodeUp\"K\n\014FpbPe" +
+      "rNodeUp\022\014\n\004node\030\001 \002(\t\022\024\n\014partition_id\030\002 " +
+      "\002(\r\022\027\n\003ups\030\003 \003(\0132\n.FpbUpdate\"6\n\016FpbPrepT" +
+      "xnResp\022\017\n\007success\030\001 \002(\010\022\023\n\013commit_time\030\002" +
+      " \001(\004\"G\n\nFpbReadReq\022\026\n\004txid\030\001 \001(\0132\010.FpbTx",
+      "Id\022\013\n\003key\030\002 \002(\t\022\024\n\014partition_id\030\003 \002(\r\"\036\n" +
+      "\016FpbPartListReq\022\014\n\004noop\030\001 \001(\010\"M\n\016FpbSing" +
+      "leUpReq\022\013\n\003key\030\001 \002(\t\022\030\n\005value\030\002 \002(\0132\t.Fp" +
+      "bValue\022\024\n\014partition_id\030\003 \002(\r\"/\n\013FpbPartL" +
+      "ist\022 \n\nnode_parts\030\001 \003(\0132\014.FpbNodePart\"1\n" +
+      "\013FpbNodePart\022\n\n\002ip\030\001 \002(\t\022\026\n\016num_partitio" +
+      "ns\030\002 \002(\r\"2\n\tFpbUpdate\022\013\n\003key\030\001 \002(\t\022\030\n\005va" +
+      "lue\030\002 \002(\0132\t.FpbValue\"2\n\tFpbTxnReq\022\r\n\005clo" +
+      "ck\030\001 \001(\014\022\026\n\003ops\030\002 \003(\0132\t.FpbTxnOp\"K\n\010FpbT" +
+      "xnOp\022\014\n\004type\030\001 \002(\r\022\013\n\003key\030\002 \002(\r\022\021\n\topera",
+      "tion\030\003 \001(\r\022\021\n\tparameter\030\004 \001(\014\"H\n\nFpbTxnR" +
+      "esp\022\017\n\007success\030\001 \002(\010\022\r\n\005clock\030\002 \001(\014\022\032\n\007r" +
+      "esults\030\003 \003(\0132\t.FpbValue\"(\n\007FpbTxId\022\020\n\010sn" +
+      "apshot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014\"\227\003\n\010FpbValue\022\021" +
+      "\n\005field\030\001 \002(\r:\00212\022\037\n\010customer\030\002 \001(\0132\r.Tp" +
+      "ccCustomer\022$\n\007clookup\030\003 \001(\0132\023.TpccCustom" +
+      "erLookup\022\037\n\010district\030\004 \001(\0132\r.TpccDistric" +
+      "t\022\035\n\007history\030\005 \001(\0132\014.TpccHistory\022\027\n\004item" +
+      "\030\006 \001(\0132\t.TpccItem\022\037\n\010neworder\030\007 \001(\0132\r.Tp" +
+      "ccNewOrder\022\031\n\005order\030\010 \001(\0132\n.TpccOrder\022!\n",
+      "\torderline\030\t \001(\0132\016.TpccOrderLine\022\031\n\005stoc" +
+      "k\030\n \001(\0132\n.TpccStock\022!\n\twarehouse\030\013 \001(\0132\016" +
+      ".TpccWarehouse\022\021\n\tstr_value\030\014 \001(\t\022\022\n\nlon" +
+      "g_value\030\r \001(\003\022\024\n\014double_value\030\016 \001(\001\"\313\002\n\014" +
+      "TpccCustomer\022\017\n\007c_first\030\001 \002(\t\022\020\n\010c_middl" +
+      "e\030\002 \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021\n\tc_street1\030\004 \002" +
+      "(\t\022\021\n\tc_street2\030\005 \002(\t\022\016\n\006c_city\030\006 \002(\t\022\017\n" +
+      "\007c_state\030\007 \002(\t\022\r\n\005c_zip\030\010 \002(\t\022\017\n\007c_phone" +
+      "\030\t \002(\t\022\017\n\007c_since\030\n \002(\004\022\020\n\010c_credit\030\013 \002(" +
+      "\t\022\024\n\014c_credit_lim\030\014 \002(\001\022\022\n\nc_discount\030\r ",
+      "\002(\001\022\025\n\rc_ytd_payment\030\016 \002(\001\022\025\n\rc_payment_" +
+      "cnt\030\017 \002(\005\022\026\n\016c_delivery_cnt\030\020 \002(\005\022\016\n\006c_d" +
+      "ata\030\021 \002(\t\"Q\n\022TpccCustomerLookup\022\016\n\006c_w_i" +
+      "d\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016\n\006c_last\030\003 \002(\t\022" +
+      "\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDistrict\022\016\n\006d_name\030" +
+      "\001 \002(\t\022\021\n\td_street1\030\002 \002(\t\022\021\n\td_street2\030\003 " +
+      "\002(\t\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_state\030\005 \002(\t\022\r\n\005" +
+      "d_zip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(\001\022\023\n\013d_next_o_i" +
+      "d\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n\006h_c_id\030\001 \002(\004\"L" +
+      "\n\010TpccItem\022\017\n\007i_im_id\030\001 \002(\004\022\016\n\006i_name\030\002 ",
+      "\002(\t\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i_data\030\004 \002(\t\"A\n\014" +
+      "TpccNewOrder\022\017\n\007no_o_id\030\001 \002(\004\022\017\n\007no_d_id" +
+      "\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k\n\tTpccOrder\022\016\n\006" +
+      "o_c_id\030\001 \002(\004\022\021\n\to_entry_d\030\002 \002(\004\022\024\n\014o_car" +
+      "rier_id\030\003 \002(\004\022\020\n\010o_ol_cnt\030\004 \002(\005\022\023\n\013o_all" +
+      "_local\030\005 \002(\005\"\215\001\n\rTpccOrderLine\022\017\n\007ol_i_i" +
+      "d\030\001 \002(\004\022\026\n\016ol_supply_w_id\030\002 \002(\004\022\025\n\rol_de" +
+      "livery_d\030\003 \002(\004\022\023\n\013ol_quantity\030\004 \002(\004\022\021\n\to" +
+      "l_amount\030\005 \002(\001\022\024\n\014ol_dist_info\030\006 \002(\t\"\247\002\n" +
+      "\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts_dist",
+      "_01\030\002 \002(\t\022\021\n\ts_dist_02\030\003 \002(\t\022\021\n\ts_dist_0" +
+      "3\030\004 \002(\t\022\021\n\ts_dist_04\030\005 \002(\t\022\021\n\ts_dist_05\030" +
+      "\006 \002(\t\022\021\n\ts_dist_06\030\007 \002(\t\022\021\n\ts_dist_07\030\010 " +
+      "\002(\t\022\021\n\ts_dist_08\030\t \002(\t\022\021\n\ts_dist_09\030\n \002(" +
+      "\t\022\021\n\ts_dist_10\030\013 \002(\t\022\r\n\005s_ytd\030\014 \002(\004\022\023\n\013s" +
+      "_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 \002(\005\022\016" +
+      "\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w_na" +
+      "me\030\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_street2" +
+      "\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002(\t\022" +
+      "\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B%\n\027com.bas",
+      "ho.riak.protobufB\nAntidotePB"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -22459,7 +25522,7 @@ public final class AntidotePB {
           internal_static_FpbPrepTxnReq_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbPrepTxnReq_descriptor,
-              new java.lang.String[] { "Txid", "LocalUpdates", "RemoteUpdates", });
+              new java.lang.String[] { "Txid", "LocalUpdates", "RemoteUpdates", "Threadid", });
           internal_static_FpbNodeUps_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_FpbNodeUps_fieldAccessorTable = new
@@ -22543,7 +25606,7 @@ public final class AntidotePB {
           internal_static_FpbValue_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbValue_descriptor,
-              new java.lang.String[] { "Field", "Customer", "Clookup", "District", "History", "Item", "Neworder", "Order", "Orderline", "Stock", "Warehouse", "Value", });
+              new java.lang.String[] { "Field", "Customer", "Clookup", "District", "History", "Item", "Neworder", "Order", "Orderline", "Stock", "Warehouse", "StrValue", "LongValue", "DoubleValue", });
           internal_static_TpccCustomer_descriptor =
             getDescriptor().getMessageTypes().get(16);
           internal_static_TpccCustomer_fieldAccessorTable = new
@@ -22591,7 +25654,7 @@ public final class AntidotePB {
           internal_static_TpccOrderLine_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccOrderLine_descriptor,
-              new java.lang.String[] { "OlOId", "OlDId", "OlWId", "OlNumber", "OlIId", "OlSupplyWId", "OlDeliveryD", "OlQuantity", "OlAmount", "OlDistInfo", });
+              new java.lang.String[] { "OlIId", "OlSupplyWId", "OlDeliveryD", "OlQuantity", "OlAmount", "OlDistInfo", });
           internal_static_TpccStock_descriptor =
             getDescriptor().getMessageTypes().get(24);
           internal_static_TpccStock_fieldAccessorTable = new

@@ -11,6 +11,9 @@ import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.google.protobuf.MessageLite;
 
 class AntidoteConnection {
@@ -20,6 +23,7 @@ class AntidoteConnection {
 	 private Socket sock;
 	 private DataOutputStream dout;
 	 private DataInputStream din;
+	 private static Log log = LogFactory.getLog(AntidoteConnection.class);
 
 	public AntidoteConnection(String host) throws IOException {
 		this(host, DEFAULT_RIAK_PB_PORT);
@@ -30,7 +34,7 @@ class AntidoteConnection {
 	}
 
 	public AntidoteConnection(InetAddress addr, int port) throws IOException {
-		System.out.println("Trying to connect...");
+		log.info("Trying to connect to "+addr.toString()+":"+port);
 		sock = new Socket(addr, port);
 		
 		sock.setSendBufferSize(1024 * 200);
@@ -39,7 +43,7 @@ class AntidoteConnection {
 				.getOutputStream(), 1024 * 200));
 		din = new DataInputStream(
 				new BufferedInputStream(sock.getInputStream(), 1024 * 200));
-		System.out.println("Connected...");
+		//log.info("Connected...");
 	}
 
 	///////////////////////

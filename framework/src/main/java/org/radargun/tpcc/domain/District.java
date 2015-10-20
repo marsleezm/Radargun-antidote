@@ -169,9 +169,9 @@ public class District implements Serializable, DomainObject {
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 	   TpccDistrict district = TpccDistrict.newBuilder()
-			   .setDName(ByteString.copyFromUtf8(d_name)).setDStreet1(ByteString.copyFromUtf8(d_street1))
-			   .setDStreet2(ByteString.copyFromUtf8(d_street2)).setDCity(ByteString.copyFromUtf8(d_city))
-			   .setDState(ByteString.copyFromUtf8(d_state)).setDZip(ByteString.copyFromUtf8(d_zip))
+			   .setDName(d_name).setDStreet1(d_street1)
+			   .setDStreet2(d_street2).setDCity(d_city)
+			   .setDState(d_state).setDZip(d_zip)
 			   .setDTax(d_tax).setDNextOId(d_next_o_id).build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setDistrict(district).setField(4).build();
@@ -195,14 +195,14 @@ public class District implements Serializable, DomainObject {
       if (value == null) return false;
       TpccDistrict district = value.getDistrict();
 
-      this.d_city = district.getDCity().toString();
-      this.d_name = district.getDName().toString();
+      this.d_city = district.getDCity();
+      this.d_name = district.getDName();
       this.d_next_o_id = district.getDNextOId();
-      this.d_state = district.getDState().toString();
-      this.d_street1 = district.getDStreet1().toString();
-      this.d_street2 = district.getDStreet2().toString();
+      this.d_state = district.getDState();
+      this.d_street1 = district.getDStreet1();
+      this.d_street2 = district.getDStreet2();
       this.d_tax = district.getDTax();
-      this.d_zip = district.getDZip().toString();
+      this.d_zip = district.getDZip();
 
 
       return true;

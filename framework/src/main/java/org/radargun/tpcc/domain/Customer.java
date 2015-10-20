@@ -269,15 +269,15 @@ public class Customer implements Serializable, Comparable, DomainObject {
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 	   TpccCustomer customer = TpccCustomer.newBuilder()
-			   .setCCity(ByteString.copyFromUtf8(c_city)).setCCredit(ByteString.copyFromUtf8(c_credit))
-			   .setCCreditLim(c_credit_lim).setCData(ByteString.copyFromUtf8(c_data)).
-			   setCDeliveryCnt(c_delivery_cnt)
-			   .setCDiscount(c_discount).setCFirst(ByteString.copyFromUtf8(c_first))
-			   .setCLast(ByteString.copyFromUtf8(c_last)).setCMiddle(ByteString.copyFromUtf8(c_middle))
-			   .setCPaymentCnt(c_payment_cnt).setCPhone(ByteString.copyFromUtf8(c_phone))
-			   .setCSince(c_since).setCState(ByteString.copyFromUtf8(c_state))
-			   .setCStreet1(ByteString.copyFromUtf8(c_street1)).setCStreet2(ByteString.copyFromUtf8(c_street2))
-			   .setCYtdPayment(c_ytd_payment).setCZip(ByteString.copyFromUtf8(c_zip)).build();
+			   .setCCity(c_city).setCCredit(c_credit)
+			   .setCCreditLim(c_credit_lim).setCData((c_data))
+			   .setCDeliveryCnt(c_delivery_cnt)
+			   .setCDiscount(c_discount).setCFirst((c_first))
+			   .setCLast((c_last)).setCMiddle((c_middle))
+			   .setCPaymentCnt(c_payment_cnt).setCPhone((c_phone))
+			   .setCSince(c_since).setCState((c_state))
+			   .setCStreet1((c_street1)).setCStreet2((c_street2))
+			   .setCYtdPayment(c_ytd_payment).setCZip((c_zip)).build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setCustomer(customer).setField(2).build();
 	      
@@ -298,27 +298,27 @@ public class Customer implements Serializable, Comparable, DomainObject {
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 
       FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
-      TpccCustomer customer = value.getCustomer();
-      
       if (value == null) return false;
+      
+      TpccCustomer customer = value.getCustomer();
 
-      this.c_city = customer.getCCity().toString();
-      this.c_credit = customer.getCCredit().toString();
+      this.c_city = customer.getCCity();
+      this.c_credit = customer.getCCredit();
       this.c_credit_lim = customer.getCCreditLim();
-      this.c_data = customer.getCData().toString();
+      this.c_data = customer.getCData();
       this.c_delivery_cnt = customer.getCDeliveryCnt();
       this.c_discount = customer.getCDiscount();
-      this.c_first = customer.getCFirst().toString();
-      this.c_last = customer.getCLast().toString();
-      this.c_middle = customer.getCMiddle().toString();
+      this.c_first = customer.getCFirst();
+      this.c_last = customer.getCLast();
+      this.c_middle = customer.getCMiddle();
       this.c_payment_cnt = customer.getCPaymentCnt();
-      this.c_phone = customer.getCPhone().toString();
+      this.c_phone = customer.getCPhone();
       this.c_since = customer.getCSince();
-      this.c_state = customer.getCState().toString();
-      this.c_street1 = customer.getCStreet1().toString();
-      this.c_street2 = customer.getCStreet2().toString();
+      this.c_state = customer.getCState();
+      this.c_street1 = customer.getCStreet1();
+      this.c_street2 = customer.getCStreet2();
       this.c_ytd_payment = customer.getCYtdPayment();
-      this.c_zip = customer.getCZip().toString();
+      this.c_zip = customer.getCZip();
 
       return true;
    }

@@ -31,6 +31,12 @@ public interface CacheWrapper
     * operations.
     */
    void tearDown() throws Exception;
+   
+   
+   /**
+    * Inform the cacheWrapper that how many parallel threads will be used
+    */
+   void setParallelism(int numThreads);
 
    /**
     * This method is called when the framework needs to put an object in cache.  This method is treated

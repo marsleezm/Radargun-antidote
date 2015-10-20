@@ -5,7 +5,6 @@ import org.radargun.tpcc.DomainObject;
 
 import com.basho.riak.protobuf.AntidotePB.FpbValue;
 import com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup;
-import com.basho.riak.protobuf.AntidotePB.TpccDistrict;
 import com.google.protobuf.ByteString;
 
 import java.io.Externalizable;
@@ -82,7 +81,6 @@ public class CustomerLookup implements Externalizable, DomainObject {
       if(this.ids == null){
          this.ids = new LinkedList<Long>();
       }
-
       this.ids.add(newId);
    }
 
@@ -94,13 +92,7 @@ public class CustomerLookup implements Externalizable, DomainObject {
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 	   TpccCustomerLookup.Builder builder = TpccCustomerLookup.newBuilder()
 			   .setCWId(c_w_id).setCDId(c_d_id)
-			   .setCLast(ByteString.copyFromUtf8(c_last));
-	   
-	   int index = 0;
-	   for(Long id : ids)
-	   {
-		   builder.setIds(index, id);
-	   }
+			   .setCLast(c_last).addAllIds(ids);
 	   
 	   FpbValue value = FpbValue.newBuilder().setClookup(builder).setField(3).build();
 	   
@@ -118,16 +110,16 @@ public class CustomerLookup implements Externalizable, DomainObject {
 
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex)throws Throwable{
+	   
+	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  if (value == null) return false;
+	  
+	  TpccCustomerLookup clookup = value.getClookup();
 
-      CustomerLookup loaded=(CustomerLookup)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
-
-      if(loaded==null) return false;
-
-      this.c_w_id = loaded.c_w_id;
-      this.c_d_id = loaded.c_d_id;
-      this.c_last = loaded.c_last;
-      this.ids = loaded.ids;
-
+      this.c_w_id = clookup.getCWId();
+      this.c_d_id = clookup.getCDId();
+      this.c_last = clookup.getCLast();
+      this.ids = new LinkedList<Long>(clookup.getIdsList());
 
       return true;
    }

@@ -140,9 +140,9 @@ public class OrderLine implements Serializable, DomainObject {
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 	   TpccOrderLine orderline = TpccOrderLine.newBuilder()
-			   .setOlDId(ol_i_id).setOlSupplyWId(ol_supply_w_id)
+			   .setOlIId(ol_i_id).setOlSupplyWId(ol_supply_w_id)
 			   .setOlDeliveryD(ol_supply_w_id).setOlQuantity(ol_quantity)
-			   .setOlAmount(ol_amount).setOlDistInfo(ByteString.copyFromUtf8(ol_dist_info)).build();
+			   .setOlAmount(ol_amount).setOlDistInfo(ol_dist_info).build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setOrderline(orderline).setField(9).build();
 	   
@@ -170,7 +170,7 @@ public class OrderLine implements Serializable, DomainObject {
       this.ol_delivery_d = orderline.getOlDeliveryD();
       this.ol_quantity = orderline.getOlQuantity();
       this.ol_amount = orderline.getOlAmount();
-      this.ol_dist_info = orderline.getOlDistInfo().toString();
+      this.ol_dist_info = orderline.getOlDistInfo();
 
 
       return true;

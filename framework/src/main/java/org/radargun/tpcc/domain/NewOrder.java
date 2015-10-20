@@ -64,7 +64,7 @@ public class NewOrder implements Serializable, DomainObject {
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 	   TpccNewOrder neworder = TpccNewOrder.newBuilder()
-			   .setNoDId(no_o_id).setNoDId(no_d_id).setNoWId(no_w_id)
+			   .setNoOId(no_o_id).setNoDId(no_d_id).setNoWId(no_w_id)
 			   .build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setNeworder(neworder).setField(7).build();

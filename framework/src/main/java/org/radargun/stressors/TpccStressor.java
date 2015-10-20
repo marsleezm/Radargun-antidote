@@ -626,8 +626,10 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
             } catch (Throwable e) {
                successful = false;
                if (log.isDebugEnabled()) {
+            	   log.info(transaction);
                   log.debug("Exception while executing transaction.", e);
                } else {
+            	   log.info(transaction);
                   log.warn("Exception while executing transaction: " + e.getMessage());
                }
                if (e instanceof ElementNotFoundException) {

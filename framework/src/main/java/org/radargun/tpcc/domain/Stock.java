@@ -216,12 +216,12 @@ public class Stock implements Serializable, DomainObject {
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
 	   TpccStock stock = TpccStock.newBuilder()
-			   .setSData(ByteString.copyFromUtf8(s_data)).setSDist01(ByteString.copyFromUtf8(s_dist_01))
-			   .setSDist02(ByteString.copyFromUtf8(s_dist_02)).setSDist03(ByteString.copyFromUtf8(s_dist_03))
-			   .setSDist04(ByteString.copyFromUtf8(s_dist_04)).setSDist05(ByteString.copyFromUtf8(s_dist_05))
-			   .setSDist06(ByteString.copyFromUtf8(s_dist_06)).setSDist07(ByteString.copyFromUtf8(s_dist_07))
-			   .setSDist08(ByteString.copyFromUtf8(s_dist_08)).setSDist09(ByteString.copyFromUtf8(s_dist_09))
-			   .setSDist10(ByteString.copyFromUtf8(s_dist_10)).setSOrderCnt(s_order_cnt)
+			   .setSData(s_data).setSDist01(s_dist_01)
+			   .setSDist02(s_dist_02).setSDist03(s_dist_03)
+			   .setSDist04(s_dist_04).setSDist05(s_dist_05)
+			   .setSDist06(s_dist_06).setSDist07(s_dist_07)
+			   .setSDist08(s_dist_08).setSDist09(s_dist_09)
+			   .setSDist10(s_dist_10).setSOrderCnt(s_order_cnt)
 			   .setSQuantity(s_quantity).setSRemoteCnt(s_remote_cnt).setSYtd(s_ytd).build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setStock(stock).setField(10).build();
@@ -245,17 +245,17 @@ public class Stock implements Serializable, DomainObject {
       if (value == null) return false;
       TpccStock stock = value.getStock();
 
-      this.s_data = stock.getSData().toString();
-      this.s_dist_01 = stock.getSDist01().toString();
-      this.s_dist_02 = stock.getSDist02().toString();
-      this.s_dist_03 = stock.getSDist03().toString();
-      this.s_dist_04 = stock.getSDist04().toString();
-      this.s_dist_05 = stock.getSDist05().toString();
-      this.s_dist_06 = stock.getSDist06().toString();
-      this.s_dist_07 = stock.getSDist07().toString();
-      this.s_dist_08 = stock.getSDist08().toString();;
-      this.s_dist_09 = stock.getSDist09().toString();
-      this.s_dist_10 = stock.getSDist10().toString();
+      this.s_data = stock.getSData();
+      this.s_dist_01 = stock.getSDist01();
+      this.s_dist_02 = stock.getSDist02();
+      this.s_dist_03 = stock.getSDist03();
+      this.s_dist_04 = stock.getSDist04();
+      this.s_dist_05 = stock.getSDist05();
+      this.s_dist_06 = stock.getSDist06();
+      this.s_dist_07 = stock.getSDist07();
+      this.s_dist_08 = stock.getSDist08();;
+      this.s_dist_09 = stock.getSDist09();
+      this.s_dist_10 = stock.getSDist10();
       this.s_order_cnt = stock.getSOrderCnt();
       this.s_quantity = stock.getSQuantity();
       this.s_remote_cnt = stock.getSRemoteCnt();

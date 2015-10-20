@@ -6,7 +6,10 @@ import org.radargun.CacheWrapper;
 import org.radargun.IDelayedComputation;
 import org.radargun.LocatedKey;
 import org.radargun.utils.TypedProperties;
+
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +17,13 @@ public class AntidoteWrapper implements CacheWrapper {
    private static final Object NOT_IN_TRANSACTION = null;
 
    private static Log log = LogFactory.getLog(AntidoteWrapper.class);
-   TransactionManager tm;
+   static List<TransactionManager> tms = new ArrayList<TransactionManager>();
 
    boolean started = false;
    String config;
    Method isPassiveReplicationMethod = null;
+
+   private int numThreads = 1;
 
    public void setUp(String config, boolean isLocal, int nodeIndex, TypedProperties confAttributes) throws Exception {
       this.config = config;
@@ -27,25 +32,25 @@ public class AntidoteWrapper implements CacheWrapper {
 
       log.trace("Using config file: " + configFile + " and cache name: " + cacheName);
 
-      log.warn("Finishing loading config file:"+config);
       if (!started) {
-         DCManager.init(config);
          started = true;
-         tm = new TransactionManager();
-         log.info("Using transaction manager: " + tm);
+         DCInfoManager.init();
+         while(tms.size() < numThreads)
+ 			tms.add(new TransactionManager());
+         log.info("DCInfo just started!");
       }
       log.info("Using config attributes: " + confAttributes);
    }
    
    @Override
     public void clusterFormed(int expected) {
-           while (DCManager.getAddressesSize() != expected) {
+           while (DCInfoManager.getAddressesSize() != expected) {
                try {
                    Thread.sleep(1000);
                } catch (InterruptedException e) {}
               
            }
-           MagicKey.NODE_INDEX = DCManager.getNodeIndex();
+           MagicKey.NODE_INDEX = DCInfoManager.getNodeIndex();
     }
    
    @Override
@@ -59,46 +64,63 @@ public class AntidoteWrapper implements CacheWrapper {
     }
    
    public void tearDown() throws Exception {
-      List<String> addressList = DCManager.getMembers();
+	   
+      String addressList = DCInfoManager.getMembers().toString();
       if (started) {
-    	 DCManager.stop();
+    	 for(TransactionManager tm : tms)
+    		 tm.stopConnections();
          log.trace("Stopped, previous view is " + addressList);
          started = false;
       }
    }
 
    public void put(String bucket, Object key, Object value) throws Exception {
-      tm.put(key, value);
+	  if (bucket == null)
+		  getThreadLocalTm().put(key, value);
+	  else
+		  getThreadLocalTm().put(bucket+key, value);
    }
 
    @Override
    public void putIfLocal(String bucket, Object key, Object value) throws Exception {
-      tm.put(key, value);
+	   if (bucket == null)
+		   getThreadLocalTm().put(key, value);
+	   else
+	       getThreadLocalTm().put(bucket+key, value);
    }
 
    public Object get(String bucket, Object key) throws Exception {
-      return tm.get(key);
+	  String threadName = Thread.currentThread().getName();
+	  String[] substrs = threadName.split("-");
+	  Integer threadId = new Integer(substrs[substrs.length-1]);
+	  TransactionManager tm = tms.get(threadId % numThreads);
+	  if (bucket == null)
+		  return tm.get(threadId, key);
+	  else
+		  return tm.get(threadId, bucket+key);
    }
 
    public void empty() throws Exception {
       //use keySet().size() rather than size directly as cache.size might not be reliable
-      log.info("Cache size before clear (cluster size= " + DCManager.getAddressesSize() +")" 
-    		  	+ DCManager.getCacheSize());
+      log.info("Cache size before clear (cluster size= " + DCInfoManager.getAddressesSize() +")" 
+    		  	+ DCInfoManager.getCacheSize());
 
-      DCManager.clear();
-      log.info("Cache size after clear: " + DCManager.getCacheSize());
+      for(TransactionManager tm : tms)
+    	  tm.stopConnections();
+      DCInfoManager.clear();
+      log.info("Cache size after clear: " + DCInfoManager.getCacheSize());
    }
 
    public int getNumMembers() {
-      if (DCManager.getMembers() != null) {
-         log.trace("Members are: " + DCManager.getMembers());
+      if (DCInfoManager.getMembers() != null) {
+         log.trace("Members are: " + DCInfoManager.getMembers());
       }
-      return DCManager.getMembers() == null ? 0 : DCManager.getMembers().size();
+      return DCInfoManager.getMembers() == null ? 0 : DCInfoManager.getMembers().size();
    }
 
    public String getInfo() {
       //Important: don't change this string without validating the ./dist.sh as it relies on its format!!
-      return "Running : " + DCManager.getVersion() +  ", config:" + config + ", cacheName:" + DCManager.getName();
+      return "Running : " + "1.0.0" +  ", config:" + config + ", cacheName:" + "Antidote";
    }
 
    public Object getReplicatedData(String bucket, String key) throws Exception {
@@ -107,7 +129,8 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public void startTransaction(boolean isReadOnly) {
-      assertTm();
+	  TransactionManager tm = getThreadLocalTm();
+      assertTm(tm);
       try {
          tm.begin();
       }
@@ -117,25 +140,28 @@ public class AntidoteWrapper implements CacheWrapper {
    }
 
    public void endTransaction(boolean successful) {
-      assertTm();
-      try {
-         if (successful)
-            tm.commit();
-         else
-            tm.abort();
+	  String threadName = Thread.currentThread().getName();
+	  String[] substrs = threadName.split("-");
+	  Integer threadId = new Integer(substrs[substrs.length-1]);
+	  TransactionManager tm = tms.get(threadId % numThreads);
+      assertTm(tm);
+      if (successful){
+    	  if( tm.commit(threadId) == false)
+    		  throw new RuntimeException();
       }
-      catch (Exception e) {
-         throw new RuntimeException(e);
+      else{
+          tm.abort();
       }
    }
 
    @Override
    public boolean isInTransaction() {
-         return tm != null && tm.getStatus() != NOT_IN_TRANSACTION;
+	   TransactionManager tm = getThreadLocalTm();
+       return tm != null && tm.getStatus() != NOT_IN_TRANSACTION;
    }
 
 
-   private void assertTm() {
+   private void assertTm(TransactionManager tm) {
       if (tm == null) throw new RuntimeException("No configured TM!");
    }
 
@@ -144,12 +170,12 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public int getCacheSize() {
-      return DCManager.getCacheSize();
+      return DCInfoManager.getCacheSize();
    }
 
    @Override
    public Map<String, String> getAdditionalStats() {
-      return DCManager.getStat();
+      return new HashMap<String, String>();
    }
 
    @Override
@@ -159,7 +185,14 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public boolean isTheMaster() {
-      return !isPassiveReplication() || tm.isCoordinator();
+      return !isPassiveReplication() || getThreadLocalTm().isCoordinator();
+   }
+   
+   private synchronized TransactionManager getThreadLocalTm() {
+	   String threadName = Thread.currentThread().getName();
+	   String[] substrs = threadName.split("-");
+	   Integer index = new Integer(substrs[substrs.length-1]);
+	   return tms.get(index % numThreads);
    }
    
    //================================================= JMX STATS ====================================================
@@ -170,12 +203,12 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public Object getDelayed(Object key) {
-       return tm.delayedGet(key);
+       return getThreadLocalTm().delayedGet(key);
    }
 
    @Override
    public void putDelayed(Object key, Object value) {
-       tm.delayedPut(key, value);
+	   getThreadLocalTm().delayedPut(key, value);
    }
 
    @Override
@@ -187,4 +220,19 @@ public class AntidoteWrapper implements CacheWrapper {
    public void delayComputation(IDelayedComputation<?> computation) {
 	   // TODO Auto-generated method stub
    }
+
+   public static void clearTMs()
+   {
+	   for(TransactionManager tm : tms)
+		 tm.stopConnections();
+   }
+
+	@Override
+	public void setParallelism(int numThreads) {
+		this.numThreads  = numThreads;
+		while(tms.size() < numThreads){
+			log.info("Increasing tms: now num is "+tms.size());
+			tms.add(new TransactionManager());
+		}
+	}
 }
