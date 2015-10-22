@@ -112,8 +112,10 @@ public class TransactionManager {
 				
 				connection.send(MSG_SingleUpReq, singleUpReq);
 				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-				if (resp.getSuccess() == false)
+				if (resp.getSuccess() == false){
+					log.warn("Trying to put ["+key+","+value+"] failed!");
 					throw new Exception();
+				}
 			}
 		}
 	}
