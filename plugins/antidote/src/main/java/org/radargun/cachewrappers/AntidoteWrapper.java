@@ -102,13 +102,13 @@ public class AntidoteWrapper implements CacheWrapper {
 
    public void empty() throws Exception {
       //use keySet().size() rather than size directly as cache.size might not be reliable
-      log.info("Cache size before clear (cluster size= " + DCInfoManager.getAddressesSize() +")" 
-    		  	+ DCInfoManager.getCacheSize());
+      //log.info("Cache size before clear (cluster size= " + DCInfoManager.getAddressesSize() +")" 
+    //		  	+ DCInfoManager.getCacheSize());
 
-      for(TransactionManager tm : tms)
-    	  tm.stopConnections();
-      DCInfoManager.clear();
-      log.info("Cache size after clear: " + DCInfoManager.getCacheSize());
+     // for(TransactionManager tm : tms)
+    //	  tm.stopConnections();
+     // DCInfoManager.clear();
+      log.info("Not really emptying the cache");
    }
 
    public int getNumMembers() {
