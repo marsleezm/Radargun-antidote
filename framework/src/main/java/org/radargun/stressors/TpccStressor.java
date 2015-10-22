@@ -125,6 +125,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       initializeToolsParameters();
 
       if (this.arrivalRate != 0.0) {     //Open system
+    	 log.info("Arrival rate is :"+ arrivalRate+", not zero.");
          queue = new LinkedBlockingQueue<RequestType>();
          countJobs = new AtomicLong(0L);
 
@@ -154,6 +155,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
             producers[i] = new Producer(producerRates[i], i);
          }
       } else {
+    	 log.info("Arrival rate is zero.");
          producers = new Producer[0];
       }
 
@@ -547,6 +549,8 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       public Stressor(int localWarehouseID, int threadIndex, int nodeIndex, double arrivalRate,
                       double paymentWeight, double orderStatusWeight) {
          super("Stressor-" + threadIndex);
+    	 log.info("Creating stressor, localWarehouseID:"+localWarehouseID+", threadIndex:"+ threadIndex
+    			 +", nodeIndex:"+nodeIndex+", arrivalRate:"+arrivalRate+", paymentWeight:"+paymentWeight);
          this.threadIndex = threadIndex;
          this.arrivalRate = arrivalRate;
          this.terminal = new TpccTerminal(paymentWeight, orderStatusWeight, nodeIndex, localWarehouseID);
@@ -977,7 +981,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
    private Stressor createStressor(int threadIndex) {
       int localWarehouse = getWarehouseForThread(threadIndex);
-System.out.println("~~~~~~~~~~~~~~~~~local warehouse: " + localWarehouse + " ~~~~~~~~~~~~~~~~~~");
+      log.info("~~~~~~~~~~~~~~~~~local warehouse: " + localWarehouse + " ~~~~~~~~~~~~~~~~~~");
       return new Stressor(localWarehouse, threadIndex, nodeIndex, arrivalRate, paymentWeight,orderStatusWeight);
    }
 
@@ -1067,6 +1071,7 @@ System.out.println("~~~~~~~~~~~~~~~~~local warehouse: " + localWarehouse + " ~~~
    }
 
    private int getWarehouseForThread(int threadIdx) {
+	  log.info(threadIdx+": localwarehouse should always be empty, right? "+listLocalWarehouses.isEmpty());
       return listLocalWarehouses.isEmpty() ? -1 : listLocalWarehouses.get(threadIdx % listLocalWarehouses.size());
    }
 

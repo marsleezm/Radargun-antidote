@@ -13,17 +13,12 @@ import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.radargun.stressors.TpccStressor;
-
 /**
  * @author Mircea Markus
  */
 public class LineReportGenerator {
 
    private static final String REPORT_PNG = "report";
-   private static final Log log = LogFactory.getLog(LineReportGenerator.class);
 
    public static void main(String[] args) throws Exception {
 
@@ -86,7 +81,6 @@ public class LineReportGenerator {
             return s.indexOf(fileNamePrefix) == 0;
          }
       });
-      log.trace("Getting value from dir:"+dir+", columnIndex is "+columnIndex+", file name is:"+fileNamePrefix+"files are"+files);
       SortedMap<Integer, Double> result = new TreeMap<Integer, Double>();
       if (files == null) throw new RuntimeException("Could not find any files with prefix:" + fileNamePrefix + " in directory " + f.getAbsolutePath());
       for (String file : files) {
@@ -96,14 +90,11 @@ public class LineReportGenerator {
          Double sum = 0d;
          int count = 0;
          String line;
-         log.trace("File is:"+file);
          while ((line = br.readLine()) != null) {
-        	log.trace("Line is:"+line);
             StringTokenizer st = new StringTokenizer(line, ",");
             for (int i = 0; i <= columnIndex; i++) {
-               if (!st.hasMoreElements()) throw new RuntimeException("No column with index " + columnIndex + " in file '" + fileNamePrefix + "'");           
+               if (!st.hasMoreElements()) throw new RuntimeException("No column with index " + columnIndex + " in file '" + fileNamePrefix + "'");
                String value = st.nextToken();
-               log.trace("value is:"+value+", i is"+i+", column is "+columnIndex);
                if (i == columnIndex) {
                   sum += (Double.valueOf(value));
                   count++;

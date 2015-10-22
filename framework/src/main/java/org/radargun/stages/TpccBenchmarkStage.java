@@ -66,7 +66,6 @@ public class TpccBenchmarkStage extends AbstractDistStage {
     * if true, each node will pick a warehouse and all transactions will work over that warehouse. The warehouses are
     * picked by order, i.e., slave 0 gets warehouse 1,N+1, 2N+1,[...]; ... slave N-1 gets warehouse N, 2N, [...].
     */
-   private boolean accessSameWarehouse = false;
 
    /**
     * specify the min and the max number of items created by a New Order Transaction.
@@ -91,7 +90,8 @@ public class TpccBenchmarkStage extends AbstractDistStage {
          return result;
       }
 
-      log.info("Starting TpccBenchmarkStage: " + this.toString());
+      log.info("Starting TpccBenchmarkStage: " + this.toString()+", num slaves are"+getActiveSlaveCount()
+    		  +", number of threads are"+this.numOfThreads);
 
       tpccStressor = new TpccStressor();
       tpccStressor.setNodeIndex(cacheWrapper.getMyNode());
@@ -101,7 +101,7 @@ public class TpccBenchmarkStage extends AbstractDistStage {
       tpccStressor.setArrivalRate(this.arrivalRate);
       tpccStressor.setPaymentWeight(this.paymentWeight);
       tpccStressor.setOrderStatusWeight(this.orderStatusWeight);
-      tpccStressor.setAccessSameWarehouse(accessSameWarehouse);
+      tpccStressor.setAccessSameWarehouse(false);
       tpccStressor.setNumberOfItemsInterval(numberOfItemsInterval);
       tpccStressor.setStatsSamplingInterval(statsSamplingInterval);
 
@@ -174,10 +174,6 @@ public class TpccBenchmarkStage extends AbstractDistStage {
       this.orderStatusWeight = orderStatusWeight;
    }
 
-   public void setAccessSameWarehouse(boolean accessSameWarehouse) {
-      this.accessSameWarehouse = accessSameWarehouse;
-   }
-
    public void setNumberOfItemsInterval(String numberOfItemsInterval) {
       this.numberOfItemsInterval = numberOfItemsInterval;
    }
@@ -194,7 +190,7 @@ public class TpccBenchmarkStage extends AbstractDistStage {
             ", arrivalRate=" + arrivalRate +
             ", paymentWeight=" + paymentWeight +
             ", orderStatusWeight=" + orderStatusWeight +
-            ", accessSameWarehouse=" + accessSameWarehouse +
+            ", accessSameWarehouse=" + false +
             ", numberOfItemsInterval=" + numberOfItemsInterval +
             ", statsSamplingInterval=" + statsSamplingInterval +
             ", cacheWrapper=" + cacheWrapper +

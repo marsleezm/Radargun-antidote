@@ -55,7 +55,7 @@ public class AntidoteWrapper implements CacheWrapper {
    
    @Override
     public int getMyNode() {
-        return MagicKey.NODE_INDEX;
+        return DCInfoManager.getNodeIndex();
     }
    
    @Override

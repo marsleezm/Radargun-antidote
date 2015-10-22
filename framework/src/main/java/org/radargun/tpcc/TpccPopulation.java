@@ -102,7 +102,6 @@ public class TpccPopulation {
          boolean successful = false;
          while (!successful) {
             try {
-               System.out.println("Trying to put C_C_LAST");
                wrapper.put(null, "C_C_LAST", c_c_last);
                successful = true;
             } catch (Throwable e) {

@@ -17,7 +17,7 @@
             partialReplication="false"/>
       <TpccPopulation
             preloadedFromDB="false"
-            numWarehouses="1"
+            numWarehouses="2"
             cLastMask="0"
             olIdMask="0"
             cIdMask="0"

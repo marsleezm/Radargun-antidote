@@ -231,12 +231,14 @@ public class TransactionManager {
 			return resp.getSuccess();
 		} catch (InvalidProtocolBufferException e) {
 			// TODO Auto-generated catch block
+			log.warn("Invalid protocol buffer");
 			e.printStackTrace();
 			System.exit(0);
 			return false;
 		}
 		   catch (IOException e) {
 			// TODO Auto-generated catch block
+			log.warn("IOException");
 			e.printStackTrace();
 			System.exit(0);
 			return false;
