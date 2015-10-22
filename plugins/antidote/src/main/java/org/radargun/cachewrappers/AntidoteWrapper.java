@@ -180,12 +180,13 @@ public class AntidoteWrapper implements CacheWrapper {
 
    @Override
    public boolean isPassiveReplication() {
-      return true;
+      return false;
    }
 
    @Override
    public boolean isTheMaster() {
-      return !isPassiveReplication() || getThreadLocalTm().isCoordinator();
+	   return true;
+      //return !isPassiveReplication() || getThreadLocalTm().isCoordinator();
    }
    
    private synchronized TransactionManager getThreadLocalTm() {
