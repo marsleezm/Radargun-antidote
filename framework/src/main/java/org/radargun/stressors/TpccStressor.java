@@ -623,14 +623,13 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
             long startService = System.nanoTime();
 
-            log.info("Transaction started!");
             cacheWrapper.startTransaction(isReadOnly);
 
             try {
-            	log.info("Transaction before execution:");
                transaction.executeTransaction(cacheWrapper);
                log.info("Transaction done execution.");
             } catch (Throwable e) {
+            	log.warn("Transaction failure!"+e);
                successful = false;
                if (log.isDebugEnabled()) {
             	   log.info(transaction);
@@ -655,15 +654,19 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                   measureCommitTime = true;
                }
 
+               log.info("Before try to commit");
                cacheWrapper.endTransaction(successful);
+               log.info("Done try to commit");
 
                if (!successful) {
+            	  log.warn("Transaction failed in execution!");
                   nrFailures++;
                   if (!isReadOnly) {
                      nrWrFailures++;
                      if (transaction instanceof NewOrderTransaction) {
                         nrNewOrderFailures++;
                      } else if (transaction instanceof PaymentTransaction) {
+                    	 log.warn("Payment failed!");
                         nrPaymentFailures++;
                      }
 
@@ -675,6 +678,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
             } catch (Throwable rb) {
                nrFailures++;
 
+               log.warn("Transaction failed in committing!");
                if (!isReadOnly) {
                   nrWrFailures++;
                   nrWrFailuresOnCommit++;
