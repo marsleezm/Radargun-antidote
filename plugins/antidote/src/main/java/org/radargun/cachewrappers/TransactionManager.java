@@ -81,8 +81,10 @@ public class TransactionManager {
 			newValue = FpbValue.newBuilder().setField(LONG_FIELD).setLongValue((Long)value).build();
 		else if(value instanceof Double || value instanceof Float)
 			newValue = FpbValue.newBuilder().setField(DOUBLE_FIELD).setDoubleValue((Double)value).build();
-		else
+		else{
+			log.info("Tring to put "+key+" is magickey:"+(key instanceof MagicKey)+", isInTxn:"+isInTxn);
 			newValue = (FpbValue)value;
+		}
 		
 		if (isInTxn)
 			writeBuffer.put(key, newValue);
