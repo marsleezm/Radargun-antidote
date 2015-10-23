@@ -93,7 +93,8 @@ public class TransactionManager {
 				MagicKey mKey = (MagicKey)key;
 				AntidoteConnection connection = connections.get(mKey.node);
 				Integer partitionId = Math.abs(mKey.hashCode()) % DCInfoManager.getPartNum(mKey.node);
-				log.trace("No transaction put: key is "+key+", node is "+mKey.node+", partitionid is"+partitionId);
+				if (mKey.key.startsWith("ITEM"))
+					log.info("No transaction put: key is "+key+", node is "+mKey.node+", partitionid is"+partitionId);
 				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.key)
 						.setValue(newValue).setPartitionId(partitionId+1).build();
 				
@@ -310,8 +311,10 @@ public class TransactionManager {
 			if(key instanceof MagicKey){
 				keyNode = ((MagicKey)key).node;
 				realKey = ((MagicKey) key).key;
-				connection = connections.get(((MagicKey)key).node);;
+				connection = connections.get(((MagicKey)key).node);
 				partitionId = Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode);
+				if (realKey.startsWith("ITEM"))
+					log.info("No transaction get: key is "+key+", node is "+keyNode+", partitionid is"+partitionId);
 			}
 			else{
 				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
