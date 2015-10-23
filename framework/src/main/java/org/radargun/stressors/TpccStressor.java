@@ -676,7 +676,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
             } catch (Throwable rb) {
                nrFailures++;
 
-               log.warn("Transaction failed in committing!");
+               log.warn("Transaction failed in committing!"+cacheWrapper);
                if (!isReadOnly) {
                   nrWrFailures++;
                   nrWrFailuresOnCommit++;
