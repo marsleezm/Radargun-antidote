@@ -173,14 +173,9 @@ public class TransactionManager {
 			realKey = mKey.key;
 			hashCode = Math.abs(mKey.hashCode());
 			
-			if(threadId ==0 )
-				log.info("Iterating for" +realKey+" keyNode is"+keyNode); 
 			if (keyNode == localNodeIndex)
 			{
 				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
-				if(threadId ==0 )
-					log.info("Local index is "+localNodeIndex+"partNum is "+DCInfoManager.getPartNum(localNodeIndex)
-						+"Index is "+index);
 				if (localKeySet.get(index)==null)
 					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
 				else
@@ -194,7 +189,7 @@ public class TransactionManager {
 			{
 				int partIndex = hashCode % DCInfoManager.getPartNum(keyNode);
 				if(threadId ==0 )
-					log.info("Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
+					log.info("Remote!: Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
 						+"part index is"+partIndex);
 				if (remoteKeySet.containsKey(keyNode) == false){
 					Map<Integer, FpbPerNodeUp.Builder> nodesUp = new HashMap<Integer,FpbPerNodeUp.Builder>();
@@ -227,23 +222,11 @@ public class TransactionManager {
 		FpbPrepTxnReq prepTxnReq = FpbPrepTxnReq.newBuilder().setTxid(txId).setThreadid(threadId).
 				setLocalUpdates(localUpdates.build()).setRemoteUpdates(remoteUpdates.build()).build();
 		
-		if(threadId == 0 )
-			log.info("Before getting connection");
 		connection = connections.get(DCInfoManager.getNodeIndex());
 		try {
-			if(threadId == 0 )
-				log.info("Before sending req");
 			connection.send(MSG_PrepTxnReq, prepTxnReq);
 			FpbPrepTxnResp resp;
-			if(threadId == 0 )
-				log.info("After sending req");
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-			if(threadId == 0 )
-				log.info("Got resp");
-			if(resp.getSuccess() == false)
-			{
-				log.info("Transaction failed!!!"+txId+" writeSet is"+prepTxnReq.toString());
-			}
 			isInTxn = false;
 			return resp.getSuccess();
 		} catch (InvalidProtocolBufferException e) {

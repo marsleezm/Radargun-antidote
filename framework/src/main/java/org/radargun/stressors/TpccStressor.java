@@ -627,7 +627,6 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
             try {
                transaction.executeTransaction(cacheWrapper);
-               log.info("Transaction done execution.");
             } catch (Throwable e) {
             	e.printStackTrace();
             	log.warn("Transaction failure!");
@@ -655,7 +654,6 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                   measureCommitTime = true;
                }
 
-               log.info("Before try to commit, successful is"+successful);
                cacheWrapper.endTransaction(successful);
 
                if (!successful) {
@@ -676,8 +674,9 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                }
             } catch (Throwable rb) {
                nrFailures++;
-
-               log.warn("Transaction failed in committing!"+cacheWrapper);
+               
+               rb.printStackTrace();
+               log.warn("Transaction failed in committing!");
                if (!isReadOnly) {
                   nrWrFailures++;
                   nrWrFailuresOnCommit++;
