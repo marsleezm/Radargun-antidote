@@ -629,7 +629,8 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                transaction.executeTransaction(cacheWrapper);
                log.info("Transaction done execution.");
             } catch (Throwable e) {
-            	log.warn("Transaction failure!"+e);
+            	e.printStackTrace();
+            	log.warn("Transaction failure!");
                successful = false;
                if (log.isDebugEnabled()) {
             	   log.info(transaction);

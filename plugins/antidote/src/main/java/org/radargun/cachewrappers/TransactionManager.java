@@ -163,7 +163,7 @@ public class TransactionManager {
 				new HashMap<Integer, Map<Integer, FpbPerNodeUp.Builder>>();
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
 				remoteUpdates = FpbNodeUps.newBuilder();
-		
+		try{
 		for(Map.Entry<Object, FpbValue> entry : writeBuffer.entrySet())
 		{	
 			MagicKey mKey = (MagicKey)entry.getKey();
@@ -173,7 +173,8 @@ public class TransactionManager {
 			realKey = mKey.key;
 			hashCode = Math.abs(mKey.hashCode());
 			
-			//log.info("Wrapping commitreq for"+mKey.key);
+			if(threadId ==0 )
+				log.info("Iterating for" +realKey+" keyNode is"+keyNode); 
 			if (keyNode == localNodeIndex)
 			{
 				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
@@ -192,9 +193,10 @@ public class TransactionManager {
 			else
 			{
 				int partIndex = hashCode % DCInfoManager.getPartNum(keyNode);
-				//log.info("Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
-				//		+"Index is "+index);
-				if (remoteKeySet.containsKey(keyNode)){
+				if(threadId ==0 )
+					log.info("Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
+						+"part index is"+partIndex);
+				if (remoteKeySet.containsKey(keyNode) == false){
 					Map<Integer, FpbPerNodeUp.Builder> nodesUp = new HashMap<Integer,FpbPerNodeUp.Builder>();
 					nodesUp.put(partIndex, newUpBuilder(DCInfoManager.getNodeName(keyNode), partIndex, realKey, entry.getValue()));
 					remoteKeySet.put(keyNode, nodesUp);
@@ -258,7 +260,14 @@ public class TransactionManager {
 			System.exit(0);
 			return false;
 		} 
-
+		}
+		   catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.warn("IOException");
+			e.printStackTrace();
+			System.exit(0);
+			return false;
+		  }
 	}
 	
 	private FpbPerNodeUp.Builder newUpBuilder(String nodeName, int part_id, String key, FpbValue value)
