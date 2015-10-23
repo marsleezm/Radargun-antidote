@@ -177,8 +177,8 @@ public class TransactionManager {
 			if (keyNode == localNodeIndex)
 			{
 				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
-				//log.info("Local index is "+localNodeIndex+"partNum is "+DCInfoManager.getPartNum(localNodeIndex)
-				//		+"Index is "+index);
+				log.info("Local index is "+localNodeIndex+"partNum is "+DCInfoManager.getPartNum(localNodeIndex)
+						+"Index is "+index);
 				if (localKeySet.get(index)==null)
 					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
 				else
@@ -229,6 +229,7 @@ public class TransactionManager {
 			connection.send(MSG_PrepTxnReq, prepTxnReq);
 			FpbPrepTxnResp resp;
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+			log.info("Transaction result is"+resp.getSuccess());
 			isInTxn = false;
 			return resp.getSuccess();
 		} catch (InvalidProtocolBufferException e) {

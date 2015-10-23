@@ -669,7 +669,6 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                     	 log.warn("Payment failed!");
                         nrPaymentFailures++;
                      }
-
                   } else {
                      nrRdFailures++;
                   }
