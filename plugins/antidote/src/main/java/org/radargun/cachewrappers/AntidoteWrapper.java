@@ -146,9 +146,12 @@ public class AntidoteWrapper implements CacheWrapper {
 	  TransactionManager tm = tms.get(threadId % numThreads);
       assertTm(tm);
       if (successful){
-    	  log.info(threadId+": trying to commit a txn..");
-    	  if( tm.commit(threadId) == false )
+    	  if (threadId == 0)
+    		  log.info(threadId+": trying to commit a txn..");
+    	  if( tm.commit(threadId) == false ){
+    		  log.info("Commit failed!!!");
     		  throw new RuntimeException();
+    	  }
       }
       else{
           tm.abort();

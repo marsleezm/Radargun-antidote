@@ -177,8 +177,9 @@ public class TransactionManager {
 			if (keyNode == localNodeIndex)
 			{
 				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
-				//log.info("Local index is "+localNodeIndex+"partNum is "+DCInfoManager.getPartNum(localNodeIndex)
-				//		+"Index is "+index);
+				if(threadId ==0 )
+					log.info("Local index is "+localNodeIndex+"partNum is "+DCInfoManager.getPartNum(localNodeIndex)
+						+"Index is "+index);
 				if (localKeySet.get(index)==null)
 					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
 				else
@@ -224,11 +225,19 @@ public class TransactionManager {
 		FpbPrepTxnReq prepTxnReq = FpbPrepTxnReq.newBuilder().setTxid(txId).setThreadid(threadId).
 				setLocalUpdates(localUpdates.build()).setRemoteUpdates(remoteUpdates.build()).build();
 		
+		if(threadId == 0 )
+			log.info("Before getting connection");
 		connection = connections.get(DCInfoManager.getNodeIndex());
 		try {
+			if(threadId == 0 )
+				log.info("Before sending req");
 			connection.send(MSG_PrepTxnReq, prepTxnReq);
 			FpbPrepTxnResp resp;
+			if(threadId == 0 )
+				log.info("After sending req");
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+			if(threadId == 0 )
+				log.info("Got resp");
 			if(resp.getSuccess() == false)
 			{
 				log.info("Transaction failed!!!"+txId+" writeSet is"+prepTxnReq.toString());
