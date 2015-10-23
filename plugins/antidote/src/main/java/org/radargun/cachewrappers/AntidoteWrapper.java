@@ -146,7 +146,8 @@ public class AntidoteWrapper implements CacheWrapper {
 	  TransactionManager tm = tms.get(threadId % numThreads);
       assertTm(tm);
       if (successful){
-    	  if( tm.commit(threadId) == false)
+    	  log.info(threadId+": trying to commit a txn..");
+    	  if( tm.commit(threadId) == false )
     		  throw new RuntimeException();
       }
       else{

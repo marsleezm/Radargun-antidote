@@ -229,7 +229,6 @@ public class TransactionManager {
 			connection.send(MSG_PrepTxnReq, prepTxnReq);
 			FpbPrepTxnResp resp;
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-			log.info(txId+":Transaction result is"+resp.getSuccess());
 			isInTxn = false;
 			return resp.getSuccess();
 		} catch (InvalidProtocolBufferException e) {

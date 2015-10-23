@@ -654,12 +654,11 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                   measureCommitTime = true;
                }
 
-               log.info("Before try to commit");
+               log.info("Before try to commit, successful is"+successful);
                cacheWrapper.endTransaction(successful);
-               log.info("Done try to commit");
 
                if (!successful) {
-            	  log.warn("Transaction failed in execution!");
+            	  log.warn("Transaction failed in execution!"+cacheWrapper);
                   nrFailures++;
                   if (!isReadOnly) {
                      nrWrFailures++;
