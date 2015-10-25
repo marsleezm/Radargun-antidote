@@ -325,7 +325,9 @@ public class TransactionManager {
 				connection = connections.get(((MagicKey)key).node);
 				partitionId = Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode);
 				if (realKey.startsWith("ITEM"))
-					log.info("No transaction get: key is "+realKey+", node is "+keyNode+", partitionid is"+partitionId);
+					log.info("No transaction get: key is "+realKey+", node is "
+				+DCInfoManager.getNodeName(keyNode)+", partitionid is"+partitionId
+				+", local is"+DCInfoManager.getLocalNodeName());
 			}
 			else{
 				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);

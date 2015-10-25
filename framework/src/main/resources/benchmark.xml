@@ -3,8 +3,8 @@
          bindAddress="${127.0.0.1:master.address}"
          port="${21032:master.port}"/>
    <benchmark
-         initSize="${1:Islaves}"
-         maxSize="${1:slaves}"
+         initSize="${2:Islaves}"
+         maxSize="${2:slaves}"
          increment="1">
       <DestroyWrapper
             runOnAllSlaves="true"/>
