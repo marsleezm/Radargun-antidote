@@ -78,7 +78,7 @@ public class DCInfoManager {
 			InetAddress addr = InetAddress.getLocalHost();
 			localIp = addr.getHostAddress();
 			log.info("localIp is "+localIp);
-			AntidoteConnection tempConnection = new AntidoteConnection("127.0.0.1");
+			AntidoteConnection tempConnection = new AntidoteConnection(localIp);
 			
 			tempConnection.send(MSG_PartListReq, FpbPartListReq.newBuilder().setNoop(true).build());
 			FpbPartList partList = FpbPartList.parseFrom(tempConnection.receive(MSG_PartList));
