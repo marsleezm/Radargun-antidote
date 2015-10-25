@@ -41,7 +41,7 @@ public class ClusterValidationStage extends AbstractDistStage {
    private static final String BUCKET = "clusterValidation";
 
    public DistStageAck executeOnSlave() {
-	  //isPassiveReplication = true;
+	  isPartialReplication = true;
       DefaultDistStageAck response = newDefaultStageAck();
       try {
          wrapper = slaveState.getCacheWrapper();
@@ -97,6 +97,7 @@ public class ClusterValidationStage extends AbstractDistStage {
    public boolean processAckOnMaster(List<DistStageAck> acks, MasterState masterState) {
 	   //TODO: This sucks so much and doens't make sense... As a reminder that it's very ad-hoc to set variable just ot true
 	   
+	   isPartialReplication = true;
 	  //isPassiveReplication = true;
       logDurationInfo(acks);
       boolean success = true;

@@ -99,17 +99,17 @@ public class Item implements Serializable, DomainObject {
    @Override
    public void storeToPopulate(CacheWrapper wrapper, int nodeIndex, boolean localOnly) throws Throwable {
       if (localOnly) {
-    	 System.out.println("Trying to put LOCALONLY item ["+getKey()+","+nodeIndex+"]");
+    	 //System.out.println("Trying to put LOCALONLY item ["+getKey()+","+nodeIndex+"]");
          wrapper.putIfLocal(null, getKey(), this);
       } else {
-    	 System.out.println("Trying to put NORMAL item ["+getKey()+","+nodeIndex+"]");
+    	 //System.out.println("Trying to put NORMAL item ["+getKey()+","+nodeIndex+"]");
          store(wrapper, nodeIndex);
       }
    }
 
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	  System.out.println("Trying to load item ["+getKey()+","+nodeIndex+"]");
+	  //System.out.println("Trying to load item ["+getKey()+","+nodeIndex+"]");
 	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
 	  if (value == null) return false;
 	  TpccItem item = value.getItem();

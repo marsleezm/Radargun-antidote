@@ -9,7 +9,8 @@ if [ "x$RADARGUN_HOME" = "x" ]; then DIRNAME=`dirname $0`; RADARGUN_HOME=`cd $DI
 SSH_USER=$USER
 WORKING_DIR=`pwd`
 VERBOSE=false
-REMOTE_CMD='ssh -q -o "StrictHostKeyChecking false" -i ~/openstack_li.pem'
+#REMOTE_CMD='ssh -q -o "StrictHostKeyChecking false" -i ~/openstack_li.pem'
+REMOTE_CMD='ssh -q -o "StrictHostKeyChecking false"'
 MASTER=`hostname`
 SLAVES=""
 SLAVE_COUNT=0

@@ -63,6 +63,7 @@ public class TransactionManager {
     }
     
 	public void begin() throws IOException {
+		//log.info("Transaction started!!!");
 		FpbStartTxnReq startTxnReq = FpbStartTxnReq.newBuilder().setClock(0).build();
 		connection = connections.get(DCInfoManager.getNodeIndex());
 		connection.send(MSG_StartTxnReq, startTxnReq);
@@ -82,7 +83,6 @@ public class TransactionManager {
 		else if(value instanceof Double || value instanceof Float)
 			newValue = FpbValue.newBuilder().setField(DOUBLE_FIELD).setDoubleValue((Double)value).build();
 		else{
-			log.info("Tring to put "+key+" is magickey:"+(key instanceof MagicKey)+", isInTxn:"+isInTxn);
 			newValue = (FpbValue)value;
 		}
 		
@@ -180,6 +180,8 @@ public class TransactionManager {
 			if (keyNode == localNodeIndex)
 			{
 				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
+				if(realKey.startsWith("ITEM") && (threadId == 3 || threadId ==4))
+					log.trace(realKey+" Local index is "+keyNode+",part index is"+index);
 				if (localKeySet.get(index)==null)
 					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
 				else
@@ -192,8 +194,8 @@ public class TransactionManager {
 			else
 			{
 				int partIndex = hashCode % DCInfoManager.getPartNum(keyNode);
-				if(threadId ==0 )
-					log.info("Remote!: Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
+				if(threadId ==0)
+					log.trace("Remote!: Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
 						+"part index is"+partIndex);
 				if (remoteKeySet.containsKey(keyNode) == false){
 					Map<Integer, FpbPerNodeUp.Builder> nodesUp = new HashMap<Integer,FpbPerNodeUp.Builder>();
@@ -232,7 +234,13 @@ public class TransactionManager {
 			FpbPrepTxnResp resp;
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
 			isInTxn = false;
-			return resp.getSuccess();
+			if(resp.getSuccess())
+				return true;
+			else
+			{
+				log.info("Transaction failed!");
+				return false;
+			}
 		} catch (InvalidProtocolBufferException e) {
 			// TODO Auto-generated catch block
 			log.warn("Invalid protocol buffer");

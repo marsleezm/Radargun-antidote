@@ -3,8 +3,8 @@
          bindAddress="${127.0.0.1:master.address}"
          port="${21032:master.port}"/>
    <benchmark
-         initSize="${2:Islaves}"
-         maxSize="${2:slaves}"
+         initSize="${1:Islaves}"
+         maxSize="${1:slaves}"
          increment="1">
       <DestroyWrapper
             runOnAllSlaves="true"/>
@@ -17,13 +17,13 @@
             partialReplication="false"/>
       <TpccPopulation
             preloadedFromDB="false"
-            numWarehouses="2"
+            numWarehouses="1"
             cLastMask="0"
             olIdMask="0"
             cIdMask="0"
             threadParallelLoad="true"
             batchLevel="100"
-            numLoaderThreads="2"/>
+            numLoaderThreads="1"/>
       <ResetStats />
       <CacheSize
             statName="CACHE_SIZE_BEFORE_BENCH" />

@@ -50,6 +50,7 @@ public class Slave {
    private Future<?> future;
 
    public Slave(String masterHost, int masterPort) {
+	  //BasicConfigurator.configure();
       this.masterHost = masterHost;
       this.masterPort = masterPort;
       Runtime.getRuntime().addShutdownHook(new ShutDownHook("Slave process"));
@@ -73,6 +74,7 @@ public class Slave {
          // Walk through set
          while (readyItor.hasNext()) {
             final SelectionKey key = readyItor.next();
+            
             readyItor.remove();
             SocketChannel keyChannel = (SocketChannel) key.channel();
 
