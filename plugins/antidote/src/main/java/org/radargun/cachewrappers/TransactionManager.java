@@ -181,7 +181,7 @@ public class TransactionManager {
 			{
 				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
 				if(realKey.startsWith("ITEM") && (threadId == 3 || threadId ==4))
-					log.trace(realKey+" Local index is "+keyNode+",part index is"+index);
+					log.info("Putting"+ realKey+"  node is "+keyNode);
 				if (localKeySet.get(index)==null)
 					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
 				else
@@ -194,9 +194,8 @@ public class TransactionManager {
 			else
 			{
 				int partIndex = hashCode % DCInfoManager.getPartNum(keyNode);
-				if(threadId ==0)
-					log.trace("Remote!: Local index is "+keyNode+"partNum is "+DCInfoManager.getPartNum(keyNode)
-						+"part index is"+partIndex);
+				if(realKey.startsWith("ITEM"))
+					log.info("Putting"+realKey+" Remote!: node is "+keyNode);
 				if (remoteKeySet.containsKey(keyNode) == false){
 					Map<Integer, FpbPerNodeUp.Builder> nodesUp = new HashMap<Integer,FpbPerNodeUp.Builder>();
 					nodesUp.put(partIndex, newUpBuilder(DCInfoManager.getNodeName(keyNode), partIndex, realKey, entry.getValue()));
@@ -325,9 +324,7 @@ public class TransactionManager {
 				connection = connections.get(((MagicKey)key).node);
 				partitionId = Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode);
 				if (realKey.startsWith("ITEM"))
-					log.info("No transaction get: key is "+realKey+", node is "
-				+DCInfoManager.getNodeName(keyNode)+", partitionid is"+partitionId
-				+", local is"+DCInfoManager.getLocalNodeName());
+					log.info("No transaction get: key is "+realKey+", node is "+keyNode);
 			}
 			else{
 				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
