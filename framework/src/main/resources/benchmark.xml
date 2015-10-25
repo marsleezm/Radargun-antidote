@@ -17,13 +17,13 @@
             partialReplication="false"/>
       <TpccPopulation
             preloadedFromDB="false"
-            numWarehouses="1"
+            numWarehouses="2"
             cLastMask="0"
             olIdMask="0"
             cIdMask="0"
             threadParallelLoad="true"
             batchLevel="100"
-            numLoaderThreads="1"/>
+            numLoaderThreads="2"/>
       <ResetStats />
       <CacheSize
             statName="CACHE_SIZE_BEFORE_BENCH" />
