@@ -149,11 +149,11 @@ public class AntidoteWrapper implements CacheWrapper {
     	  //if (threadId == 0)
     	//	  log.info(threadId+": trying to commit a txn..");
     	  if( tm.commit(threadId) == false ){
-    		  log.info("Commit failed!!!");
+    		  //log.info("Commit failed!!!");
     		  throw new RuntimeException();
     	  }
-    	  else
-    		  log.info("Commit success!");
+    	  //else
+    	//	  log.info("Commit success!");
       }
       else{
           tm.abort();

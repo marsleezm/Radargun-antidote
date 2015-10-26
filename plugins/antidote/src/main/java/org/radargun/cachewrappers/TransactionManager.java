@@ -190,14 +190,14 @@ public class TransactionManager {
 
 				if (localKeySet.get(index)==null)
 				{
-					if(realKey.equals("ITEM_7036"))
-						log.info("Not exist...Putting"+ realKey+"  index is "+(index+1));
+					//if(realKey.equals("ITEM_7036"))
+					//	log.info("Not exist...Putting"+ realKey+"  index is "+(index+1));
 					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
 				}
 				else
 				{
-					if(realKey.equals("ITEM_7036"))
-						log.info("Exist... Putting"+ realKey+"  index is "+(index+1));
+					//if(realKey.equals("ITEM_7036"))
+					//	log.info("Exist... Putting"+ realKey+"  index is "+(index+1));
 					FpbPerNodeUp.Builder upBuilder= localKeySet.get(index);
 					upBuilder.addUps(FpbUpdate.newBuilder().setKey(realKey).
 							setValue((entry.getValue())));
@@ -342,14 +342,14 @@ public class TransactionManager {
 			
 			FpbReadReq readReq;
 			if (isInTxn == true){
-				if (realKey.startsWith("ITEM"))
-					log.info("In transaction get: key is "+realKey+", node is "+keyNode);
+				//if (realKey.startsWith("ITEM"))
+				//	log.info("In transaction get: key is "+realKey+", node is "+keyNode);
 				readReq = FpbReadReq.newBuilder().setTxid(txId).setPartitionId(partitionId+1).
 					setKey(realKey).build();
 			}
 			else{
-				if (realKey.startsWith("ITEM"))
-					log.info("No transaction get: key is "+realKey+", node is "+keyNode);
+				//if (realKey.startsWith("ITEM"))
+				//	log.info("No transaction get: key is "+realKey+", node is "+keyNode);
 				readReq = FpbReadReq.newBuilder().setPartitionId(partitionId+1).
 				setKey(realKey).build();
 			}
