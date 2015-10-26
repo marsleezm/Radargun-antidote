@@ -96,7 +96,7 @@ public class ProcCpuStat implements CpuStat{
             ret[i - 2] = Long.parseLong(temp[i]);
          }
       } catch (IOException ioe) {
-         log.warn("Exception caught when parsing the CPU time: " + ioe.getMessage());
+         //log.warn("Exception caught when parsing the CPU time: " + ioe.getMessage());
       }
       return ret;
    }
