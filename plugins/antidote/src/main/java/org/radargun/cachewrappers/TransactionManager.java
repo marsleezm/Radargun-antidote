@@ -323,6 +323,7 @@ public class TransactionManager {
 				realKey = ((MagicKey) key).key;
 				connection = connections.get(((MagicKey)key).node);
 				partitionId = toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode));
+				log.info(realKey+" read: ["+keyNode+","+partitionId);
 			}
 			else{
 				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
