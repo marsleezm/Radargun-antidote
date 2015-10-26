@@ -167,7 +167,7 @@ public class TransactionManager {
 				new HashMap<Integer, Map<Integer, FpbPerNodeUp.Builder>>();
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
 				remoteUpdates = FpbNodeUps.newBuilder();
-		
+		long t1 = System.nanoTime(), t2,t3;
 		if(writeBuffer.size() == 0)
 		{
 			readBuffer.clear();
@@ -239,11 +239,18 @@ public class TransactionManager {
 		FpbPrepTxnReq prepTxnReq = FpbPrepTxnReq.newBuilder().setTxid(txId).setThreadid(threadId).
 				setLocalUpdates(localUpdates.build()).setRemoteUpdates(remoteUpdates.build()).build();
 		
+		t2= System.nanoTime();
+		log.info("Wrap write set takes:"+(t2-t1));
+		
 		connection = connections.get(DCInfoManager.getNodeIndex());
 		try {
 			connection.send(MSG_PrepTxnReq, prepTxnReq);
 			FpbPrepTxnResp resp;
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+			
+			t3= System.nanoTime();
+			log.info("Got request takes:"+(t3-t2));
+			
 			isInTxn = false;
 			writeBuffer.clear();
 			readBuffer.clear();

@@ -623,10 +623,16 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
             long startService = System.nanoTime();
 
+            long t1 = System.nanoTime(), t2=0, t3=0, t4=0;
             cacheWrapper.startTransaction(isReadOnly);
-
+            t2 = System.nanoTime();
+            log.info("Start txn takes:"+ (t2-t1));
+            
             try {
                transaction.executeTransaction(cacheWrapper);
+               t3 = System.nanoTime();
+               log.info("Execute txn takes:"+ (t3-t2));
+               
             } catch (Throwable e) {
             	e.printStackTrace();
             	log.warn("Transaction failure!");
@@ -635,7 +641,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
             	   log.info(transaction);
                   log.debug("Exception while executing transaction.", e);
                } else {
-            	   log.info(transaction);
+            	  log.info(transaction);
                   log.warn("Exception while executing transaction: " + e.getMessage());
                }
                if (e instanceof ElementNotFoundException) {
@@ -655,6 +661,8 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                }
 
                cacheWrapper.endTransaction(successful);
+               t4 = System.nanoTime();
+               log.info("End txn takes:"+ (t4-t3));
 
                if (!successful) {
             	  log.warn("Transaction failed in execution!"+cacheWrapper);
