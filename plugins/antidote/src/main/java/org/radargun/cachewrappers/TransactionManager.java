@@ -94,11 +94,12 @@ public class TransactionManager {
 		else{
 			long t1=System.nanoTime(), t2,t3;
 			FpbSingleUpReq singleUpReq;
+			AntidoteConnection connection;
 			//Partition id has to be plus one because of the index in Erlang is different.
 			if( key instanceof MagicKey)
 			{
 				MagicKey mKey = (MagicKey)key;
-				AntidoteConnection connection = connections.get(mKey.node);
+				connection = connections.get(mKey.node);
 				Integer partitionId = toErlangIndex(Math.abs(mKey.hashCode()) % DCInfoManager.getPartNum(mKey.node));
 				if (mKey.key.startsWith("ITEM"))
 					log.info("No transaction put magic: key is "+mKey.key+", node is "+mKey.node+", partitionid is"+partitionId);
@@ -108,7 +109,7 @@ public class TransactionManager {
 			else
 			{	
 				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
-				AntidoteConnection connection = connections.get(location.fst);
+				connection = connections.get(location.fst);
 				//if (((String)key).startsWith("ITEM"))
 				//		log.info("No transaction put: key is "+key+", node is "+location.fst+", partitionid is "+location.snd);
 				singleUpReq = FpbSingleUpReq.newBuilder().setKey((String)key)
