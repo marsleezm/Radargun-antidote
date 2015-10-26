@@ -66,8 +66,10 @@ public class TransactionManager {
 		//log.info("Transaction started!!!");
 		FpbStartTxnReq startTxnReq = FpbStartTxnReq.newBuilder().setClock(0).build();
 		connection = connections.get(DCInfoManager.getNodeIndex());
+		long t1 = System.nanoTime(), t2;
 		connection.send(MSG_StartTxnReq, startTxnReq);
-		//log.info("Sent txn message");
+		t2= System.nanoTime();
+		log.info("Start txn takes:"+(t2-t1));
 		txId = FpbTxId.parseFrom(connection.receive(MSG_TxId));
 		//log.info("Got txn id");
 		isInTxn = true;
@@ -86,9 +88,12 @@ public class TransactionManager {
 			newValue = (FpbValue)value;
 		}
 		
+		
 		if (isInTxn)
 			writeBuffer.put(key, newValue);
 		else{
+			long t1=System.nanoTime(), t2,t3;
+			FpbSingleUpReq singleUpReq;
 			//Partition id has to be plus one because of the index in Erlang is different.
 			if( key instanceof MagicKey)
 			{
@@ -97,13 +102,8 @@ public class TransactionManager {
 				Integer partitionId = toErlangIndex(Math.abs(mKey.hashCode()) % DCInfoManager.getPartNum(mKey.node));
 				if (mKey.key.startsWith("ITEM"))
 					log.info("No transaction put magic: key is "+mKey.key+", node is "+mKey.node+", partitionid is"+partitionId);
-				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.key)
+				singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.key)
 						.setValue(newValue).setPartitionId(partitionId).build();
-				
-				connection.send(MSG_SingleUpReq, singleUpReq);
-				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-				if (!resp.getSuccess())
-					throw new Exception();
 			}
 			else
 			{	
@@ -111,15 +111,18 @@ public class TransactionManager {
 				AntidoteConnection connection = connections.get(location.fst);
 				//if (((String)key).startsWith("ITEM"))
 				//		log.info("No transaction put: key is "+key+", node is "+location.fst+", partitionid is "+location.snd);
-				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey((String)key)
+				singleUpReq = FpbSingleUpReq.newBuilder().setKey((String)key)
 						.setValue(newValue).setPartitionId(location.snd).build();
-				
-				connection.send(MSG_SingleUpReq, singleUpReq);
-				FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-				if (resp.getSuccess() == false){
-					log.warn("Trying to put ["+key+","+value+"] failed!");
-					throw new Exception();
-				}
+			}
+			t2 = System.nanoTime();
+			log.info("Single up prep takes:"+(t2-t1));
+			connection.send(MSG_SingleUpReq, singleUpReq);
+			FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
+			t3 = System.nanoTime();
+			log.info("Single up takes:"+(t3-t2));
+			if (resp.getSuccess() == false){
+				log.warn("Trying to put ["+key+","+value+"] failed!");
+				throw new Exception();
 			}
 		}
 	}
