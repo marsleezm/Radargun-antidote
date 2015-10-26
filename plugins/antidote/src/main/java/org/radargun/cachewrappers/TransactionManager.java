@@ -66,10 +66,10 @@ public class TransactionManager {
 		//log.info("Transaction started!!!");
 		FpbStartTxnReq startTxnReq = FpbStartTxnReq.newBuilder().setClock(0).build();
 		connection = connections.get(DCInfoManager.getNodeIndex());
-		long t1 = System.nanoTime(), t2;
+		//long t1 = System.nanoTime(), t2;
 		connection.send(MSG_StartTxnReq, startTxnReq);
-		t2= System.nanoTime();
-		log.info("Start txn takes:"+(t2-t1));
+		//t2= System.nanoTime();
+		//log.info("Start txn takes:"+(t2-t1));
 		txId = FpbTxId.parseFrom(connection.receive(MSG_TxId));
 		//log.info("Got txn id");
 		isInTxn = true;
@@ -161,9 +161,10 @@ public class TransactionManager {
 	}
 
 	public boolean commit(int threadId) {
-		int localNodeIndex = DCInfoManager.getNodeIndex();
-		Map<Integer, FpbPerNodeUp.Builder> localKeySet = 
-				new HashMap<Integer, FpbPerNodeUp.Builder>();
+		int localNodeIndex = DCInfoManager.getNodeIndex(),
+				localPartNum = DCInfoManager.getPartNum(localNodeIndex);
+		//Plus one because we won't use the first slot, to match the index style in Erlang, which starts from 1.
+		FpbPerNodeUp.Builder[] localKeySet = new FpbPerNodeUp.Builder[localPartNum+1];
 		Map<Pair, FpbPerNodeUp.Builder> remoteKeySet = 
 				new HashMap<Pair, FpbPerNodeUp.Builder>();
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
@@ -189,17 +190,17 @@ public class TransactionManager {
 			{
 				int index = toErlangIndex(hashCode % DCInfoManager.getPartNum(localNodeIndex));
 
-				if (localKeySet.containsKey(index) == false)
+				if (localKeySet[index] == null)
 				{
 					//if(realKey.equals("ITEM_7036"))
 					//log.info("Not exist, Putting: "+ realKey+":"+index);
-					localKeySet.put(index, newUpBuilder(keyNode, index, realKey, entry.getValue()));
+					localKeySet[index] = newUpBuilder(keyNode, index, realKey, entry.getValue());
 				}
 				else
 				{
 					//if(realKey.equals("ITEM_7036"))
 					//log.info("Exist,Putting: "+ realKey+":"+index);
-					localKeySet.get(index).
+					localKeySet[index].
 							addUps(FpbUpdate.newBuilder().setKey(realKey).
 							setValue(entry.getValue()));
 				}
@@ -217,8 +218,9 @@ public class TransactionManager {
 							setValue(entry.getValue()));
 			}
 		}
-		for(Map.Entry<Integer, FpbPerNodeUp.Builder> entry : localKeySet.entrySet())
-			localUpdates.addPerNodeup(entry.getValue());
+		for(int i =1;  i<=localPartNum; ++i)
+			if(localKeySet[i] != null)
+				localUpdates.addPerNodeup(localKeySet[i]);
 		
 		for(Map.Entry<Pair, FpbPerNodeUp.Builder> entry1 : remoteKeySet.entrySet())
 				remoteUpdates.addPerNodeup(entry1.getValue());
