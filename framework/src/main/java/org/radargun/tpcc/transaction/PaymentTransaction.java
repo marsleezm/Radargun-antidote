@@ -137,7 +137,7 @@ public class PaymentTransaction implements TpccTransaction {
       d.setD_id(districtID);
       d.setD_w_id(terminalWarehouseID);
       found = d.load(cacheWrapper, ((int) terminalWarehouseID - 1));
-      if (!found) throw new ElementNotFoundException("D_ID=" + districtID + " D_W_ID=" + terminalWarehouseID + " not found!");
+      if (!found) throw new ElementNotFoundException(d.getKey().hashCode()+" D_ID=" + districtID + " D_W_ID=" + terminalWarehouseID + " not found!");
 
       final LocatedKey key2 = WRAPPER.createKey(d.getKeyD_ytd(), ((int) terminalWarehouseID - 1));
       

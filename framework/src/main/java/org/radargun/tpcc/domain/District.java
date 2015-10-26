@@ -162,7 +162,7 @@ public class District implements Serializable, DomainObject {
       this.d_next_o_id = d_next_o_id;
    }
 
-   private String getKey() {
+   public String getKey() {
       return "DISTRICT_" + this.d_w_id + "_" + this.d_id;
    }
 
