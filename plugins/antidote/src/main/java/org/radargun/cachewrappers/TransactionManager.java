@@ -95,8 +95,8 @@ public class TransactionManager {
 				MagicKey mKey = (MagicKey)key;
 				AntidoteConnection connection = connections.get(mKey.node);
 				Integer partitionId = Math.abs(mKey.hashCode()) % DCInfoManager.getPartNum(mKey.node);
-				//if (mKey.key.startsWith("ITEM"))
-				//	log.info("No transaction put magic: key is "+mKey.key+", node is "+mKey.node+", partitionid is"+partitionId);
+				if (mKey.key.startsWith("ITEM"))
+					log.info("No transaction put magic: key is "+mKey.key+", node is "+mKey.node+", partitionid is"+(partitionId+1));
 				FpbSingleUpReq singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.key)
 						.setValue(newValue).setPartitionId(partitionId+1).build();
 				
@@ -180,12 +180,17 @@ public class TransactionManager {
 			if (keyNode == localNodeIndex)
 			{
 				int index = hashCode % DCInfoManager.getPartNum(localNodeIndex);
-				//if(realKey.startsWith("ITEM") && (threadId == 3 || threadId ==4))
-				//	log.info("Putting"+ realKey+"  node is "+keyNode);
+
 				if (localKeySet.get(index)==null)
+				{
+					if(realKey.equals("ITEM_7036"))
+						log.info("Not exist...Putting"+ realKey+"  index is "+(index+1));
 					localKeySet.put(index, newUpBuilder(localName, index, realKey, entry.getValue()));
+				}
 				else
 				{
+					if(realKey.equals("ITEM_7036"))
+						log.info("Exist... Putting"+ realKey+"  index is "+(index+1));
 					FpbPerNodeUp.Builder upBuilder= localKeySet.get(index);
 					upBuilder.addUps(FpbUpdate.newBuilder().setKey(realKey).
 							setValue((entry.getValue())));
