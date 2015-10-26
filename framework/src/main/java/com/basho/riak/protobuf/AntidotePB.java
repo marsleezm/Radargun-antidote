@@ -2121,20 +2121,15 @@ public final class AntidotePB {
   public interface FpbPerNodeUpOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required string node = 1;
+    // required uint32 node_id = 1;
     /**
-     * <code>required string node = 1;</code>
+     * <code>required uint32 node_id = 1;</code>
      */
-    boolean hasNode();
+    boolean hasNodeId();
     /**
-     * <code>required string node = 1;</code>
+     * <code>required uint32 node_id = 1;</code>
      */
-    java.lang.String getNode();
-    /**
-     * <code>required string node = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getNodeBytes();
+    int getNodeId();
 
     // required uint32 partition_id = 2;
     /**
@@ -2222,9 +2217,9 @@ public final class AntidotePB {
               }
               break;
             }
-            case 10: {
+            case 8: {
               bitField0_ |= 0x00000001;
-              node_ = input.readBytes();
+              nodeId_ = input.readUInt32();
               break;
             }
             case 16: {
@@ -2283,47 +2278,20 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required string node = 1;
-    public static final int NODE_FIELD_NUMBER = 1;
-    private java.lang.Object node_;
+    // required uint32 node_id = 1;
+    public static final int NODE_ID_FIELD_NUMBER = 1;
+    private int nodeId_;
     /**
-     * <code>required string node = 1;</code>
+     * <code>required uint32 node_id = 1;</code>
      */
-    public boolean hasNode() {
+    public boolean hasNodeId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string node = 1;</code>
+     * <code>required uint32 node_id = 1;</code>
      */
-    public java.lang.String getNode() {
-      java.lang.Object ref = node_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          node_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string node = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNodeBytes() {
-      java.lang.Object ref = node_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        node_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getNodeId() {
+      return nodeId_;
     }
 
     // required uint32 partition_id = 2;
@@ -2379,7 +2347,7 @@ public final class AntidotePB {
     }
 
     private void initFields() {
-      node_ = "";
+      nodeId_ = 0;
       partitionId_ = 0;
       ups_ = java.util.Collections.emptyList();
     }
@@ -2388,7 +2356,7 @@ public final class AntidotePB {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasNode()) {
+      if (!hasNodeId()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -2410,7 +2378,7 @@ public final class AntidotePB {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getNodeBytes());
+        output.writeUInt32(1, nodeId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeUInt32(2, partitionId_);
@@ -2429,7 +2397,7 @@ public final class AntidotePB {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getNodeBytes());
+          .computeUInt32Size(1, nodeId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2556,7 +2524,7 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        node_ = "";
+        nodeId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         partitionId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2597,7 +2565,7 @@ public final class AntidotePB {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.node_ = node_;
+        result.nodeId_ = nodeId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -2627,10 +2595,8 @@ public final class AntidotePB {
 
       public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbPerNodeUp other) {
         if (other == com.basho.riak.protobuf.AntidotePB.FpbPerNodeUp.getDefaultInstance()) return this;
-        if (other.hasNode()) {
-          bitField0_ |= 0x00000001;
-          node_ = other.node_;
-          onChanged();
+        if (other.hasNodeId()) {
+          setNodeId(other.getNodeId());
         }
         if (other.hasPartitionId()) {
           setPartitionId(other.getPartitionId());
@@ -2666,7 +2632,7 @@ public final class AntidotePB {
       }
 
       public final boolean isInitialized() {
-        if (!hasNode()) {
+        if (!hasNodeId()) {
           
           return false;
         }
@@ -2702,76 +2668,35 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required string node = 1;
-      private java.lang.Object node_ = "";
+      // required uint32 node_id = 1;
+      private int nodeId_ ;
       /**
-       * <code>required string node = 1;</code>
+       * <code>required uint32 node_id = 1;</code>
        */
-      public boolean hasNode() {
+      public boolean hasNodeId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string node = 1;</code>
+       * <code>required uint32 node_id = 1;</code>
        */
-      public java.lang.String getNode() {
-        java.lang.Object ref = node_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          node_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getNodeId() {
+        return nodeId_;
       }
       /**
-       * <code>required string node = 1;</code>
+       * <code>required uint32 node_id = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getNodeBytes() {
-        java.lang.Object ref = node_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          node_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string node = 1;</code>
-       */
-      public Builder setNode(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        node_ = value;
+      public Builder setNodeId(int value) {
+        bitField0_ |= 0x00000001;
+        nodeId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string node = 1;</code>
+       * <code>required uint32 node_id = 1;</code>
        */
-      public Builder clearNode() {
+      public Builder clearNodeId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        node_ = getDefaultInstance().getNode();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string node = 1;</code>
-       */
-      public Builder setNodeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        node_ = value;
+        nodeId_ = 0;
         onChanged();
         return this;
       }
@@ -25439,72 +25364,72 @@ public final class AntidotePB {
       "\0132\010.FpbTxId\022\"\n\rlocal_updates\030\002 \001(\0132\013.Fpb" +
       "NodeUps\022#\n\016remote_updates\030\003 \001(\0132\013.FpbNod" +
       "eUps\022\020\n\010threadid\030\004 \002(\r\"/\n\nFpbNodeUps\022!\n\n" +
-      "per_nodeup\030\001 \003(\0132\r.FpbPerNodeUp\"K\n\014FpbPe" +
-      "rNodeUp\022\014\n\004node\030\001 \002(\t\022\024\n\014partition_id\030\002 " +
-      "\002(\r\022\027\n\003ups\030\003 \003(\0132\n.FpbUpdate\"6\n\016FpbPrepT" +
-      "xnResp\022\017\n\007success\030\001 \002(\010\022\023\n\013commit_time\030\002" +
-      " \001(\004\"G\n\nFpbReadReq\022\026\n\004txid\030\001 \001(\0132\010.FpbTx",
-      "Id\022\013\n\003key\030\002 \002(\t\022\024\n\014partition_id\030\003 \002(\r\"\036\n" +
-      "\016FpbPartListReq\022\014\n\004noop\030\001 \001(\010\"M\n\016FpbSing" +
-      "leUpReq\022\013\n\003key\030\001 \002(\t\022\030\n\005value\030\002 \002(\0132\t.Fp" +
-      "bValue\022\024\n\014partition_id\030\003 \002(\r\"/\n\013FpbPartL" +
-      "ist\022 \n\nnode_parts\030\001 \003(\0132\014.FpbNodePart\"1\n" +
-      "\013FpbNodePart\022\n\n\002ip\030\001 \002(\t\022\026\n\016num_partitio" +
-      "ns\030\002 \002(\r\"2\n\tFpbUpdate\022\013\n\003key\030\001 \002(\t\022\030\n\005va" +
-      "lue\030\002 \002(\0132\t.FpbValue\"2\n\tFpbTxnReq\022\r\n\005clo" +
-      "ck\030\001 \001(\014\022\026\n\003ops\030\002 \003(\0132\t.FpbTxnOp\"K\n\010FpbT" +
-      "xnOp\022\014\n\004type\030\001 \002(\r\022\013\n\003key\030\002 \002(\r\022\021\n\topera",
-      "tion\030\003 \001(\r\022\021\n\tparameter\030\004 \001(\014\"H\n\nFpbTxnR" +
-      "esp\022\017\n\007success\030\001 \002(\010\022\r\n\005clock\030\002 \001(\014\022\032\n\007r" +
-      "esults\030\003 \003(\0132\t.FpbValue\"(\n\007FpbTxId\022\020\n\010sn" +
-      "apshot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014\"\227\003\n\010FpbValue\022\021" +
-      "\n\005field\030\001 \002(\r:\00212\022\037\n\010customer\030\002 \001(\0132\r.Tp" +
-      "ccCustomer\022$\n\007clookup\030\003 \001(\0132\023.TpccCustom" +
-      "erLookup\022\037\n\010district\030\004 \001(\0132\r.TpccDistric" +
-      "t\022\035\n\007history\030\005 \001(\0132\014.TpccHistory\022\027\n\004item" +
-      "\030\006 \001(\0132\t.TpccItem\022\037\n\010neworder\030\007 \001(\0132\r.Tp" +
-      "ccNewOrder\022\031\n\005order\030\010 \001(\0132\n.TpccOrder\022!\n",
-      "\torderline\030\t \001(\0132\016.TpccOrderLine\022\031\n\005stoc" +
-      "k\030\n \001(\0132\n.TpccStock\022!\n\twarehouse\030\013 \001(\0132\016" +
-      ".TpccWarehouse\022\021\n\tstr_value\030\014 \001(\t\022\022\n\nlon" +
-      "g_value\030\r \001(\003\022\024\n\014double_value\030\016 \001(\001\"\313\002\n\014" +
-      "TpccCustomer\022\017\n\007c_first\030\001 \002(\t\022\020\n\010c_middl" +
-      "e\030\002 \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021\n\tc_street1\030\004 \002" +
-      "(\t\022\021\n\tc_street2\030\005 \002(\t\022\016\n\006c_city\030\006 \002(\t\022\017\n" +
-      "\007c_state\030\007 \002(\t\022\r\n\005c_zip\030\010 \002(\t\022\017\n\007c_phone" +
-      "\030\t \002(\t\022\017\n\007c_since\030\n \002(\004\022\020\n\010c_credit\030\013 \002(" +
-      "\t\022\024\n\014c_credit_lim\030\014 \002(\001\022\022\n\nc_discount\030\r ",
-      "\002(\001\022\025\n\rc_ytd_payment\030\016 \002(\001\022\025\n\rc_payment_" +
-      "cnt\030\017 \002(\005\022\026\n\016c_delivery_cnt\030\020 \002(\005\022\016\n\006c_d" +
-      "ata\030\021 \002(\t\"Q\n\022TpccCustomerLookup\022\016\n\006c_w_i" +
-      "d\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016\n\006c_last\030\003 \002(\t\022" +
-      "\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDistrict\022\016\n\006d_name\030" +
-      "\001 \002(\t\022\021\n\td_street1\030\002 \002(\t\022\021\n\td_street2\030\003 " +
-      "\002(\t\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_state\030\005 \002(\t\022\r\n\005" +
-      "d_zip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(\001\022\023\n\013d_next_o_i" +
-      "d\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n\006h_c_id\030\001 \002(\004\"L" +
-      "\n\010TpccItem\022\017\n\007i_im_id\030\001 \002(\004\022\016\n\006i_name\030\002 ",
-      "\002(\t\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i_data\030\004 \002(\t\"A\n\014" +
-      "TpccNewOrder\022\017\n\007no_o_id\030\001 \002(\004\022\017\n\007no_d_id" +
-      "\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k\n\tTpccOrder\022\016\n\006" +
-      "o_c_id\030\001 \002(\004\022\021\n\to_entry_d\030\002 \002(\004\022\024\n\014o_car" +
-      "rier_id\030\003 \002(\004\022\020\n\010o_ol_cnt\030\004 \002(\005\022\023\n\013o_all" +
-      "_local\030\005 \002(\005\"\215\001\n\rTpccOrderLine\022\017\n\007ol_i_i" +
-      "d\030\001 \002(\004\022\026\n\016ol_supply_w_id\030\002 \002(\004\022\025\n\rol_de" +
-      "livery_d\030\003 \002(\004\022\023\n\013ol_quantity\030\004 \002(\004\022\021\n\to" +
-      "l_amount\030\005 \002(\001\022\024\n\014ol_dist_info\030\006 \002(\t\"\247\002\n" +
-      "\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts_dist",
-      "_01\030\002 \002(\t\022\021\n\ts_dist_02\030\003 \002(\t\022\021\n\ts_dist_0" +
-      "3\030\004 \002(\t\022\021\n\ts_dist_04\030\005 \002(\t\022\021\n\ts_dist_05\030" +
-      "\006 \002(\t\022\021\n\ts_dist_06\030\007 \002(\t\022\021\n\ts_dist_07\030\010 " +
-      "\002(\t\022\021\n\ts_dist_08\030\t \002(\t\022\021\n\ts_dist_09\030\n \002(" +
-      "\t\022\021\n\ts_dist_10\030\013 \002(\t\022\r\n\005s_ytd\030\014 \002(\004\022\023\n\013s" +
-      "_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 \002(\005\022\016" +
-      "\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w_na" +
-      "me\030\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_street2" +
-      "\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002(\t\022" +
-      "\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B%\n\027com.bas",
-      "ho.riak.protobufB\nAntidotePB"
+      "per_nodeup\030\001 \003(\0132\r.FpbPerNodeUp\"N\n\014FpbPe" +
+      "rNodeUp\022\017\n\007node_id\030\001 \002(\r\022\024\n\014partition_id" +
+      "\030\002 \002(\r\022\027\n\003ups\030\003 \003(\0132\n.FpbUpdate\"6\n\016FpbPr" +
+      "epTxnResp\022\017\n\007success\030\001 \002(\010\022\023\n\013commit_tim" +
+      "e\030\002 \001(\004\"G\n\nFpbReadReq\022\026\n\004txid\030\001 \001(\0132\010.Fp",
+      "bTxId\022\013\n\003key\030\002 \002(\t\022\024\n\014partition_id\030\003 \002(\r" +
+      "\"\036\n\016FpbPartListReq\022\014\n\004noop\030\001 \001(\010\"M\n\016FpbS" +
+      "ingleUpReq\022\013\n\003key\030\001 \002(\t\022\030\n\005value\030\002 \002(\0132\t" +
+      ".FpbValue\022\024\n\014partition_id\030\003 \002(\r\"/\n\013FpbPa" +
+      "rtList\022 \n\nnode_parts\030\001 \003(\0132\014.FpbNodePart" +
+      "\"1\n\013FpbNodePart\022\n\n\002ip\030\001 \002(\t\022\026\n\016num_parti" +
+      "tions\030\002 \002(\r\"2\n\tFpbUpdate\022\013\n\003key\030\001 \002(\t\022\030\n" +
+      "\005value\030\002 \002(\0132\t.FpbValue\"2\n\tFpbTxnReq\022\r\n\005" +
+      "clock\030\001 \001(\014\022\026\n\003ops\030\002 \003(\0132\t.FpbTxnOp\"K\n\010F" +
+      "pbTxnOp\022\014\n\004type\030\001 \002(\r\022\013\n\003key\030\002 \002(\r\022\021\n\top",
+      "eration\030\003 \001(\r\022\021\n\tparameter\030\004 \001(\014\"H\n\nFpbT" +
+      "xnResp\022\017\n\007success\030\001 \002(\010\022\r\n\005clock\030\002 \001(\014\022\032" +
+      "\n\007results\030\003 \003(\0132\t.FpbValue\"(\n\007FpbTxId\022\020\n" +
+      "\010snapshot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014\"\227\003\n\010FpbValu" +
+      "e\022\021\n\005field\030\001 \002(\r:\00212\022\037\n\010customer\030\002 \001(\0132\r" +
+      ".TpccCustomer\022$\n\007clookup\030\003 \001(\0132\023.TpccCus" +
+      "tomerLookup\022\037\n\010district\030\004 \001(\0132\r.TpccDist" +
+      "rict\022\035\n\007history\030\005 \001(\0132\014.TpccHistory\022\027\n\004i" +
+      "tem\030\006 \001(\0132\t.TpccItem\022\037\n\010neworder\030\007 \001(\0132\r" +
+      ".TpccNewOrder\022\031\n\005order\030\010 \001(\0132\n.TpccOrder",
+      "\022!\n\torderline\030\t \001(\0132\016.TpccOrderLine\022\031\n\005s" +
+      "tock\030\n \001(\0132\n.TpccStock\022!\n\twarehouse\030\013 \001(" +
+      "\0132\016.TpccWarehouse\022\021\n\tstr_value\030\014 \001(\t\022\022\n\n" +
+      "long_value\030\r \001(\003\022\024\n\014double_value\030\016 \001(\001\"\313" +
+      "\002\n\014TpccCustomer\022\017\n\007c_first\030\001 \002(\t\022\020\n\010c_mi" +
+      "ddle\030\002 \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021\n\tc_street1\030" +
+      "\004 \002(\t\022\021\n\tc_street2\030\005 \002(\t\022\016\n\006c_city\030\006 \002(\t" +
+      "\022\017\n\007c_state\030\007 \002(\t\022\r\n\005c_zip\030\010 \002(\t\022\017\n\007c_ph" +
+      "one\030\t \002(\t\022\017\n\007c_since\030\n \002(\004\022\020\n\010c_credit\030\013" +
+      " \002(\t\022\024\n\014c_credit_lim\030\014 \002(\001\022\022\n\nc_discount",
+      "\030\r \002(\001\022\025\n\rc_ytd_payment\030\016 \002(\001\022\025\n\rc_payme" +
+      "nt_cnt\030\017 \002(\005\022\026\n\016c_delivery_cnt\030\020 \002(\005\022\016\n\006" +
+      "c_data\030\021 \002(\t\"Q\n\022TpccCustomerLookup\022\016\n\006c_" +
+      "w_id\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016\n\006c_last\030\003 \002" +
+      "(\t\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDistrict\022\016\n\006d_na" +
+      "me\030\001 \002(\t\022\021\n\td_street1\030\002 \002(\t\022\021\n\td_street2" +
+      "\030\003 \002(\t\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_state\030\005 \002(\t\022" +
+      "\r\n\005d_zip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(\001\022\023\n\013d_next_" +
+      "o_id\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n\006h_c_id\030\001 \002(" +
+      "\004\"L\n\010TpccItem\022\017\n\007i_im_id\030\001 \002(\004\022\016\n\006i_name",
+      "\030\002 \002(\t\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i_data\030\004 \002(\t\"" +
+      "A\n\014TpccNewOrder\022\017\n\007no_o_id\030\001 \002(\004\022\017\n\007no_d" +
+      "_id\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k\n\tTpccOrder\022" +
+      "\016\n\006o_c_id\030\001 \002(\004\022\021\n\to_entry_d\030\002 \002(\004\022\024\n\014o_" +
+      "carrier_id\030\003 \002(\004\022\020\n\010o_ol_cnt\030\004 \002(\005\022\023\n\013o_" +
+      "all_local\030\005 \002(\005\"\215\001\n\rTpccOrderLine\022\017\n\007ol_" +
+      "i_id\030\001 \002(\004\022\026\n\016ol_supply_w_id\030\002 \002(\004\022\025\n\rol" +
+      "_delivery_d\030\003 \002(\004\022\023\n\013ol_quantity\030\004 \002(\004\022\021" +
+      "\n\tol_amount\030\005 \002(\001\022\024\n\014ol_dist_info\030\006 \002(\t\"" +
+      "\247\002\n\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts_d",
+      "ist_01\030\002 \002(\t\022\021\n\ts_dist_02\030\003 \002(\t\022\021\n\ts_dis" +
+      "t_03\030\004 \002(\t\022\021\n\ts_dist_04\030\005 \002(\t\022\021\n\ts_dist_" +
+      "05\030\006 \002(\t\022\021\n\ts_dist_06\030\007 \002(\t\022\021\n\ts_dist_07" +
+      "\030\010 \002(\t\022\021\n\ts_dist_08\030\t \002(\t\022\021\n\ts_dist_09\030\n" +
+      " \002(\t\022\021\n\ts_dist_10\030\013 \002(\t\022\r\n\005s_ytd\030\014 \002(\004\022\023" +
+      "\n\013s_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 \002(" +
+      "\005\022\016\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w" +
+      "_name\030\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_stre" +
+      "et2\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002" +
+      "(\t\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B%\n\027com.",
+      "basho.riak.protobufB\nAntidotePB"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -25534,7 +25459,7 @@ public final class AntidotePB {
           internal_static_FpbPerNodeUp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbPerNodeUp_descriptor,
-              new java.lang.String[] { "Node", "PartitionId", "Ups", });
+              new java.lang.String[] { "NodeId", "PartitionId", "Ups", });
           internal_static_FpbPrepTxnResp_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_FpbPrepTxnResp_fieldAccessorTable = new

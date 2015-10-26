@@ -91,7 +91,7 @@ public class DCInfoManager {
 				nodePartitionNum.add(nodePart.getNumPartitions());
 				
 				//Create a hash function that is a list of {node, index of this node's partitions}
-				for(int i=0; i<nodePart.getNumPartitions(); ++i)
+				for(int i=1; i<=nodePart.getNumPartitions(); ++i)
 					nodePartList.add(new Pair<Integer, Integer>(index,i));
 				nodeNames.add(nodeName);
 				String ip = nodeName.split("@")[1].replace("'", "");
