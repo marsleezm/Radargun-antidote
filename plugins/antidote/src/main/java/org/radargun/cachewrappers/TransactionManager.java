@@ -166,7 +166,7 @@ public class TransactionManager {
 				new HashMap<Pair<Integer, Integer>, FpbPerNodeUp.Builder>();
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
 				remoteUpdates = FpbNodeUps.newBuilder();
-		long t1 = System.nanoTime(), t2,t3;
+		//long t1 = System.nanoTime(), t2,t3;
 		if(writeBuffer.size() == 0)
 		{
 			readBuffer.clear();
@@ -190,13 +190,13 @@ public class TransactionManager {
 				if (localKeySet.containsKey(index) == false)
 				{
 					//if(realKey.equals("ITEM_7036"))
-					//	log.info("Not exist...Putting"+ realKey+"  index is "+(index+1));
+					log.info("Not exist...Putting"+ realKey+":"+index);
 					localKeySet.put(index, newUpBuilder(keyNode, index, realKey, entry.getValue()));
 				}
 				else
 				{
 					//if(realKey.equals("ITEM_7036"))
-					//	log.info("Exist... Putting"+ realKey+"  index is "+(index+1));
+					log.info("Exist... Putting"+ realKey+":"+index);
 					localKeySet.get(index).
 							addUps(FpbUpdate.newBuilder().setKey(realKey).
 							setValue((entry.getValue())));
@@ -207,7 +207,7 @@ public class TransactionManager {
 				int partIndex = toErlangIndex(hashCode % DCInfoManager.getPartNum(keyNode));
 				Pair<Integer, Integer> myPair = new Pair<Integer, Integer>(keyNode, partIndex);
 				//if(realKey.startsWith("ITEM"))
-				//	log.info("Putting"+realKey+" Remote!: node is "+keyNode);
+				log.info("Putting"+realKey+" Remote!: "+partIndex);
 				if (remoteKeySet.containsKey(myPair) == false)
 					remoteKeySet.put(myPair, newUpBuilder(keyNode, partIndex, realKey, entry.getValue()));
 				else
@@ -224,8 +224,8 @@ public class TransactionManager {
 		FpbPrepTxnReq prepTxnReq = FpbPrepTxnReq.newBuilder().setTxid(txId).setThreadid(threadId).
 				setLocalUpdates(localUpdates.build()).setRemoteUpdates(remoteUpdates.build()).build();
 		
-		t2= System.nanoTime();
-		log.info("Wrap write set takes:"+(t2-t1));
+		//t2= System.nanoTime();
+		//log.info("Wrap write set takes:"+(t2-t1));
 		
 		connection = connections.get(DCInfoManager.getNodeIndex());
 		try {
@@ -233,8 +233,8 @@ public class TransactionManager {
 			FpbPrepTxnResp resp;
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
 			
-			t3= System.nanoTime();
-			log.info("Got request takes:"+(t3-t2));
+			//t3= System.nanoTime();
+			//log.info("Got request takes:"+(t3-t2));
 			
 			isInTxn = false;
 			writeBuffer.clear();
