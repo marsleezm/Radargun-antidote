@@ -180,7 +180,7 @@ public class NewOrderTransaction implements TpccTransaction {
          s.setS_i_id(ol_i_id);
          s.setS_w_id(ol_supply_w_id);
          found = s.load(cacheWrapper, ((int) ol_supply_w_id - 1));
-         if (!found) throw new ElementNotFoundException("I_ID=" + ol_i_id + " not found!");
+         if (!found) throw new ElementNotFoundException("S_I_ID=" + ol_i_id + "S_W_ID="+ol_supply_w_id +" not found!");
 
 
          s_quantity = s.getS_quantity();

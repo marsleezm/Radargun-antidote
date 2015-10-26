@@ -190,13 +190,13 @@ public class TransactionManager {
 				if (localKeySet.containsKey(index) == false)
 				{
 					//if(realKey.equals("ITEM_7036"))
-					log.info("Not exist, Putting: "+ realKey+":"+index);
+					//log.info("Not exist, Putting: "+ realKey+":"+index);
 					localKeySet.put(index, newUpBuilder(keyNode, index, realKey, entry.getValue()));
 				}
 				else
 				{
 					//if(realKey.equals("ITEM_7036"))
-					log.info("Exist,Putting: "+ realKey+":"+index);
+					//log.info("Exist,Putting: "+ realKey+":"+index);
 					localKeySet.get(index).
 							addUps(FpbUpdate.newBuilder().setKey(realKey).
 							setValue((entry.getValue())));
@@ -207,7 +207,7 @@ public class TransactionManager {
 				int partIndex = toErlangIndex(hashCode % DCInfoManager.getPartNum(keyNode));
 				Pair<Integer, Integer> myPair = new Pair<Integer, Integer>(keyNode, partIndex);
 				//if(realKey.startsWith("ITEM"))
-				log.info("Remote putting: "+realKey+" : "+partIndex);
+				//log.info("Remote putting: "+realKey+" : "+partIndex);
 				if (remoteKeySet.containsKey(myPair) == false)
 					remoteKeySet.put(myPair, newUpBuilder(keyNode, partIndex, realKey, entry.getValue()));
 				else
@@ -323,7 +323,7 @@ public class TransactionManager {
 				realKey = ((MagicKey) key).key;
 				connection = connections.get(((MagicKey)key).node);
 				partitionId = toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode));
-				log.info(realKey+" read: ["+keyNode+","+partitionId);
+				//log.info(realKey+" read: ["+keyNode+","+partitionId);
 			}
 			else{
 				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
