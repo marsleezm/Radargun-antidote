@@ -167,7 +167,14 @@ public class TransactionManager {
 				new HashMap<Integer, Map<Integer, FpbPerNodeUp.Builder>>();
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
 				remoteUpdates = FpbNodeUps.newBuilder();
-		try{
+		
+		if(writeBuffer.size() == 0)
+		{
+			readBuffer.clear();
+			writeBuffer.clear();
+			return true;
+		}
+		
 		for(Map.Entry<Object, FpbValue> entry : writeBuffer.entrySet())
 		{	
 			MagicKey mKey = (MagicKey)entry.getKey();
@@ -261,14 +268,6 @@ public class TransactionManager {
 			System.exit(0);
 			return false;
 		} 
-		}
-		   catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.warn("IOException");
-			e.printStackTrace();
-			System.exit(0);
-			return false;
-		  }
 	}
 	
 	private FpbPerNodeUp.Builder newUpBuilder(String nodeName, int part_id, String key, FpbValue value)
