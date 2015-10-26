@@ -23,7 +23,7 @@ public class DCInfoManager {
 	static List<String> nodeNames = new ArrayList<String>();
 	static List<String> ips = new ArrayList<String>();
 	static List<Integer> nodePartitionNum = new ArrayList<Integer>();
-	static List<Pair<Integer, Integer>> nodePartList = new ArrayList<Pair<Integer, Integer>>();
+	static List<Pair> nodePartList = new ArrayList<Pair>();
 	static Integer nodeIndex = -1;
 	static String localIp;
 	
@@ -92,7 +92,7 @@ public class DCInfoManager {
 				
 				//Create a hash function that is a list of {node, index of this node's partitions}
 				for(int i=1; i<=nodePart.getNumPartitions(); ++i)
-					nodePartList.add(new Pair<Integer, Integer>(index,i));
+					nodePartList.add(new Pair(index,i));
 				nodeNames.add(nodeName);
 				String ip = nodeName.split("@")[1].replace("'", "");
 				if(ip.equals(localIp) || ip.equals("127.0.0.1"))
@@ -124,7 +124,7 @@ public class DCInfoManager {
 		return nodeNames.get(index);
 	}
 	
-	static public Pair<Integer, Integer> locateForNormalKey(Object key){
+	static public Pair locateForNormalKey(Object key){
 		int index = Math.abs(key.hashCode()) % nodePartList.size();
 		return nodePartList.get(index);
 	}

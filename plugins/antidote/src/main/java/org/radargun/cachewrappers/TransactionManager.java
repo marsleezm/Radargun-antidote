@@ -92,7 +92,6 @@ public class TransactionManager {
 		if (isInTxn)
 			writeBuffer.put(key, newValue);
 		else{
-			long t2,t3;
 			FpbSingleUpReq singleUpReq;
 			AntidoteConnection connection;
 			//Partition id has to be plus one because of the index in Erlang is different.
@@ -108,18 +107,18 @@ public class TransactionManager {
 			}
 			else
 			{	
-				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
+				Pair location = DCInfoManager.locateForNormalKey(key);
 				connection = connections.get(location.fst);
 				//if (((String)key).startsWith("ITEM"))
 				//		log.info("No transaction put: key is "+key+", node is "+location.fst+", partitionid is "+location.snd);
 				singleUpReq = FpbSingleUpReq.newBuilder().setKey((String)key)
 						.setValue(newValue).setPartitionId(location.snd).build();
 			}
-			t2 = System.nanoTime();
+			//t2 = System.nanoTime();
 			connection.send(MSG_SingleUpReq, singleUpReq);
 			FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
-			t3 = System.nanoTime();
-			log.info("Single up takes:"+(t3-t2));
+			//t3 = System.nanoTime();
+			//log.info("Single up takes:"+(t3-t2));
 			if (resp.getSuccess() == false){
 				log.warn("Trying to put ["+key+","+value+"] failed!");
 				throw new Exception();
@@ -165,8 +164,8 @@ public class TransactionManager {
 		int localNodeIndex = DCInfoManager.getNodeIndex();
 		Map<Integer, FpbPerNodeUp.Builder> localKeySet = 
 				new HashMap<Integer, FpbPerNodeUp.Builder>();
-		Map<Pair<Integer, Integer>, FpbPerNodeUp.Builder> remoteKeySet = 
-				new HashMap<Pair<Integer, Integer>, FpbPerNodeUp.Builder>();
+		Map<Pair, FpbPerNodeUp.Builder> remoteKeySet = 
+				new HashMap<Pair, FpbPerNodeUp.Builder>();
 		FpbNodeUps.Builder localUpdates = FpbNodeUps.newBuilder(),
 				remoteUpdates = FpbNodeUps.newBuilder();
 		//long t1 = System.nanoTime(), t2,t3;
@@ -202,13 +201,13 @@ public class TransactionManager {
 					//log.info("Exist,Putting: "+ realKey+":"+index);
 					localKeySet.get(index).
 							addUps(FpbUpdate.newBuilder().setKey(realKey).
-							setValue((entry.getValue())));
+							setValue(entry.getValue()));
 				}
 			}
 			else
 			{
 				int partIndex = toErlangIndex(hashCode % DCInfoManager.getPartNum(keyNode));
-				Pair<Integer, Integer> myPair = new Pair<Integer, Integer>(keyNode, partIndex);
+				Pair myPair = new Pair(keyNode, partIndex);
 				//if(realKey.startsWith("ITEM"))
 				//log.info("Remote putting: "+realKey+" : "+partIndex);
 				if (remoteKeySet.containsKey(myPair) == false)
@@ -221,11 +220,11 @@ public class TransactionManager {
 		for(Map.Entry<Integer, FpbPerNodeUp.Builder> entry : localKeySet.entrySet())
 			localUpdates.addPerNodeup(entry.getValue());
 		
-		for(Map.Entry<Pair<Integer, Integer>, FpbPerNodeUp.Builder> entry1 : remoteKeySet.entrySet())
+		for(Map.Entry<Pair, FpbPerNodeUp.Builder> entry1 : remoteKeySet.entrySet())
 				remoteUpdates.addPerNodeup(entry1.getValue());
 		
 		FpbPrepTxnReq prepTxnReq = FpbPrepTxnReq.newBuilder().setTxid(txId).setThreadid(threadId).
-				setLocalUpdates(localUpdates.build()).setRemoteUpdates(remoteUpdates.build()).build();
+				setLocalUpdates(localUpdates).setRemoteUpdates(remoteUpdates).build();
 		
 		//t2= System.nanoTime();
 		//log.info("Wrap write set takes:"+(t2-t1));
@@ -242,13 +241,13 @@ public class TransactionManager {
 			isInTxn = false;
 			writeBuffer.clear();
 			readBuffer.clear();
-			if(resp.getSuccess())
-				return true;
-			else
-			{
-				log.info("Transaction failed!");
-				return false;
-			}
+			return resp.getSuccess();
+			//	return true;
+			//else
+			//{
+			//	log.info("Transaction failed!");
+			//	return false;
+			//}
 		} catch (InvalidProtocolBufferException e) {
 			// TODO Auto-generated catch block
 			log.warn("Invalid protocol buffer");
@@ -324,12 +323,12 @@ public class TransactionManager {
 			if(key instanceof MagicKey){
 				keyNode = ((MagicKey)key).node;
 				realKey = ((MagicKey) key).key;
-				connection = connections.get(((MagicKey)key).node);
+				connection = connections.get(keyNode);
 				partitionId = toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode));
 				//log.info(realKey+" read: ["+keyNode+","+partitionId);
 			}
 			else{
-				Pair<Integer, Integer> location = DCInfoManager.locateForNormalKey(key);
+				Pair location = DCInfoManager.locateForNormalKey(key);
 				keyNode = location.fst;
 				realKey = (String)key;
 				connection = connections.get(location.fst);
