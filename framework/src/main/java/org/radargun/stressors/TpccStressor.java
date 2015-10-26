@@ -623,8 +623,9 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
             long startService = System.nanoTime();
 
-            //long t1 = System.nanoTime(), t2=0, t3=0, t4=0;
-            //cacheWrapper.startTransaction(isReadOnly);
+            
+            cacheWrapper.startTransaction(isReadOnly);
+          //long t1 = System.nanoTime(), t2=0, t3=0, t4=0;
             //t2 = System.nanoTime();
             //log.info("Start txn takes:"+ (t2-t1));
             
