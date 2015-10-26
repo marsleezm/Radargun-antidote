@@ -238,6 +238,8 @@ public class TransactionManager {
 			FpbPrepTxnResp resp;
 			resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
 			isInTxn = false;
+			writeBuffer.clear();
+			readBuffer.clear();
 			if(resp.getSuccess())
 				return true;
 			else
@@ -279,6 +281,8 @@ public class TransactionManager {
 	public void abort() {
 		// TODO Auto-generated method stub
 		isInTxn = false;
+		writeBuffer.clear();
+		readBuffer.clear();
 		log.warn("Trying to abort: something is wrong!!!");
 	}
 
