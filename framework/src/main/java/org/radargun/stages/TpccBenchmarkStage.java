@@ -94,6 +94,7 @@ public class TpccBenchmarkStage extends AbstractDistStage {
       log.info("Starting TpccBenchmarkStage: " + this.toString()+", num slaves are"+getActiveSlaveCount()
     		  +", number of threads are"+this.numOfThreads);
 
+      cacheWrapper.setParallelism(numOfThreads);
       tpccStressor = new TpccStressor();
       tpccStressor.setNodeIndex(cacheWrapper.getMyNode());
       tpccStressor.setNumSlaves(getActiveSlaveCount());
