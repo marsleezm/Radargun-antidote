@@ -32,7 +32,7 @@
             numOfThreads="1"
             perThreadSimulTime="60"
             arrivalRate="0"
-            accessSameWarehouse="false"
+            accessSameWarehouse="true"
             paymentWeight="45"
             orderStatusWeight="5"/>
       <CacheSize
