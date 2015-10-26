@@ -92,7 +92,7 @@ public class TransactionManager {
 		if (isInTxn)
 			writeBuffer.put(key, newValue);
 		else{
-			long t1=System.nanoTime(), t2,t3;
+			long t2,t3;
 			FpbSingleUpReq singleUpReq;
 			AntidoteConnection connection;
 			//Partition id has to be plus one because of the index in Erlang is different.
@@ -101,8 +101,8 @@ public class TransactionManager {
 				MagicKey mKey = (MagicKey)key;
 				connection = connections.get(mKey.node);
 				Integer partitionId = toErlangIndex(Math.abs(mKey.hashCode()) % DCInfoManager.getPartNum(mKey.node));
-				if (mKey.key.startsWith("ITEM"))
-					log.info("No transaction put magic: key is "+mKey.key+", node is "+mKey.node+", partitionid is"+partitionId);
+				//if (mKey.key.startsWith("ITEM"))
+				//	log.info("No transaction put magic: key is "+mKey.key+", node is "+mKey.node+", partitionid is"+partitionId);
 				singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.key)
 						.setValue(newValue).setPartitionId(partitionId).build();
 			}
@@ -116,7 +116,6 @@ public class TransactionManager {
 						.setValue(newValue).setPartitionId(location.snd).build();
 			}
 			t2 = System.nanoTime();
-			log.info("Single up prep takes:"+(t2-t1));
 			connection.send(MSG_SingleUpReq, singleUpReq);
 			FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
 			t3 = System.nanoTime();
