@@ -36,6 +36,7 @@ public class TpccTerminal {
       this.orderStatusWeight = orderStatusWeight;
       this.indexNode = indexNode;
       this.localWarehouseID = localWarehouseID;
+      NewOrderTransaction.initRange();
       tpccTools = TpccTools.newInstance();
    }
 

@@ -1,6 +1,7 @@
 package org.radargun.tpcc.transaction;
 
 import org.radargun.CacheWrapper;
+import org.radargun.cachewrappers.Pair;
 import org.radargun.tpcc.ElementNotFoundException;
 import org.radargun.tpcc.TpccTools;
 import org.radargun.tpcc.domain.Customer;
@@ -31,6 +32,7 @@ public class NewOrderTransaction implements TpccTransaction {
    private final long[] itemIDs;
    private final long[] supplierWarehouseIDs;
    private final long[] orderQuantities;
+   private static List<Pair> ranges;
 
    public NewOrderTransaction(TpccTools tpccTools, int warehouseID) {
 
@@ -51,19 +53,20 @@ public class NewOrderTransaction implements TpccTransaction {
       this.allLocal = 1; // see clause 2.4.2.2 (dot 6)
       for (int i = 0; i < numItems; i++) // clause 2.4.1.5
       {
-         if (tpccTools.randomNumber(1, 100) > 1) 
+         //if (tpccTools.randomNumber(1, 100) > 1) 
             supplierWarehouseIDs[i] = this.warehouseID; 
-         else //see clause 2.4.1.5 (dot 2)
+         /*else //see clause 2.4.1.5 (dot 2)
          {
             do {
                supplierWarehouseIDs[i] = tpccTools.randomNumber(1, TpccTools.NB_WAREHOUSES);
             }
             while (supplierWarehouseIDs[i] == this.warehouseID && TpccTools.NB_WAREHOUSES > 1);
             allLocal = 0;// see clause 2.4.2.2 (dot 6)
-         }
+         }*/
          
-         List<Long> range = getWarehouseItemRange(supplierWarehouseIDs[i]);
-         itemIDs[i] = tpccTools.nonUniformRandom(TpccTools.C_OL_I_ID, TpccTools.A_OL_I_ID, range.get(0), range.get(1));
+         //Only select items from the supplier warehouse. Otherwise 'item not found' exception will be triggered.
+         Pair range = ranges.get((int) (supplierWarehouseIDs[i]-1));
+         itemIDs[i] = tpccTools.nonUniformRandom(TpccTools.C_OL_I_ID, TpccTools.A_OL_I_ID, range.fst, range.snd);
          
          orderQuantities[i] = tpccTools.randomNumber(1, TpccTools.NB_MAX_DISTRICT); //see clause 2.4.1.5 (dot 6)
       }
@@ -71,6 +74,23 @@ public class NewOrderTransaction implements TpccTransaction {
       if (tpccTools.randomNumber(1, 100) == 1)
          this.itemIDs[this.numItems - 1] = -12345;
 
+   }
+   
+   public static void initRange(){	   
+	   ranges = new ArrayList<Pair>();
+       long remainder = TpccTools.NB_MAX_ITEM % TpccTools.NB_WAREHOUSES,
+       num_of_items = (TpccTools.NB_MAX_ITEM-remainder)/TpccTools.NB_WAREHOUSES;
+       
+       long init_id_item, end_id_item;
+       for(int i=1; i<= TpccTools.NB_WAREHOUSES; ++i)
+       {
+    	   init_id_item=((i-1)*num_of_items)+1;
+    	   if(i==TpccTools.NB_WAREHOUSES)
+        	   end_id_item=TpccTools.NB_MAX_ITEM;
+    	   else
+      		   end_id_item=i*num_of_items;
+    	   ranges.add(new Pair(init_id_item, end_id_item));
+       }
    }
 
    @Override
@@ -81,22 +101,6 @@ public class NewOrderTransaction implements TpccTransaction {
    @Override
    public boolean isReadOnly() {
       return false;
-   }
-   
-   private List<Long> getWarehouseItemRange(long warehouseId) {
-	   List<Long> numList = new ArrayList<Long>();
-       long remainder = TpccTools.NB_MAX_ITEM % TpccTools.NB_WAREHOUSES,
-       num_of_items = (TpccTools.NB_MAX_ITEM-remainder)/TpccTools.NB_WAREHOUSES;
-
-       long init_id_item=((warehouseId-1)*num_of_items)+1,
-    		   end_id_item=warehouseId*num_of_items;
-
-       if(warehouseId==TpccTools.NB_WAREHOUSES){
-    	   end_id_item=TpccTools.NB_MAX_ITEM;
-       }
-       numList.add(init_id_item);
-       numList.add(end_id_item);
-       return numList;
    }
 
    private void newOrderTransaction(CacheWrapper cacheWrapper) throws Throwable {
@@ -112,7 +116,6 @@ public class NewOrderTransaction implements TpccTransaction {
       long ol_supply_w_id, ol_i_id, ol_quantity;
       int s_remote_cnt_increment;
       double ol_amount, total_amount = 0;
-
 
       Customer c = new Customer();
       Warehouse w = new Warehouse();
@@ -258,6 +261,27 @@ public class NewOrderTransaction implements TpccTransaction {
 
       }
 
+   }
+   
+   public static class Pair {
+	    public long fst; //first member of pair
+	    public long snd; //second member of pair
+
+	    public Pair(long first, long second) {
+	        this.fst = first;
+	        this.snd = second;
+	    }
+	    
+	    public boolean equals(Object o){
+	    	if (o instanceof Pair)
+	    		return ((Pair) o).fst==fst && ((Pair) o).snd==snd;
+	    	else
+	    		return false;
+	    }
+	    
+	    public int hashCode(){
+	    	return (int) (fst*10+snd);
+	    }
    }
 
 
