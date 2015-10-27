@@ -79,11 +79,11 @@ public class TransactionManager {
 		//log.info("Trying to put "+key+": value is "+value);
 		FpbValue newValue;
 		if (value instanceof String)
-			newValue = FpbValue.newBuilder().setField(STRING_FIELD).setStrValue((String)value).build();
+			newValue = FpbValue.newBuilder().setField(STRING_FIELD).addStrValue((String)value).build();
 		else if(value instanceof Long || value instanceof Integer)
-			newValue = FpbValue.newBuilder().setField(LONG_FIELD).setLongValue((Long)value).build();
+			newValue = FpbValue.newBuilder().setField(LONG_FIELD).addLongValue((Long)value).build();
 		else if(value instanceof Double || value instanceof Float)
-			newValue = FpbValue.newBuilder().setField(DOUBLE_FIELD).setDoubleValue((Double)value).build();
+			newValue = FpbValue.newBuilder().setField(DOUBLE_FIELD).addDoubleValue((Double)value).build();
 		else{
 			newValue = (FpbValue)value;
 		}
@@ -149,11 +149,11 @@ public class TransactionManager {
 		//log.trace("Key is "+ key +", value is "+value.toString());
 		
 		if(value.getField() == STRING_FIELD)
-			return value.getStrValue();
+			return value.getStrValue(0);
 		else if(value.getField() == LONG_FIELD)
-			return value.getLongValue();
+			return value.getLongValue(0);
 		else if(value.getField() == DOUBLE_FIELD)
-			return value.getDoubleValue();
+			return value.getDoubleValue(0);
 		else if(value.getField() == NULL_FIELD)
 			return null;
 		else
