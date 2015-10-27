@@ -322,6 +322,7 @@ public class TransactionManager {
 
 		AntidoteConnection connection;
 		try{
+			long t1 = System.nanoTime(), t2, t3;
 			if(key instanceof MagicKey){
 				keyNode = ((MagicKey)key).node;
 				realKey = ((MagicKey) key).key;
@@ -352,8 +353,13 @@ public class TransactionManager {
 			}
 			
 			try {
+				t2 = System.nanoTime();
+				log.info("Read prep takes:"+(t2-t1));
 				connection.send(MSG_ReadReq, readReq);
-				return FpbValue.parseFrom(connection.receive(MSG_Value));
+				FpbValue V= FpbValue.parseFrom(connection.receive(MSG_Value));
+				t3 = System.nanoTime();
+				log.info("Read takes:"+(t3-t2));
+				return V;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
