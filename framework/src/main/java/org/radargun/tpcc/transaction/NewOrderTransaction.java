@@ -1,7 +1,6 @@
 package org.radargun.tpcc.transaction;
 
 import org.radargun.CacheWrapper;
-import org.radargun.cachewrappers.Pair;
 import org.radargun.tpcc.ElementNotFoundException;
 import org.radargun.tpcc.TpccTools;
 import org.radargun.tpcc.domain.Customer;
