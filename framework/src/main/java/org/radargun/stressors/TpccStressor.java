@@ -625,14 +625,14 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
             
             cacheWrapper.startTransaction(isReadOnly);
-            long t2 = System.nanoTime(), t3=0, t4=0;
+            //long t2 = System.nanoTime(), t3=0, t4=0;
             //t2 = System.nanoTime();
             //log.info("Start txn takes:"+ (t2-t1));
             
             try {
                transaction.executeTransaction(cacheWrapper);
-               t3 = System.nanoTime();
-               log.info("Execute txn takes:"+ (t3-t2));
+               //t3 = System.nanoTime();
+               //log.info("Execute txn takes:"+ (t3-t2));
                
             } catch (Throwable e) {
             	e.printStackTrace();
@@ -662,8 +662,8 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
                }
 
                cacheWrapper.endTransaction(successful);
-               t4 = System.nanoTime();
-               log.info("End txn takes:"+ (t4-t3));
+               //t4 = System.nanoTime();
+               //log.info("End txn takes:"+ (t4-t3));
 
                if (!successful) {
             	  log.warn("Transaction failed in execution!"+cacheWrapper);

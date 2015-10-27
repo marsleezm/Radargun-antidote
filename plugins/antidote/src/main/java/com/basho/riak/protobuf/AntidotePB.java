@@ -25428,8 +25428,8 @@ public final class AntidotePB {
       "\005\022\016\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w" +
       "_name\030\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_stre" +
       "et2\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002" +
-      "(\t\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B%\n\027com.",
-      "basho.riak.protobufB\nAntidotePB"
+      "(\t\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B\'\n\027com.",
+      "basho.riak.protobufB\nAntidotePBH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

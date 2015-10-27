@@ -352,11 +352,11 @@ public class TransactionManager {
 			}
 			
 			try {
-				long t2 = System.nanoTime(), t3;
+				//long t2 = System.nanoTime(), t3;
 				connection.send(MSG_ReadReq, readReq);
 				FpbValue V= FpbValue.parseFrom(connection.receive(MSG_Value));
-				t3 = System.nanoTime();
-				log.info("Read takes:"+(t3-t2));
+				//t3 = System.nanoTime();
+				//log.info("Read takes:"+(t3-t2));
 				return V;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
