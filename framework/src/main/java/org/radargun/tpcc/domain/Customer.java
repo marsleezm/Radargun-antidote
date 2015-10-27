@@ -44,9 +44,9 @@ public class Customer implements Serializable, Comparable, DomainObject {
 
    private String c_phone;
 
-   private long c_since;
-
    private String c_credit;
+   
+   private String c_data;
 
    private double c_credit_lim;
 
@@ -55,12 +55,13 @@ public class Customer implements Serializable, Comparable, DomainObject {
    // private double c_balance;
 
    private double c_ytd_payment;
+   
+   private long c_since;
 
    private int c_payment_cnt;
 
    private int c_delivery_cnt;
 
-   private String c_data;
 
    public Customer() {
 
@@ -268,7 +269,7 @@ public class Customer implements Serializable, Comparable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	   TpccCustomer customer = TpccCustomer.newBuilder()
+	  /* TpccCustomer customer = TpccCustomer.newBuilder()
 			   .setCCity(c_city).setCCredit(c_credit)
 			   .setCCreditLim(c_credit_lim).setCData((c_data))
 			   .setCDeliveryCnt(c_delivery_cnt)
@@ -280,7 +281,19 @@ public class Customer implements Serializable, Comparable, DomainObject {
 			   .setCYtdPayment(c_ytd_payment).setCZip((c_zip)).build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setCustomer(customer).setField(2).build();
-	      
+	   */
+	   
+	   FpbValue value = FpbValue.newBuilder()
+			   .addStrValue(c_first).addStrValue(c_middle)
+			   .addStrValue(c_last).addStrValue(c_street1)
+			   .addStrValue(c_street2).addStrValue(c_city)
+			   .addStrValue(c_state).addStrValue(c_zip)
+			   .addStrValue(c_phone).addStrValue(c_credit)
+			   .addStrValue(c_data).addDoubleValue(c_credit_lim)
+			   .addDoubleValue(c_discount).addDoubleValue(c_ytd_payment)
+			   .addLongValue(c_since).addLongValue(c_payment_cnt)
+			   .addLongValue(c_delivery_cnt).setField(2).build();
+			   
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex) , value);
    }
 
@@ -300,7 +313,7 @@ public class Customer implements Serializable, Comparable, DomainObject {
       FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
       if (value == null) return false;
       
-      TpccCustomer customer = value.getCustomer();
+      /*
 
       this.c_city = customer.getCCity();
       this.c_credit = customer.getCCredit();
@@ -319,7 +332,26 @@ public class Customer implements Serializable, Comparable, DomainObject {
       this.c_street2 = customer.getCStreet2();
       this.c_ytd_payment = customer.getCYtdPayment();
       this.c_zip = customer.getCZip();
-
+      */
+      
+      this.c_first = value.getStrValue(0);
+      this.c_middle =value.getStrValue(1);
+      this.c_last =value.getStrValue(2);
+      this.c_street1 =value.getStrValue(3);
+      this.c_street2 =value.getStrValue(4);
+      this.c_city =value.getStrValue(5);
+      this.c_state =value.getStrValue(6);
+      this.c_zip =value.getStrValue(7);
+      this.c_phone =value.getStrValue(8);
+      this.c_credit =value.getStrValue(9);
+      this.c_data =value.getStrValue(10);
+      this.c_credit_lim =value.getDoubleValue(0);
+      this.c_discount =value.getDoubleValue(1);
+      this.c_ytd_payment =value.getDoubleValue(2);
+      this.c_since = value.getLongValue(0);
+      this.c_payment_cnt = (int)value.getLongValue(1);
+      this.c_delivery_cnt = (int)value.getLongValue(2);
+      
       return true;
    }
 

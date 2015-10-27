@@ -10163,190 +10163,63 @@ public final class AntidotePB {
   public interface FpbValueOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required uint32 field = 1 [default = 12];
+    // required uint32 field = 1;
     /**
-     * <code>required uint32 field = 1 [default = 12];</code>
+     * <code>required uint32 field = 1;</code>
      */
     boolean hasField();
     /**
-     * <code>required uint32 field = 1 [default = 12];</code>
+     * <code>required uint32 field = 1;</code>
      */
     int getField();
 
-    // optional .TpccCustomer customer = 2;
+    // repeated string str_value = 2;
     /**
-     * <code>optional .TpccCustomer customer = 2;</code>
+     * <code>repeated string str_value = 2;</code>
      */
-    boolean hasCustomer();
+    java.util.List<java.lang.String>
+    getStrValueList();
     /**
-     * <code>optional .TpccCustomer customer = 2;</code>
+     * <code>repeated string str_value = 2;</code>
      */
-    com.basho.riak.protobuf.AntidotePB.TpccCustomer getCustomer();
+    int getStrValueCount();
     /**
-     * <code>optional .TpccCustomer customer = 2;</code>
+     * <code>repeated string str_value = 2;</code>
      */
-    com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder getCustomerOrBuilder();
-
-    // optional .TpccCustomerLookup clookup = 3;
+    java.lang.String getStrValue(int index);
     /**
-     * <code>optional .TpccCustomerLookup clookup = 3;</code>
-     */
-    boolean hasClookup();
-    /**
-     * <code>optional .TpccCustomerLookup clookup = 3;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup getClookup();
-    /**
-     * <code>optional .TpccCustomerLookup clookup = 3;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder getClookupOrBuilder();
-
-    // optional .TpccDistrict district = 4;
-    /**
-     * <code>optional .TpccDistrict district = 4;</code>
-     */
-    boolean hasDistrict();
-    /**
-     * <code>optional .TpccDistrict district = 4;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccDistrict getDistrict();
-    /**
-     * <code>optional .TpccDistrict district = 4;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder getDistrictOrBuilder();
-
-    // optional .TpccHistory history = 5;
-    /**
-     * <code>optional .TpccHistory history = 5;</code>
-     */
-    boolean hasHistory();
-    /**
-     * <code>optional .TpccHistory history = 5;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccHistory getHistory();
-    /**
-     * <code>optional .TpccHistory history = 5;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder getHistoryOrBuilder();
-
-    // optional .TpccItem item = 6;
-    /**
-     * <code>optional .TpccItem item = 6;</code>
-     */
-    boolean hasItem();
-    /**
-     * <code>optional .TpccItem item = 6;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccItem getItem();
-    /**
-     * <code>optional .TpccItem item = 6;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder getItemOrBuilder();
-
-    // optional .TpccNewOrder neworder = 7;
-    /**
-     * <code>optional .TpccNewOrder neworder = 7;</code>
-     */
-    boolean hasNeworder();
-    /**
-     * <code>optional .TpccNewOrder neworder = 7;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccNewOrder getNeworder();
-    /**
-     * <code>optional .TpccNewOrder neworder = 7;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder getNeworderOrBuilder();
-
-    // optional .TpccOrder order = 8;
-    /**
-     * <code>optional .TpccOrder order = 8;</code>
-     */
-    boolean hasOrder();
-    /**
-     * <code>optional .TpccOrder order = 8;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccOrder getOrder();
-    /**
-     * <code>optional .TpccOrder order = 8;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder getOrderOrBuilder();
-
-    // optional .TpccOrderLine orderline = 9;
-    /**
-     * <code>optional .TpccOrderLine orderline = 9;</code>
-     */
-    boolean hasOrderline();
-    /**
-     * <code>optional .TpccOrderLine orderline = 9;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccOrderLine getOrderline();
-    /**
-     * <code>optional .TpccOrderLine orderline = 9;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder getOrderlineOrBuilder();
-
-    // optional .TpccStock stock = 10;
-    /**
-     * <code>optional .TpccStock stock = 10;</code>
-     */
-    boolean hasStock();
-    /**
-     * <code>optional .TpccStock stock = 10;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccStock getStock();
-    /**
-     * <code>optional .TpccStock stock = 10;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder getStockOrBuilder();
-
-    // optional .TpccWarehouse warehouse = 11;
-    /**
-     * <code>optional .TpccWarehouse warehouse = 11;</code>
-     */
-    boolean hasWarehouse();
-    /**
-     * <code>optional .TpccWarehouse warehouse = 11;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccWarehouse getWarehouse();
-    /**
-     * <code>optional .TpccWarehouse warehouse = 11;</code>
-     */
-    com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder getWarehouseOrBuilder();
-
-    // optional string str_value = 12;
-    /**
-     * <code>optional string str_value = 12;</code>
-     */
-    boolean hasStrValue();
-    /**
-     * <code>optional string str_value = 12;</code>
-     */
-    java.lang.String getStrValue();
-    /**
-     * <code>optional string str_value = 12;</code>
+     * <code>repeated string str_value = 2;</code>
      */
     com.google.protobuf.ByteString
-        getStrValueBytes();
+        getStrValueBytes(int index);
 
-    // optional int64 long_value = 13;
+    // repeated int64 long_value = 3;
     /**
-     * <code>optional int64 long_value = 13;</code>
+     * <code>repeated int64 long_value = 3;</code>
      */
-    boolean hasLongValue();
+    java.util.List<java.lang.Long> getLongValueList();
     /**
-     * <code>optional int64 long_value = 13;</code>
+     * <code>repeated int64 long_value = 3;</code>
      */
-    long getLongValue();
+    int getLongValueCount();
+    /**
+     * <code>repeated int64 long_value = 3;</code>
+     */
+    long getLongValue(int index);
 
-    // optional double double_value = 14;
+    // repeated double double_value = 4;
     /**
-     * <code>optional double double_value = 14;</code>
+     * <code>repeated double double_value = 4;</code>
      */
-    boolean hasDoubleValue();
+    java.util.List<java.lang.Double> getDoubleValueList();
     /**
-     * <code>optional double double_value = 14;</code>
+     * <code>repeated double double_value = 4;</code>
      */
-    double getDoubleValue();
+    int getDoubleValueCount();
+    /**
+     * <code>repeated double double_value = 4;</code>
+     */
+    double getDoubleValue(int index);
   }
   /**
    * Protobuf type {@code FpbValue}
@@ -10405,148 +10278,53 @@ public final class AntidotePB {
               break;
             }
             case 18: {
-              com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = customer_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                strValue_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
               }
-              customer_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccCustomer.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(customer_);
-                customer_ = subBuilder.buildPartial();
+              strValue_.add(input.readBytes());
+              break;
+            }
+            case 24: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                longValue_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000004;
               }
-              bitField0_ |= 0x00000002;
+              longValue_.add(input.readInt64());
               break;
             }
             case 26: {
-              com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = clookup_.toBuilder();
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
+                longValue_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000004;
               }
-              clookup_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(clookup_);
-                clookup_ = subBuilder.buildPartial();
+              while (input.getBytesUntilLimit() > 0) {
+                longValue_.add(input.readInt64());
               }
-              bitField0_ |= 0x00000004;
+              input.popLimit(limit);
+              break;
+            }
+            case 33: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                doubleValue_ = new java.util.ArrayList<java.lang.Double>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              doubleValue_.add(input.readDouble());
               break;
             }
             case 34: {
-              com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000008) == 0x00000008)) {
-                subBuilder = district_.toBuilder();
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                doubleValue_ = new java.util.ArrayList<java.lang.Double>();
+                mutable_bitField0_ |= 0x00000008;
               }
-              district_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccDistrict.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(district_);
-                district_ = subBuilder.buildPartial();
+              while (input.getBytesUntilLimit() > 0) {
+                doubleValue_.add(input.readDouble());
               }
-              bitField0_ |= 0x00000008;
-              break;
-            }
-            case 42: {
-              com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000010) == 0x00000010)) {
-                subBuilder = history_.toBuilder();
-              }
-              history_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccHistory.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(history_);
-                history_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000010;
-              break;
-            }
-            case 50: {
-              com.basho.riak.protobuf.AntidotePB.TpccItem.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000020) == 0x00000020)) {
-                subBuilder = item_.toBuilder();
-              }
-              item_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccItem.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(item_);
-                item_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000020;
-              break;
-            }
-            case 58: {
-              com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000040) == 0x00000040)) {
-                subBuilder = neworder_.toBuilder();
-              }
-              neworder_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccNewOrder.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(neworder_);
-                neworder_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000040;
-              break;
-            }
-            case 66: {
-              com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000080) == 0x00000080)) {
-                subBuilder = order_.toBuilder();
-              }
-              order_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccOrder.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(order_);
-                order_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000080;
-              break;
-            }
-            case 74: {
-              com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000100) == 0x00000100)) {
-                subBuilder = orderline_.toBuilder();
-              }
-              orderline_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccOrderLine.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(orderline_);
-                orderline_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000100;
-              break;
-            }
-            case 82: {
-              com.basho.riak.protobuf.AntidotePB.TpccStock.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000200) == 0x00000200)) {
-                subBuilder = stock_.toBuilder();
-              }
-              stock_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccStock.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(stock_);
-                stock_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000200;
-              break;
-            }
-            case 90: {
-              com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000400) == 0x00000400)) {
-                subBuilder = warehouse_.toBuilder();
-              }
-              warehouse_ = input.readMessage(com.basho.riak.protobuf.AntidotePB.TpccWarehouse.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(warehouse_);
-                warehouse_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000400;
-              break;
-            }
-            case 98: {
-              bitField0_ |= 0x00000800;
-              strValue_ = input.readBytes();
-              break;
-            }
-            case 104: {
-              bitField0_ |= 0x00001000;
-              longValue_ = input.readInt64();
-              break;
-            }
-            case 113: {
-              bitField0_ |= 0x00002000;
-              doubleValue_ = input.readDouble();
+              input.popLimit(limit);
               break;
             }
           }
@@ -10557,6 +10335,15 @@ public final class AntidotePB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          strValue_ = new com.google.protobuf.UnmodifiableLazyStringList(strValue_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          longValue_ = java.util.Collections.unmodifiableList(longValue_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          doubleValue_ = java.util.Collections.unmodifiableList(doubleValue_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -10589,332 +10376,103 @@ public final class AntidotePB {
     }
 
     private int bitField0_;
-    // required uint32 field = 1 [default = 12];
+    // required uint32 field = 1;
     public static final int FIELD_FIELD_NUMBER = 1;
     private int field_;
     /**
-     * <code>required uint32 field = 1 [default = 12];</code>
+     * <code>required uint32 field = 1;</code>
      */
     public boolean hasField() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required uint32 field = 1 [default = 12];</code>
+     * <code>required uint32 field = 1;</code>
      */
     public int getField() {
       return field_;
     }
 
-    // optional .TpccCustomer customer = 2;
-    public static final int CUSTOMER_FIELD_NUMBER = 2;
-    private com.basho.riak.protobuf.AntidotePB.TpccCustomer customer_;
+    // repeated string str_value = 2;
+    public static final int STR_VALUE_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList strValue_;
     /**
-     * <code>optional .TpccCustomer customer = 2;</code>
+     * <code>repeated string str_value = 2;</code>
      */
-    public boolean hasCustomer() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public java.util.List<java.lang.String>
+        getStrValueList() {
+      return strValue_;
     }
     /**
-     * <code>optional .TpccCustomer customer = 2;</code>
+     * <code>repeated string str_value = 2;</code>
      */
-    public com.basho.riak.protobuf.AntidotePB.TpccCustomer getCustomer() {
-      return customer_;
+    public int getStrValueCount() {
+      return strValue_.size();
     }
     /**
-     * <code>optional .TpccCustomer customer = 2;</code>
+     * <code>repeated string str_value = 2;</code>
      */
-    public com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder getCustomerOrBuilder() {
-      return customer_;
-    }
-
-    // optional .TpccCustomerLookup clookup = 3;
-    public static final int CLOOKUP_FIELD_NUMBER = 3;
-    private com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup clookup_;
-    /**
-     * <code>optional .TpccCustomerLookup clookup = 3;</code>
-     */
-    public boolean hasClookup() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+    public java.lang.String getStrValue(int index) {
+      return strValue_.get(index);
     }
     /**
-     * <code>optional .TpccCustomerLookup clookup = 3;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup getClookup() {
-      return clookup_;
-    }
-    /**
-     * <code>optional .TpccCustomerLookup clookup = 3;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder getClookupOrBuilder() {
-      return clookup_;
-    }
-
-    // optional .TpccDistrict district = 4;
-    public static final int DISTRICT_FIELD_NUMBER = 4;
-    private com.basho.riak.protobuf.AntidotePB.TpccDistrict district_;
-    /**
-     * <code>optional .TpccDistrict district = 4;</code>
-     */
-    public boolean hasDistrict() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional .TpccDistrict district = 4;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccDistrict getDistrict() {
-      return district_;
-    }
-    /**
-     * <code>optional .TpccDistrict district = 4;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder getDistrictOrBuilder() {
-      return district_;
-    }
-
-    // optional .TpccHistory history = 5;
-    public static final int HISTORY_FIELD_NUMBER = 5;
-    private com.basho.riak.protobuf.AntidotePB.TpccHistory history_;
-    /**
-     * <code>optional .TpccHistory history = 5;</code>
-     */
-    public boolean hasHistory() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional .TpccHistory history = 5;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccHistory getHistory() {
-      return history_;
-    }
-    /**
-     * <code>optional .TpccHistory history = 5;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder getHistoryOrBuilder() {
-      return history_;
-    }
-
-    // optional .TpccItem item = 6;
-    public static final int ITEM_FIELD_NUMBER = 6;
-    private com.basho.riak.protobuf.AntidotePB.TpccItem item_;
-    /**
-     * <code>optional .TpccItem item = 6;</code>
-     */
-    public boolean hasItem() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional .TpccItem item = 6;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccItem getItem() {
-      return item_;
-    }
-    /**
-     * <code>optional .TpccItem item = 6;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder getItemOrBuilder() {
-      return item_;
-    }
-
-    // optional .TpccNewOrder neworder = 7;
-    public static final int NEWORDER_FIELD_NUMBER = 7;
-    private com.basho.riak.protobuf.AntidotePB.TpccNewOrder neworder_;
-    /**
-     * <code>optional .TpccNewOrder neworder = 7;</code>
-     */
-    public boolean hasNeworder() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional .TpccNewOrder neworder = 7;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccNewOrder getNeworder() {
-      return neworder_;
-    }
-    /**
-     * <code>optional .TpccNewOrder neworder = 7;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder getNeworderOrBuilder() {
-      return neworder_;
-    }
-
-    // optional .TpccOrder order = 8;
-    public static final int ORDER_FIELD_NUMBER = 8;
-    private com.basho.riak.protobuf.AntidotePB.TpccOrder order_;
-    /**
-     * <code>optional .TpccOrder order = 8;</code>
-     */
-    public boolean hasOrder() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional .TpccOrder order = 8;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccOrder getOrder() {
-      return order_;
-    }
-    /**
-     * <code>optional .TpccOrder order = 8;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder getOrderOrBuilder() {
-      return order_;
-    }
-
-    // optional .TpccOrderLine orderline = 9;
-    public static final int ORDERLINE_FIELD_NUMBER = 9;
-    private com.basho.riak.protobuf.AntidotePB.TpccOrderLine orderline_;
-    /**
-     * <code>optional .TpccOrderLine orderline = 9;</code>
-     */
-    public boolean hasOrderline() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional .TpccOrderLine orderline = 9;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccOrderLine getOrderline() {
-      return orderline_;
-    }
-    /**
-     * <code>optional .TpccOrderLine orderline = 9;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder getOrderlineOrBuilder() {
-      return orderline_;
-    }
-
-    // optional .TpccStock stock = 10;
-    public static final int STOCK_FIELD_NUMBER = 10;
-    private com.basho.riak.protobuf.AntidotePB.TpccStock stock_;
-    /**
-     * <code>optional .TpccStock stock = 10;</code>
-     */
-    public boolean hasStock() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional .TpccStock stock = 10;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccStock getStock() {
-      return stock_;
-    }
-    /**
-     * <code>optional .TpccStock stock = 10;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder getStockOrBuilder() {
-      return stock_;
-    }
-
-    // optional .TpccWarehouse warehouse = 11;
-    public static final int WAREHOUSE_FIELD_NUMBER = 11;
-    private com.basho.riak.protobuf.AntidotePB.TpccWarehouse warehouse_;
-    /**
-     * <code>optional .TpccWarehouse warehouse = 11;</code>
-     */
-    public boolean hasWarehouse() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <code>optional .TpccWarehouse warehouse = 11;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccWarehouse getWarehouse() {
-      return warehouse_;
-    }
-    /**
-     * <code>optional .TpccWarehouse warehouse = 11;</code>
-     */
-    public com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder getWarehouseOrBuilder() {
-      return warehouse_;
-    }
-
-    // optional string str_value = 12;
-    public static final int STR_VALUE_FIELD_NUMBER = 12;
-    private java.lang.Object strValue_;
-    /**
-     * <code>optional string str_value = 12;</code>
-     */
-    public boolean hasStrValue() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    /**
-     * <code>optional string str_value = 12;</code>
-     */
-    public java.lang.String getStrValue() {
-      java.lang.Object ref = strValue_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          strValue_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string str_value = 12;</code>
+     * <code>repeated string str_value = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getStrValueBytes() {
-      java.lang.Object ref = strValue_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        strValue_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getStrValueBytes(int index) {
+      return strValue_.getByteString(index);
     }
 
-    // optional int64 long_value = 13;
-    public static final int LONG_VALUE_FIELD_NUMBER = 13;
-    private long longValue_;
+    // repeated int64 long_value = 3;
+    public static final int LONG_VALUE_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.Long> longValue_;
     /**
-     * <code>optional int64 long_value = 13;</code>
+     * <code>repeated int64 long_value = 3;</code>
      */
-    public boolean hasLongValue() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
-    }
-    /**
-     * <code>optional int64 long_value = 13;</code>
-     */
-    public long getLongValue() {
+    public java.util.List<java.lang.Long>
+        getLongValueList() {
       return longValue_;
     }
-
-    // optional double double_value = 14;
-    public static final int DOUBLE_VALUE_FIELD_NUMBER = 14;
-    private double doubleValue_;
     /**
-     * <code>optional double double_value = 14;</code>
+     * <code>repeated int64 long_value = 3;</code>
      */
-    public boolean hasDoubleValue() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+    public int getLongValueCount() {
+      return longValue_.size();
     }
     /**
-     * <code>optional double double_value = 14;</code>
+     * <code>repeated int64 long_value = 3;</code>
      */
-    public double getDoubleValue() {
+    public long getLongValue(int index) {
+      return longValue_.get(index);
+    }
+
+    // repeated double double_value = 4;
+    public static final int DOUBLE_VALUE_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Double> doubleValue_;
+    /**
+     * <code>repeated double double_value = 4;</code>
+     */
+    public java.util.List<java.lang.Double>
+        getDoubleValueList() {
       return doubleValue_;
+    }
+    /**
+     * <code>repeated double double_value = 4;</code>
+     */
+    public int getDoubleValueCount() {
+      return doubleValue_.size();
+    }
+    /**
+     * <code>repeated double double_value = 4;</code>
+     */
+    public double getDoubleValue(int index) {
+      return doubleValue_.get(index);
     }
 
     private void initFields() {
-      field_ = 12;
-      customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
-      clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
-      district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
-      history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
-      item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
-      neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
-      order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
-      orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
-      stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
-      warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
-      strValue_ = "";
-      longValue_ = 0L;
-      doubleValue_ = 0D;
+      field_ = 0;
+      strValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      longValue_ = java.util.Collections.emptyList();
+      doubleValue_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10924,66 +10482,6 @@ public final class AntidotePB {
       if (!hasField()) {
         memoizedIsInitialized = 0;
         return false;
-      }
-      if (hasCustomer()) {
-        if (!getCustomer().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasClookup()) {
-        if (!getClookup().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasDistrict()) {
-        if (!getDistrict().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasHistory()) {
-        if (!getHistory().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasItem()) {
-        if (!getItem().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasNeworder()) {
-        if (!getNeworder().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasOrder()) {
-        if (!getOrder().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasOrderline()) {
-        if (!getOrderline().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasStock()) {
-        if (!getStock().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      if (hasWarehouse()) {
-        if (!getWarehouse().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -10995,44 +10493,14 @@ public final class AntidotePB {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeUInt32(1, field_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, customer_);
+      for (int i = 0; i < strValue_.size(); i++) {
+        output.writeBytes(2, strValue_.getByteString(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, clookup_);
+      for (int i = 0; i < longValue_.size(); i++) {
+        output.writeInt64(3, longValue_.get(i));
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, district_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeMessage(5, history_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeMessage(6, item_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeMessage(7, neworder_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeMessage(8, order_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeMessage(9, orderline_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeMessage(10, stock_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeMessage(11, warehouse_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeBytes(12, getStrValueBytes());
-      }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt64(13, longValue_);
-      }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeDouble(14, doubleValue_);
+      for (int i = 0; i < doubleValue_.size(); i++) {
+        output.writeDouble(4, doubleValue_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -11047,57 +10515,29 @@ public final class AntidotePB {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, field_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, customer_);
+      {
+        int dataSize = 0;
+        for (int i = 0; i < strValue_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(strValue_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getStrValueList().size();
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, clookup_);
+      {
+        int dataSize = 0;
+        for (int i = 0; i < longValue_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt64SizeNoTag(longValue_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getLongValueList().size();
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, district_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, history_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, item_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, neworder_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, order_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, orderline_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, stock_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, warehouse_);
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, getStrValueBytes());
-      }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(13, longValue_);
-      }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(14, doubleValue_);
+      {
+        int dataSize = 0;
+        dataSize = 8 * getDoubleValueList().size();
+        size += dataSize;
+        size += 1 * getDoubleValueList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11207,16 +10647,6 @@ public final class AntidotePB {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getCustomerFieldBuilder();
-          getClookupFieldBuilder();
-          getDistrictFieldBuilder();
-          getHistoryFieldBuilder();
-          getItemFieldBuilder();
-          getNeworderFieldBuilder();
-          getOrderFieldBuilder();
-          getOrderlineFieldBuilder();
-          getStockFieldBuilder();
-          getWarehouseFieldBuilder();
         }
       }
       private static Builder create() {
@@ -11225,74 +10655,14 @@ public final class AntidotePB {
 
       public Builder clear() {
         super.clear();
-        field_ = 12;
+        field_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (customerBuilder_ == null) {
-          customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
-        } else {
-          customerBuilder_.clear();
-        }
+        strValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (clookupBuilder_ == null) {
-          clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
-        } else {
-          clookupBuilder_.clear();
-        }
+        longValue_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (districtBuilder_ == null) {
-          district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
-        } else {
-          districtBuilder_.clear();
-        }
+        doubleValue_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
-        if (historyBuilder_ == null) {
-          history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
-        } else {
-          historyBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000010);
-        if (itemBuilder_ == null) {
-          item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
-        } else {
-          itemBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000020);
-        if (neworderBuilder_ == null) {
-          neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
-        } else {
-          neworderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000040);
-        if (orderBuilder_ == null) {
-          order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
-        } else {
-          orderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000080);
-        if (orderlineBuilder_ == null) {
-          orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
-        } else {
-          orderlineBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000100);
-        if (stockBuilder_ == null) {
-          stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
-        } else {
-          stockBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000200);
-        if (warehouseBuilder_ == null) {
-          warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
-        } else {
-          warehouseBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000400);
-        strValue_ = "";
-        bitField0_ = (bitField0_ & ~0x00000800);
-        longValue_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00001000);
-        doubleValue_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -11325,96 +10695,20 @@ public final class AntidotePB {
           to_bitField0_ |= 0x00000001;
         }
         result.field_ = field_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        if (customerBuilder_ == null) {
-          result.customer_ = customer_;
-        } else {
-          result.customer_ = customerBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        if (clookupBuilder_ == null) {
-          result.clookup_ = clookup_;
-        } else {
-          result.clookup_ = clookupBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        if (districtBuilder_ == null) {
-          result.district_ = district_;
-        } else {
-          result.district_ = districtBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        if (historyBuilder_ == null) {
-          result.history_ = history_;
-        } else {
-          result.history_ = historyBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        if (itemBuilder_ == null) {
-          result.item_ = item_;
-        } else {
-          result.item_ = itemBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        if (neworderBuilder_ == null) {
-          result.neworder_ = neworder_;
-        } else {
-          result.neworder_ = neworderBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        if (orderBuilder_ == null) {
-          result.order_ = order_;
-        } else {
-          result.order_ = orderBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        if (orderlineBuilder_ == null) {
-          result.orderline_ = orderline_;
-        } else {
-          result.orderline_ = orderlineBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        if (stockBuilder_ == null) {
-          result.stock_ = stock_;
-        } else {
-          result.stock_ = stockBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        if (warehouseBuilder_ == null) {
-          result.warehouse_ = warehouse_;
-        } else {
-          result.warehouse_ = warehouseBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000800;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          strValue_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              strValue_);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.strValue_ = strValue_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
-          to_bitField0_ |= 0x00001000;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          longValue_ = java.util.Collections.unmodifiableList(longValue_);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.longValue_ = longValue_;
-        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
-          to_bitField0_ |= 0x00002000;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          doubleValue_ = java.util.Collections.unmodifiableList(doubleValue_);
+          bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.doubleValue_ = doubleValue_;
         result.bitField0_ = to_bitField0_;
@@ -11436,46 +10730,35 @@ public final class AntidotePB {
         if (other.hasField()) {
           setField(other.getField());
         }
-        if (other.hasCustomer()) {
-          mergeCustomer(other.getCustomer());
-        }
-        if (other.hasClookup()) {
-          mergeClookup(other.getClookup());
-        }
-        if (other.hasDistrict()) {
-          mergeDistrict(other.getDistrict());
-        }
-        if (other.hasHistory()) {
-          mergeHistory(other.getHistory());
-        }
-        if (other.hasItem()) {
-          mergeItem(other.getItem());
-        }
-        if (other.hasNeworder()) {
-          mergeNeworder(other.getNeworder());
-        }
-        if (other.hasOrder()) {
-          mergeOrder(other.getOrder());
-        }
-        if (other.hasOrderline()) {
-          mergeOrderline(other.getOrderline());
-        }
-        if (other.hasStock()) {
-          mergeStock(other.getStock());
-        }
-        if (other.hasWarehouse()) {
-          mergeWarehouse(other.getWarehouse());
-        }
-        if (other.hasStrValue()) {
-          bitField0_ |= 0x00000800;
-          strValue_ = other.strValue_;
+        if (!other.strValue_.isEmpty()) {
+          if (strValue_.isEmpty()) {
+            strValue_ = other.strValue_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureStrValueIsMutable();
+            strValue_.addAll(other.strValue_);
+          }
           onChanged();
         }
-        if (other.hasLongValue()) {
-          setLongValue(other.getLongValue());
+        if (!other.longValue_.isEmpty()) {
+          if (longValue_.isEmpty()) {
+            longValue_ = other.longValue_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureLongValueIsMutable();
+            longValue_.addAll(other.longValue_);
+          }
+          onChanged();
         }
-        if (other.hasDoubleValue()) {
-          setDoubleValue(other.getDoubleValue());
+        if (!other.doubleValue_.isEmpty()) {
+          if (doubleValue_.isEmpty()) {
+            doubleValue_ = other.doubleValue_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureDoubleValueIsMutable();
+            doubleValue_.addAll(other.doubleValue_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11485,66 +10768,6 @@ public final class AntidotePB {
         if (!hasField()) {
           
           return false;
-        }
-        if (hasCustomer()) {
-          if (!getCustomer().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasClookup()) {
-          if (!getClookup().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasDistrict()) {
-          if (!getDistrict().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasHistory()) {
-          if (!getHistory().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasItem()) {
-          if (!getItem().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasNeworder()) {
-          if (!getNeworder().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasOrder()) {
-          if (!getOrder().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasOrderline()) {
-          if (!getOrderline().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasStock()) {
-          if (!getStock().isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasWarehouse()) {
-          if (!getWarehouse().isInitialized()) {
-            
-            return false;
-          }
         }
         return true;
       }
@@ -11568,22 +10791,22 @@ public final class AntidotePB {
       }
       private int bitField0_;
 
-      // required uint32 field = 1 [default = 12];
-      private int field_ = 12;
+      // required uint32 field = 1;
+      private int field_ ;
       /**
-       * <code>required uint32 field = 1 [default = 12];</code>
+       * <code>required uint32 field = 1;</code>
        */
       public boolean hasField() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required uint32 field = 1 [default = 12];</code>
+       * <code>required uint32 field = 1;</code>
        */
       public int getField() {
         return field_;
       }
       /**
-       * <code>required uint32 field = 1 [default = 12];</code>
+       * <code>required uint32 field = 1;</code>
        */
       public Builder setField(int value) {
         bitField0_ |= 0x00000001;
@@ -11592,1321 +10815,236 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required uint32 field = 1 [default = 12];</code>
+       * <code>required uint32 field = 1;</code>
        */
       public Builder clearField() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        field_ = 12;
+        field_ = 0;
         onChanged();
         return this;
       }
 
-      // optional .TpccCustomer customer = 2;
-      private com.basho.riak.protobuf.AntidotePB.TpccCustomer customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccCustomer, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder> customerBuilder_;
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public boolean hasCustomer() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccCustomer getCustomer() {
-        if (customerBuilder_ == null) {
-          return customer_;
-        } else {
-          return customerBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public Builder setCustomer(com.basho.riak.protobuf.AntidotePB.TpccCustomer value) {
-        if (customerBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          customer_ = value;
-          onChanged();
-        } else {
-          customerBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public Builder setCustomer(
-          com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder builderForValue) {
-        if (customerBuilder_ == null) {
-          customer_ = builderForValue.build();
-          onChanged();
-        } else {
-          customerBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public Builder mergeCustomer(com.basho.riak.protobuf.AntidotePB.TpccCustomer value) {
-        if (customerBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              customer_ != com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance()) {
-            customer_ =
-              com.basho.riak.protobuf.AntidotePB.TpccCustomer.newBuilder(customer_).mergeFrom(value).buildPartial();
-          } else {
-            customer_ = value;
-          }
-          onChanged();
-        } else {
-          customerBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public Builder clearCustomer() {
-        if (customerBuilder_ == null) {
-          customer_ = com.basho.riak.protobuf.AntidotePB.TpccCustomer.getDefaultInstance();
-          onChanged();
-        } else {
-          customerBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder getCustomerBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getCustomerFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder getCustomerOrBuilder() {
-        if (customerBuilder_ != null) {
-          return customerBuilder_.getMessageOrBuilder();
-        } else {
-          return customer_;
-        }
-      }
-      /**
-       * <code>optional .TpccCustomer customer = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccCustomer, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder> 
-          getCustomerFieldBuilder() {
-        if (customerBuilder_ == null) {
-          customerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccCustomer, com.basho.riak.protobuf.AntidotePB.TpccCustomer.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerOrBuilder>(
-                  customer_,
-                  getParentForChildren(),
-                  isClean());
-          customer_ = null;
-        }
-        return customerBuilder_;
-      }
-
-      // optional .TpccCustomerLookup clookup = 3;
-      private com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder> clookupBuilder_;
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public boolean hasClookup() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup getClookup() {
-        if (clookupBuilder_ == null) {
-          return clookup_;
-        } else {
-          return clookupBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public Builder setClookup(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup value) {
-        if (clookupBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          clookup_ = value;
-          onChanged();
-        } else {
-          clookupBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public Builder setClookup(
-          com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder builderForValue) {
-        if (clookupBuilder_ == null) {
-          clookup_ = builderForValue.build();
-          onChanged();
-        } else {
-          clookupBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public Builder mergeClookup(com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup value) {
-        if (clookupBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              clookup_ != com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance()) {
-            clookup_ =
-              com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.newBuilder(clookup_).mergeFrom(value).buildPartial();
-          } else {
-            clookup_ = value;
-          }
-          onChanged();
-        } else {
-          clookupBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public Builder clearClookup() {
-        if (clookupBuilder_ == null) {
-          clookup_ = com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.getDefaultInstance();
-          onChanged();
-        } else {
-          clookupBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder getClookupBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getClookupFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder getClookupOrBuilder() {
-        if (clookupBuilder_ != null) {
-          return clookupBuilder_.getMessageOrBuilder();
-        } else {
-          return clookup_;
-        }
-      }
-      /**
-       * <code>optional .TpccCustomerLookup clookup = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder> 
-          getClookupFieldBuilder() {
-        if (clookupBuilder_ == null) {
-          clookupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookup.Builder, com.basho.riak.protobuf.AntidotePB.TpccCustomerLookupOrBuilder>(
-                  clookup_,
-                  getParentForChildren(),
-                  isClean());
-          clookup_ = null;
-        }
-        return clookupBuilder_;
-      }
-
-      // optional .TpccDistrict district = 4;
-      private com.basho.riak.protobuf.AntidotePB.TpccDistrict district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccDistrict, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder, com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder> districtBuilder_;
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public boolean hasDistrict() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccDistrict getDistrict() {
-        if (districtBuilder_ == null) {
-          return district_;
-        } else {
-          return districtBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public Builder setDistrict(com.basho.riak.protobuf.AntidotePB.TpccDistrict value) {
-        if (districtBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          district_ = value;
-          onChanged();
-        } else {
-          districtBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000008;
-        return this;
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public Builder setDistrict(
-          com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder builderForValue) {
-        if (districtBuilder_ == null) {
-          district_ = builderForValue.build();
-          onChanged();
-        } else {
-          districtBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000008;
-        return this;
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public Builder mergeDistrict(com.basho.riak.protobuf.AntidotePB.TpccDistrict value) {
-        if (districtBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
-              district_ != com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance()) {
-            district_ =
-              com.basho.riak.protobuf.AntidotePB.TpccDistrict.newBuilder(district_).mergeFrom(value).buildPartial();
-          } else {
-            district_ = value;
-          }
-          onChanged();
-        } else {
-          districtBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000008;
-        return this;
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public Builder clearDistrict() {
-        if (districtBuilder_ == null) {
-          district_ = com.basho.riak.protobuf.AntidotePB.TpccDistrict.getDefaultInstance();
-          onChanged();
-        } else {
-          districtBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder getDistrictBuilder() {
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return getDistrictFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder getDistrictOrBuilder() {
-        if (districtBuilder_ != null) {
-          return districtBuilder_.getMessageOrBuilder();
-        } else {
-          return district_;
-        }
-      }
-      /**
-       * <code>optional .TpccDistrict district = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccDistrict, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder, com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder> 
-          getDistrictFieldBuilder() {
-        if (districtBuilder_ == null) {
-          districtBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccDistrict, com.basho.riak.protobuf.AntidotePB.TpccDistrict.Builder, com.basho.riak.protobuf.AntidotePB.TpccDistrictOrBuilder>(
-                  district_,
-                  getParentForChildren(),
-                  isClean());
-          district_ = null;
-        }
-        return districtBuilder_;
-      }
-
-      // optional .TpccHistory history = 5;
-      private com.basho.riak.protobuf.AntidotePB.TpccHistory history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccHistory, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder, com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder> historyBuilder_;
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public boolean hasHistory() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccHistory getHistory() {
-        if (historyBuilder_ == null) {
-          return history_;
-        } else {
-          return historyBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public Builder setHistory(com.basho.riak.protobuf.AntidotePB.TpccHistory value) {
-        if (historyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          history_ = value;
-          onChanged();
-        } else {
-          historyBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000010;
-        return this;
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public Builder setHistory(
-          com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder builderForValue) {
-        if (historyBuilder_ == null) {
-          history_ = builderForValue.build();
-          onChanged();
-        } else {
-          historyBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000010;
-        return this;
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public Builder mergeHistory(com.basho.riak.protobuf.AntidotePB.TpccHistory value) {
-        if (historyBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010) &&
-              history_ != com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance()) {
-            history_ =
-              com.basho.riak.protobuf.AntidotePB.TpccHistory.newBuilder(history_).mergeFrom(value).buildPartial();
-          } else {
-            history_ = value;
-          }
-          onChanged();
-        } else {
-          historyBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000010;
-        return this;
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public Builder clearHistory() {
-        if (historyBuilder_ == null) {
-          history_ = com.basho.riak.protobuf.AntidotePB.TpccHistory.getDefaultInstance();
-          onChanged();
-        } else {
-          historyBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000010);
-        return this;
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder getHistoryBuilder() {
-        bitField0_ |= 0x00000010;
-        onChanged();
-        return getHistoryFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder getHistoryOrBuilder() {
-        if (historyBuilder_ != null) {
-          return historyBuilder_.getMessageOrBuilder();
-        } else {
-          return history_;
-        }
-      }
-      /**
-       * <code>optional .TpccHistory history = 5;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccHistory, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder, com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder> 
-          getHistoryFieldBuilder() {
-        if (historyBuilder_ == null) {
-          historyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccHistory, com.basho.riak.protobuf.AntidotePB.TpccHistory.Builder, com.basho.riak.protobuf.AntidotePB.TpccHistoryOrBuilder>(
-                  history_,
-                  getParentForChildren(),
-                  isClean());
-          history_ = null;
-        }
-        return historyBuilder_;
-      }
-
-      // optional .TpccItem item = 6;
-      private com.basho.riak.protobuf.AntidotePB.TpccItem item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccItem, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder, com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder> itemBuilder_;
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public boolean hasItem() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccItem getItem() {
-        if (itemBuilder_ == null) {
-          return item_;
-        } else {
-          return itemBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public Builder setItem(com.basho.riak.protobuf.AntidotePB.TpccItem value) {
-        if (itemBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          item_ = value;
-          onChanged();
-        } else {
-          itemBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000020;
-        return this;
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public Builder setItem(
-          com.basho.riak.protobuf.AntidotePB.TpccItem.Builder builderForValue) {
-        if (itemBuilder_ == null) {
-          item_ = builderForValue.build();
-          onChanged();
-        } else {
-          itemBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000020;
-        return this;
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public Builder mergeItem(com.basho.riak.protobuf.AntidotePB.TpccItem value) {
-        if (itemBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020) &&
-              item_ != com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance()) {
-            item_ =
-              com.basho.riak.protobuf.AntidotePB.TpccItem.newBuilder(item_).mergeFrom(value).buildPartial();
-          } else {
-            item_ = value;
-          }
-          onChanged();
-        } else {
-          itemBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000020;
-        return this;
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public Builder clearItem() {
-        if (itemBuilder_ == null) {
-          item_ = com.basho.riak.protobuf.AntidotePB.TpccItem.getDefaultInstance();
-          onChanged();
-        } else {
-          itemBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000020);
-        return this;
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccItem.Builder getItemBuilder() {
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return getItemFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder getItemOrBuilder() {
-        if (itemBuilder_ != null) {
-          return itemBuilder_.getMessageOrBuilder();
-        } else {
-          return item_;
-        }
-      }
-      /**
-       * <code>optional .TpccItem item = 6;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccItem, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder, com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder> 
-          getItemFieldBuilder() {
-        if (itemBuilder_ == null) {
-          itemBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccItem, com.basho.riak.protobuf.AntidotePB.TpccItem.Builder, com.basho.riak.protobuf.AntidotePB.TpccItemOrBuilder>(
-                  item_,
-                  getParentForChildren(),
-                  isClean());
-          item_ = null;
-        }
-        return itemBuilder_;
-      }
-
-      // optional .TpccNewOrder neworder = 7;
-      private com.basho.riak.protobuf.AntidotePB.TpccNewOrder neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccNewOrder, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder> neworderBuilder_;
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public boolean hasNeworder() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccNewOrder getNeworder() {
-        if (neworderBuilder_ == null) {
-          return neworder_;
-        } else {
-          return neworderBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public Builder setNeworder(com.basho.riak.protobuf.AntidotePB.TpccNewOrder value) {
-        if (neworderBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          neworder_ = value;
-          onChanged();
-        } else {
-          neworderBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public Builder setNeworder(
-          com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder builderForValue) {
-        if (neworderBuilder_ == null) {
-          neworder_ = builderForValue.build();
-          onChanged();
-        } else {
-          neworderBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public Builder mergeNeworder(com.basho.riak.protobuf.AntidotePB.TpccNewOrder value) {
-        if (neworderBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
-              neworder_ != com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance()) {
-            neworder_ =
-              com.basho.riak.protobuf.AntidotePB.TpccNewOrder.newBuilder(neworder_).mergeFrom(value).buildPartial();
-          } else {
-            neworder_ = value;
-          }
-          onChanged();
-        } else {
-          neworderBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public Builder clearNeworder() {
-        if (neworderBuilder_ == null) {
-          neworder_ = com.basho.riak.protobuf.AntidotePB.TpccNewOrder.getDefaultInstance();
-          onChanged();
-        } else {
-          neworderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000040);
-        return this;
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder getNeworderBuilder() {
-        bitField0_ |= 0x00000040;
-        onChanged();
-        return getNeworderFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder getNeworderOrBuilder() {
-        if (neworderBuilder_ != null) {
-          return neworderBuilder_.getMessageOrBuilder();
-        } else {
-          return neworder_;
-        }
-      }
-      /**
-       * <code>optional .TpccNewOrder neworder = 7;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccNewOrder, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder> 
-          getNeworderFieldBuilder() {
-        if (neworderBuilder_ == null) {
-          neworderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccNewOrder, com.basho.riak.protobuf.AntidotePB.TpccNewOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccNewOrderOrBuilder>(
-                  neworder_,
-                  getParentForChildren(),
-                  isClean());
-          neworder_ = null;
-        }
-        return neworderBuilder_;
-      }
-
-      // optional .TpccOrder order = 8;
-      private com.basho.riak.protobuf.AntidotePB.TpccOrder order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccOrder, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder> orderBuilder_;
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public boolean hasOrder() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccOrder getOrder() {
-        if (orderBuilder_ == null) {
-          return order_;
-        } else {
-          return orderBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public Builder setOrder(com.basho.riak.protobuf.AntidotePB.TpccOrder value) {
-        if (orderBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          order_ = value;
-          onChanged();
-        } else {
-          orderBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000080;
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public Builder setOrder(
-          com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder builderForValue) {
-        if (orderBuilder_ == null) {
-          order_ = builderForValue.build();
-          onChanged();
-        } else {
-          orderBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000080;
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public Builder mergeOrder(com.basho.riak.protobuf.AntidotePB.TpccOrder value) {
-        if (orderBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080) &&
-              order_ != com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance()) {
-            order_ =
-              com.basho.riak.protobuf.AntidotePB.TpccOrder.newBuilder(order_).mergeFrom(value).buildPartial();
-          } else {
-            order_ = value;
-          }
-          onChanged();
-        } else {
-          orderBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000080;
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public Builder clearOrder() {
-        if (orderBuilder_ == null) {
-          order_ = com.basho.riak.protobuf.AntidotePB.TpccOrder.getDefaultInstance();
-          onChanged();
-        } else {
-          orderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000080);
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder getOrderBuilder() {
-        bitField0_ |= 0x00000080;
-        onChanged();
-        return getOrderFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder getOrderOrBuilder() {
-        if (orderBuilder_ != null) {
-          return orderBuilder_.getMessageOrBuilder();
-        } else {
-          return order_;
-        }
-      }
-      /**
-       * <code>optional .TpccOrder order = 8;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccOrder, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder> 
-          getOrderFieldBuilder() {
-        if (orderBuilder_ == null) {
-          orderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccOrder, com.basho.riak.protobuf.AntidotePB.TpccOrder.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderOrBuilder>(
-                  order_,
-                  getParentForChildren(),
-                  isClean());
-          order_ = null;
-        }
-        return orderBuilder_;
-      }
-
-      // optional .TpccOrderLine orderline = 9;
-      private com.basho.riak.protobuf.AntidotePB.TpccOrderLine orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccOrderLine, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder> orderlineBuilder_;
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public boolean hasOrderline() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccOrderLine getOrderline() {
-        if (orderlineBuilder_ == null) {
-          return orderline_;
-        } else {
-          return orderlineBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public Builder setOrderline(com.basho.riak.protobuf.AntidotePB.TpccOrderLine value) {
-        if (orderlineBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          orderline_ = value;
-          onChanged();
-        } else {
-          orderlineBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000100;
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public Builder setOrderline(
-          com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder builderForValue) {
-        if (orderlineBuilder_ == null) {
-          orderline_ = builderForValue.build();
-          onChanged();
-        } else {
-          orderlineBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000100;
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public Builder mergeOrderline(com.basho.riak.protobuf.AntidotePB.TpccOrderLine value) {
-        if (orderlineBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) == 0x00000100) &&
-              orderline_ != com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance()) {
-            orderline_ =
-              com.basho.riak.protobuf.AntidotePB.TpccOrderLine.newBuilder(orderline_).mergeFrom(value).buildPartial();
-          } else {
-            orderline_ = value;
-          }
-          onChanged();
-        } else {
-          orderlineBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000100;
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public Builder clearOrderline() {
-        if (orderlineBuilder_ == null) {
-          orderline_ = com.basho.riak.protobuf.AntidotePB.TpccOrderLine.getDefaultInstance();
-          onChanged();
-        } else {
-          orderlineBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000100);
-        return this;
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder getOrderlineBuilder() {
-        bitField0_ |= 0x00000100;
-        onChanged();
-        return getOrderlineFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder getOrderlineOrBuilder() {
-        if (orderlineBuilder_ != null) {
-          return orderlineBuilder_.getMessageOrBuilder();
-        } else {
-          return orderline_;
-        }
-      }
-      /**
-       * <code>optional .TpccOrderLine orderline = 9;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccOrderLine, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder> 
-          getOrderlineFieldBuilder() {
-        if (orderlineBuilder_ == null) {
-          orderlineBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccOrderLine, com.basho.riak.protobuf.AntidotePB.TpccOrderLine.Builder, com.basho.riak.protobuf.AntidotePB.TpccOrderLineOrBuilder>(
-                  orderline_,
-                  getParentForChildren(),
-                  isClean());
-          orderline_ = null;
-        }
-        return orderlineBuilder_;
-      }
-
-      // optional .TpccStock stock = 10;
-      private com.basho.riak.protobuf.AntidotePB.TpccStock stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccStock, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder, com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder> stockBuilder_;
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public boolean hasStock() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccStock getStock() {
-        if (stockBuilder_ == null) {
-          return stock_;
-        } else {
-          return stockBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public Builder setStock(com.basho.riak.protobuf.AntidotePB.TpccStock value) {
-        if (stockBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          stock_ = value;
-          onChanged();
-        } else {
-          stockBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000200;
-        return this;
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public Builder setStock(
-          com.basho.riak.protobuf.AntidotePB.TpccStock.Builder builderForValue) {
-        if (stockBuilder_ == null) {
-          stock_ = builderForValue.build();
-          onChanged();
-        } else {
-          stockBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000200;
-        return this;
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public Builder mergeStock(com.basho.riak.protobuf.AntidotePB.TpccStock value) {
-        if (stockBuilder_ == null) {
-          if (((bitField0_ & 0x00000200) == 0x00000200) &&
-              stock_ != com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance()) {
-            stock_ =
-              com.basho.riak.protobuf.AntidotePB.TpccStock.newBuilder(stock_).mergeFrom(value).buildPartial();
-          } else {
-            stock_ = value;
-          }
-          onChanged();
-        } else {
-          stockBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000200;
-        return this;
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public Builder clearStock() {
-        if (stockBuilder_ == null) {
-          stock_ = com.basho.riak.protobuf.AntidotePB.TpccStock.getDefaultInstance();
-          onChanged();
-        } else {
-          stockBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000200);
-        return this;
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccStock.Builder getStockBuilder() {
-        bitField0_ |= 0x00000200;
-        onChanged();
-        return getStockFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder getStockOrBuilder() {
-        if (stockBuilder_ != null) {
-          return stockBuilder_.getMessageOrBuilder();
-        } else {
-          return stock_;
-        }
-      }
-      /**
-       * <code>optional .TpccStock stock = 10;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccStock, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder, com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder> 
-          getStockFieldBuilder() {
-        if (stockBuilder_ == null) {
-          stockBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccStock, com.basho.riak.protobuf.AntidotePB.TpccStock.Builder, com.basho.riak.protobuf.AntidotePB.TpccStockOrBuilder>(
-                  stock_,
-                  getParentForChildren(),
-                  isClean());
-          stock_ = null;
-        }
-        return stockBuilder_;
-      }
-
-      // optional .TpccWarehouse warehouse = 11;
-      private com.basho.riak.protobuf.AntidotePB.TpccWarehouse warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccWarehouse, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder, com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder> warehouseBuilder_;
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public boolean hasWarehouse() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccWarehouse getWarehouse() {
-        if (warehouseBuilder_ == null) {
-          return warehouse_;
-        } else {
-          return warehouseBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public Builder setWarehouse(com.basho.riak.protobuf.AntidotePB.TpccWarehouse value) {
-        if (warehouseBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          warehouse_ = value;
-          onChanged();
-        } else {
-          warehouseBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000400;
-        return this;
-      }
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public Builder setWarehouse(
-          com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder builderForValue) {
-        if (warehouseBuilder_ == null) {
-          warehouse_ = builderForValue.build();
-          onChanged();
-        } else {
-          warehouseBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000400;
-        return this;
-      }
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public Builder mergeWarehouse(com.basho.riak.protobuf.AntidotePB.TpccWarehouse value) {
-        if (warehouseBuilder_ == null) {
-          if (((bitField0_ & 0x00000400) == 0x00000400) &&
-              warehouse_ != com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance()) {
-            warehouse_ =
-              com.basho.riak.protobuf.AntidotePB.TpccWarehouse.newBuilder(warehouse_).mergeFrom(value).buildPartial();
-          } else {
-            warehouse_ = value;
-          }
-          onChanged();
-        } else {
-          warehouseBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000400;
-        return this;
-      }
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public Builder clearWarehouse() {
-        if (warehouseBuilder_ == null) {
-          warehouse_ = com.basho.riak.protobuf.AntidotePB.TpccWarehouse.getDefaultInstance();
-          onChanged();
-        } else {
-          warehouseBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000400);
-        return this;
-      }
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder getWarehouseBuilder() {
-        bitField0_ |= 0x00000400;
-        onChanged();
-        return getWarehouseFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
-       */
-      public com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder getWarehouseOrBuilder() {
-        if (warehouseBuilder_ != null) {
-          return warehouseBuilder_.getMessageOrBuilder();
-        } else {
-          return warehouse_;
-        }
+      // repeated string str_value = 2;
+      private com.google.protobuf.LazyStringList strValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureStrValueIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          strValue_ = new com.google.protobuf.LazyStringArrayList(strValue_);
+          bitField0_ |= 0x00000002;
+         }
       }
       /**
-       * <code>optional .TpccWarehouse warehouse = 11;</code>
+       * <code>repeated string str_value = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.basho.riak.protobuf.AntidotePB.TpccWarehouse, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder, com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder> 
-          getWarehouseFieldBuilder() {
-        if (warehouseBuilder_ == null) {
-          warehouseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.basho.riak.protobuf.AntidotePB.TpccWarehouse, com.basho.riak.protobuf.AntidotePB.TpccWarehouse.Builder, com.basho.riak.protobuf.AntidotePB.TpccWarehouseOrBuilder>(
-                  warehouse_,
-                  getParentForChildren(),
-                  isClean());
-          warehouse_ = null;
-        }
-        return warehouseBuilder_;
+      public java.util.List<java.lang.String>
+          getStrValueList() {
+        return java.util.Collections.unmodifiableList(strValue_);
       }
-
-      // optional string str_value = 12;
-      private java.lang.Object strValue_ = "";
       /**
-       * <code>optional string str_value = 12;</code>
+       * <code>repeated string str_value = 2;</code>
        */
-      public boolean hasStrValue() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+      public int getStrValueCount() {
+        return strValue_.size();
       }
       /**
-       * <code>optional string str_value = 12;</code>
+       * <code>repeated string str_value = 2;</code>
        */
-      public java.lang.String getStrValue() {
-        java.lang.Object ref = strValue_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          strValue_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public java.lang.String getStrValue(int index) {
+        return strValue_.get(index);
       }
       /**
-       * <code>optional string str_value = 12;</code>
+       * <code>repeated string str_value = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getStrValueBytes() {
-        java.lang.Object ref = strValue_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          strValue_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+          getStrValueBytes(int index) {
+        return strValue_.getByteString(index);
       }
       /**
-       * <code>optional string str_value = 12;</code>
+       * <code>repeated string str_value = 2;</code>
        */
       public Builder setStrValue(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStrValueIsMutable();
+        strValue_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string str_value = 2;</code>
+       */
+      public Builder addStrValue(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
-        strValue_ = value;
+  ensureStrValueIsMutable();
+        strValue_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>optional string str_value = 12;</code>
+       * <code>repeated string str_value = 2;</code>
+       */
+      public Builder addAllStrValue(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureStrValueIsMutable();
+        super.addAll(values, strValue_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string str_value = 2;</code>
        */
       public Builder clearStrValue() {
-        bitField0_ = (bitField0_ & ~0x00000800);
-        strValue_ = getDefaultInstance().getStrValue();
+        strValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
-       * <code>optional string str_value = 12;</code>
+       * <code>repeated string str_value = 2;</code>
        */
-      public Builder setStrValueBytes(
+      public Builder addStrValueBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
-        strValue_ = value;
+  ensureStrValueIsMutable();
+        strValue_.add(value);
         onChanged();
         return this;
       }
 
-      // optional int64 long_value = 13;
-      private long longValue_ ;
-      /**
-       * <code>optional int64 long_value = 13;</code>
-       */
-      public boolean hasLongValue() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+      // repeated int64 long_value = 3;
+      private java.util.List<java.lang.Long> longValue_ = java.util.Collections.emptyList();
+      private void ensureLongValueIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          longValue_ = new java.util.ArrayList<java.lang.Long>(longValue_);
+          bitField0_ |= 0x00000004;
+         }
       }
       /**
-       * <code>optional int64 long_value = 13;</code>
+       * <code>repeated int64 long_value = 3;</code>
        */
-      public long getLongValue() {
-        return longValue_;
+      public java.util.List<java.lang.Long>
+          getLongValueList() {
+        return java.util.Collections.unmodifiableList(longValue_);
       }
       /**
-       * <code>optional int64 long_value = 13;</code>
+       * <code>repeated int64 long_value = 3;</code>
        */
-      public Builder setLongValue(long value) {
-        bitField0_ |= 0x00001000;
-        longValue_ = value;
+      public int getLongValueCount() {
+        return longValue_.size();
+      }
+      /**
+       * <code>repeated int64 long_value = 3;</code>
+       */
+      public long getLongValue(int index) {
+        return longValue_.get(index);
+      }
+      /**
+       * <code>repeated int64 long_value = 3;</code>
+       */
+      public Builder setLongValue(
+          int index, long value) {
+        ensureLongValueIsMutable();
+        longValue_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 long_value = 13;</code>
+       * <code>repeated int64 long_value = 3;</code>
+       */
+      public Builder addLongValue(long value) {
+        ensureLongValueIsMutable();
+        longValue_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 long_value = 3;</code>
+       */
+      public Builder addAllLongValue(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureLongValueIsMutable();
+        super.addAll(values, longValue_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int64 long_value = 3;</code>
        */
       public Builder clearLongValue() {
-        bitField0_ = (bitField0_ & ~0x00001000);
-        longValue_ = 0L;
+        longValue_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
 
-      // optional double double_value = 14;
-      private double doubleValue_ ;
-      /**
-       * <code>optional double double_value = 14;</code>
-       */
-      public boolean hasDoubleValue() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+      // repeated double double_value = 4;
+      private java.util.List<java.lang.Double> doubleValue_ = java.util.Collections.emptyList();
+      private void ensureDoubleValueIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          doubleValue_ = new java.util.ArrayList<java.lang.Double>(doubleValue_);
+          bitField0_ |= 0x00000008;
+         }
       }
       /**
-       * <code>optional double double_value = 14;</code>
+       * <code>repeated double double_value = 4;</code>
        */
-      public double getDoubleValue() {
-        return doubleValue_;
+      public java.util.List<java.lang.Double>
+          getDoubleValueList() {
+        return java.util.Collections.unmodifiableList(doubleValue_);
       }
       /**
-       * <code>optional double double_value = 14;</code>
+       * <code>repeated double double_value = 4;</code>
        */
-      public Builder setDoubleValue(double value) {
-        bitField0_ |= 0x00002000;
-        doubleValue_ = value;
+      public int getDoubleValueCount() {
+        return doubleValue_.size();
+      }
+      /**
+       * <code>repeated double double_value = 4;</code>
+       */
+      public double getDoubleValue(int index) {
+        return doubleValue_.get(index);
+      }
+      /**
+       * <code>repeated double double_value = 4;</code>
+       */
+      public Builder setDoubleValue(
+          int index, double value) {
+        ensureDoubleValueIsMutable();
+        doubleValue_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>optional double double_value = 14;</code>
+       * <code>repeated double double_value = 4;</code>
+       */
+      public Builder addDoubleValue(double value) {
+        ensureDoubleValueIsMutable();
+        doubleValue_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated double double_value = 4;</code>
+       */
+      public Builder addAllDoubleValue(
+          java.lang.Iterable<? extends java.lang.Double> values) {
+        ensureDoubleValueIsMutable();
+        super.addAll(values, doubleValue_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated double double_value = 4;</code>
        */
       public Builder clearDoubleValue() {
-        bitField0_ = (bitField0_ & ~0x00002000);
-        doubleValue_ = 0D;
+        doubleValue_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -25382,54 +23520,46 @@ public final class AntidotePB {
       "eration\030\003 \001(\r\022\021\n\tparameter\030\004 \001(\014\"H\n\nFpbT" +
       "xnResp\022\017\n\007success\030\001 \002(\010\022\r\n\005clock\030\002 \001(\014\022\032" +
       "\n\007results\030\003 \003(\0132\t.FpbValue\"(\n\007FpbTxId\022\020\n" +
-      "\010snapshot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014\"\227\003\n\010FpbValu" +
-      "e\022\021\n\005field\030\001 \002(\r:\00212\022\037\n\010customer\030\002 \001(\0132\r" +
-      ".TpccCustomer\022$\n\007clookup\030\003 \001(\0132\023.TpccCus" +
-      "tomerLookup\022\037\n\010district\030\004 \001(\0132\r.TpccDist" +
-      "rict\022\035\n\007history\030\005 \001(\0132\014.TpccHistory\022\027\n\004i" +
-      "tem\030\006 \001(\0132\t.TpccItem\022\037\n\010neworder\030\007 \001(\0132\r" +
-      ".TpccNewOrder\022\031\n\005order\030\010 \001(\0132\n.TpccOrder",
-      "\022!\n\torderline\030\t \001(\0132\016.TpccOrderLine\022\031\n\005s" +
-      "tock\030\n \001(\0132\n.TpccStock\022!\n\twarehouse\030\013 \001(" +
-      "\0132\016.TpccWarehouse\022\021\n\tstr_value\030\014 \001(\t\022\022\n\n" +
-      "long_value\030\r \001(\003\022\024\n\014double_value\030\016 \001(\001\"\313" +
-      "\002\n\014TpccCustomer\022\017\n\007c_first\030\001 \002(\t\022\020\n\010c_mi" +
-      "ddle\030\002 \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021\n\tc_street1\030" +
-      "\004 \002(\t\022\021\n\tc_street2\030\005 \002(\t\022\016\n\006c_city\030\006 \002(\t" +
-      "\022\017\n\007c_state\030\007 \002(\t\022\r\n\005c_zip\030\010 \002(\t\022\017\n\007c_ph" +
-      "one\030\t \002(\t\022\017\n\007c_since\030\n \002(\004\022\020\n\010c_credit\030\013" +
-      " \002(\t\022\024\n\014c_credit_lim\030\014 \002(\001\022\022\n\nc_discount",
-      "\030\r \002(\001\022\025\n\rc_ytd_payment\030\016 \002(\001\022\025\n\rc_payme" +
-      "nt_cnt\030\017 \002(\005\022\026\n\016c_delivery_cnt\030\020 \002(\005\022\016\n\006" +
-      "c_data\030\021 \002(\t\"Q\n\022TpccCustomerLookup\022\016\n\006c_" +
-      "w_id\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016\n\006c_last\030\003 \002" +
-      "(\t\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDistrict\022\016\n\006d_na" +
-      "me\030\001 \002(\t\022\021\n\td_street1\030\002 \002(\t\022\021\n\td_street2" +
-      "\030\003 \002(\t\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_state\030\005 \002(\t\022" +
-      "\r\n\005d_zip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(\001\022\023\n\013d_next_" +
-      "o_id\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n\006h_c_id\030\001 \002(" +
-      "\004\"L\n\010TpccItem\022\017\n\007i_im_id\030\001 \002(\004\022\016\n\006i_name",
-      "\030\002 \002(\t\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i_data\030\004 \002(\t\"" +
-      "A\n\014TpccNewOrder\022\017\n\007no_o_id\030\001 \002(\004\022\017\n\007no_d" +
-      "_id\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k\n\tTpccOrder\022" +
-      "\016\n\006o_c_id\030\001 \002(\004\022\021\n\to_entry_d\030\002 \002(\004\022\024\n\014o_" +
-      "carrier_id\030\003 \002(\004\022\020\n\010o_ol_cnt\030\004 \002(\005\022\023\n\013o_" +
-      "all_local\030\005 \002(\005\"\215\001\n\rTpccOrderLine\022\017\n\007ol_" +
-      "i_id\030\001 \002(\004\022\026\n\016ol_supply_w_id\030\002 \002(\004\022\025\n\rol" +
-      "_delivery_d\030\003 \002(\004\022\023\n\013ol_quantity\030\004 \002(\004\022\021" +
-      "\n\tol_amount\030\005 \002(\001\022\024\n\014ol_dist_info\030\006 \002(\t\"" +
-      "\247\002\n\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts_d",
-      "ist_01\030\002 \002(\t\022\021\n\ts_dist_02\030\003 \002(\t\022\021\n\ts_dis" +
-      "t_03\030\004 \002(\t\022\021\n\ts_dist_04\030\005 \002(\t\022\021\n\ts_dist_" +
-      "05\030\006 \002(\t\022\021\n\ts_dist_06\030\007 \002(\t\022\021\n\ts_dist_07" +
-      "\030\010 \002(\t\022\021\n\ts_dist_08\030\t \002(\t\022\021\n\ts_dist_09\030\n" +
-      " \002(\t\022\021\n\ts_dist_10\030\013 \002(\t\022\r\n\005s_ytd\030\014 \002(\004\022\023" +
-      "\n\013s_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 \002(" +
-      "\005\022\016\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w" +
-      "_name\030\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_stre" +
-      "et2\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002" +
-      "(\t\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B\'\n\027com.",
-      "basho.riak.protobufB\nAntidotePBH\001"
+      "\010snapshot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014\"V\n\010FpbValue" +
+      "\022\r\n\005field\030\001 \002(\r\022\021\n\tstr_value\030\002 \003(\t\022\022\n\nlo" +
+      "ng_value\030\003 \003(\003\022\024\n\014double_value\030\004 \003(\001\"\313\002\n" +
+      "\014TpccCustomer\022\017\n\007c_first\030\001 \002(\t\022\020\n\010c_midd" +
+      "le\030\002 \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021\n\tc_street1\030\004 " +
+      "\002(\t\022\021\n\tc_street2\030\005 \002(\t\022\016\n\006c_city\030\006 \002(\t\022\017" +
+      "\n\007c_state\030\007 \002(\t\022\r\n\005c_zip\030\010 \002(\t\022\017\n\007c_phon",
+      "e\030\t \002(\t\022\017\n\007c_since\030\n \002(\004\022\020\n\010c_credit\030\013 \002" +
+      "(\t\022\024\n\014c_credit_lim\030\014 \002(\001\022\022\n\nc_discount\030\r" +
+      " \002(\001\022\025\n\rc_ytd_payment\030\016 \002(\001\022\025\n\rc_payment" +
+      "_cnt\030\017 \002(\005\022\026\n\016c_delivery_cnt\030\020 \002(\005\022\016\n\006c_" +
+      "data\030\021 \002(\t\"Q\n\022TpccCustomerLookup\022\016\n\006c_w_" +
+      "id\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016\n\006c_last\030\003 \002(\t" +
+      "\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDistrict\022\016\n\006d_name" +
+      "\030\001 \002(\t\022\021\n\td_street1\030\002 \002(\t\022\021\n\td_street2\030\003" +
+      " \002(\t\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_state\030\005 \002(\t\022\r\n" +
+      "\005d_zip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(\001\022\023\n\013d_next_o_",
+      "id\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n\006h_c_id\030\001 \002(\004\"" +
+      "L\n\010TpccItem\022\017\n\007i_im_id\030\001 \002(\004\022\016\n\006i_name\030\002" +
+      " \002(\t\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i_data\030\004 \002(\t\"A\n" +
+      "\014TpccNewOrder\022\017\n\007no_o_id\030\001 \002(\004\022\017\n\007no_d_i" +
+      "d\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k\n\tTpccOrder\022\016\n" +
+      "\006o_c_id\030\001 \002(\004\022\021\n\to_entry_d\030\002 \002(\004\022\024\n\014o_ca" +
+      "rrier_id\030\003 \002(\004\022\020\n\010o_ol_cnt\030\004 \002(\005\022\023\n\013o_al" +
+      "l_local\030\005 \002(\005\"\215\001\n\rTpccOrderLine\022\017\n\007ol_i_" +
+      "id\030\001 \002(\004\022\026\n\016ol_supply_w_id\030\002 \002(\004\022\025\n\rol_d" +
+      "elivery_d\030\003 \002(\004\022\023\n\013ol_quantity\030\004 \002(\004\022\021\n\t",
+      "ol_amount\030\005 \002(\001\022\024\n\014ol_dist_info\030\006 \002(\t\"\247\002" +
+      "\n\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts_dis" +
+      "t_01\030\002 \002(\t\022\021\n\ts_dist_02\030\003 \002(\t\022\021\n\ts_dist_" +
+      "03\030\004 \002(\t\022\021\n\ts_dist_04\030\005 \002(\t\022\021\n\ts_dist_05" +
+      "\030\006 \002(\t\022\021\n\ts_dist_06\030\007 \002(\t\022\021\n\ts_dist_07\030\010" +
+      " \002(\t\022\021\n\ts_dist_08\030\t \002(\t\022\021\n\ts_dist_09\030\n \002" +
+      "(\t\022\021\n\ts_dist_10\030\013 \002(\t\022\r\n\005s_ytd\030\014 \002(\004\022\023\n\013" +
+      "s_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 \002(\005\022" +
+      "\016\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w_n" +
+      "ame\030\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_street",
+      "2\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002(\t" +
+      "\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B\'\n\027com.ba" +
+      "sho.riak.protobufB\nAntidotePBH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -25531,7 +23661,7 @@ public final class AntidotePB {
           internal_static_FpbValue_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbValue_descriptor,
-              new java.lang.String[] { "Field", "Customer", "Clookup", "District", "History", "Item", "Neworder", "Order", "Orderline", "Stock", "Warehouse", "StrValue", "LongValue", "DoubleValue", });
+              new java.lang.String[] { "Field", "StrValue", "LongValue", "DoubleValue", });
           internal_static_TpccCustomer_descriptor =
             getDescriptor().getMessageTypes().get(16);
           internal_static_TpccCustomer_fieldAccessorTable = new

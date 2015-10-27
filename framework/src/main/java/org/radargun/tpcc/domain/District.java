@@ -168,6 +168,26 @@ public class District implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
+	   
+	   /*
+	    *    private String d_name;
+
+   private String d_street1;
+
+   private String d_street2;
+
+   private String d_city;
+
+   private String d_state;
+
+   private String d_zip;
+
+   private double d_tax;
+
+   // private double d_ytd;
+
+   private long d_next_o_id;
+	    
 	   TpccDistrict district = TpccDistrict.newBuilder()
 			   .setDName(d_name).setDStreet1(d_street1)
 			   .setDStreet2(d_street2).setDCity(d_city)
@@ -175,6 +195,12 @@ public class District implements Serializable, DomainObject {
 			   .setDTax(d_tax).setDNextOId(d_next_o_id).build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setDistrict(district).setField(4).build();
+	   */
+	   FpbValue value = FpbValue.newBuilder()
+			   .addStrValue(d_street1).addStrValue(d_street2)
+			   .addStrValue(d_city).addStrValue(d_state)
+			   .addStrValue(d_zip).addDoubleValue(d_tax)
+			   .addLongValue(d_next_o_id).setField(4).build();
 			   
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
@@ -193,7 +219,8 @@ public class District implements Serializable, DomainObject {
 
       FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
       if (value == null) return false;
-      TpccDistrict district = value.getDistrict();
+      
+      /*TpccDistrict district = value.getDistrict();
 
       this.d_city = district.getDCity();
       this.d_name = district.getDName();
@@ -203,7 +230,30 @@ public class District implements Serializable, DomainObject {
       this.d_street2 = district.getDStreet2();
       this.d_tax = district.getDTax();
       this.d_zip = district.getDZip();
+      
+        private String d_street1;
 
+   private String d_street2;
+
+   private String d_city;
+
+   private String d_state;
+
+   private String d_zip;
+
+   private double d_tax;
+
+   // private double d_ytd;
+
+   private long d_next_o_id;
+      */
+      this.d_street1 = value.getStrValue(0);
+      this.d_street2 = value.getStrValue(1);
+      this.d_city = value.getStrValue(2);
+      this.d_state = value.getStrValue(3);
+      this.d_zip = value.getStrValue(4);
+      this.d_tax = value.getDoubleValue(0);
+      this.d_next_o_id = value.getLongValue(0);
 
       return true;
    }

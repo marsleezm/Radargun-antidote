@@ -19,6 +19,8 @@ public class History implements Serializable, DomainObject {
 
    private static final AtomicLong idGenerator = new AtomicLong(0L);
 
+   private String h_data;
+   
    /* customer id */
    private long h_c_id;
 
@@ -35,8 +37,6 @@ public class History implements Serializable, DomainObject {
    private long h_date;
 
    private double h_amount;
-
-   private String h_data;
 
 
    public History() {
@@ -125,11 +125,14 @@ public class History implements Serializable, DomainObject {
    //!TODO: Since History is never loaded, we just need to store a small portion..
    @Override
    public void store(CacheWrapper wrapper, int slaveIndex) throws Throwable {
-	   TpccHistory history = TpccHistory.newBuilder()
-			   .setHCId(h_c_id).build();
+	  /*
+	   * TpccHistory history = TpccHistory.newBuilder()
+	   	.setHCId(h_c_id).build();
 	   
 	  FpbValue value = FpbValue.newBuilder().setHistory(history).setField(5).build();
+	  */
       String id = generateId(slaveIndex);
+      FpbValue value = FpbValue.newBuilder().addLongValue(h_c_id).setField(5).build();
       wrapper.put(null, wrapper.createKey(id, slaveIndex), value);
    }
 

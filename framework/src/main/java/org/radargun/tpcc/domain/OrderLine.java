@@ -139,12 +139,28 @@ public class OrderLine implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	   TpccOrderLine orderline = TpccOrderLine.newBuilder()
+	   /*TpccOrderLine orderline = TpccOrderLine.newBuilder()
 			   .setOlIId(ol_i_id).setOlSupplyWId(ol_supply_w_id)
 			   .setOlDeliveryD(ol_supply_w_id).setOlQuantity(ol_quantity)
 			   .setOlAmount(ol_amount).setOlDistInfo(ol_dist_info).build();
-	   
+	     private long ol_i_id;
+
+   private long ol_supply_w_id;
+
+   private long ol_delivery_d;
+
+   private long ol_quantity;
+
+   private double ol_amount;
+
+   private String ol_dist_info;
 	   FpbValue value = FpbValue.newBuilder().setOrderline(orderline).setField(9).build();
+	   */
+	   FpbValue value = FpbValue.newBuilder()
+			   .addLongValue(ol_i_id).addLongValue(ol_supply_w_id)
+			   .addLongValue(ol_delivery_d).addLongValue(ol_quantity)
+			   .addDoubleValue(ol_amount).addStrValue(ol_dist_info)
+			   .setField(9).build(); 
 	   
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
@@ -163,7 +179,7 @@ public class OrderLine implements Serializable, DomainObject {
 
 	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
 	  if (value == null) return false;
-	  TpccOrderLine orderline = value.getOrderline();
+	  /*TpccOrderLine orderline = value.getOrderline();
 
       this.ol_i_id = orderline.getOlIId();
       this.ol_supply_w_id = orderline.getOlSupplyWId();
@@ -171,6 +187,13 @@ public class OrderLine implements Serializable, DomainObject {
       this.ol_quantity = orderline.getOlQuantity();
       this.ol_amount = orderline.getOlAmount();
       this.ol_dist_info = orderline.getOlDistInfo();
+      */
+	  this.ol_i_id = value.getLongValue(0);
+	  this.ol_supply_w_id = value.getLongValue(1);
+	  this.ol_delivery_d = value.getLongValue(2);
+	  this.ol_quantity = value.getLongValue(3);
+	  this.ol_amount = value.getDoubleValue(0);
+	  this.ol_dist_info = value.getStrValue(0);
 
 
       return true;

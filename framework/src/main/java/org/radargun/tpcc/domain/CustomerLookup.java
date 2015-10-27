@@ -90,11 +90,16 @@ public class CustomerLookup implements Externalizable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	   TpccCustomerLookup.Builder builder = TpccCustomerLookup.newBuilder()
-			   .setCWId(c_w_id).setCDId(c_d_id)
-			   .setCLast(c_last).addAllIds(ids);
+	   //TpccCustomerLookup.Builder builder = TpccCustomerLookup.newBuilder()
+	//		   .setCWId(c_w_id).setCDId(c_d_id)
+	//		   .setCLast(c_last).addAllIds(ids);
 	   
-	   FpbValue value = FpbValue.newBuilder().setClookup(builder).setField(3).build();
+	   FpbValue value = FpbValue.newBuilder().addLongValue(c_w_id).addLongValue(c_d_id).addAllLongValue(ids)
+			   .addStrValue(c_last).setField(3).build();
+			   		   
+	//	   ([c_w_id, c_d_id, ids]).builder;
+	   
+	   //.setField(3).build();
 	   
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
@@ -114,12 +119,19 @@ public class CustomerLookup implements Externalizable, DomainObject {
 	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
 	  if (value == null) return false;
 	  
-	  TpccCustomerLookup clookup = value.getClookup();
+	  /*TpccCustomerLookup clookup = value.getClookup();
 
       this.c_w_id = clookup.getCWId();
       this.c_d_id = clookup.getCDId();
       this.c_last = clookup.getCLast();
       this.ids = new LinkedList<Long>(clookup.getIdsList());
+      */
+	  List<Long> l = value.getLongValueList();
+	  this.c_w_id = l.get(0);
+      this.c_d_id = l.get(1);
+      this.c_last = value.getStrValue(0);
+      this.ids = new LinkedList<Long>(l.subList(2, l.size()));
+	  
 
       return true;
    }

@@ -18,8 +18,6 @@ public class Stock implements Serializable, DomainObject {
 
    private long s_w_id;
 
-   private long s_quantity;
-
    private String s_dist_01;
 
    private String s_dist_02;
@@ -39,14 +37,16 @@ public class Stock implements Serializable, DomainObject {
    private String s_dist_09;
 
    private String s_dist_10;
+   
+   private String s_data;
 
    private long s_ytd;
+   
+   private long s_quantity;
 
    private int s_order_cnt;
 
    private int s_remote_cnt;
-
-   private String s_data;
 
 
    public Stock() {
@@ -215,7 +215,7 @@ public class Stock implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	   TpccStock stock = TpccStock.newBuilder()
+	   /*TpccStock stock = TpccStock.newBuilder()
 			   .setSData(s_data).setSDist01(s_dist_01)
 			   .setSDist02(s_dist_02).setSDist03(s_dist_03)
 			   .setSDist04(s_dist_04).setSDist05(s_dist_05)
@@ -223,8 +223,24 @@ public class Stock implements Serializable, DomainObject {
 			   .setSDist08(s_dist_08).setSDist09(s_dist_09)
 			   .setSDist10(s_dist_10).setSOrderCnt(s_order_cnt)
 			   .setSQuantity(s_quantity).setSRemoteCnt(s_remote_cnt).setSYtd(s_ytd).build();
-	   
+	     private long s_ytd;
+   
+   private long s_quantity;
+
+   private int s_order_cnt;
+
+   private int s_remote_cnt;
 	   FpbValue value = FpbValue.newBuilder().setStock(stock).setField(10).build();
+	   */
+	   FpbValue value = FpbValue.newBuilder()
+			   .addStrValue(s_dist_01).addStrValue(s_dist_02)
+			   .addStrValue(s_dist_03).addStrValue(s_dist_04)
+			   .addStrValue(s_dist_05).addStrValue(s_dist_06)
+			   .addStrValue(s_dist_07).addStrValue(s_dist_08)
+			   .addStrValue(s_dist_09).addStrValue(s_dist_10)   
+			   .addStrValue(s_data).addLongValue(s_ytd)
+			   .addLongValue(s_quantity).addLongValue(s_order_cnt)
+			   .addLongValue(s_remote_cnt).setField(10).build();
 	   
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
@@ -243,7 +259,7 @@ public class Stock implements Serializable, DomainObject {
 
       FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
       if (value == null) return false;
-      TpccStock stock = value.getStock();
+      /*TpccStock stock = value.getStock();
 
       this.s_data = stock.getSData();
       this.s_dist_01 = stock.getSDist01();
@@ -260,6 +276,22 @@ public class Stock implements Serializable, DomainObject {
       this.s_quantity = stock.getSQuantity();
       this.s_remote_cnt = stock.getSRemoteCnt();
       this.s_ytd = stock.getSYtd();
+      */
+      this.s_dist_01 = value.getStrValue(0);
+      this.s_dist_02 = value.getStrValue(1);
+      this.s_dist_03 = value.getStrValue(2);
+      this.s_dist_04 = value.getStrValue(3);
+      this.s_dist_05 = value.getStrValue(4);
+      this.s_dist_06 = value.getStrValue(5);
+      this.s_dist_07 = value.getStrValue(6);
+      this.s_dist_08 = value.getStrValue(7);
+      this.s_dist_09 = value.getStrValue(8);
+      this.s_dist_10 = value.getStrValue(9);
+      this.s_data = value.getStrValue(10);
+      this.s_ytd = value.getLongValue(0);
+      this.s_quantity = value.getLongValue(1);
+      this.s_order_cnt = (int)value.getLongValue(2);
+      this.s_remote_cnt = (int)value.getLongValue(3);
 
       return true;
    }

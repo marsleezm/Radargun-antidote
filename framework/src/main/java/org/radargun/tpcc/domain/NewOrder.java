@@ -63,11 +63,16 @@ public class NewOrder implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	   TpccNewOrder neworder = TpccNewOrder.newBuilder()
+	   /*TpccNewOrder neworder = TpccNewOrder.newBuilder()
 			   .setNoOId(no_o_id).setNoDId(no_d_id).setNoWId(no_w_id)
 			   .build();
 	   
 	   FpbValue value = FpbValue.newBuilder().setNeworder(neworder).setField(7).build();
+	   */
+	   
+	   FpbValue value = FpbValue.newBuilder()
+			   .addLongValue(no_o_id).addLongValue(no_d_id)
+			   .addLongValue(no_w_id).setField(7).build();
 	   
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
@@ -83,6 +88,14 @@ public class NewOrder implements Serializable, DomainObject {
 
    @Override
    public boolean load(CacheWrapper wrapper, int nodeIndex) throws Throwable {
+	   
+	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
+	  if (value == null) return false;
+	  
+	  this.no_o_id = value.getLongValue(0);
+	  this.no_d_id = value.getLongValue(1);
+	  this.no_w_id = value.getLongValue(2);
+	  
       return true;
    }
 

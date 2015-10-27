@@ -17,13 +17,14 @@ public class Item implements Serializable, DomainObject {
 
    private long i_id;
 
+   private String i_data;
+   
+   private String i_name;
+   
    private long i_im_id;
 
-   private String i_name;
-
    private double i_price;
-
-   private String i_data;
+   
 
    public Item() {
 
@@ -84,14 +85,23 @@ public class Item implements Serializable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	   TpccItem item = TpccItem.newBuilder()
+	   /*TpccItem item = TpccItem.newBuilder()
 			   .setIData(i_data).setIImId(i_im_id)
 			   .setIName(i_name).setIPrice(i_price)
 			   .build();
+	   private String i_data;
 	   
+	   private String i_name;
 	   
+	   private long i_im_id;
+
+	   private double i_price;
 	   
-	   FpbValue value = FpbValue.newBuilder().setItem(item).setField(6).build();
+	   FpbValue value = FpbValue.newBuilder().setItem(item).setField(6).build(); */
+	   FpbValue value = FpbValue.newBuilder()
+			   .addStrValue(i_data).addStrValue(i_name)
+			   .addLongValue(i_im_id).addDoubleValue(i_price)
+			   .setField(6).build();
 	      
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
@@ -112,12 +122,26 @@ public class Item implements Serializable, DomainObject {
 	  //System.out.println("Trying to load item ["+getKey()+","+nodeIndex+"]");
 	  FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
 	  if (value == null) return false;
-	  TpccItem item = value.getItem();
+	 
+	  /*TpccItem item = value.getItem();
 
+   private String i_data;
+	   
+	   private String i_name;
+	   
+	   private long i_im_id;
+
+	   private double i_price;
+	   
       this.i_data = item.getIData();
       this.i_im_id = item.getIImId();
       this.i_name = item.getIName();
       this.i_price = item.getIPrice();
+      */
+	  this.i_data = value.getStrValue(0);
+	  this.i_name = value.getStrValue(1);
+	  this.i_im_id = value.getLongValue(0);
+	  this.i_price = value.getDoubleValue(0);
 
       return true;
    }

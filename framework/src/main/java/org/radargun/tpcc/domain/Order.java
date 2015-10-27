@@ -118,12 +118,29 @@ public class Order implements Serializable, Comparable, DomainObject {
 
    @Override
    public void store(CacheWrapper wrapper, int nodeIndex) throws Throwable {
-	   TpccOrder order = TpccOrder.newBuilder()
+	   /* TpccOrder order = TpccOrder.newBuilder()
 			   .setOCId(o_c_id).setOCarrierId(o_carrier_id)
 			   .setOEntryD(o_entry_d).setOOlCnt(o_ol_cnt)
 			   .setOAllLocal(o_all_local).build();
 	   
+	   
+	       private long o_c_id;
+
+   private long o_entry_d;
+
+   private long o_carrier_id;
+
+   private int o_ol_cnt;
+
+   private int o_all_local;
+	   
 	   FpbValue value = FpbValue.newBuilder().setOrder(order).setField(8).build();
+	   */
+	   
+	   FpbValue value = FpbValue.newBuilder()
+			   .addLongValue(o_c_id).addLongValue(o_entry_d)
+			   .addLongValue(o_carrier_id).addLongValue(o_ol_cnt)
+			   .addLongValue(o_all_local).setField(8).build();
 	   
        wrapper.put(null, wrapper.createKey(this.getKey(), nodeIndex), value);
    }
@@ -142,6 +159,7 @@ public class Order implements Serializable, Comparable, DomainObject {
 
       FpbValue value = (FpbValue)wrapper.get(null, wrapper.createKey(this.getKey(), nodeIndex));
       if (value == null) return false;
+      /*
       TpccOrder order = value.getOrder();
 
       this.o_c_id = order.getOCId();
@@ -149,6 +167,12 @@ public class Order implements Serializable, Comparable, DomainObject {
       this.o_entry_d = order.getOEntryD();
       this.o_ol_cnt = order.getOOlCnt();
       this.o_all_local = order.getOAllLocal();
+      */
+      this.o_c_id = value.getLongValue(0);
+      this.o_entry_d = value.getLongValue(1);
+      this.o_carrier_id = value.getLongValue(2);
+      this.o_ol_cnt = (int)value.getLongValue(3);
+      this.o_all_local = (int)value.getLongValue(4);
 
       return true;
    }
