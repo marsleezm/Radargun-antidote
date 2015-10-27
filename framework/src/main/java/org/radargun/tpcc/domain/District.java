@@ -196,7 +196,7 @@ public class District implements Serializable, DomainObject {
 	   
 	   FpbValue value = FpbValue.newBuilder().setDistrict(district).setField(4).build();
 	   */
-	   FpbValue value = FpbValue.newBuilder()
+	   FpbValue value = FpbValue.newBuilder().addStrValue(d_name)
 			   .addStrValue(d_street1).addStrValue(d_street2)
 			   .addStrValue(d_city).addStrValue(d_state)
 			   .addStrValue(d_zip).addDoubleValue(d_tax)
@@ -247,11 +247,12 @@ public class District implements Serializable, DomainObject {
 
    private long d_next_o_id;
       */
-      this.d_street1 = value.getStrValue(0);
-      this.d_street2 = value.getStrValue(1);
-      this.d_city = value.getStrValue(2);
-      this.d_state = value.getStrValue(3);
-      this.d_zip = value.getStrValue(4);
+      this.d_name = value.getStrValue(0);
+      this.d_street1 = value.getStrValue(1);
+      this.d_street2 = value.getStrValue(2);
+      this.d_city = value.getStrValue(3);
+      this.d_state = value.getStrValue(4);
+      this.d_zip = value.getStrValue(5);
       this.d_tax = value.getDoubleValue(0);
       this.d_next_o_id = value.getLongValue(0);
 
