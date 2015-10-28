@@ -765,6 +765,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       }
 
       public final synchronized void inactive() {
+    	 log.info(Thread.currentThread().getName()+" inactivated!");
          active = false;
       }
 
@@ -774,6 +775,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       }
 
       public final synchronized void finish() {
+    	 log.info(Thread.currentThread().getName()+" finished!");
          active = true;
          running = false;
          notifyAll();
@@ -786,6 +788,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       private synchronized void blockIfInactive() {
          while (!active) {
             try {
+            	log.info(Thread.currentThread().getName()+" blocked because inactive!");
                wait();
             } catch (InterruptedException e) {
                Thread.currentThread().interrupt();
@@ -945,11 +948,14 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       running = false;
       for (Stressor stressor : stressors) {
          stressor.finish();
+         log.info("Finsihed a stressor");
       }
       for (Producer producer : producers) {
          producer.interrupt();
+         log.info("Finsihed a producer");
       }
       notifyAll();
+      log.info("Notified all");
    }
 
    public final synchronized void setNumberOfRunningThreads(int numOfThreads) {
