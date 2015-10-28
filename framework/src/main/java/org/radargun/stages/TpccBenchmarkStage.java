@@ -230,6 +230,7 @@ public class TpccBenchmarkStage extends AbstractDistStage {
 
    @ManagedOperation(description = "Change the number of threads running, creating more threads if needed")
    public final void setNumberOfActiveThreads(int numberOfActiveThreads) {
+	  log.info("Trying to set number of activeThreads:"+numberOfActiveThreads);
       tpccStressor.setNumberOfRunningThreads(numberOfActiveThreads);
    }
 
