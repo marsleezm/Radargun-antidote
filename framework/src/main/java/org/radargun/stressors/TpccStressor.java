@@ -622,7 +622,6 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
             isReadOnly = transaction.isReadOnly();
 
             long startService = System.nanoTime();
-
             
             cacheWrapper.startTransaction(isReadOnly);
             //long t2 = System.nanoTime(), t3=0, t4=0;
@@ -765,6 +764,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       }
 
       public final synchronized void inactive() {
+    	 log.info(Thread.currentThread().getName()+": set inactive!");
          active = false;
       }
 
@@ -774,6 +774,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       }
 
       public final synchronized void finish() {
+    	 log.info(Thread.currentThread().getName()+": called finish!");
          active = true;
          running = false;
          notifyAll();
@@ -786,6 +787,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       private synchronized void blockIfInactive() {
          while (!active) {
             try {
+               log.info(Thread.currentThread().getName()+": blocked because in-active!");
                wait();
             } catch (InterruptedException e) {
                Thread.currentThread().interrupt();
@@ -943,13 +945,17 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
          return;
       }
       running = false;
+      log.info("Trying to stop thread..");
       for (Stressor stressor : stressors) {
          stressor.finish();
+         log.info("Finished a thread");
       }
       for (Producer producer : producers) {
          producer.interrupt();
+         log.info("Finished a producer");
       }
       notifyAll();
+      log.info("Notified all...");
    }
 
    public final synchronized void setNumberOfRunningThreads(int numOfThreads) {
