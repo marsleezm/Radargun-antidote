@@ -133,6 +133,7 @@ public class TpccBenchmarkStage extends AbstractDistStage {
       masterState.put("results", results);
       for (DistStageAck ack : acks) {
          DefaultDistStageAck wAck = (DefaultDistStageAck) ack;
+         log.info("Got a reply from slave!");
          if (wAck.isError()) {
             success = false;
             log.warn("Received error ack: " + wAck);
