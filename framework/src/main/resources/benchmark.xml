@@ -29,7 +29,7 @@
             statName="CACHE_SIZE_BEFORE_BENCH" />
       <TpccBenchmark
             statsSamplingInterval="5000"
-            numOfThreads="1"
+            numOfThreads="4"
             perThreadSimulTime="60"
             arrivalRate="0"
             accessSameWarehouse="true"
