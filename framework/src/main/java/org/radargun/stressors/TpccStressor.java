@@ -755,7 +755,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
         	transaction = null;
             }
             
-            blockIfInactive();
+            //blockIfInactive();
          }
       }
 
