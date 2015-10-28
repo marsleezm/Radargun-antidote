@@ -791,7 +791,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       private synchronized void blockIfInactive() {
          while (!active) {
             try {
-            	log.info(Thread.currentThread().getName()+" blocked because inactive!");
+               log.info(Thread.currentThread().getName()+" blocked because inactive!");
                wait();
             } catch (InterruptedException e) {
                Thread.currentThread().interrupt();
@@ -957,6 +957,14 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
          producer.interrupt();
          log.info("Finsihed a producer");
       }
+      
+      try {
+    	  log.info("Trying to sleep for 0.5 sec");
+		Thread.sleep(500);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
       notifyAll();
       log.info("Notified all");
    }
