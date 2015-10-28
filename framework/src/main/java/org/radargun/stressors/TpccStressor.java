@@ -779,7 +779,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
       public final synchronized void finish() {
     	 log.info(Thread.currentThread().getName()+" finished!");
-         active = true;
+         active = false;
          running = false;
          notifyAll();
       }
