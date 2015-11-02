@@ -186,11 +186,11 @@ public class DCInfoManager {
 		{
 			int length = nonRepList.size();
 			int randomIndex =(int)(length*Math.random());
-			log.info("Length is "+length+", random index is "+randomIndex);
+			//log.info("Length is "+length+", random index is "+randomIndex);
 			return nonRepList.get(randomIndex);
 		}
 		else{
-			log.info("Returning myself");
+			//log.info("Returning myself");
 			return nodeIndex;
 		}
 	}

@@ -343,8 +343,8 @@ public class TransactionManager {
 			//Replicated read
 			else if(DCInfoManager.replicateNode(location.fst))
 			{
-				log.info("Replicated read: for key ["+key+"], owner is ["+location.fst
-						+"], my index is "+DCInfoManager.getNodeIndex());
+				//log.info("Replicated read: for key ["+key+"], owner is ["+location.fst
+				//		+"], my index is "+DCInfoManager.getNodeIndex());
 				builder.setReplicaIp(DCInfoManager.getNodeName(location.fst));
 				connection = connections.get(DCInfoManager.getNodeIndex());
 			}
