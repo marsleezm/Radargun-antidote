@@ -45,6 +45,7 @@ public class ClusterValidationStage extends AbstractDistStage {
       DefaultDistStageAck response = newDefaultStageAck();
       try {
          wrapper = slaveState.getCacheWrapper();
+         log.trace("Got cache wrapper");
          int replResult = checkReplicationSeveralTimes();
          if (!isPartialReplication && !isPassiveReplication) {
             if (replResult > 0) {//only executes this on the slaves on which replication happened.
