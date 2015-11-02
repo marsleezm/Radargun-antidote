@@ -31,6 +31,7 @@ public class DCInfoManager {
 	static List<Integer> myRepList = new ArrayList<Integer>();
 	static List<Integer> nonRepList = new ArrayList<Integer>();
 	static Integer nodeIndex = -1;
+	static String localNodeName;
 	static String localIp;
 	
 	static public void init(){
@@ -102,7 +103,10 @@ public class DCInfoManager {
 				nodeNames.add(nodeName);
 				String ip = nodeName.split("@")[1].replace("'", "");
 				if(ip.equals(localIp) || ip.equals("127.0.0.1"))
+				{
 					nodeIndex = index;
+					localNodeName = nodeName;
+				}
 				ips.add(ip);
 				++index;
 			}
@@ -110,7 +114,7 @@ public class DCInfoManager {
 			for(FpbReplList repList : partList.getReplListList())
 			{
 				log.info("Replist is:"+repList);
-				if (repList.getIp().equals(localIp))
+				if (repList.getIp().equals(localNodeName))
 				{
 					List<String> l = repList.getToReplsList();
 					log.info("My rep list is:"+myRepList);
