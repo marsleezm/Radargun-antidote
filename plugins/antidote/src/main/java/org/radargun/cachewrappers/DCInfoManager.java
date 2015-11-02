@@ -110,17 +110,16 @@ public class DCInfoManager {
 				ips.add(ip);
 				++index;
 			}
-			log.info("All nodes are"+nodeNames);
+			log.info("All nodes are"+nodeNames+", my node name is "+localNodeName+", myIndex is "+nodeIndex);
 			for(FpbReplList repList : partList.getReplListList())
 			{
 				log.info("Replist is:"+repList);
 				if (repList.getIp().equals(localNodeName))
 				{
 					List<String> l = repList.getToReplsList();
-					log.info("My rep list is:"+myRepList);
 					for(String rep : l)
-					{
-						log.info("Adding rep of:"+nodeNames.indexOf(rep));
+					{				
+						log.info("Adding rep of:"+rep+", index is"+nodeNames.indexOf(rep));
 						myRepSet.add(nodeNames.indexOf(rep));
 						myRepList.add(nodeNames.indexOf(rep));
 					}
