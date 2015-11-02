@@ -317,15 +317,13 @@ public class TransactionManager {
 	
 	
 	private FpbValue getKeyFromServer(Object key, boolean isInTxn) {
-		int keyNode, partitionId;
-		String realKey;
 		Pair location;
 		FpbReadReq.Builder builder = FpbReadReq.newBuilder();
 
 		AntidoteConnection connection;
 		try{
 			if(key instanceof MagicKey){
-				keyNode = ((MagicKey)key).node;
+				int keyNode = ((MagicKey)key).node;
 				location = new Pair(keyNode, 
 						toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode)));
 				builder.setKey(((MagicKey)key).key);
@@ -345,6 +343,8 @@ public class TransactionManager {
 			//Replicated read
 			else if(DCInfoManager.replicateNode(location.fst))
 			{
+				log.info("Replicated read: for key ["+key+"], owner is ["+location.fst
+						+"], my index is "+DCInfoManager.getNodeIndex());
 				builder.setReplicaIp(DCInfoManager.getNodeName(location.fst));
 				connection = connections.get(DCInfoManager.getNodeIndex());
 			}
