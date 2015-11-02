@@ -57,10 +57,10 @@ public class NewOrderTransaction implements TpccTransaction {
             supplierWarehouseIDs[i] = this.warehouseID;
          //Read local replicated but slave object for 40%
          else if(tpccTools.randomNumber(1, 100) > 20)
-        	supplierWarehouseIDs[i] = cacheWrapper.getRandomReplicaId();
+        	supplierWarehouseIDs[i] = cacheWrapper.getRandomReplicaId()+1;
          else //see clause 2.4.1.5 (dot 2)
          {
-        	supplierWarehouseIDs[i] = cacheWrapper.getRandomNonRepId();
+        	supplierWarehouseIDs[i] = cacheWrapper.getRandomNonRepId()+1;
             allLocal = 0;// see clause 2.4.2.2 (dot 6)
          }
          
