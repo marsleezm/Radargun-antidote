@@ -489,9 +489,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       }
       log.info("Cache wrapper info is: " + cacheWrapper.getInfo());
       startPoint.countDown();
-      log.info("Got blocked!!");
       blockWhileRunning();
-      log.info("Not blocked anymore!!");
       for (Stressor stressor : stressors) {
          stressor.join();
          log.info("A stressor joined!");
@@ -951,22 +949,14 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       running = false;
       for (Stressor stressor : stressors) {
          stressor.finish();
-         log.info("Finsihed a stressor");
+         //log.info("Finsihed a stressor");
       }
       for (Producer producer : producers) {
          producer.interrupt();
-         log.info("Finsihed a producer");
+         //log.info("Finsihed a producer");
       }
-      
-      try {
-    	  log.info("Trying to sleep for 0.5 sec");
-		Thread.sleep(500);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
       notifyAll();
-      log.info("Notified all");
+      //log.info("Notified all");
    }
 
    public final synchronized void setNumberOfRunningThreads(int numOfThreads) {
@@ -975,7 +965,6 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       }
       Iterator<Stressor> iterator = stressors.iterator();
       while (numOfThreads > 0 && iterator.hasNext()) {
-    	 log.info("Activated a thread!");
          Stressor stressor = iterator.next();
          if (!stressor.isActive()) {
             stressor.active();
@@ -988,7 +977,6 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
          while (numOfThreads-- > 0) {
             Stressor stressor = createStressor(threadIdx++);
             stressor.start();
-            log.info("Started a thread!");
             stressors.add(stressor);
          }
       } else {
@@ -1121,7 +1109,6 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
    }
 
    public synchronized final void stopBenchmark() {
-	  log.info("Trying to stop benchmark!!");
       finishBenchmarkTimer.cancel();
       finishBenchmark();
    }

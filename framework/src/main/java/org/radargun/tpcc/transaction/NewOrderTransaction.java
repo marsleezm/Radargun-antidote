@@ -1,6 +1,7 @@
 package org.radargun.tpcc.transaction;
 
 import org.radargun.CacheWrapper;
+import org.radargun.cachewrappers.DCInfoManager;
 import org.radargun.tpcc.ElementNotFoundException;
 import org.radargun.tpcc.TpccTools;
 import org.radargun.tpcc.domain.Customer;
@@ -52,16 +53,17 @@ public class NewOrderTransaction implements TpccTransaction {
       this.allLocal = 1; // see clause 2.4.2.2 (dot 6)
       for (int i = 0; i < numItems; i++) // clause 2.4.1.5
       {
-         //if (tpccTools.randomNumber(1, 100) > 1) 
-            supplierWarehouseIDs[i] = this.warehouseID; 
-         /*else //see clause 2.4.1.5 (dot 2)
+    	 //Read local master object for 50% 
+         if (tpccTools.randomNumber(1, 100) > 50) 
+            supplierWarehouseIDs[i] = this.warehouseID;
+         //Read local replicated but slave object for 40%
+         else if(tpccTools.randomNumber(1, 100) > 20)
+        	supplierWarehouseIDs[i] = DCInfoManager.getRandomRepIndex();
+         else //see clause 2.4.1.5 (dot 2)
          {
-            do {
-               supplierWarehouseIDs[i] = tpccTools.randomNumber(1, TpccTools.NB_WAREHOUSES);
-            }
-            while (supplierWarehouseIDs[i] == this.warehouseID && TpccTools.NB_WAREHOUSES > 1);
+        	supplierWarehouseIDs[i] = DCInfoManager.getRandomNonRepIndex();
             allLocal = 0;// see clause 2.4.2.2 (dot 6)
-         }*/
+         }
          
          //Only select items from the supplier warehouse. Otherwise 'item not found' exception will be triggered.
          Pair range = ranges.get((int) (supplierWarehouseIDs[i]-1));

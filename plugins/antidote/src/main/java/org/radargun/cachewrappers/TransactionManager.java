@@ -319,41 +319,49 @@ public class TransactionManager {
 	private FpbValue getKeyFromServer(Object key, boolean isInTxn) {
 		int keyNode, partitionId;
 		String realKey;
+		Pair location;
+		FpbReadReq.Builder builder = FpbReadReq.newBuilder();
 
 		AntidoteConnection connection;
 		try{
 			if(key instanceof MagicKey){
 				keyNode = ((MagicKey)key).node;
-				realKey = ((MagicKey) key).key;
-				connection = connections.get(keyNode);
-				partitionId = toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode));
+				location = new Pair(keyNode, 
+						toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode)));
+				builder.setKey(((MagicKey)key).key);
 				//log.info(realKey+" read: ["+keyNode+","+partitionId);
 			}
 			else{
-				Pair location = DCInfoManager.locateForNormalKey(key);
-				keyNode = location.fst;
-				realKey = (String)key;
-				connection = connections.get(location.fst);
-				partitionId = toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(location.fst));
+				location = DCInfoManager.locateForNormalKey(key);
+				builder.setKey((String)key);
+				//toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(location.fst));
 			}
 			
-			FpbReadReq readReq;
-			if (isInTxn == true){
+			if(location.fst == DCInfoManager.getNodeIndex())
+			{
+				builder.setPartitionId(location.snd);
+				connection = connections.get(location.fst);
+			}
+			//Replicated read
+			else if(DCInfoManager.replicateNode(location.fst))
+			{
+				builder.setReplicaIp(DCInfoManager.getNodeName(location.fst));
+				connection = connections.get(DCInfoManager.getNodeIndex());
+			}
+			else
+			{
+				builder.setPartitionId(location.snd);
+				connection = connections.get(location.fst);
+			}
+
+			if (isInTxn == true)
 				//if (realKey.startsWith("ITEM"))
 				//	log.info("In transaction get: key is "+realKey+", node is "+keyNode);
-				readReq = FpbReadReq.newBuilder().setTxid(txId).setPartitionId(partitionId).
-					setKey(realKey).build();
-			}
-			else{
-				//if (realKey.startsWith("ITEM"))
-				//	log.info("No transaction get: key is "+realKey+", node is "+keyNode);
-				readReq = FpbReadReq.newBuilder().setPartitionId(partitionId).
-				setKey(realKey).build();
-			}
+				builder.setTxid(txId);
 			
 			try {
 				//long t2 = System.nanoTime(), t3;
-				connection.send(MSG_ReadReq, readReq);
+				connection.send(MSG_ReadReq, builder.build());
 				FpbValue V= FpbValue.parseFrom(connection.receive(MSG_Value));
 				//t3 = System.nanoTime();
 				//log.info("Read takes:"+(t3-t2));

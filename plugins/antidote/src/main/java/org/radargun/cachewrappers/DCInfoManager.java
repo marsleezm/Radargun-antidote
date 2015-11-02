@@ -6,13 +6,16 @@ import org.apache.commons.logging.LogFactory;
 import com.basho.riak.protobuf.AntidotePB.FpbNodePart;
 import com.basho.riak.protobuf.AntidotePB.FpbPartList;
 import com.basho.riak.protobuf.AntidotePB.FpbPartListReq;
+import com.basho.riak.protobuf.AntidotePB.FpbReplList;
 import com.google.protobuf.ByteString;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 
 public class DCInfoManager {
@@ -24,6 +27,9 @@ public class DCInfoManager {
 	static List<String> ips = new ArrayList<String>();
 	static List<Integer> nodePartitionNum = new ArrayList<Integer>();
 	static List<Pair> nodePartList = new ArrayList<Pair>();
+	static Set<Integer> myRepSet = new HashSet<Integer>();
+	static List<Integer> myRepList = new ArrayList<Integer>();
+	static List<Integer> nonRepList = new ArrayList<Integer>();
 	static Integer nodeIndex = -1;
 	static String localIp;
 	
@@ -101,6 +107,27 @@ public class DCInfoManager {
 				++index;
 			}
 			log.info("All nodes are"+nodeNames);
+			for(FpbReplList repList : partList.getReplListList())
+			{
+				log.info("Replist is:"+repList);
+				if (repList.getIp().equals(localIp))
+				{
+					List<String> l = repList.getToReplsList();
+					log.info("My rep list is:"+myRepList);
+					for(String rep : l)
+					{
+						log.info("Adding rep of:"+nodeNames.indexOf(rep));
+						myRepSet.add(nodeNames.indexOf(rep));
+						myRepList.add(nodeNames.indexOf(rep));
+					}
+					break;
+				}
+			}
+			
+			for(int i=0; i< nodeNames.size(); ++i)
+				if(i != nodeIndex && myRepSet.contains(i) == false)
+					nonRepList.add(i);
+			
 			tempConnection.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -134,6 +161,20 @@ public class DCInfoManager {
 	}
 	
 	static public void clear() {
+	}
+
+	public static boolean replicateNode(int nodeIndex) {
+		return myRepSet.contains(nodeIndex);
+	}
+	
+	public static Integer getRandomRepIndex(){
+		int length = myRepList.size();
+		return myRepList.get((int)(length*Math.random()));
+	}
+	
+	public static Integer getRandomNonRepIndex(){
+		int length = nonRepList.size();
+		return nonRepList.get((int)(length*Math.random()));
 	}
 
 }

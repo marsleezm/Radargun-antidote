@@ -3502,15 +3502,30 @@ public final class AntidotePB {
     com.google.protobuf.ByteString
         getKeyBytes();
 
-    // required uint32 partition_id = 3;
+    // optional uint32 partition_id = 3;
     /**
-     * <code>required uint32 partition_id = 3;</code>
+     * <code>optional uint32 partition_id = 3;</code>
      */
     boolean hasPartitionId();
     /**
-     * <code>required uint32 partition_id = 3;</code>
+     * <code>optional uint32 partition_id = 3;</code>
      */
     int getPartitionId();
+
+    // optional string replica_ip = 4;
+    /**
+     * <code>optional string replica_ip = 4;</code>
+     */
+    boolean hasReplicaIp();
+    /**
+     * <code>optional string replica_ip = 4;</code>
+     */
+    java.lang.String getReplicaIp();
+    /**
+     * <code>optional string replica_ip = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getReplicaIpBytes();
   }
   /**
    * Protobuf type {@code FpbReadReq}
@@ -3584,6 +3599,11 @@ public final class AntidotePB {
             case 24: {
               bitField0_ |= 0x00000004;
               partitionId_ = input.readUInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              replicaIp_ = input.readBytes();
               break;
             }
           }
@@ -3691,26 +3711,70 @@ public final class AntidotePB {
       }
     }
 
-    // required uint32 partition_id = 3;
+    // optional uint32 partition_id = 3;
     public static final int PARTITION_ID_FIELD_NUMBER = 3;
     private int partitionId_;
     /**
-     * <code>required uint32 partition_id = 3;</code>
+     * <code>optional uint32 partition_id = 3;</code>
      */
     public boolean hasPartitionId() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required uint32 partition_id = 3;</code>
+     * <code>optional uint32 partition_id = 3;</code>
      */
     public int getPartitionId() {
       return partitionId_;
+    }
+
+    // optional string replica_ip = 4;
+    public static final int REPLICA_IP_FIELD_NUMBER = 4;
+    private java.lang.Object replicaIp_;
+    /**
+     * <code>optional string replica_ip = 4;</code>
+     */
+    public boolean hasReplicaIp() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string replica_ip = 4;</code>
+     */
+    public java.lang.String getReplicaIp() {
+      java.lang.Object ref = replicaIp_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          replicaIp_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string replica_ip = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getReplicaIpBytes() {
+      java.lang.Object ref = replicaIp_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        replicaIp_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
       txid_ = com.basho.riak.protobuf.AntidotePB.FpbTxId.getDefaultInstance();
       key_ = "";
       partitionId_ = 0;
+      replicaIp_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3718,10 +3782,6 @@ public final class AntidotePB {
       if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasKey()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPartitionId()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -3747,6 +3807,9 @@ public final class AntidotePB {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeUInt32(3, partitionId_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getReplicaIpBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3767,6 +3830,10 @@ public final class AntidotePB {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, partitionId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getReplicaIpBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3895,6 +3962,8 @@ public final class AntidotePB {
         bitField0_ = (bitField0_ & ~0x00000002);
         partitionId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        replicaIp_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -3939,6 +4008,10 @@ public final class AntidotePB {
           to_bitField0_ |= 0x00000004;
         }
         result.partitionId_ = partitionId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.replicaIp_ = replicaIp_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3966,16 +4039,17 @@ public final class AntidotePB {
         if (other.hasPartitionId()) {
           setPartitionId(other.getPartitionId());
         }
+        if (other.hasReplicaIp()) {
+          bitField0_ |= 0x00000008;
+          replicaIp_ = other.replicaIp_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasKey()) {
-          
-          return false;
-        }
-        if (!hasPartitionId()) {
           
           return false;
         }
@@ -4198,22 +4272,22 @@ public final class AntidotePB {
         return this;
       }
 
-      // required uint32 partition_id = 3;
+      // optional uint32 partition_id = 3;
       private int partitionId_ ;
       /**
-       * <code>required uint32 partition_id = 3;</code>
+       * <code>optional uint32 partition_id = 3;</code>
        */
       public boolean hasPartitionId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required uint32 partition_id = 3;</code>
+       * <code>optional uint32 partition_id = 3;</code>
        */
       public int getPartitionId() {
         return partitionId_;
       }
       /**
-       * <code>required uint32 partition_id = 3;</code>
+       * <code>optional uint32 partition_id = 3;</code>
        */
       public Builder setPartitionId(int value) {
         bitField0_ |= 0x00000004;
@@ -4222,11 +4296,85 @@ public final class AntidotePB {
         return this;
       }
       /**
-       * <code>required uint32 partition_id = 3;</code>
+       * <code>optional uint32 partition_id = 3;</code>
        */
       public Builder clearPartitionId() {
         bitField0_ = (bitField0_ & ~0x00000004);
         partitionId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string replica_ip = 4;
+      private java.lang.Object replicaIp_ = "";
+      /**
+       * <code>optional string replica_ip = 4;</code>
+       */
+      public boolean hasReplicaIp() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string replica_ip = 4;</code>
+       */
+      public java.lang.String getReplicaIp() {
+        java.lang.Object ref = replicaIp_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          replicaIp_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string replica_ip = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getReplicaIpBytes() {
+        java.lang.Object ref = replicaIp_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          replicaIp_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string replica_ip = 4;</code>
+       */
+      public Builder setReplicaIp(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        replicaIp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string replica_ip = 4;</code>
+       */
+      public Builder clearReplicaIp() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        replicaIp_ = getDefaultInstance().getReplicaIp();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string replica_ip = 4;</code>
+       */
+      public Builder setReplicaIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        replicaIp_ = value;
         onChanged();
         return this;
       }
@@ -5441,6 +5589,31 @@ public final class AntidotePB {
      */
     com.basho.riak.protobuf.AntidotePB.FpbNodePartOrBuilder getNodePartsOrBuilder(
         int index);
+
+    // repeated .FpbReplList repl_list = 2;
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    java.util.List<com.basho.riak.protobuf.AntidotePB.FpbReplList> 
+        getReplListList();
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.FpbReplList getReplList(int index);
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    int getReplListCount();
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    java.util.List<? extends com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder> 
+        getReplListOrBuilderList();
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder getReplListOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code FpbPartList}
@@ -5501,6 +5674,14 @@ public final class AntidotePB {
               nodeParts_.add(input.readMessage(com.basho.riak.protobuf.AntidotePB.FpbNodePart.PARSER, extensionRegistry));
               break;
             }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                replList_ = new java.util.ArrayList<com.basho.riak.protobuf.AntidotePB.FpbReplList>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              replList_.add(input.readMessage(com.basho.riak.protobuf.AntidotePB.FpbReplList.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5511,6 +5692,9 @@ public final class AntidotePB {
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           nodeParts_ = java.util.Collections.unmodifiableList(nodeParts_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          replList_ = java.util.Collections.unmodifiableList(replList_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -5579,8 +5763,45 @@ public final class AntidotePB {
       return nodeParts_.get(index);
     }
 
+    // repeated .FpbReplList repl_list = 2;
+    public static final int REPL_LIST_FIELD_NUMBER = 2;
+    private java.util.List<com.basho.riak.protobuf.AntidotePB.FpbReplList> replList_;
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    public java.util.List<com.basho.riak.protobuf.AntidotePB.FpbReplList> getReplListList() {
+      return replList_;
+    }
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    public java.util.List<? extends com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder> 
+        getReplListOrBuilderList() {
+      return replList_;
+    }
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    public int getReplListCount() {
+      return replList_.size();
+    }
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.FpbReplList getReplList(int index) {
+      return replList_.get(index);
+    }
+    /**
+     * <code>repeated .FpbReplList repl_list = 2;</code>
+     */
+    public com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder getReplListOrBuilder(
+        int index) {
+      return replList_.get(index);
+    }
+
     private void initFields() {
       nodeParts_ = java.util.Collections.emptyList();
+      replList_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5589,6 +5810,12 @@ public final class AntidotePB {
 
       for (int i = 0; i < getNodePartsCount(); i++) {
         if (!getNodeParts(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getReplListCount(); i++) {
+        if (!getReplList(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -5603,6 +5830,9 @@ public final class AntidotePB {
       for (int i = 0; i < nodeParts_.size(); i++) {
         output.writeMessage(1, nodeParts_.get(i));
       }
+      for (int i = 0; i < replList_.size(); i++) {
+        output.writeMessage(2, replList_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5615,6 +5845,10 @@ public final class AntidotePB {
       for (int i = 0; i < nodeParts_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, nodeParts_.get(i));
+      }
+      for (int i = 0; i < replList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, replList_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5725,6 +5959,7 @@ public final class AntidotePB {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getNodePartsFieldBuilder();
+          getReplListFieldBuilder();
         }
       }
       private static Builder create() {
@@ -5738,6 +5973,12 @@ public final class AntidotePB {
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           nodePartsBuilder_.clear();
+        }
+        if (replListBuilder_ == null) {
+          replList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          replListBuilder_.clear();
         }
         return this;
       }
@@ -5774,6 +6015,15 @@ public final class AntidotePB {
           result.nodeParts_ = nodeParts_;
         } else {
           result.nodeParts_ = nodePartsBuilder_.build();
+        }
+        if (replListBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            replList_ = java.util.Collections.unmodifiableList(replList_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.replList_ = replList_;
+        } else {
+          result.replList_ = replListBuilder_.build();
         }
         onBuilt();
         return result;
@@ -5816,6 +6066,32 @@ public final class AntidotePB {
             }
           }
         }
+        if (replListBuilder_ == null) {
+          if (!other.replList_.isEmpty()) {
+            if (replList_.isEmpty()) {
+              replList_ = other.replList_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureReplListIsMutable();
+              replList_.addAll(other.replList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.replList_.isEmpty()) {
+            if (replListBuilder_.isEmpty()) {
+              replListBuilder_.dispose();
+              replListBuilder_ = null;
+              replList_ = other.replList_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              replListBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getReplListFieldBuilder() : null;
+            } else {
+              replListBuilder_.addAllMessages(other.replList_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -5823,6 +6099,12 @@ public final class AntidotePB {
       public final boolean isInitialized() {
         for (int i = 0; i < getNodePartsCount(); i++) {
           if (!getNodeParts(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getReplListCount(); i++) {
+          if (!getReplList(i).isInitialized()) {
             
             return false;
           }
@@ -6087,6 +6369,246 @@ public final class AntidotePB {
           nodeParts_ = null;
         }
         return nodePartsBuilder_;
+      }
+
+      // repeated .FpbReplList repl_list = 2;
+      private java.util.List<com.basho.riak.protobuf.AntidotePB.FpbReplList> replList_ =
+        java.util.Collections.emptyList();
+      private void ensureReplListIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          replList_ = new java.util.ArrayList<com.basho.riak.protobuf.AntidotePB.FpbReplList>(replList_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.FpbReplList, com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder, com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder> replListBuilder_;
+
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public java.util.List<com.basho.riak.protobuf.AntidotePB.FpbReplList> getReplListList() {
+        if (replListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(replList_);
+        } else {
+          return replListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public int getReplListCount() {
+        if (replListBuilder_ == null) {
+          return replList_.size();
+        } else {
+          return replListBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbReplList getReplList(int index) {
+        if (replListBuilder_ == null) {
+          return replList_.get(index);
+        } else {
+          return replListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder setReplList(
+          int index, com.basho.riak.protobuf.AntidotePB.FpbReplList value) {
+        if (replListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureReplListIsMutable();
+          replList_.set(index, value);
+          onChanged();
+        } else {
+          replListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder setReplList(
+          int index, com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder builderForValue) {
+        if (replListBuilder_ == null) {
+          ensureReplListIsMutable();
+          replList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          replListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder addReplList(com.basho.riak.protobuf.AntidotePB.FpbReplList value) {
+        if (replListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureReplListIsMutable();
+          replList_.add(value);
+          onChanged();
+        } else {
+          replListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder addReplList(
+          int index, com.basho.riak.protobuf.AntidotePB.FpbReplList value) {
+        if (replListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureReplListIsMutable();
+          replList_.add(index, value);
+          onChanged();
+        } else {
+          replListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder addReplList(
+          com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder builderForValue) {
+        if (replListBuilder_ == null) {
+          ensureReplListIsMutable();
+          replList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          replListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder addReplList(
+          int index, com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder builderForValue) {
+        if (replListBuilder_ == null) {
+          ensureReplListIsMutable();
+          replList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          replListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder addAllReplList(
+          java.lang.Iterable<? extends com.basho.riak.protobuf.AntidotePB.FpbReplList> values) {
+        if (replListBuilder_ == null) {
+          ensureReplListIsMutable();
+          super.addAll(values, replList_);
+          onChanged();
+        } else {
+          replListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder clearReplList() {
+        if (replListBuilder_ == null) {
+          replList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          replListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public Builder removeReplList(int index) {
+        if (replListBuilder_ == null) {
+          ensureReplListIsMutable();
+          replList_.remove(index);
+          onChanged();
+        } else {
+          replListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder getReplListBuilder(
+          int index) {
+        return getReplListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder getReplListOrBuilder(
+          int index) {
+        if (replListBuilder_ == null) {
+          return replList_.get(index);  } else {
+          return replListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public java.util.List<? extends com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder> 
+           getReplListOrBuilderList() {
+        if (replListBuilder_ != null) {
+          return replListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(replList_);
+        }
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder addReplListBuilder() {
+        return getReplListFieldBuilder().addBuilder(
+            com.basho.riak.protobuf.AntidotePB.FpbReplList.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder addReplListBuilder(
+          int index) {
+        return getReplListFieldBuilder().addBuilder(
+            index, com.basho.riak.protobuf.AntidotePB.FpbReplList.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .FpbReplList repl_list = 2;</code>
+       */
+      public java.util.List<com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder> 
+           getReplListBuilderList() {
+        return getReplListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.basho.riak.protobuf.AntidotePB.FpbReplList, com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder, com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder> 
+          getReplListFieldBuilder() {
+        if (replListBuilder_ == null) {
+          replListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.basho.riak.protobuf.AntidotePB.FpbReplList, com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder, com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder>(
+                  replList_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          replList_ = null;
+        }
+        return replListBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:FpbPartList)
@@ -6666,6 +7188,670 @@ public final class AntidotePB {
     }
 
     // @@protoc_insertion_point(class_scope:FpbNodePart)
+  }
+
+  public interface FpbReplListOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required string ip = 1;
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    boolean hasIp();
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    java.lang.String getIp();
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
+
+    // repeated string to_repls = 2;
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    java.util.List<java.lang.String>
+    getToReplsList();
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    int getToReplsCount();
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    java.lang.String getToRepls(int index);
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getToReplsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code FpbReplList}
+   */
+  public static final class FpbReplList extends
+      com.google.protobuf.GeneratedMessage
+      implements FpbReplListOrBuilder {
+    // Use FpbReplList.newBuilder() to construct.
+    private FpbReplList(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private FpbReplList(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final FpbReplList defaultInstance;
+    public static FpbReplList getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public FpbReplList getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FpbReplList(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              ip_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                toRepls_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              toRepls_.add(input.readBytes());
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          toRepls_ = new com.google.protobuf.UnmodifiableLazyStringList(toRepls_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_FpbReplList_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.basho.riak.protobuf.AntidotePB.internal_static_FpbReplList_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.basho.riak.protobuf.AntidotePB.FpbReplList.class, com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<FpbReplList> PARSER =
+        new com.google.protobuf.AbstractParser<FpbReplList>() {
+      public FpbReplList parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FpbReplList(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FpbReplList> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required string ip = 1;
+    public static final int IP_FIELD_NUMBER = 1;
+    private java.lang.Object ip_;
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    public boolean hasIp() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          ip_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string ip = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // repeated string to_repls = 2;
+    public static final int TO_REPLS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList toRepls_;
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    public java.util.List<java.lang.String>
+        getToReplsList() {
+      return toRepls_;
+    }
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    public int getToReplsCount() {
+      return toRepls_.size();
+    }
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    public java.lang.String getToRepls(int index) {
+      return toRepls_.get(index);
+    }
+    /**
+     * <code>repeated string to_repls = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getToReplsBytes(int index) {
+      return toRepls_.getByteString(index);
+    }
+
+    private void initFields() {
+      ip_ = "";
+      toRepls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasIp()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getIpBytes());
+      }
+      for (int i = 0; i < toRepls_.size(); i++) {
+        output.writeBytes(2, toRepls_.getByteString(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getIpBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < toRepls_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(toRepls_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getToReplsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.basho.riak.protobuf.AntidotePB.FpbReplList parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.basho.riak.protobuf.AntidotePB.FpbReplList prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code FpbReplList}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.basho.riak.protobuf.AntidotePB.FpbReplListOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbReplList_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbReplList_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.basho.riak.protobuf.AntidotePB.FpbReplList.class, com.basho.riak.protobuf.AntidotePB.FpbReplList.Builder.class);
+      }
+
+      // Construct using com.basho.riak.protobuf.AntidotePB.FpbReplList.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        ip_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        toRepls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.basho.riak.protobuf.AntidotePB.internal_static_FpbReplList_descriptor;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.FpbReplList getDefaultInstanceForType() {
+        return com.basho.riak.protobuf.AntidotePB.FpbReplList.getDefaultInstance();
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.FpbReplList build() {
+        com.basho.riak.protobuf.AntidotePB.FpbReplList result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.basho.riak.protobuf.AntidotePB.FpbReplList buildPartial() {
+        com.basho.riak.protobuf.AntidotePB.FpbReplList result = new com.basho.riak.protobuf.AntidotePB.FpbReplList(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.ip_ = ip_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          toRepls_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              toRepls_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.toRepls_ = toRepls_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.basho.riak.protobuf.AntidotePB.FpbReplList) {
+          return mergeFrom((com.basho.riak.protobuf.AntidotePB.FpbReplList)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.basho.riak.protobuf.AntidotePB.FpbReplList other) {
+        if (other == com.basho.riak.protobuf.AntidotePB.FpbReplList.getDefaultInstance()) return this;
+        if (other.hasIp()) {
+          bitField0_ |= 0x00000001;
+          ip_ = other.ip_;
+          onChanged();
+        }
+        if (!other.toRepls_.isEmpty()) {
+          if (toRepls_.isEmpty()) {
+            toRepls_ = other.toRepls_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureToReplsIsMutable();
+            toRepls_.addAll(other.toRepls_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasIp()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.basho.riak.protobuf.AntidotePB.FpbReplList parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.basho.riak.protobuf.AntidotePB.FpbReplList) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required string ip = 1;
+      private java.lang.Object ip_ = "";
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public boolean hasIp() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          ip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public Builder setIp(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public Builder clearIp() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        ip_ = getDefaultInstance().getIp();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+
+      // repeated string to_repls = 2;
+      private com.google.protobuf.LazyStringList toRepls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureToReplsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          toRepls_ = new com.google.protobuf.LazyStringArrayList(toRepls_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public java.util.List<java.lang.String>
+          getToReplsList() {
+        return java.util.Collections.unmodifiableList(toRepls_);
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public int getToReplsCount() {
+        return toRepls_.size();
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public java.lang.String getToRepls(int index) {
+        return toRepls_.get(index);
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getToReplsBytes(int index) {
+        return toRepls_.getByteString(index);
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public Builder setToRepls(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureToReplsIsMutable();
+        toRepls_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public Builder addToRepls(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureToReplsIsMutable();
+        toRepls_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public Builder addAllToRepls(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureToReplsIsMutable();
+        super.addAll(values, toRepls_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public Builder clearToRepls() {
+        toRepls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to_repls = 2;</code>
+       */
+      public Builder addToReplsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureToReplsIsMutable();
+        toRepls_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:FpbReplList)
+    }
+
+    static {
+      defaultInstance = new FpbReplList(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:FpbReplList)
   }
 
   public interface FpbUpdateOrBuilder
@@ -25271,6 +26457,11 @@ public final class AntidotePB {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_FpbNodePart_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_FpbReplList_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_FpbReplList_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_FpbUpdate_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -25368,68 +26559,71 @@ public final class AntidotePB {
       "rNodeUp\022\017\n\007node_id\030\001 \002(\r\022\024\n\014partition_id" +
       "\030\002 \002(\r\022\027\n\003ups\030\003 \003(\0132\n.FpbUpdate\"6\n\016FpbPr" +
       "epTxnResp\022\017\n\007success\030\001 \002(\010\022\023\n\013commit_tim" +
-      "e\030\002 \001(\004\"G\n\nFpbReadReq\022\026\n\004txid\030\001 \001(\0132\010.Fp",
-      "bTxId\022\013\n\003key\030\002 \002(\t\022\024\n\014partition_id\030\003 \002(\r" +
-      "\"\036\n\016FpbPartListReq\022\014\n\004noop\030\001 \001(\010\"M\n\016FpbS" +
-      "ingleUpReq\022\013\n\003key\030\001 \002(\t\022\030\n\005value\030\002 \002(\0132\t" +
-      ".FpbValue\022\024\n\014partition_id\030\003 \002(\r\"/\n\013FpbPa" +
-      "rtList\022 \n\nnode_parts\030\001 \003(\0132\014.FpbNodePart" +
-      "\"1\n\013FpbNodePart\022\n\n\002ip\030\001 \002(\t\022\026\n\016num_parti" +
-      "tions\030\002 \002(\r\"2\n\tFpbUpdate\022\013\n\003key\030\001 \002(\t\022\030\n" +
-      "\005value\030\002 \002(\0132\t.FpbValue\"2\n\tFpbTxnReq\022\r\n\005" +
-      "clock\030\001 \001(\014\022\026\n\003ops\030\002 \003(\0132\t.FpbTxnOp\"K\n\010F" +
-      "pbTxnOp\022\014\n\004type\030\001 \002(\r\022\013\n\003key\030\002 \002(\r\022\021\n\top",
-      "eration\030\003 \001(\r\022\021\n\tparameter\030\004 \001(\014\"H\n\nFpbT" +
-      "xnResp\022\017\n\007success\030\001 \002(\010\022\r\n\005clock\030\002 \001(\014\022\032" +
-      "\n\007results\030\003 \003(\0132\t.FpbValue\"(\n\007FpbTxId\022\020\n" +
-      "\010snapshot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014\"\227\003\n\010FpbValu" +
-      "e\022\021\n\005field\030\001 \002(\r:\00212\022\037\n\010customer\030\002 \001(\0132\r" +
-      ".TpccCustomer\022$\n\007clookup\030\003 \001(\0132\023.TpccCus" +
-      "tomerLookup\022\037\n\010district\030\004 \001(\0132\r.TpccDist" +
-      "rict\022\035\n\007history\030\005 \001(\0132\014.TpccHistory\022\027\n\004i" +
-      "tem\030\006 \001(\0132\t.TpccItem\022\037\n\010neworder\030\007 \001(\0132\r" +
-      ".TpccNewOrder\022\031\n\005order\030\010 \001(\0132\n.TpccOrder",
-      "\022!\n\torderline\030\t \001(\0132\016.TpccOrderLine\022\031\n\005s" +
-      "tock\030\n \001(\0132\n.TpccStock\022!\n\twarehouse\030\013 \001(" +
-      "\0132\016.TpccWarehouse\022\021\n\tstr_value\030\014 \001(\t\022\022\n\n" +
-      "long_value\030\r \001(\003\022\024\n\014double_value\030\016 \001(\001\"\313" +
-      "\002\n\014TpccCustomer\022\017\n\007c_first\030\001 \002(\t\022\020\n\010c_mi" +
-      "ddle\030\002 \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021\n\tc_street1\030" +
-      "\004 \002(\t\022\021\n\tc_street2\030\005 \002(\t\022\016\n\006c_city\030\006 \002(\t" +
-      "\022\017\n\007c_state\030\007 \002(\t\022\r\n\005c_zip\030\010 \002(\t\022\017\n\007c_ph" +
-      "one\030\t \002(\t\022\017\n\007c_since\030\n \002(\004\022\020\n\010c_credit\030\013" +
-      " \002(\t\022\024\n\014c_credit_lim\030\014 \002(\001\022\022\n\nc_discount",
-      "\030\r \002(\001\022\025\n\rc_ytd_payment\030\016 \002(\001\022\025\n\rc_payme" +
-      "nt_cnt\030\017 \002(\005\022\026\n\016c_delivery_cnt\030\020 \002(\005\022\016\n\006" +
-      "c_data\030\021 \002(\t\"Q\n\022TpccCustomerLookup\022\016\n\006c_" +
-      "w_id\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016\n\006c_last\030\003 \002" +
-      "(\t\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDistrict\022\016\n\006d_na" +
-      "me\030\001 \002(\t\022\021\n\td_street1\030\002 \002(\t\022\021\n\td_street2" +
-      "\030\003 \002(\t\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_state\030\005 \002(\t\022" +
-      "\r\n\005d_zip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(\001\022\023\n\013d_next_" +
-      "o_id\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n\006h_c_id\030\001 \002(" +
-      "\004\"L\n\010TpccItem\022\017\n\007i_im_id\030\001 \002(\004\022\016\n\006i_name",
-      "\030\002 \002(\t\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i_data\030\004 \002(\t\"" +
-      "A\n\014TpccNewOrder\022\017\n\007no_o_id\030\001 \002(\004\022\017\n\007no_d" +
-      "_id\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k\n\tTpccOrder\022" +
-      "\016\n\006o_c_id\030\001 \002(\004\022\021\n\to_entry_d\030\002 \002(\004\022\024\n\014o_" +
-      "carrier_id\030\003 \002(\004\022\020\n\010o_ol_cnt\030\004 \002(\005\022\023\n\013o_" +
-      "all_local\030\005 \002(\005\"\215\001\n\rTpccOrderLine\022\017\n\007ol_" +
-      "i_id\030\001 \002(\004\022\026\n\016ol_supply_w_id\030\002 \002(\004\022\025\n\rol" +
-      "_delivery_d\030\003 \002(\004\022\023\n\013ol_quantity\030\004 \002(\004\022\021" +
-      "\n\tol_amount\030\005 \002(\001\022\024\n\014ol_dist_info\030\006 \002(\t\"" +
-      "\247\002\n\tTpccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts_d",
-      "ist_01\030\002 \002(\t\022\021\n\ts_dist_02\030\003 \002(\t\022\021\n\ts_dis" +
-      "t_03\030\004 \002(\t\022\021\n\ts_dist_04\030\005 \002(\t\022\021\n\ts_dist_" +
-      "05\030\006 \002(\t\022\021\n\ts_dist_06\030\007 \002(\t\022\021\n\ts_dist_07" +
-      "\030\010 \002(\t\022\021\n\ts_dist_08\030\t \002(\t\022\021\n\ts_dist_09\030\n" +
-      " \002(\t\022\021\n\ts_dist_10\030\013 \002(\t\022\r\n\005s_ytd\030\014 \002(\004\022\023" +
-      "\n\013s_order_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 \002(" +
-      "\005\022\016\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w" +
-      "_name\030\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_stre" +
-      "et2\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002" +
-      "(\t\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B\'\n\027com.",
-      "basho.riak.protobufB\nAntidotePBH\001"
+      "e\030\002 \001(\004\"[\n\nFpbReadReq\022\026\n\004txid\030\001 \001(\0132\010.Fp",
+      "bTxId\022\013\n\003key\030\002 \002(\t\022\024\n\014partition_id\030\003 \001(\r" +
+      "\022\022\n\nreplica_ip\030\004 \001(\t\"\036\n\016FpbPartListReq\022\014" +
+      "\n\004noop\030\001 \001(\010\"M\n\016FpbSingleUpReq\022\013\n\003key\030\001 " +
+      "\002(\t\022\030\n\005value\030\002 \002(\0132\t.FpbValue\022\024\n\014partiti" +
+      "on_id\030\003 \002(\r\"P\n\013FpbPartList\022 \n\nnode_parts" +
+      "\030\001 \003(\0132\014.FpbNodePart\022\037\n\trepl_list\030\002 \003(\0132" +
+      "\014.FpbReplList\"1\n\013FpbNodePart\022\n\n\002ip\030\001 \002(\t" +
+      "\022\026\n\016num_partitions\030\002 \002(\r\"+\n\013FpbReplList\022" +
+      "\n\n\002ip\030\001 \002(\t\022\020\n\010to_repls\030\002 \003(\t\"2\n\tFpbUpda" +
+      "te\022\013\n\003key\030\001 \002(\t\022\030\n\005value\030\002 \002(\0132\t.FpbValu",
+      "e\"2\n\tFpbTxnReq\022\r\n\005clock\030\001 \001(\014\022\026\n\003ops\030\002 \003" +
+      "(\0132\t.FpbTxnOp\"K\n\010FpbTxnOp\022\014\n\004type\030\001 \002(\r\022" +
+      "\013\n\003key\030\002 \002(\r\022\021\n\toperation\030\003 \001(\r\022\021\n\tparam" +
+      "eter\030\004 \001(\014\"H\n\nFpbTxnResp\022\017\n\007success\030\001 \002(" +
+      "\010\022\r\n\005clock\030\002 \001(\014\022\032\n\007results\030\003 \003(\0132\t.FpbV" +
+      "alue\"(\n\007FpbTxId\022\020\n\010snapshot\030\001 \002(\004\022\013\n\003pid" +
+      "\030\002 \002(\014\"\227\003\n\010FpbValue\022\021\n\005field\030\001 \002(\r:\00212\022\037" +
+      "\n\010customer\030\002 \001(\0132\r.TpccCustomer\022$\n\007clook" +
+      "up\030\003 \001(\0132\023.TpccCustomerLookup\022\037\n\010distric" +
+      "t\030\004 \001(\0132\r.TpccDistrict\022\035\n\007history\030\005 \001(\0132",
+      "\014.TpccHistory\022\027\n\004item\030\006 \001(\0132\t.TpccItem\022\037" +
+      "\n\010neworder\030\007 \001(\0132\r.TpccNewOrder\022\031\n\005order" +
+      "\030\010 \001(\0132\n.TpccOrder\022!\n\torderline\030\t \001(\0132\016." +
+      "TpccOrderLine\022\031\n\005stock\030\n \001(\0132\n.TpccStock" +
+      "\022!\n\twarehouse\030\013 \001(\0132\016.TpccWarehouse\022\021\n\ts" +
+      "tr_value\030\014 \001(\t\022\022\n\nlong_value\030\r \001(\003\022\024\n\014do" +
+      "uble_value\030\016 \001(\001\"\313\002\n\014TpccCustomer\022\017\n\007c_f" +
+      "irst\030\001 \002(\t\022\020\n\010c_middle\030\002 \002(\t\022\016\n\006c_last\030\003" +
+      " \002(\t\022\021\n\tc_street1\030\004 \002(\t\022\021\n\tc_street2\030\005 \002" +
+      "(\t\022\016\n\006c_city\030\006 \002(\t\022\017\n\007c_state\030\007 \002(\t\022\r\n\005c",
+      "_zip\030\010 \002(\t\022\017\n\007c_phone\030\t \002(\t\022\017\n\007c_since\030\n" +
+      " \002(\004\022\020\n\010c_credit\030\013 \002(\t\022\024\n\014c_credit_lim\030\014" +
+      " \002(\001\022\022\n\nc_discount\030\r \002(\001\022\025\n\rc_ytd_paymen" +
+      "t\030\016 \002(\001\022\025\n\rc_payment_cnt\030\017 \002(\005\022\026\n\016c_deli" +
+      "very_cnt\030\020 \002(\005\022\016\n\006c_data\030\021 \002(\t\"Q\n\022TpccCu" +
+      "stomerLookup\022\016\n\006c_w_id\030\001 \002(\004\022\016\n\006c_d_id\030\002" +
+      " \002(\004\022\016\n\006c_last\030\003 \002(\t\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014Tp" +
+      "ccDistrict\022\016\n\006d_name\030\001 \002(\t\022\021\n\td_street1\030" +
+      "\002 \002(\t\022\021\n\td_street2\030\003 \002(\t\022\016\n\006d_city\030\004 \002(\t" +
+      "\022\017\n\007d_state\030\005 \002(\t\022\r\n\005d_zip\030\006 \002(\t\022\r\n\005d_ta",
+      "x\030\007 \002(\001\022\023\n\013d_next_o_id\030\010 \002(\004\"\035\n\013TpccHist" +
+      "ory\022\016\n\006h_c_id\030\001 \002(\004\"L\n\010TpccItem\022\017\n\007i_im_" +
+      "id\030\001 \002(\004\022\016\n\006i_name\030\002 \002(\t\022\017\n\007i_price\030\003 \002(" +
+      "\001\022\016\n\006i_data\030\004 \002(\t\"A\n\014TpccNewOrder\022\017\n\007no_" +
+      "o_id\030\001 \002(\004\022\017\n\007no_d_id\030\002 \002(\004\022\017\n\007no_w_id\030\003" +
+      " \002(\004\"k\n\tTpccOrder\022\016\n\006o_c_id\030\001 \002(\004\022\021\n\to_e" +
+      "ntry_d\030\002 \002(\004\022\024\n\014o_carrier_id\030\003 \002(\004\022\020\n\010o_" +
+      "ol_cnt\030\004 \002(\005\022\023\n\013o_all_local\030\005 \002(\005\"\215\001\n\rTp" +
+      "ccOrderLine\022\017\n\007ol_i_id\030\001 \002(\004\022\026\n\016ol_suppl" +
+      "y_w_id\030\002 \002(\004\022\025\n\rol_delivery_d\030\003 \002(\004\022\023\n\013o",
+      "l_quantity\030\004 \002(\004\022\021\n\tol_amount\030\005 \002(\001\022\024\n\014o" +
+      "l_dist_info\030\006 \002(\t\"\247\002\n\tTpccStock\022\022\n\ns_qua" +
+      "ntity\030\001 \002(\004\022\021\n\ts_dist_01\030\002 \002(\t\022\021\n\ts_dist" +
+      "_02\030\003 \002(\t\022\021\n\ts_dist_03\030\004 \002(\t\022\021\n\ts_dist_0" +
+      "4\030\005 \002(\t\022\021\n\ts_dist_05\030\006 \002(\t\022\021\n\ts_dist_06\030" +
+      "\007 \002(\t\022\021\n\ts_dist_07\030\010 \002(\t\022\021\n\ts_dist_08\030\t " +
+      "\002(\t\022\021\n\ts_dist_09\030\n \002(\t\022\021\n\ts_dist_10\030\013 \002(" +
+      "\t\022\r\n\005s_ytd\030\014 \002(\004\022\023\n\013s_order_cnt\030\r \002(\005\022\024\n" +
+      "\014s_remote_cnt\030\016 \002(\005\022\016\n\006s_data\030\017 \002(\t\"\204\001\n\r" +
+      "TpccWarehouse\022\016\n\006w_name\030\001 \002(\t\022\021\n\tw_stree",
+      "t1\030\002 \002(\t\022\021\n\tw_street2\030\003 \002(\t\022\016\n\006w_city\030\004 " +
+      "\002(\t\022\017\n\007w_state\030\005 \002(\t\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w" +
+      "_tax\030\007 \002(\001B%\n\027com.basho.riak.protobufB\nA" +
+      "ntidotePB"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -25471,7 +26665,7 @@ public final class AntidotePB {
           internal_static_FpbReadReq_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbReadReq_descriptor,
-              new java.lang.String[] { "Txid", "Key", "PartitionId", });
+              new java.lang.String[] { "Txid", "Key", "PartitionId", "ReplicaIp", });
           internal_static_FpbPartListReq_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_FpbPartListReq_fieldAccessorTable = new
@@ -25489,105 +26683,111 @@ public final class AntidotePB {
           internal_static_FpbPartList_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbPartList_descriptor,
-              new java.lang.String[] { "NodeParts", });
+              new java.lang.String[] { "NodeParts", "ReplList", });
           internal_static_FpbNodePart_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_FpbNodePart_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbNodePart_descriptor,
               new java.lang.String[] { "Ip", "NumPartitions", });
-          internal_static_FpbUpdate_descriptor =
+          internal_static_FpbReplList_descriptor =
             getDescriptor().getMessageTypes().get(10);
+          internal_static_FpbReplList_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_FpbReplList_descriptor,
+              new java.lang.String[] { "Ip", "ToRepls", });
+          internal_static_FpbUpdate_descriptor =
+            getDescriptor().getMessageTypes().get(11);
           internal_static_FpbUpdate_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbUpdate_descriptor,
               new java.lang.String[] { "Key", "Value", });
           internal_static_FpbTxnReq_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_FpbTxnReq_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbTxnReq_descriptor,
               new java.lang.String[] { "Clock", "Ops", });
           internal_static_FpbTxnOp_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_FpbTxnOp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbTxnOp_descriptor,
               new java.lang.String[] { "Type", "Key", "Operation", "Parameter", });
           internal_static_FpbTxnResp_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_FpbTxnResp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbTxnResp_descriptor,
               new java.lang.String[] { "Success", "Clock", "Results", });
           internal_static_FpbTxId_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_FpbTxId_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbTxId_descriptor,
               new java.lang.String[] { "Snapshot", "Pid", });
           internal_static_FpbValue_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_FpbValue_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbValue_descriptor,
               new java.lang.String[] { "Field", "Customer", "Clookup", "District", "History", "Item", "Neworder", "Order", "Orderline", "Stock", "Warehouse", "StrValue", "LongValue", "DoubleValue", });
           internal_static_TpccCustomer_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_TpccCustomer_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccCustomer_descriptor,
               new java.lang.String[] { "CFirst", "CMiddle", "CLast", "CStreet1", "CStreet2", "CCity", "CState", "CZip", "CPhone", "CSince", "CCredit", "CCreditLim", "CDiscount", "CYtdPayment", "CPaymentCnt", "CDeliveryCnt", "CData", });
           internal_static_TpccCustomerLookup_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_TpccCustomerLookup_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccCustomerLookup_descriptor,
               new java.lang.String[] { "CWId", "CDId", "CLast", "Ids", });
           internal_static_TpccDistrict_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_TpccDistrict_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccDistrict_descriptor,
               new java.lang.String[] { "DName", "DStreet1", "DStreet2", "DCity", "DState", "DZip", "DTax", "DNextOId", });
           internal_static_TpccHistory_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_TpccHistory_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccHistory_descriptor,
               new java.lang.String[] { "HCId", });
           internal_static_TpccItem_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_TpccItem_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccItem_descriptor,
               new java.lang.String[] { "IImId", "IName", "IPrice", "IData", });
           internal_static_TpccNewOrder_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_TpccNewOrder_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccNewOrder_descriptor,
               new java.lang.String[] { "NoOId", "NoDId", "NoWId", });
           internal_static_TpccOrder_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_TpccOrder_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccOrder_descriptor,
               new java.lang.String[] { "OCId", "OEntryD", "OCarrierId", "OOlCnt", "OAllLocal", });
           internal_static_TpccOrderLine_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_TpccOrderLine_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccOrderLine_descriptor,
               new java.lang.String[] { "OlIId", "OlSupplyWId", "OlDeliveryD", "OlQuantity", "OlAmount", "OlDistInfo", });
           internal_static_TpccStock_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_TpccStock_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccStock_descriptor,
               new java.lang.String[] { "SQuantity", "SDist01", "SDist02", "SDist03", "SDist04", "SDist05", "SDist06", "SDist07", "SDist08", "SDist09", "SDist10", "SYtd", "SOrderCnt", "SRemoteCnt", "SData", });
           internal_static_TpccWarehouse_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_TpccWarehouse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TpccWarehouse_descriptor,
