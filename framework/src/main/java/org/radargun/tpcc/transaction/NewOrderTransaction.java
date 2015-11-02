@@ -54,10 +54,10 @@ public class NewOrderTransaction implements TpccTransaction {
       {
     	 int randNum = (int)tpccTools.randomNumber(1, 100);
     	 //Read local master object for 50% 
-         if (randNum < TpccTools.ACCESS_MASTER_RATIO) 
+         if (randNum <= TpccTools.ACCESS_MASTER_RATIO) 
             supplierWarehouseIDs[i] = this.warehouseID;
          //Read local replicated but slave object for 40%
-         else if(randNum < TpccTools.ACCESS_MASTER_RATIO + TpccTools.ACCESS_SLAVE_RATIO)
+         else if(randNum <= TpccTools.ACCESS_MASTER_RATIO + TpccTools.ACCESS_SLAVE_RATIO)
         	supplierWarehouseIDs[i] = cacheWrapper.getRandomReplicaId()+1;
          else //see clause 2.4.1.5 (dot 2)
          {
