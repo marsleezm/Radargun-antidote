@@ -242,4 +242,15 @@ public class AntidoteWrapper implements CacheWrapper {
 			tms.add(new TransactionManager());
 		}
 	}
+
+	@Override
+	public int getRandomReplicaId() {
+		return DCInfoManager.getRandomRepIndex();
+	}
+
+	@Override
+	public int getRandomNonRepId() {
+		// TODO Auto-generated method stub
+		return DCInfoManager.getRandomNonRepIndex();
+	}
 }

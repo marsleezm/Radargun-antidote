@@ -1,7 +1,6 @@
 package org.radargun.tpcc.transaction;
 
 import org.radargun.CacheWrapper;
-import org.radargun.cachewrappers.DCInfoManager;
 import org.radargun.tpcc.ElementNotFoundException;
 import org.radargun.tpcc.TpccTools;
 import org.radargun.tpcc.domain.Customer;
@@ -34,7 +33,7 @@ public class NewOrderTransaction implements TpccTransaction {
    private final long[] orderQuantities;
    private static List<Pair> ranges;
 
-   public NewOrderTransaction(TpccTools tpccTools, int warehouseID) {
+   public NewOrderTransaction(CacheWrapper cacheWrapper, TpccTools tpccTools, int warehouseID) {
 
       if (warehouseID <= 0) {
          this.warehouseID = tpccTools.randomNumber(1, TpccTools.NB_WAREHOUSES);
@@ -58,10 +57,10 @@ public class NewOrderTransaction implements TpccTransaction {
             supplierWarehouseIDs[i] = this.warehouseID;
          //Read local replicated but slave object for 40%
          else if(tpccTools.randomNumber(1, 100) > 20)
-        	supplierWarehouseIDs[i] = DCInfoManager.getRandomRepIndex();
+        	supplierWarehouseIDs[i] = cacheWrapper.getRandomReplicaId();
          else //see clause 2.4.1.5 (dot 2)
          {
-        	supplierWarehouseIDs[i] = DCInfoManager.getRandomNonRepIndex();
+        	supplierWarehouseIDs[i] = cacheWrapper.getRandomNonRepId();
             allLocal = 0;// see clause 2.4.2.2 (dot 6)
          }
          

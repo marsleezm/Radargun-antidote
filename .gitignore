@@ -2,6 +2,8 @@
 .svn
 # ignore Maven generated target folders
 target
+# ignore class file
+.class
 # ignore eclipse files
 .project
 .classpath

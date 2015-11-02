@@ -2,6 +2,7 @@ package org.radargun.tpcc;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.radargun.CacheWrapper;
 import org.radargun.tpcc.transaction.NewOrderTransaction;
 import org.radargun.tpcc.transaction.OrderStatusTransaction;
 import org.radargun.tpcc.transaction.PaymentTransaction;
@@ -29,12 +30,15 @@ public class TpccTerminal {
    private int localWarehouseID;
 
    private final TpccTools tpccTools;
+   
+   private CacheWrapper cacheWrapper;
 
 
-   public TpccTerminal(double paymentWeight, double orderStatusWeight, int indexNode, int localWarehouseID) {
+   public TpccTerminal(CacheWrapper cacheWrapper, double paymentWeight, double orderStatusWeight, int indexNode, int localWarehouseID) {
       this.paymentWeight = paymentWeight;
       this.orderStatusWeight = orderStatusWeight;
       this.indexNode = indexNode;
+      this.cacheWrapper = cacheWrapper;
       this.localWarehouseID = localWarehouseID;
       NewOrderTransaction.initRange();
       tpccTools = TpccTools.newInstance();
@@ -47,7 +51,7 @@ public class TpccTerminal {
          case ORDER_STATUS:
             return new OrderStatusTransaction(tpccTools, localWarehouseID);
          case NEW_ORDER:
-            return new NewOrderTransaction(tpccTools, localWarehouseID);
+            return new NewOrderTransaction(cacheWrapper, tpccTools, localWarehouseID);
          case DELIVERY:
          case STOCK_LEVEL:
          default:

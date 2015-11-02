@@ -152,7 +152,7 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
          producers = new Producer[producerRates.length];
 
          for (int i = 0; i < producerRates.length; ++i) {
-            producers[i] = new Producer(producerRates[i], i);
+            producers[i] = new Producer(cacheWrapper, producerRates[i], i);
          }
       } else {
     	 log.info("Arrival rate is zero.");
@@ -548,13 +548,13 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       private boolean active = true;
 
       public Stressor(int localWarehouseID, int threadIndex, int nodeIndex, double arrivalRate,
-                      double paymentWeight, double orderStatusWeight) {
+                      double paymentWeight, double orderStatusWeight, CacheWrapper cacheWrapper) {
          super("Stressor-" + threadIndex);
     	 log.info("Creating stressor, localWarehouseID:"+localWarehouseID+", threadIndex:"+ threadIndex
     			 +", nodeIndex:"+nodeIndex+", arrivalRate:"+arrivalRate+", paymentWeight:"+paymentWeight);
          this.threadIndex = threadIndex;
          this.arrivalRate = arrivalRate;
-         this.terminal = new TpccTerminal(paymentWeight, orderStatusWeight, nodeIndex, localWarehouseID);
+         this.terminal = new TpccTerminal(cacheWrapper, paymentWeight, orderStatusWeight, nodeIndex, localWarehouseID);
       }
 
       @Override
@@ -828,11 +828,11 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       private final TpccTerminal terminal;
       private boolean running = true;
 
-      public Producer(ProducerRate rate, int id) {
+      public Producer(CacheWrapper cacheWrapper, ProducerRate rate, int id) {
          super("Producer-" + id);
          setDaemon(true);
          this.rate = rate;
-         this.terminal = new TpccTerminal(paymentWeight, orderStatusWeight, nodeIndex, 0);
+         this.terminal = new TpccTerminal(cacheWrapper, paymentWeight, orderStatusWeight, nodeIndex, 0);
       }
 
       public void run() {
@@ -1003,7 +1003,8 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
    private Stressor createStressor(int threadIndex) {
       int localWarehouse = getWarehouseForThread(threadIndex);
       log.info("~~~~~~~~~~~~~~~~~local warehouse: " + localWarehouse + " ~~~~~~~~~~~~~~~~~~");
-      return new Stressor(localWarehouse, threadIndex, nodeIndex, arrivalRate, paymentWeight,orderStatusWeight);
+      return new Stressor(localWarehouse, threadIndex, 
+    		  nodeIndex, arrivalRate, paymentWeight,orderStatusWeight, cacheWrapper);
    }
 
    private void calculateLocalWarehouses() {
