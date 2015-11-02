@@ -80,6 +80,16 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
     * percentage of Order Status transactions
     */
    private int orderStatusWeight = 5;
+   
+   /**
+    * percentage of Payment transactions
+    */
+   private int accessMasterWeight = 50;
+
+   /**
+    * percentage of Order Status transactions
+    */
+   private int accessSlaveWeight = 40;
 
    /**
     * if true, each node will pick a warehouse and all transactions will work over that warehouse. The warehouses are
@@ -238,6 +248,10 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
          TpccTools.C_C_ID = (Long) cacheWrapper.get(null, "C_C_ID");
 
          TpccTools.C_OL_I_ID = (Long) cacheWrapper.get(null, "C_OL_ID");
+         
+         TpccTools.ACCESS_MASTER_RATIO = this.accessMasterWeight;
+         
+         TpccTools.ACCESS_SLAVE_RATIO = this.accessSlaveWeight;
 
       } catch (Exception e) {
          log.error("Error", e);
@@ -914,6 +928,14 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
       this.orderStatusWeight = orderStatusWeight;
    }
 
+   public void setAccessMasterWeight(int accessMasterWeight) {
+	  this.accessMasterWeight = accessMasterWeight;
+   }
+   
+   public void setAccessSlaveWeight(int accessSlaveWeight) {
+	   this.accessSlaveWeight = accessSlaveWeight;
+   }
+   
    public void setAccessSameWarehouse(boolean accessSameWarehouse) {
       this.accessSameWarehouse = accessSameWarehouse;
    }
@@ -1107,6 +1129,14 @@ public class TpccStressor extends AbstractCacheWrapperStressor {
 
    public synchronized final int getOrderStatusWeight() {
       return orderStatusWeight;
+   }
+   
+   public synchronized final int getAccessMasterWeight() {
+	  return accessMasterWeight;
+   }
+
+   public synchronized final int getAccessSlaveWeight() {
+	  return accessSlaveWeight;
    }
 
    public synchronized final void stopBenchmark() {

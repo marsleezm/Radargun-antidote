@@ -128,8 +128,14 @@ public class DCInfoManager {
 			}
 			
 			for(int i=0; i< nodeNames.size(); ++i)
+			{
+				log.info("Node name is "+nodeNames.get(i));
 				if(i != nodeIndex && myRepSet.contains(i) == false)
+				{
+					log.info(nodeNames.get(i)+" added into set.");
 					nonRepList.add(i);
+				}
+			}
 			
 			tempConnection.close();
 		} catch (IOException e) {
@@ -176,7 +182,7 @@ public class DCInfoManager {
 	}
 	
 	public static Integer getRandomNonRepIndex(){
-		if( nonRepList.size() == 0)
+		if( nonRepList.size() != 0)
 		{
 			int length = nonRepList.size();
 			int randomIndex =(int)(length*Math.random());

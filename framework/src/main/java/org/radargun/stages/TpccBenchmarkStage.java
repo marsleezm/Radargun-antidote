@@ -25,6 +25,11 @@ import static org.radargun.utils.Utils.numberFormat;
  *       - arrivalRate : if the value is greater than 0.0, the "open system" mode is active and the parameter represents the arrival rate (in transactions per second) of a job (a transaction to be executed) to the system; otherwise the "closed system" mode is active: this means that each thread generates and executes a new transaction in an iteration as soon as it has completed the previous iteration.
  *       - paymentWeight : percentage of Payment transactions.
  *       - orderStatusWeight : percentage of Order Status transactions.
+ *       
+ *       For NewOrder Only right now
+ *       - accessMasterWeight: percentage of reading/updating items that the local node is the master.
+ *       - accessSlaveWeight: percentage of reading/updating items that are replicated locally(but I am not master).
+ *    	 (100-accessMasterWeight-accessSlaveWeight) denotes reading/updating non-replicated objects. 
  * </pre>
  *
  * @author peluso@gsd.inesc-id.pt , peluso@dis.uniroma1.it
@@ -61,6 +66,16 @@ public class TpccBenchmarkStage extends AbstractDistStage {
     * percentage of Order Status transactions
     */
    private int orderStatusWeight = 5;
+   
+   /**
+    * percentage of NewOrder transaction to access items that local node is master.
+    */
+   private int accessMasterWeight = 50;
+
+   /**
+    * percentage of NewOrder transaction to access items that local node is slave.
+    */
+   private int accessSlaveWeight = 40;
 
    /**
     * if true, each node will pick a warehouse and all transactions will work over that warehouse. The warehouses are
@@ -92,7 +107,8 @@ public class TpccBenchmarkStage extends AbstractDistStage {
       }
 
       log.info("Starting TpccBenchmarkStage: " + this.toString()+", num slaves are"+getActiveSlaveCount()
-    		  +", number of threads are"+this.numOfThreads);
+    		  +", number of threads are"+this.numOfThreads+
+    		  ", access master weight is "+accessMasterWeight+", access slave weight is "+accessSlaveWeight);
 
       cacheWrapper.setParallelism(numOfThreads);
       tpccStressor = new TpccStressor();
@@ -103,6 +119,8 @@ public class TpccBenchmarkStage extends AbstractDistStage {
       tpccStressor.setArrivalRate(this.arrivalRate);
       tpccStressor.setPaymentWeight(this.paymentWeight);
       tpccStressor.setOrderStatusWeight(this.orderStatusWeight);
+      tpccStressor.setAccessMasterWeight(this.accessMasterWeight);
+      tpccStressor.setAccessSlaveWeight(this.accessSlaveWeight);
       tpccStressor.setAccessSameWarehouse(this.accessSameWarehouse);
       tpccStressor.setNumberOfItemsInterval(numberOfItemsInterval);
       tpccStressor.setStatsSamplingInterval(statsSamplingInterval);
@@ -169,6 +187,15 @@ public class TpccBenchmarkStage extends AbstractDistStage {
       this.arrivalRate = arrivalRate;
    }
 
+   //What I added. @Li
+   public void setAccessMasterWeight(int accessMasterWeight) {
+	      this.accessMasterWeight = accessMasterWeight;
+   }
+   
+   public void setAccessSlaveWeight(int accessSlaveWeight) {
+	      this.accessSlaveWeight = accessSlaveWeight;
+   }
+   
    public void setPaymentWeight(int paymentWeight) {
       this.paymentWeight = paymentWeight;
    }
@@ -243,6 +270,16 @@ public class TpccBenchmarkStage extends AbstractDistStage {
    @ManagedAttribute(description = "Returns the Payment transaction type percentage", writable = false)
    public final int getPaymentWeight() {
       return tpccStressor.getPaymentWeight();
+   }
+
+   @ManagedAttribute(description = "Returns the ratio of access master items", writable = false)
+   public final int getAccessMasterWeight() {
+      return tpccStressor.getAccessMasterWeight();
+   }
+   
+   @ManagedAttribute(description = "Returns the ratio of access slave items", writable = false)
+   public final int getAccessSlaveWeight() {
+      return tpccStressor.getAccessSlaveWeight();
    }
 
    @ManagedAttribute(description = "Returns the Order Status transaction type percentage", writable = false)

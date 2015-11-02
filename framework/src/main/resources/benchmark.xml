@@ -33,8 +33,10 @@
             perThreadSimulTime="60"
             arrivalRate="0"
             accessSameWarehouse="true"
-            paymentWeight="45"
-            orderStatusWeight="5"/>
+            accessMasterWeight="50"
+            accessSlaveWeight="40"
+            paymentWeight="0"
+            orderStatusWeight="0"/>
       <CacheSize
             statName="CACHE_SIZE_AFTER_BENCH" />
       <CsvReportGeneration/>

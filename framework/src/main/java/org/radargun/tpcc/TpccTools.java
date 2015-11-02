@@ -37,6 +37,10 @@ public final class TpccTools {
 
    public final static int S_DATA_MINN = 26;
 
+   public static int ACCESS_MASTER_RATIO = 50;
+   
+   public static int ACCESS_SLAVE_RATIO = 40;
+   
    public static int NB_WAREHOUSES = 1;
 
    public static long A_C_LAST = 255L;
