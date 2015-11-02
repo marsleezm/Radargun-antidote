@@ -89,4 +89,3 @@ echo " ... Done!  Please check /etc/hosts to verify that slaves have been proper
 echo ""
 echo ""
 exit 0
-

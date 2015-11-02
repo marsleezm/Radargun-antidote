@@ -11,6 +11,7 @@ message FpbPrepTxnReq {
     required FpbTxId txid = 1;
     optional FpbNodeUps local_updates = 2;
     optional FpbNodeUps remote_updates = 3;
+    required uint32 threadid = 4;
 }
 
 message FpbNodeUps {
@@ -18,7 +19,7 @@ message FpbNodeUps {
 }
 
 message FpbPerNodeUp {
-    required bytes node = 1;
+    required uint32 node_id = 1;
     required uint32 partition_id = 2;
     repeated FpbUpdate ups = 3; 
 }
@@ -30,8 +31,9 @@ message FpbPrepTxnResp {
 
 message FpbReadReq {
     optional FpbTxId txid = 1;
-    required bytes key = 2;
-    required uint32 partition_id = 3;
+    required string key = 2;
+    optional uint32 partition_id = 3;
+    optional string replica_ip = 4;
 }
 
 message FpbPartListReq {
@@ -39,22 +41,28 @@ message FpbPartListReq {
 }
 
 message FpbSingleUpReq {
-    required bytes key = 1;
+    required string key = 1;
     required FpbValue value = 2;
     required uint32 partition_id = 3;
 }
 
 message FpbPartList {
     repeated FpbNodePart node_parts = 1;
+    repeated FpbReplList repl_list = 2;
 }
 
 message FpbNodePart {
-    required bytes ip = 1;
+    required string ip = 1;
     required uint32 num_partitions = 2 ;
 }
 
+message FpbReplList {
+    required string ip = 1;
+    repeated string to_repls = 2 ;
+}
+
 message FpbUpdate {
-    required bytes key = 1;
+    required string key = 1;
     required FpbValue value = 2;
 }
 
@@ -95,43 +103,45 @@ message FpbValue{
     optional TpccOrderLine orderline = 9;
     optional TpccStock stock = 10;
     optional TpccWarehouse warehouse = 11; 
-    optional bytes value = 12;
+    optional string str_value = 12;
+    optional int64 long_value = 13;
+    optional double double_value = 14;
 }
 
 message TpccCustomer{
-   required bytes c_first = 1;
-   required bytes c_middle = 2;
-   required bytes c_last = 3;
-   required bytes c_street1 = 4;
-   required bytes c_street2 = 5;
-   required bytes c_city = 6;
-   required bytes c_state = 7;
-   required bytes c_zip = 8;
-   required bytes c_phone = 9;
+   required string c_first = 1;
+   required string c_middle = 2;
+   required string c_last = 3;
+   required string c_street1 = 4;
+   required string c_street2 = 5;
+   required string c_city = 6;
+   required string c_state = 7;
+   required string c_zip = 8;
+   required string c_phone = 9;
    required uint64 c_since = 10;
-   required bytes c_credit = 11;
+   required string c_credit = 11;
    required double c_credit_lim = 12;
    required double c_discount = 13;
    required double c_ytd_payment = 14;
    required int32 c_payment_cnt = 15;
    required int32 c_delivery_cnt = 16;
-   required bytes c_data = 17;
+   required string c_data = 17;
 }
 
 message TpccCustomerLookup {
    required uint64 c_w_id = 1;
    required uint64 c_d_id = 2;
-   required bytes c_last = 3;
+   required string c_last = 3;
    repeated int64 ids = 4;
 }
 
 message TpccDistrict {
-   required bytes d_name  = 1;
-   required bytes d_street1  = 2;
-   required bytes d_street2  = 3;
-   required bytes d_city  = 4;
-   required bytes d_state  = 5;
-   required bytes d_zip  = 6;
+   required string d_name  = 1;
+   required string d_street1  = 2;
+   required string d_street2  = 3;
+   required string d_city  = 4;
+   required string d_state  = 5;
+   required string d_zip  = 6;
    required double d_tax  = 7;
    required uint64 d_next_o_id  = 8;
 }
@@ -142,9 +152,9 @@ message TpccHistory {
 
 message TpccItem {
    required uint64 i_im_id  =  1;
-   required bytes i_name  =  2;
+   required string i_name  =  2;
    required double i_price  =  3;
-   required bytes i_data  =  4;
+   required string i_data  =  4;
 }
 
 message TpccNewOrder {
@@ -162,42 +172,38 @@ message TpccOrder {
 }
 
 message TpccOrderLine {
-   required uint64 ol_o_id  =  1;
-   required uint64 ol_d_id  =  2;
-   required uint64 ol_w_id  =  3;
-   required uint64 ol_number  =  4;
-   required uint64 ol_i_id  =  5;
-   required uint64 ol_supply_w_id  =  6;
-   required uint64 ol_delivery_d  =  7;
-   required uint64 ol_quantity  =  8;
-   required double ol_amount  =  9;
-   required bytes ol_dist_info  = 10;
+   required uint64 ol_i_id  =  1;
+   required uint64 ol_supply_w_id  =  2;
+   required uint64 ol_delivery_d  =  3;
+   required uint64 ol_quantity  =  4;
+   required double ol_amount  =  5;
+   required string ol_dist_info  = 6;
 }
 
 message TpccStock {
    required uint64 s_quantity  =  1;
-   required bytes s_dist_01  =  2;
-   required bytes s_dist_02  =  3;
-   required bytes s_dist_03  =  4;
-   required bytes s_dist_04  =  5;
-   required bytes s_dist_05  =  6;
-   required bytes s_dist_06  =  7;
-   required bytes s_dist_07  = 8;
-   required bytes s_dist_08  = 9;
-   required bytes s_dist_09  = 10;
-   required bytes s_dist_10  = 11;
+   required string s_dist_01  =  2;
+   required string s_dist_02  =  3;
+   required string s_dist_03  =  4;
+   required string s_dist_04  =  5;
+   required string s_dist_05  =  6;
+   required string s_dist_06  =  7;
+   required string s_dist_07  = 8;
+   required string s_dist_08  = 9;
+   required string s_dist_09  = 10;
+   required string s_dist_10  = 11;
    required uint64 s_ytd  = 12;
    required int32 s_order_cnt  = 13;
    required int32 s_remote_cnt  = 14;
-   required bytes s_data  = 15;
+   required string s_data  = 15;
 }
 
 message TpccWarehouse {
-   required bytes w_name  =  1;
-   required bytes w_street1  =  2;
-   required bytes w_street2  =  3;
-   required bytes w_city  =  4;
-   required bytes w_state  =  5;
-   required bytes w_zip  =  6;
+   required string w_name  =  1;
+   required string w_street1  =  2;
+   required string w_street2  =  3;
+   required string w_city  =  4;
+   required string w_state  =  5;
+   required string w_zip  =  6;
    required double w_tax  =  7;
 }

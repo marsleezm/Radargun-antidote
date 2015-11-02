@@ -173,8 +173,17 @@ public class DCInfoManager {
 	}
 	
 	public static Integer getRandomNonRepIndex(){
-		int length = nonRepList.size();
-		return nonRepList.get((int)(length*Math.random()));
+		if( nonRepList.size() == 0)
+		{
+			int length = nonRepList.size();
+			int randomIndex =(int)(length*Math.random());
+			log.info("Length is "+length+", random index is "+randomIndex);
+			return nonRepList.get(randomIndex);
+		}
+		else{
+			log.info("Returning myself");
+			return nodeIndex;
+		}
 	}
 
 }
