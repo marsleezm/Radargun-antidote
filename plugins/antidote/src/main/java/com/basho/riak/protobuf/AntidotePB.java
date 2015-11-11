@@ -3536,6 +3536,16 @@ public final class AntidotePB {
      */
     com.google.protobuf.ByteString
         getReplicaIpBytes();
+
+    // optional uint32 threadid = 6;
+    /**
+     * <code>optional uint32 threadid = 6;</code>
+     */
+    boolean hasThreadid();
+    /**
+     * <code>optional uint32 threadid = 6;</code>
+     */
+    int getThreadid();
   }
   /**
    * Protobuf type {@code FpbReadReq}
@@ -3619,6 +3629,11 @@ public final class AntidotePB {
             case 42: {
               bitField0_ |= 0x00000010;
               replicaIp_ = input.readBytes();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              threadid_ = input.readUInt32();
               break;
             }
           }
@@ -3801,12 +3816,29 @@ public final class AntidotePB {
       }
     }
 
+    // optional uint32 threadid = 6;
+    public static final int THREADID_FIELD_NUMBER = 6;
+    private int threadid_;
+    /**
+     * <code>optional uint32 threadid = 6;</code>
+     */
+    public boolean hasThreadid() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional uint32 threadid = 6;</code>
+     */
+    public int getThreadid() {
+      return threadid_;
+    }
+
     private void initFields() {
       txid_ = com.basho.riak.protobuf.AntidotePB.FpbTxId.getDefaultInstance();
       key_ = "";
       nodeId_ = 0;
       partitionId_ = 0;
       replicaIp_ = "";
+      threadid_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3845,6 +3877,9 @@ public final class AntidotePB {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, getReplicaIpBytes());
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeUInt32(6, threadid_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3873,6 +3908,10 @@ public final class AntidotePB {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, getReplicaIpBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(6, threadid_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4005,6 +4044,8 @@ public final class AntidotePB {
         bitField0_ = (bitField0_ & ~0x00000008);
         replicaIp_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        threadid_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -4057,6 +4098,10 @@ public final class AntidotePB {
           to_bitField0_ |= 0x00000010;
         }
         result.replicaIp_ = replicaIp_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.threadid_ = threadid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4091,6 +4136,9 @@ public final class AntidotePB {
           bitField0_ |= 0x00000010;
           replicaIp_ = other.replicaIp_;
           onChanged();
+        }
+        if (other.hasThreadid()) {
+          setThreadid(other.getThreadid());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4456,6 +4504,39 @@ public final class AntidotePB {
   }
   bitField0_ |= 0x00000010;
         replicaIp_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional uint32 threadid = 6;
+      private int threadid_ ;
+      /**
+       * <code>optional uint32 threadid = 6;</code>
+       */
+      public boolean hasThreadid() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional uint32 threadid = 6;</code>
+       */
+      public int getThreadid() {
+        return threadid_;
+      }
+      /**
+       * <code>optional uint32 threadid = 6;</code>
+       */
+      public Builder setThreadid(int value) {
+        bitField0_ |= 0x00000020;
+        threadid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 threadid = 6;</code>
+       */
+      public Builder clearThreadid() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        threadid_ = 0;
         onChanged();
         return this;
       }
@@ -26640,71 +26721,72 @@ public final class AntidotePB {
       "rNodeUp\022\017\n\007node_id\030\001 \002(\r\022\024\n\014partition_id" +
       "\030\002 \002(\r\022\027\n\003ups\030\003 \003(\0132\n.FpbUpdate\"5\n\016FpbPr" +
       "epTxnResp\022\016\n\006result\030\001 \002(\r\022\023\n\013commit_time" +
-      "\030\002 \001(\004\"l\n\nFpbReadReq\022\026\n\004txid\030\001 \001(\0132\010.Fpb",
+      "\030\002 \001(\004\"~\n\nFpbReadReq\022\026\n\004txid\030\001 \001(\0132\010.Fpb",
       "TxId\022\013\n\003key\030\002 \002(\t\022\017\n\007node_id\030\003 \001(\r\022\024\n\014pa" +
-      "rtition_id\030\004 \001(\r\022\022\n\nreplica_ip\030\005 \001(\t\"\036\n\016" +
-      "FpbPartListReq\022\014\n\004noop\030\001 \001(\010\"M\n\016FpbSingl" +
-      "eUpReq\022\013\n\003key\030\001 \002(\t\022\030\n\005value\030\002 \002(\0132\t.Fpb" +
-      "Value\022\024\n\014partition_id\030\003 \002(\r\"P\n\013FpbPartLi" +
-      "st\022 \n\nnode_parts\030\001 \003(\0132\014.FpbNodePart\022\037\n\t" +
-      "repl_list\030\002 \003(\0132\014.FpbReplList\"1\n\013FpbNode" +
-      "Part\022\n\n\002ip\030\001 \002(\t\022\026\n\016num_partitions\030\002 \002(\r" +
-      "\"+\n\013FpbReplList\022\n\n\002ip\030\001 \002(\t\022\020\n\010to_repls\030" +
-      "\002 \003(\t\"2\n\tFpbUpdate\022\013\n\003key\030\001 \002(\t\022\030\n\005value",
-      "\030\002 \002(\0132\t.FpbValue\"2\n\tFpbTxnReq\022\r\n\005clock\030" +
-      "\001 \001(\014\022\026\n\003ops\030\002 \003(\0132\t.FpbTxnOp\"K\n\010FpbTxnO" +
-      "p\022\014\n\004type\030\001 \002(\r\022\013\n\003key\030\002 \002(\r\022\021\n\toperatio" +
-      "n\030\003 \001(\r\022\021\n\tparameter\030\004 \001(\014\"H\n\nFpbTxnResp" +
-      "\022\017\n\007success\030\001 \002(\010\022\r\n\005clock\030\002 \001(\014\022\032\n\007resu" +
-      "lts\030\003 \003(\0132\t.FpbValue\"(\n\007FpbTxId\022\020\n\010snaps" +
-      "hot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014\"\227\003\n\010FpbValue\022\021\n\005f" +
-      "ield\030\001 \002(\r:\00212\022\037\n\010customer\030\002 \001(\0132\r.TpccC" +
-      "ustomer\022$\n\007clookup\030\003 \001(\0132\023.TpccCustomerL" +
-      "ookup\022\037\n\010district\030\004 \001(\0132\r.TpccDistrict\022\035",
-      "\n\007history\030\005 \001(\0132\014.TpccHistory\022\027\n\004item\030\006 " +
-      "\001(\0132\t.TpccItem\022\037\n\010neworder\030\007 \001(\0132\r.TpccN" +
-      "ewOrder\022\031\n\005order\030\010 \001(\0132\n.TpccOrder\022!\n\tor" +
-      "derline\030\t \001(\0132\016.TpccOrderLine\022\031\n\005stock\030\n" +
-      " \001(\0132\n.TpccStock\022!\n\twarehouse\030\013 \001(\0132\016.Tp" +
-      "ccWarehouse\022\021\n\tstr_value\030\014 \001(\t\022\022\n\nlong_v" +
-      "alue\030\r \001(\003\022\024\n\014double_value\030\016 \001(\001\"\313\002\n\014Tpc" +
-      "cCustomer\022\017\n\007c_first\030\001 \002(\t\022\020\n\010c_middle\030\002" +
-      " \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021\n\tc_street1\030\004 \002(\t\022" +
-      "\021\n\tc_street2\030\005 \002(\t\022\016\n\006c_city\030\006 \002(\t\022\017\n\007c_",
-      "state\030\007 \002(\t\022\r\n\005c_zip\030\010 \002(\t\022\017\n\007c_phone\030\t " +
-      "\002(\t\022\017\n\007c_since\030\n \002(\004\022\020\n\010c_credit\030\013 \002(\t\022\024" +
-      "\n\014c_credit_lim\030\014 \002(\001\022\022\n\nc_discount\030\r \002(\001" +
-      "\022\025\n\rc_ytd_payment\030\016 \002(\001\022\025\n\rc_payment_cnt" +
-      "\030\017 \002(\005\022\026\n\016c_delivery_cnt\030\020 \002(\005\022\016\n\006c_data" +
-      "\030\021 \002(\t\"Q\n\022TpccCustomerLookup\022\016\n\006c_w_id\030\001" +
-      " \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016\n\006c_last\030\003 \002(\t\022\013\n\003" +
-      "ids\030\004 \003(\003\"\230\001\n\014TpccDistrict\022\016\n\006d_name\030\001 \002" +
-      "(\t\022\021\n\td_street1\030\002 \002(\t\022\021\n\td_street2\030\003 \002(\t" +
-      "\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_state\030\005 \002(\t\022\r\n\005d_z",
-      "ip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(\001\022\023\n\013d_next_o_id\030\010" +
-      " \002(\004\"\035\n\013TpccHistory\022\016\n\006h_c_id\030\001 \002(\004\"L\n\010T" +
-      "pccItem\022\017\n\007i_im_id\030\001 \002(\004\022\016\n\006i_name\030\002 \002(\t" +
-      "\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i_data\030\004 \002(\t\"A\n\014Tpc" +
-      "cNewOrder\022\017\n\007no_o_id\030\001 \002(\004\022\017\n\007no_d_id\030\002 " +
-      "\002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k\n\tTpccOrder\022\016\n\006o_c" +
-      "_id\030\001 \002(\004\022\021\n\to_entry_d\030\002 \002(\004\022\024\n\014o_carrie" +
-      "r_id\030\003 \002(\004\022\020\n\010o_ol_cnt\030\004 \002(\005\022\023\n\013o_all_lo" +
-      "cal\030\005 \002(\005\"\215\001\n\rTpccOrderLine\022\017\n\007ol_i_id\030\001" +
-      " \002(\004\022\026\n\016ol_supply_w_id\030\002 \002(\004\022\025\n\rol_deliv",
-      "ery_d\030\003 \002(\004\022\023\n\013ol_quantity\030\004 \002(\004\022\021\n\tol_a" +
-      "mount\030\005 \002(\001\022\024\n\014ol_dist_info\030\006 \002(\t\"\247\002\n\tTp" +
-      "ccStock\022\022\n\ns_quantity\030\001 \002(\004\022\021\n\ts_dist_01" +
-      "\030\002 \002(\t\022\021\n\ts_dist_02\030\003 \002(\t\022\021\n\ts_dist_03\030\004" +
-      " \002(\t\022\021\n\ts_dist_04\030\005 \002(\t\022\021\n\ts_dist_05\030\006 \002" +
-      "(\t\022\021\n\ts_dist_06\030\007 \002(\t\022\021\n\ts_dist_07\030\010 \002(\t" +
-      "\022\021\n\ts_dist_08\030\t \002(\t\022\021\n\ts_dist_09\030\n \002(\t\022\021" +
-      "\n\ts_dist_10\030\013 \002(\t\022\r\n\005s_ytd\030\014 \002(\004\022\023\n\013s_or" +
-      "der_cnt\030\r \002(\005\022\024\n\014s_remote_cnt\030\016 \002(\005\022\016\n\006s" +
-      "_data\030\017 \002(\t\"\204\001\n\rTpccWarehouse\022\016\n\006w_name\030",
-      "\001 \002(\t\022\021\n\tw_street1\030\002 \002(\t\022\021\n\tw_street2\030\003 " +
-      "\002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n\007w_state\030\005 \002(\t\022\r\n\005" +
-      "w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007 \002(\001B%\n\027com.basho." +
-      "riak.protobufB\nAntidotePB"
+      "rtition_id\030\004 \001(\r\022\022\n\nreplica_ip\030\005 \001(\t\022\020\n\010" +
+      "threadid\030\006 \001(\r\"\036\n\016FpbPartListReq\022\014\n\004noop" +
+      "\030\001 \001(\010\"M\n\016FpbSingleUpReq\022\013\n\003key\030\001 \002(\t\022\030\n" +
+      "\005value\030\002 \002(\0132\t.FpbValue\022\024\n\014partition_id\030" +
+      "\003 \002(\r\"P\n\013FpbPartList\022 \n\nnode_parts\030\001 \003(\013" +
+      "2\014.FpbNodePart\022\037\n\trepl_list\030\002 \003(\0132\014.FpbR" +
+      "eplList\"1\n\013FpbNodePart\022\n\n\002ip\030\001 \002(\t\022\026\n\016nu" +
+      "m_partitions\030\002 \002(\r\"+\n\013FpbReplList\022\n\n\002ip\030" +
+      "\001 \002(\t\022\020\n\010to_repls\030\002 \003(\t\"2\n\tFpbUpdate\022\013\n\003",
+      "key\030\001 \002(\t\022\030\n\005value\030\002 \002(\0132\t.FpbValue\"2\n\tF" +
+      "pbTxnReq\022\r\n\005clock\030\001 \001(\014\022\026\n\003ops\030\002 \003(\0132\t.F" +
+      "pbTxnOp\"K\n\010FpbTxnOp\022\014\n\004type\030\001 \002(\r\022\013\n\003key" +
+      "\030\002 \002(\r\022\021\n\toperation\030\003 \001(\r\022\021\n\tparameter\030\004" +
+      " \001(\014\"H\n\nFpbTxnResp\022\017\n\007success\030\001 \002(\010\022\r\n\005c" +
+      "lock\030\002 \001(\014\022\032\n\007results\030\003 \003(\0132\t.FpbValue\"(" +
+      "\n\007FpbTxId\022\020\n\010snapshot\030\001 \002(\004\022\013\n\003pid\030\002 \002(\014" +
+      "\"\227\003\n\010FpbValue\022\021\n\005field\030\001 \002(\r:\00212\022\037\n\010cust" +
+      "omer\030\002 \001(\0132\r.TpccCustomer\022$\n\007clookup\030\003 \001" +
+      "(\0132\023.TpccCustomerLookup\022\037\n\010district\030\004 \001(",
+      "\0132\r.TpccDistrict\022\035\n\007history\030\005 \001(\0132\014.Tpcc" +
+      "History\022\027\n\004item\030\006 \001(\0132\t.TpccItem\022\037\n\010newo" +
+      "rder\030\007 \001(\0132\r.TpccNewOrder\022\031\n\005order\030\010 \001(\013" +
+      "2\n.TpccOrder\022!\n\torderline\030\t \001(\0132\016.TpccOr" +
+      "derLine\022\031\n\005stock\030\n \001(\0132\n.TpccStock\022!\n\twa" +
+      "rehouse\030\013 \001(\0132\016.TpccWarehouse\022\021\n\tstr_val" +
+      "ue\030\014 \001(\t\022\022\n\nlong_value\030\r \001(\003\022\024\n\014double_v" +
+      "alue\030\016 \001(\001\"\313\002\n\014TpccCustomer\022\017\n\007c_first\030\001" +
+      " \002(\t\022\020\n\010c_middle\030\002 \002(\t\022\016\n\006c_last\030\003 \002(\t\022\021" +
+      "\n\tc_street1\030\004 \002(\t\022\021\n\tc_street2\030\005 \002(\t\022\016\n\006",
+      "c_city\030\006 \002(\t\022\017\n\007c_state\030\007 \002(\t\022\r\n\005c_zip\030\010" +
+      " \002(\t\022\017\n\007c_phone\030\t \002(\t\022\017\n\007c_since\030\n \002(\004\022\020" +
+      "\n\010c_credit\030\013 \002(\t\022\024\n\014c_credit_lim\030\014 \002(\001\022\022" +
+      "\n\nc_discount\030\r \002(\001\022\025\n\rc_ytd_payment\030\016 \002(" +
+      "\001\022\025\n\rc_payment_cnt\030\017 \002(\005\022\026\n\016c_delivery_c" +
+      "nt\030\020 \002(\005\022\016\n\006c_data\030\021 \002(\t\"Q\n\022TpccCustomer" +
+      "Lookup\022\016\n\006c_w_id\030\001 \002(\004\022\016\n\006c_d_id\030\002 \002(\004\022\016" +
+      "\n\006c_last\030\003 \002(\t\022\013\n\003ids\030\004 \003(\003\"\230\001\n\014TpccDist" +
+      "rict\022\016\n\006d_name\030\001 \002(\t\022\021\n\td_street1\030\002 \002(\t\022" +
+      "\021\n\td_street2\030\003 \002(\t\022\016\n\006d_city\030\004 \002(\t\022\017\n\007d_",
+      "state\030\005 \002(\t\022\r\n\005d_zip\030\006 \002(\t\022\r\n\005d_tax\030\007 \002(" +
+      "\001\022\023\n\013d_next_o_id\030\010 \002(\004\"\035\n\013TpccHistory\022\016\n" +
+      "\006h_c_id\030\001 \002(\004\"L\n\010TpccItem\022\017\n\007i_im_id\030\001 \002" +
+      "(\004\022\016\n\006i_name\030\002 \002(\t\022\017\n\007i_price\030\003 \002(\001\022\016\n\006i" +
+      "_data\030\004 \002(\t\"A\n\014TpccNewOrder\022\017\n\007no_o_id\030\001" +
+      " \002(\004\022\017\n\007no_d_id\030\002 \002(\004\022\017\n\007no_w_id\030\003 \002(\004\"k" +
+      "\n\tTpccOrder\022\016\n\006o_c_id\030\001 \002(\004\022\021\n\to_entry_d" +
+      "\030\002 \002(\004\022\024\n\014o_carrier_id\030\003 \002(\004\022\020\n\010o_ol_cnt" +
+      "\030\004 \002(\005\022\023\n\013o_all_local\030\005 \002(\005\"\215\001\n\rTpccOrde" +
+      "rLine\022\017\n\007ol_i_id\030\001 \002(\004\022\026\n\016ol_supply_w_id",
+      "\030\002 \002(\004\022\025\n\rol_delivery_d\030\003 \002(\004\022\023\n\013ol_quan" +
+      "tity\030\004 \002(\004\022\021\n\tol_amount\030\005 \002(\001\022\024\n\014ol_dist" +
+      "_info\030\006 \002(\t\"\247\002\n\tTpccStock\022\022\n\ns_quantity\030" +
+      "\001 \002(\004\022\021\n\ts_dist_01\030\002 \002(\t\022\021\n\ts_dist_02\030\003 " +
+      "\002(\t\022\021\n\ts_dist_03\030\004 \002(\t\022\021\n\ts_dist_04\030\005 \002(" +
+      "\t\022\021\n\ts_dist_05\030\006 \002(\t\022\021\n\ts_dist_06\030\007 \002(\t\022" +
+      "\021\n\ts_dist_07\030\010 \002(\t\022\021\n\ts_dist_08\030\t \002(\t\022\021\n" +
+      "\ts_dist_09\030\n \002(\t\022\021\n\ts_dist_10\030\013 \002(\t\022\r\n\005s" +
+      "_ytd\030\014 \002(\004\022\023\n\013s_order_cnt\030\r \002(\005\022\024\n\014s_rem" +
+      "ote_cnt\030\016 \002(\005\022\016\n\006s_data\030\017 \002(\t\"\204\001\n\rTpccWa",
+      "rehouse\022\016\n\006w_name\030\001 \002(\t\022\021\n\tw_street1\030\002 \002" +
+      "(\t\022\021\n\tw_street2\030\003 \002(\t\022\016\n\006w_city\030\004 \002(\t\022\017\n" +
+      "\007w_state\030\005 \002(\t\022\r\n\005w_zip\030\006 \002(\t\022\r\n\005w_tax\030\007" +
+      " \002(\001B%\n\027com.basho.riak.protobufB\nAntidot" +
+      "ePB"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -26746,7 +26828,7 @@ public final class AntidotePB {
           internal_static_FpbReadReq_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_FpbReadReq_descriptor,
-              new java.lang.String[] { "Txid", "Key", "NodeId", "PartitionId", "ReplicaIp", });
+              new java.lang.String[] { "Txid", "Key", "NodeId", "PartitionId", "ReplicaIp", "Threadid", });
           internal_static_FpbPartListReq_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_FpbPartListReq_fieldAccessorTable = new

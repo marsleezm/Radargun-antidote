@@ -126,7 +126,7 @@ public class TransactionManager {
 		}
 	}
 
-	public Object get(Integer processIndex, Object key) {
+	public Object get(Integer threadId, Object key) {
 		log.trace("Trying to get "+key);
 		FpbValue value;
 		if(isInTxn)
@@ -137,13 +137,13 @@ public class TransactionManager {
 				value = readBuffer.get(key);
 				if ( value == null)
 				{
-					value = getKeyFromServer(key, isInTxn);
+					value = getKeyFromServer(threadId, key, isInTxn);
 					readBuffer.put(key, value);
 				}
 			}
 		}
 		else{
-			value = getKeyFromServer(key, isInTxn);
+			value = getKeyFromServer(threadId, key, isInTxn);
 		}
 		
 		//log.trace("Key is "+ key +", value is "+value.toString());
@@ -319,12 +319,13 @@ public class TransactionManager {
 	}
 	
 	
-	private FpbValue getKeyFromServer(Object key, boolean isInTxn) {
+	private FpbValue getKeyFromServer(int threadId, Object key, boolean isInTxn) {
 		Pair location;
 		FpbReadReq.Builder builder = FpbReadReq.newBuilder();
 
 		AntidoteConnection connection;
 		try{
+			builder.setThreadid(threadId);
 			if(key instanceof MagicKey){
 				int keyNode = ((MagicKey)key).node;
 				location = new Pair(keyNode, 
