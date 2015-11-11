@@ -102,7 +102,7 @@ public class TransactionManager {
 				Integer partitionId = toErlangIndex(Math.abs(mKey.hashCode()) % DCInfoManager.getPartNum(mKey.node));
 				//if (mKey.key.startsWith("ITEM"))
 				//	log.info("No transaction put magic: key is "+mKey.key+", node is "+mKey.node+", partitionid is"+partitionId);
-				singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.key)
+				singleUpReq = FpbSingleUpReq.newBuilder().setKey(mKey.getKey())
 						.setValue(newValue).setPartitionId(partitionId).build();
 			}
 			else
@@ -119,7 +119,7 @@ public class TransactionManager {
 			FpbPrepTxnResp resp = FpbPrepTxnResp.parseFrom(connection.receive(MSG_PrepTxnResp));
 			//t3 = System.nanoTime();
 			//log.info("Single up takes:"+(t3-t2));
-			if (resp.getSuccess() == false){
+			if (resp.getResult() == 0){
 				log.warn("Trying to put ["+key+","+value+"] failed!");
 				throw new Exception();
 			}
@@ -183,7 +183,7 @@ public class TransactionManager {
 			int keyNode, hashCode;
 			String realKey;
 			keyNode = mKey.node;
-			realKey = mKey.key;
+			realKey = mKey.getKey();
 			hashCode = Math.abs(mKey.hashCode());
 			
 			if (keyNode == localNodeIndex)
@@ -243,7 +243,10 @@ public class TransactionManager {
 			isInTxn = false;
 			writeBuffer.clear();
 			readBuffer.clear();
-			return resp.getSuccess();
+			if(resp.getResult()==0)
+				return false;
+			else
+				return true;
 			//	return true;
 			//else
 			//{
@@ -326,7 +329,7 @@ public class TransactionManager {
 				int keyNode = ((MagicKey)key).node;
 				location = new Pair(keyNode, 
 						toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(keyNode)));
-				builder.setKey(((MagicKey)key).key);
+				builder.setKey(((MagicKey)key).getKey());
 				//log.info(realKey+" read: ["+keyNode+","+partitionId);
 			}
 			else{
@@ -334,11 +337,13 @@ public class TransactionManager {
 				builder.setKey((String)key);
 				//toErlangIndex(Math.abs(key.hashCode()) % DCInfoManager.getPartNum(location.fst));
 			}
-			
+
+			connection = connections.get(DCInfoManager.getNodeIndex());
 			if(location.fst == DCInfoManager.getNodeIndex())
 			{
+				builder.setNodeId(location.fst);
 				builder.setPartitionId(location.snd);
-				connection = connections.get(location.fst);
+				//connection = connections.get(location.fst);
 			}
 			//Replicated read
 			else if(DCInfoManager.replicateNode(location.fst))
@@ -346,12 +351,13 @@ public class TransactionManager {
 				//log.info("Replicated read: for key ["+key+"], owner is ["+location.fst
 				//		+"], my index is "+DCInfoManager.getNodeIndex());
 				builder.setReplicaIp(DCInfoManager.getNodeName(location.fst));
-				connection = connections.get(DCInfoManager.getNodeIndex());
+				//connection = connections.get(DCInfoManager.getNodeIndex());
 			}
 			else
 			{
+				builder.setNodeId(location.fst);
 				builder.setPartitionId(location.snd);
-				connection = connections.get(location.fst);
+				//connection = connections.get(location.fst);
 			}
 
 			if (isInTxn == true)

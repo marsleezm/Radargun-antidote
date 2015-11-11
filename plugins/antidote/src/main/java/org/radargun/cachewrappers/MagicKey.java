@@ -9,7 +9,7 @@ public class MagicKey implements LocatedKey, Serializable {
     private static final long serialVersionUID = -1072474466685642719L;
     public static int NODE_INDEX;
     
-    public final String key;
+    private final String key;
     public final int node;
     
     public static int local = 0;
@@ -48,5 +48,9 @@ public class MagicKey implements LocatedKey, Serializable {
     @Override
     public String toString() {
         return this.node + "-" + this.key; 
+    }
+    
+    public String getKey() {
+    	return this.node + "-" + this.key; 
     }
 }

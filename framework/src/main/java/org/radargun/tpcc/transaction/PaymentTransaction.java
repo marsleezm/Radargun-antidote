@@ -56,6 +56,7 @@ public class PaymentTransaction implements TpccTransaction {
 
       long x = tpccTools.randomNumber(1, 100);
 
+      // 85% chance to read from local warehouse and district
       if (x <= 85) {
          this.customerDistrictID = this.districtID;
          this.customerWarehouseID = this.terminalWarehouseID;
@@ -69,6 +70,7 @@ public class PaymentTransaction implements TpccTransaction {
 
       long y = tpccTools.randomNumber(1, 100);
 
+      // 60% chance to load customer by name.. Otherwise not by name
       if (y <= 60) {
          this.customerByName = true;
          customerLastName = lastName((int) tpccTools.nonUniformRandom(TpccTools.C_C_LAST, TpccTools.A_C_LAST, 0, TpccTools.MAX_C_LAST));
