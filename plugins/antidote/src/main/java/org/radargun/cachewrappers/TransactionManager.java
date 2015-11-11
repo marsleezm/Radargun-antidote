@@ -341,6 +341,7 @@ public class TransactionManager {
 			connection = connections.get(DCInfoManager.getNodeIndex());
 			if(location.fst == DCInfoManager.getNodeIndex())
 			{
+				log.info("Setting the node"+location.fst +", the partition:"+location.snd);
 				builder.setNodeId(location.fst);
 				builder.setPartitionId(location.snd);
 				//connection = connections.get(location.fst);
@@ -350,11 +351,13 @@ public class TransactionManager {
 			{
 				//log.info("Replicated read: for key ["+key+"], owner is ["+location.fst
 				//		+"], my index is "+DCInfoManager.getNodeIndex());
+				log.info("Replicat Setting the partition"+DCInfoManager.getNodeName(location.fst));
 				builder.setReplicaIp(DCInfoManager.getNodeName(location.fst));
 				//connection = connections.get(DCInfoManager.getNodeIndex());
 			}
 			else
 			{
+				log.info("Remote Setting the node"+location.fst +", the partition:"+location.snd);
 				builder.setNodeId(location.fst);
 				builder.setPartitionId(location.snd);
 				//connection = connections.get(location.fst);
